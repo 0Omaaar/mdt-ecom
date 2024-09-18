@@ -546,9 +546,6 @@
     ================================================== -->
 
 
-
-
-
     <!-- register_section - start
     ================================================== -->
     <section class="register_section sec_ptb_140 has_overlay parallaxie clearfix" data-background="assets/user/images/backgrounds/bg_22.jpg">
@@ -567,7 +564,7 @@
                             @endif
                         </div>
                         <div class="form_item">
-                            <input id="password_input" type="password" name="password" placeholder="password">
+                            <input id="password_input" type="password" name="password" placeholder="Password">
                             <label for="password_input"><i class="fal fa-unlock-alt"></i></label>
                             @if (isset($errors) && $errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
@@ -580,7 +577,7 @@
 
                         <div class="create_account text-center">
                             <h4 class="small_title_text text-center text-uppercase">Have not account yet?</h4>
-                            <a class="create_account_btn text-uppercase" href="#!">Sign Up</a>
+                            <a class="create_account_btn text-uppercase" href="{{route('register-user')}}">Sign Up</a>
                         </div>
                     </div>
                 </form>
