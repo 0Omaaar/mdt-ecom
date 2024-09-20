@@ -10,5 +10,5 @@ Route::get('/', function () {
 
 //ADMIN ROUTES
 Route::get('/admin/index', function() {
-    return "ADMIN VIEW";
+    return view('admin.index');
 })->middleware('isAdmin')->name('admin.index');
