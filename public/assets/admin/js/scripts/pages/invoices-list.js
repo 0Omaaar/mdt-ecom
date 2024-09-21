@@ -37,18 +37,18 @@ $(document).ready(function() {
         }
     } );
 
-    $('.row-grouping tbody').on( 'click', 'tr.group', function () {
-        if (typeof table !== 'undefined' && table.order()[0]) {
-            var currentOrder = table.order()[0];
-            if ( currentOrder[0] === 5 && currentOrder[1] === 'asc' ) {
-                table.order( [ 5, 'desc' ] ).draw();
-            }
-            else {
-                table.order( [ 5, 'asc' ] ).draw();
-            }
-        }
-    });
-    
+    // $('.row-grouping tbody').on( 'click', 'tr.group', function () {
+    //     if (typeof table !== 'undefined' && table.order()[0]) {
+    //         var currentOrder = table.order()[0];
+    //         if ( currentOrder[0] === 5 && currentOrder[1] === 'asc' ) {
+    //             table.order( [ 5, 'desc' ] ).draw();
+    //         }
+    //         else {
+    //             table.order( [ 5, 'asc' ] ).draw();
+    //         }
+    //     }
+    // });
+
 
     // Checkbox & Radio 1
     $('.icheck input').iCheck({
@@ -63,12 +63,12 @@ $(document).ready(function() {
             radioClass: 'iradio_square-blue',
         });
     });
-    
+
     //TODO:AJ: Improve check uncheck all func
     var checkAll = $('input.input-chk-all');
     var checkboxes = $('input.input-chk');
 
-    checkAll.on('ifChecked ifUnchecked', function(event) {        
+    checkAll.on('ifChecked ifUnchecked', function(event) {
         if (event.type == 'ifChecked') {
             checkboxes.iCheck('check');
         } else {
