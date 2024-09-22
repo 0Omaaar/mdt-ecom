@@ -14,3 +14,4 @@ Route::get('/admin/index', function() {
     return view('admin.index');
 })->middleware('isAdmin')->name('admin.index');
 Route::get('/admin/categories/index', [CategoryController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.categories.index');
+Route::post('/admin/categories/store', [CategoryController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.categories.store');

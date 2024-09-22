@@ -1,5 +1,4 @@
-<div class="modal animated flipInY text-left" style="margin-top: 5%" id="flipInY" tabindex="-1" role="dialog"
-    aria-hidden="true">
+<div class="modal text-left" style="margin-top: 5%" id="flipInY" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,8 +7,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form" method="POST" action="#" enctype="multipart/form-data">
-
+            <form class="form" method="POST" action="{{ route('admin.categories.store') }}"
+                enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-content collpase show">
@@ -43,10 +43,16 @@
                                         <div class="form-group col-md-12 mb-2">
                                             <label for="category-image">Image</label>
                                             <input type="file" id="category-image" name="image"
-                                                class="form-control custom-file-input">
+                                                class="form-control custom-file-input" onchange="previewImage(event)">
                                             <label class="custom-file-label" for="category-image"
-                                                style="width: 94%; margin-left: 3%;">Choisir une
-                                                image</label>
+                                                style="width: 94%; margin-left: 3%;">Choisir une image</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <img id="image-preview" src="#" alt="Aperçu de l'image"
+                                                style="display: none; max-width: 100%; height: auto;" />
                                         </div>
                                     </div>
 
