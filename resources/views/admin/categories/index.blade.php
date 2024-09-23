@@ -114,7 +114,7 @@
                                                     <th>Nom</th>
                                                     <th>Slug</th>
                                                     <th>Nombre Sous Categories</th>
-                                                    <th>Nombre Articles</th>
+                                                    <th>Nombre Produits</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -122,9 +122,16 @@
                                                 @foreach ($categories as $category)
                                                     <tr>
                                                         <td>{{ $loop->index + 1 }}</td>
-                                                        <td>{{ $category->image }}</td>
+                                                        <td>
+                                                            @if($category->image != null)
+                                                                <img src="{{ asset('images/categories/' . $category->image) }}"
+                                                                style="border-radius: 4%"
+                                                                alt="{{ $category->name }}" width="50" height="50">
+                                                            @else
+                                                                <span style="color: rgb(234, 109, 109)">Aucune image</span>
+                                                            @endif</td>
                                                         <td>{{ $category->name }}</td>
-                                                        <td>{{ $category->slug }}</td>
+                                                        <td><span class="badge badge-dark badge-lg">{{ $category->slug }}</span></td>
                                                         <td><span
                                                                 class="badge badge-success badge-lg">{{ $category->subCategories()->count() }}</span>
                                                         </td>
@@ -140,19 +147,23 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                    <button data-toggle="modal" data-target="#editCategory{{ $category->id }}" class="dropdown-item"><i
+                                                                        class="la la-pencil"></i> Modifier</button>
                                                                     <a href="#" class="dropdown-item"><i
-                                                                            class="la la-eye"></i> Open Task</a>
+                                                                            class="la la-eye"></i> Voir Sous Categories</a>
                                                                     <a href="#" class="dropdown-item"><i
-                                                                            class="la la-pencil"></i> Edit Task</a>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="la la-check"></i> Complete Task</a>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="ft-upload"></i> Assign to</a>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="la la-trash"></i> Delete Task</a>
+                                                                                class="la la-eye"></i> Voir Produits</a>
+                                                                    <button data-toggle="modal" data-target="#deleteCategory{{ $category->id }}" class="dropdown-item"><i
+                                                                            class="la la-trash"></i> Supprimer</button>
                                                                 </span>
                                                             </span>
                                                         </td>
+
+                                                        {{-- Delete Category Modal --}}
+                                                        @include('admin.categories.delete')
+
+                                                        {{-- Edit Category Modal --}}
+                                                        @include('admin.categories.edit')
                                                     </tr>
                                                 @endforeach
 
@@ -173,15 +184,7 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <!-- BEGIN: Footer-->
-    <footer class="footer footer-static footer-light navbar-border navbar-shadow">
-        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span
-                class="float-md-left d-block d-md-inline-block">Copyright &copy; 2019 <a
-                    class="text-bold-800 grey darken-2" href="https://1.envato.market/modern_admin"
-                    target="_blank">PIXINVENT</a></span><span class="float-md-right d-none d-lg-block">Hand-crafted & Made
-                with<i class="ft-heart pink"></i><span id="scroll-top"></span></span></p>
-    </footer>
-    <!-- END: Footer-->
+
 @endsection
 
 
@@ -211,7 +214,7 @@
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
 
     <script>
-        function previewImage(event) {
+        function previewImageAdd(event) {
             var reader = new FileReader();
             reader.onload = function() {
                 var output = document.getElementById('image-preview');
@@ -220,5 +223,29 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         }
+
+        function removePreviewAdd(){
+            var output = document.getElementById('image-preview');
+            output.src = '';
+            output.style.display = 'none';
+        }
+
+        function previewImage(event, categoryId) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('image-preview-' + categoryId);
+                output.src = '';
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removePreview(categoryId) {
+            var output = document.getElementById('image-preview-' + categoryId);
+            output.src = '';
+            // output.style.display = 'none';
+        }
+
     </script>
 @endsection

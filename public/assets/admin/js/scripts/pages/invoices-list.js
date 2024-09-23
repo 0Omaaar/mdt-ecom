@@ -15,26 +15,26 @@ $(document).ready(function() {
     var groupingTable = $('.row-grouping').DataTable({
         responsive: true,
         rowReorder: true,
-        "columnDefs": [
-            { "visible": false, "targets": 5 },
-        ],
+        // "columnDefs": [
+        //     { "visible": false, "targets": 10 },
+        // ],
         // "order": [[ 2, 'desc' ]],
         "displayLength": 25,
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
+        // "drawCallback": function ( settings ) {
+        //     var api = this.api();
+        //     var rows = api.rows( {page:'current'} ).nodes();
+        //     var last=null;
 
-            api.column(5, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="9">'+group+'</td></tr>'
-                    );
+            // api.column(5, {page:'current'} ).data().each( function ( group, i ) {
+            //     if ( last !== group ) {
+            //         $(rows).eq( i ).before(
+            //             '<tr class="group"><td colspan="9">'+group+'</td></tr>'
+            //         );
 
-                    last = group;
-                }
-            } );
-        }
+            //         last = group;
+            //     }
+            // } );
+        // }
     } );
 
     // $('.row-grouping tbody').on( 'click', 'tr.group', function () {
