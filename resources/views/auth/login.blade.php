@@ -23,12 +23,12 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            max-width: 900px;
-            width: 100%;
+            max-width:1000px;
+            width: 140%;
         }
 
         .login-form-section {
-            padding: 40px;
+            padding: 80px;
             width: 40%;
         }
 
