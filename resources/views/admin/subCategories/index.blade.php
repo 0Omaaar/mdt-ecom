@@ -37,13 +37,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Liste Categories</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Liste Sous Categories</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Accueil</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Categories</a>
+                                <li class="breadcrumb-item"><a href="#">Sous Categories</a>
                                 </li>
                                 <li class="breadcrumb-item active">Gestion
                                 </li>
@@ -71,14 +71,14 @@
                         <div class="card">
                             <div class="card-head">
                                 <div class="card-header">
-                                    <h4 class="card-title">Categories</h4>
+                                    <h4 class="card-title">Sous Categories</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <button data-toggle="modal" data-target="#flipInY" class="btn btn-primary btn-sm"><i
-                                                class="ft-plus white"></i> Ajouter Une
+                                                class="ft-plus white"></i> Ajouter Une Sous
                                             Categorie</button>
 
-                                        @include('admin.categories.add')
+                                        @include('admin.subCategories.add')
                                         <span class="dropdown">
                                             <button id="btnSearchDrop1" type="button" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="true"
@@ -111,32 +111,28 @@
                                                     <th>N</th>
                                                     <th>Image</th>
                                                     <th>Nom</th>
-                                                    <th>Slug</th>
-                                                    <th>Nombre Sous Categories</th>
-                                                    <th>Nombre Produits</th>
+                                                    <th>Categorie</th>
+                                                    {{-- <th>Nombre Produits</th> --}}
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($categories as $category)
+                                                @foreach ($subCategories as $subCategory)
                                                     <tr>
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
-                                                            @if($category->image != null)
-                                                                <img src="{{ asset('images/categories/' . $category->image) }}"
+                                                            @if($subCategory->image != null)
+                                                                <img src="{{ asset('images/subCategories/' . $subCategory->image) }}"
                                                                 style="border-radius: 4%"
-                                                                alt="{{ $category->name }}" width="50" height="50">
+                                                                alt="{{ $subCategory->name }}" width="50" height="50">
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
                                                             @endif</td>
-                                                        <td>{{ $category->name }}</td>
-                                                        <td><span class="badge badge-dark badge-lg">{{ $category->slug }}</span></td>
-                                                        <td><span
-                                                                class="badge badge-success badge-lg">{{ $category->subCategories()->count() }}</span>
-                                                        </td>
-                                                        <td><span
-                                                                class="badge badge-success badge-lg">{{ $category->products()->count() }}</span>
-                                                        </td>
+                                                        <td>{{ $subCategory->name }}</td>
+                                                        <td><span class="badge badge-dark badge-lg">{{ $subCategory->category->name }}</span></td>
+                                                        {{-- <td><span
+                                                                class="badge badge-success badge-lg">{{ $subCategory->products()->count() }}</span>
+                                                        </td> --}}
                                                         <td>
                                                             <span class="dropdown">
                                                                 <button id="btnSearchDrop2" type="button"
@@ -146,23 +142,23 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <button data-toggle="modal" data-target="#editCategory{{ $category->id }}" class="dropdown-item"><i
+                                                                    <button data-toggle="modal" data-target="#editSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
                                                                         class="la la-pencil"></i> Modifier</button>
                                                                     <a href="#" class="dropdown-item"><i
-                                                                            class="la la-eye"></i> Voir Sous Categories</a>
+                                                                            class="la la-eye"></i> Voir Categorie</a>
                                                                     <a href="#" class="dropdown-item"><i
                                                                                 class="la la-eye"></i> Voir Produits</a>
-                                                                    <button data-toggle="modal" data-target="#deleteCategory{{ $category->id }}" class="dropdown-item"><i
+                                                                    <button data-toggle="modal" data-target="#deleteSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
                                                                             class="la la-trash"></i> Supprimer</button>
                                                                 </span>
                                                             </span>
                                                         </td>
 
                                                         {{-- Delete Category Modal --}}
-                                                        @include('admin.categories.delete')
+                                                        {{-- @include('admin.subCategories.delete') --}}
 
                                                         {{-- Edit Category Modal --}}
-                                                        @include('admin.categories.edit')
+                                                        @include('admin.subCategories.edit')
                                                     </tr>
                                                 @endforeach
 
@@ -213,37 +209,45 @@
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
 
     <script>
+
+        // Preview function for 'Add' modal
         function previewImageAdd(event) {
-            var reader = new FileReader();
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('image-preview');
+
             reader.onload = function() {
-                var output = document.getElementById('image-preview');
-                output.src = reader.result;
-                output.style.display = 'block';
+                imagePreview.src = reader.result;
+                imagePreview.style.display = 'block';
             }
+
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        function removePreviewAdd(){
-            var output = document.getElementById('image-preview');
-            output.src = '';
-            output.style.display = 'none';
+        // Remove image preview for 'Add' modal
+        function removePreviewAdd() {
+            const imagePreview = document.getElementById('image-preview');
+            imagePreview.src = "#";
+            imagePreview.style.display = 'none';
         }
 
-        function previewImage(event, categoryId) {
-            var reader = new FileReader();
+        // Preview function for 'Edit' modal
+        function previewImageEdit(event, id) {
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('image-preview-edit-' + id);
+
             reader.onload = function() {
-                var output = document.getElementById('image-preview-' + categoryId);
-                output.src = '';
-                output.src = reader.result;
-                output.style.display = 'block';
+                imagePreview.src = reader.result;
+                imagePreview.style.display = 'block';
             }
+
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        function removePreview(categoryId) {
-            var output = document.getElementById('image-preview-' + categoryId);
-            output.src = '';
-            // output.style.display = 'none';
+        // Remove image preview for 'Edit' modal
+        function removePreviewEdit(id) {
+            const imagePreview = document.getElementById('image-preview-edit-' + id);
+            imagePreview.src = "#";
+            imagePreview.style.display = 'none';
         }
 
     </script>

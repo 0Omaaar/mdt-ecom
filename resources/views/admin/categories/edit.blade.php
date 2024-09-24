@@ -22,7 +22,7 @@
                                             <label for="category-name">Nom</label>
                                             <div class="position-relative has-icon-left">
                                                 <input type="text" id="category-name" class="form-control"
-                                                    placeholder="Nom de la categorie" value="{{ $category->name }}" name="name">
+                                                    placeholder="Nom de la categorie" value="{{ $category->name }}" name="name" required>
                                                 <div class="form-control-position">
                                                     <i class="la la-tag"></i>
                                                 </div>
@@ -32,7 +32,7 @@
                                             <label for="category-slug">Slug</label>
                                             <div class="position-relative has-icon-left">
                                                 <input type="text" id="category-slug" class="form-control"
-                                                    placeholder="Slug de la categorie" value={{ $category->slug }} name="slug">
+                                                    placeholder="Slug de la categorie" value={{ $category->slug }} name="slug" required>
                                                 <div class="form-control-position">
                                                     <i class="la la-link"></i>
                                                 </div>

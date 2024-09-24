@@ -2,12 +2,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel62">Ajouter Une Categorie</h4>
+                <h4 class="modal-title" id="myModalLabel62">Ajouter Une Sous Categorie</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form" method="POST" action="{{ route('admin.categories.store') }}"
+            <form class="form" method="POST" action="{{ route('admin.subCategories.store') }}"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -28,10 +28,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6 mb-2">
-                                            <label for="category-slug">Slug</label>
+                                            <label for="category-slug">Categorie</label>
                                             <div class="position-relative has-icon-left">
-                                                <input type="text" id="category-slug" class="form-control"
-                                                    placeholder="Slug de la categorie" name="slug" required>
+                                                <select class="form-control" name="category_id" required>
+                                                    <option selected disabled>Choisir Categorie</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 <div class="form-control-position">
                                                     <i class="la la-link"></i>
                                                 </div>
@@ -55,6 +59,7 @@
                                                 style="display: none; max-width: 60%; height: auto; margin-left: 20%" />
                                         </div>
                                     </div>
+
 
                                 </div>
                             </div>

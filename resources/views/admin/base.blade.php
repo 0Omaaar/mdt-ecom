@@ -333,6 +333,10 @@
                             class="la la-th-large"></i><span class="menu-title"
                             data-i18n="Shop">Categories</span></a>
                 </li>
+                <li class=" nav-item"><a href="{{ route('admin.subCategories.index') }}"><i
+                    class="la la-th-large"></i><span class="menu-title"
+                    data-i18n="Shop">Sous Categories</span></a>
+                </li>
                 <li class=" navigation-header"><span data-i18n="Ecommerce">Ecommerce</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="Ecommerce"></i>

@@ -91,7 +91,6 @@ button {
   margin: 0px;
   padding: 0px;
   border: none;
-  background: none;
 }
 button:focus {
   outline: none;
@@ -19330,23 +19329,23 @@ blockquote .blockquote_title {
 ==================================================================================================== */
 .reg_form_wrap {
   margin: auto;
-  max-width: 800px;
+  max-width: 1300px;
   border-radius: 4px;
-  padding: 80px 100px;
+  padding: 90px 9px;
   background-size: 100%;
   background-color: #f0f2f1;
 }
 .reg_form_wrap.login_form {
-  background-position: left 480px center;
+  background-position: left 200px center;
 }
 .reg_form_wrap.signup_form {
-  background-position: left 460px center;
+  background-position: left 560px center;
 }
 .reg_form_wrap.signup_form .form_item input {
   padding: 0px;
 }
 .reg_form_wrap .reg_form {
-  max-width: 400px;
+  max-width: 300px;
 }
 .reg_form_wrap .form_title {
   color: #2e2e2e;
