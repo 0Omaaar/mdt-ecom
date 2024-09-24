@@ -19,17 +19,19 @@
 
         .login-container {
             display: flex;
+            flex-wrap: wrap;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 13px;
             overflow: hidden;
-            max-width:1000px;
-            width: 140%;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .login-form-section {
             padding: 80px;
-            width: 40%;
+            flex: 1 1 400px;
+            min-width: 300px;
         }
 
         .login-form-section h1 {
@@ -39,13 +41,13 @@
         }
 
         .form-item {
-            margin-bottom: 20px;
+            margin-bottom: 23px;
             position: relative;
         }
 
         .form-item input {
-            width: 75%;
-            padding: 10px 40px 10px 40px; /* Adjust padding for icon */
+            width: 80%;
+            padding: 10px 40px; /* Adjust padding for icon */
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
@@ -53,7 +55,7 @@
 
         .form-item i {
             position: absolute;
-            left: 10px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #aaa; /* Icon color */
@@ -68,6 +70,11 @@
             font-size: 18px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .login-button:hover {
+            background-color: black; /* Change color on hover */
         }
 
         .register-link {
@@ -84,10 +91,21 @@
         }
 
         .promo-section {
-            width: 60%;
+            flex: 1 1 600px;
+            min-width: 300px;
             background-image: url('assets/user/images/reg_bg_02.PNG');
             background-size: cover;
             background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .login-form-section, .promo-section {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -113,7 +131,7 @@
         </form>
     </div>
     <div class="promo-section">
-        <!-- Right section showing promotional content (background image) -->
+        <!-- Promotional content can go here -->
     </div>
 </div>
 

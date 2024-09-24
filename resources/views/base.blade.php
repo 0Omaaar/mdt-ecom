@@ -18,17 +18,19 @@
 
         .register-container {
             display: flex;
+            flex-wrap: wrap;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
         }
 
         .register-form-section {
             padding: 40px;
-            width: 40%;
+            flex: 1 1 400px;
+            min-width: 300px;
         }
 
         .register-form-section h1 {
@@ -50,7 +52,7 @@
         }
 
         .register-button {
-            width: 100%;
+            width: 105%;
             background-color: #0063d1;
             border: none;
             padding: 12px;
@@ -58,6 +60,11 @@
             font-size: 18px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .register-button:hover {
+            background-color: black; /* Change color on hover */
         }
 
         .login-link {
@@ -74,10 +81,25 @@
         }
 
         .promo-section {
-            width: 60%;
-            background-image: url('assets/user/images/reg_bg_01.PNG'); /* Example image URL */
+            flex: 1 1 600px;
+            min-width: 300px;
+            background-image: url('assets/user/images/reg_bg_01.PNG');
             background-size: cover;
             background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                flex-direction: column;
+            }
+
+            .register-form-section, .promo-section {
+                width: 100%;
+            }
+
+            .register-button {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -90,19 +112,15 @@
             @csrf
             <div class="form-item">
                 <input type="text" name="name" placeholder="Name" required>
-                <label for="name"><i class="fas fa-user"></i></label>
             </div>
             <div class="form-item">
                 <input type="email" name="email" placeholder="Email" required>
-                <label for="email"><i class="fas fa-envelope"></i></label>
             </div>
             <div class="form-item">
                 <input type="password" name="password" placeholder="Password" required>
-                <label for="password"><i class="fas fa-lock"></i></label>
             </div>
             <div class="form-item">
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
-                <label for="password_confirmation"><i class="fas fa-lock"></i></label>
             </div>
             <button type="submit" class="register-button">Register</button>
             <div class="login-link">
@@ -111,7 +129,7 @@
         </form>
     </div>
     <div class="promo-section">
-        <!-- Right section showing promotional content (background image) -->
+        <!-- Promotional content can go here -->
     </div>
 </div>
 
