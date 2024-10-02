@@ -309,7 +309,7 @@
                                     href="#"><i class="ft-clipboard"></i> Todo</a><a class="dropdown-item"
                                     href="#"><i class="ft-check-square"></i> Task</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
-                                    href="login-with-bg-image.html"><i class="ft-power"></i> Logout</a>
+                                    href="{{ route('signout') }}"><i class="ft-power"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
