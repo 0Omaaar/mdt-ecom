@@ -1,13 +1,13 @@
-<div class="modal text-left" style="margin-top: 0%" id="deleteCategory{{ $category->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal text-left" style="margin-top: 0%" id="deleteSubCategory{{ $subCategory->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel62">Supprimer Categorie</h4>
+                <h4 class="modal-title" id="myModalLabel62">Supprimer Sous Categorie</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form" method="POST" action="{{ route('admin.categories.destroy', $category->id) }}"
+            <form class="form" method="POST" action="{{ route('admin.subCategories.destroy', $subCategory->id) }}"
                 enctype="multipart/form-data">
                 @csrf
                 @method('DELETE')
@@ -17,8 +17,8 @@
                             <div class="card-body">
                                 <div class="form-body">
 
-                                    <p>Êtes-vous sûr de vouloir supprimer la catégorie
-                                        <strong>{{ $category->name }}</strong> ?
+                                    <p>Êtes-vous sûr de vouloir supprimer la sous catégorie
+                                        <strong>{{ $subCategory->name }}</strong> ?
                                          <span style=" color: rgb(226, 79, 79); font-weight: bold;">Cette action est irréversible.</span></p>
 
                                 </div>

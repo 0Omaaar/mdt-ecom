@@ -144,8 +144,8 @@
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
                                                                     <button data-toggle="modal" data-target="#editSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
                                                                         class="la la-pencil"></i> Modifier</button>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="la la-eye"></i> Voir Categorie</a>
+                                                                    <button data-toggle="modal" data-target="#showCategory{{ $subCategory->id }}" class="dropdown-item"><i
+                                                                        class="la la-eye"></i> Voir Categorie</button>
                                                                     <a href="#" class="dropdown-item"><i
                                                                                 class="la la-eye"></i> Voir Produits</a>
                                                                     <button data-toggle="modal" data-target="#deleteSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
@@ -154,11 +154,14 @@
                                                             </span>
                                                         </td>
 
-                                                        {{-- Delete Category Modal --}}
-                                                        {{-- @include('admin.subCategories.delete') --}}
+                                                        {{-- Delete Sub Category Modal --}}
+                                                        @include('admin.subCategories.delete')
 
-                                                        {{-- Edit Category Modal --}}
+                                                        {{-- Edit Sub Category Modal --}}
                                                         @include('admin.subCategories.edit')
+
+                                                        {{-- Show Category Modal --}}
+                                                        @include('admin.subCategories.showCategory')
                                                     </tr>
                                                 @endforeach
 
