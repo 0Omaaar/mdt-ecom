@@ -146,10 +146,10 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                    <a href="{{ route('admin.products.show', $product->id) }}" class="dropdown-item"><i
+                                                                        class="la la-eye"></i> Voir Détails</a>
                                                                     <button class="dropdown-item"><i
                                                                         class="la la-pencil"></i> Modifier</button>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="la la-eye"></i> Voir Sous Categories</a>
                                                                     <a href="#" class="dropdown-item"><i
                                                                                 class="la la-eye"></i> Voir Produits</a>
                                                                     <button data-toggle="modal" data-target="#deleteProduct{{ $product->id }}" class="dropdown-item"><i

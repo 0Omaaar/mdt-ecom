@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('folder');
             $table->string('file');
+            $table->boolean('miniature')->nullable();
             $table->timestamps();
         });
     }

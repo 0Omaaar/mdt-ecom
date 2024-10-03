@@ -7,6 +7,7 @@ use App\Models\SubCategory;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\TemporaryImage;
+use App\Models\Image;
 use Illuminate\Support\Facades\File;
 
 
@@ -16,6 +17,16 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view('admin.products.index', compact('products'));
+    }
+
+    public function show($id){
+        try{
+            $product = Product::findOrFail($id);
+
+            return view('admin.products.show', compact('product'));
+        }catch(\Exception $e){
+            return redirect()->route('admin.products.index');
+        }
     }
 
     public function create(){
@@ -73,7 +84,14 @@ class ProductController extends Controller
                     File::delete($imagePath);
                 }
 
-                $product->image = $temporaryImage->file;
+                if($temporaryImage->miniature == 1){
+                    $product->image = $temporaryImage->file;
+                }else{
+                    $image = new Image();
+                    $image->path = $temporaryImage->file;
+                    $image->product_id = $product->id;
+                    $image->save();
+                }
 
                 $folderPath = public_path('images/tmp/' . $temporaryImage->folder);
                 if(File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)){

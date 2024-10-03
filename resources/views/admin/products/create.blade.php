@@ -152,13 +152,26 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group row" style="margin-right: 15%">
-                                                        <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Image</label>
+                                                        <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Miniature</label>
                                                         <div class="col-md-9">
                                                             <input type="file" id="image" name="image">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <h4 class="form-section"><i class="la la-product-hunt"></i> Images du produit</h4>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group row" style="margin-right: 15%">
+                                                        <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Images</label>
+                                                        <div class="col-md-9">
+                                                            <input type="file" id="images" name="images[]" multiple>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <div class="form-actions text-right">
@@ -190,9 +203,11 @@
     <script>
         FilePond.registerPlugin(FilePondPluginImagePreview);
 
-        const inputElement = document.querySelector('input[type="file"]');
+        const miniatureInput  = document.querySelector('#image');
+        const imagesInput  = document.querySelector('#images');
 
-        const pond = FilePond.create(inputElement);
+        const miniaturePond = FilePond.create(miniatureInput);
+        const imagesPond = FilePond.create(imagesInput);
 
         FilePond.setOptions({
         server: {
@@ -202,6 +217,15 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
             },
+        });
+
+        mainImagePond.setOptions({
+            maxFiles: 1,
+        });
+
+        additionalImagesPond.setOptions({
+            allowMultiple: true,
+            maxFiles: 5,
         });
     </script>
 
