@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 
-class isAdmin
+class RedirectMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,14 +15,13 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(\Auth::user()){
-            if(\Auth::user()->type !== 'admin'){
-                return response()->json('You are not allowed to access this page !');
-            }
-        }else{
-            return redirect()->route('login');
-        }
+        $response = $next($request);
 
-        return $next($request);
+        $response->headers->add([
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+        ]);
+
+        return $response;
     }
 }
