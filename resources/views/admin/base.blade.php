@@ -337,6 +337,17 @@
                     class="la la-th-large"></i><span class="menu-title"
                     data-i18n="Shop">Sous Categories</span></a>
                 </li>
+                <li class=" nav-item"><a href="#"><i class="la la-clipboard"></i><span class="menu-title"
+                    data-i18n="Product">Produits</span></a>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="{{ route('admin.products.index') }}"><i></i><span
+                               >Liste des Produits</span></a>
+                    </li>
+                    <li><a class="menu-item" href="{{ route('admin.products.create') }}"><i></i><span
+                                >Ajouter Produit</span></a>
+                    </li>
+                </ul>
+            </li>
                 <li class=" navigation-header"><span data-i18n="Ecommerce">Ecommerce</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="Ecommerce"></i>

@@ -4,6 +4,9 @@ include_once 'auth.php';
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UploadTemporaryImageController;
+use App\Http\Controllers\DeleteTemporaryImageController;
 
 
 Route::get('/', function () {
@@ -27,3 +30,13 @@ Route::get('/admin/subCategories/index', [SubCategoryController::class, 'index']
 Route::post('/admin/subCategories/store', [SubCategoryController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.subCategories.store');
 Route::put('/admin/subCategories/update/{id}', [SubCategoryController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.subCategories.update');
 Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.subCategories.destroy');
+
+
+//files upload
+Route::post('/upload', [UploadTemporaryImageController::class, 'upload']);
+Route::delete('/delete', [DeleteTemporaryImageController::class, 'delete']);
+
+//products
+Route::get('/admin/products/index', [ProductController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.products.index');
+Route::get('/admin/products/create', [ProductController::class, 'create'])->middleware('auth', 'isAdmin')->name('admin.products.create');
+Route::post('/admin/products/store', [ProductController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.products.store');
