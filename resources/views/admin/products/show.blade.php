@@ -35,7 +35,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/forms/checkboxes-radios.css') }}">
 
 
+    <style>
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
 
+        li {
+            margin-bottom: 5px;
+        }
+
+    </style>
 
 @endsection
 
@@ -76,8 +86,8 @@
                             <div class="row">
                                 <div class="col-sm-4 col-12">
                                     <div class="product-img d-flex align-items-center">
-                                        <div class="badge badge-success round">
-                                            -50%
+                                        <div class="badge {{$product->stock_status == 'instock' ? 'badge-success' : 'badge-danger'}} round">
+                                            {{$product->stock_status}}
                                         </div>
                                         <img alt="Card image cap" class="img-fluid mb-1" src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}">
                                     </div>
@@ -106,8 +116,9 @@
                                     <!-- Product Information -->
                                     <div class="product-info">
                                         <p>
-                                            {{ $product->brief_description }}
+                                            {!! html_entity_decode($product->brief_description) !!}
                                         </p>
+
                                     </div>
 
 
@@ -134,19 +145,23 @@
                                 <div class="product-content tab-content px-1 pt-1">
                                     <div aria-expanded="true" aria-labelledby="description" class="tab-pane active" id="desc" role="tabpanel">
                                         <p>
-                                            {{ $product->description }}
+                                            {!! html_entity_decode($product->description) !!}
                                         </p>
                                         <br>
                                     </div>
                                     <div aria-labelledby="review" class="tab-pane" id="images">
                                         <div class="row">
-                                            @foreach ($product->images as $image)
+                                            @if ($product->images->count() > 0)
+                                                @foreach ($product->images as $image)
                                                 <div class="col-sm-4 col-4">
                                                     <div class="product-img d-flex align-items-center ml-2">
                                                         <img alt="Card image cap" class="img-fluid mb-1" src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}">
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                <p style="margin-top: 2%; margin-left: 43%;">Aucune Image pour le Moment !</p>
+                                            @endif
                                         </div>
                                     </div>
 

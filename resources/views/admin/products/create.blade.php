@@ -37,6 +37,7 @@
     rel="stylesheet"
     />
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 
 @endsection
@@ -81,7 +82,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="brief_description">Brève description</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" id="brief_description" class="form-control" placeholder="Brève description" name="brief_description">
+                                                            <textarea id="brief_description_editor" placeholder="Brève description" name="brief_description" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -92,7 +93,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="editor">Description</label>
                                                         <div class="col-md-9">
-                                                            <textarea id="editor" placeholder="Description" name="description" rows="3" required></textarea>
+                                                            <textarea id="myText" placeholder="Description" name="description" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -199,15 +200,21 @@
 @endsection
 @section('script')
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
-
     <script>
         ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch( error => {
-                console.log(error);
-            })
+        .create(document.querySelector('#myText'))
+        .catch(error => {
+            console.error(error);
+        });
+
+        ClassicEditor
+        .create(document.querySelector('#brief_description_editor'))
+        .catch(error => {
+            console.error(error);
+        });
     </script>
+
+    
 
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>

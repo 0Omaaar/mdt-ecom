@@ -37,6 +37,8 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
+        // dd($request->all);
+
        try{
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -105,7 +107,8 @@ class ProductController extends Controller
 
             return redirect()->route('admin.products.index')->with('success', 'Produit ajouté avec succès');
         }catch(\Exception $e){
-            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
+            return $e->getMessage();
+            // return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
         }
     }
 }
