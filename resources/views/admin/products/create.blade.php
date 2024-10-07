@@ -37,6 +37,8 @@
     rel="stylesheet"
     />
 
+
+
 @endsection
 
 
@@ -88,9 +90,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="description">Description</label>
+                                                        <label class="col-md-3 label-control" for="editor">Description</label>
                                                         <div class="col-md-9">
-                                                            <textarea id="description" class="form-control" placeholder="Description" name="description" rows="3" required></textarea>
+                                                            <textarea id="editor" placeholder="Description" name="description" rows="3" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -154,7 +156,7 @@
                                                     <div class="form-group row" style="margin-right: 15%">
                                                         <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Miniature</label>
                                                         <div class="col-md-9">
-                                                            <input type="file" id="image" name="image">
+                                                            <input type="file" id="image" name="image" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,6 +198,16 @@
 
 @endsection
 @section('script')
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch( error => {
+                console.log(error);
+            })
+    </script>
 
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>

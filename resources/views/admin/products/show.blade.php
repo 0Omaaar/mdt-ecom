@@ -31,6 +31,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/ecommerce-shop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/forms/checkboxes-radios.css') }}">
+
+
 
 
 @endsection
@@ -41,151 +45,118 @@
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="content-wrapper">
-        <div class="content-body">
-            <section id="justified-tabs-with-icons">
-                <div class="row">
-                    <div class="col-12 mt-1">
-                        <a href="{{ route('admin.products.index') }}">Liste des produuits</a> | <a href="{{ route('admin.products.create') }}">Ajouter produit</a>
-                        <hr>
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Détails Produit</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">Liste des Produits</a>
+                            </li>
+                            <li class="breadcrumb-item active">Details Produit
+                            </li>
+                        </ol>
                     </div>
                 </div>
+            </div>
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right">
+                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <div class="product-detail">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-sm-4 col-12">
+                                    <div class="product-img d-flex align-items-center">
+                                        <div class="badge badge-success round">
+                                            -50%
+                                        </div>
+                                        <img alt="Card image cap" class="img-fluid mb-1" src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-8 col-12">
+                                    <div class="title-area clearfix">
+                                        <h2 class="product-title float-left">
+                                            {{ $product->name }}
+                                        </h2>
+                                        <span class="ratings float-right">
+                                        </span>
+                                    </div>
+                                    <div class="price-reviews clearfix">
+                                        <span class="price-box">
+                                            <span class="price h4">
+                                                {{ $product->price }} DHS
+                                            </span>
+                                            <span class="old-price h4">
+                                                {{ $product->old_price }} DHS
+                                            </span>
+                                        </span>
+                                        <span class="float-right">
+                                            QTE : <span class="badge badge-lg">{{ $product->quantity }}</span>
+                                        </span>
+                                    </div>
+                                    <!-- Product Information -->
+                                    <div class="product-info">
+                                        <p>
+                                            {{ $product->brief_description }}
+                                        </p>
+                                    </div>
 
-                <div class="row match-height">
 
-                    <div class="col-xl-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Détails sur le Produit <b>{{ $product->name }}</b> avec le SKU <b>{{ $product->sku }}</b></h4>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs nav-top-border no-hover-bg nav-justified">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="activeIcon1-tab1" data-toggle="tab" href="#activeIcon1" aria-controls="activeIcon1" aria-expanded="true"><i class="ft-link mr-1"></i>Produit</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="linkIcon1-tab1" data-toggle="tab" href="#linkIcon1" aria-controls="linkIcon1" aria-expanded="false"><i class="ft-image mr-1"></i>Images</a>
-                                        </li>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="product-tabs nav nav-tabs nav-underline no-hover-bg">
+                                    <li class="nav-item">
+                                        <a aria-controls="desc" aria-expanded="true" class="nav-link active" data-toggle="tab" href="#desc" id="description">
+                                            Description
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a aria-controls="images" aria-expanded="false" class="nav-link" data-toggle="tab" href="#images" id="review">
+                                            Images
+                                        </a>
+                                    </li>
 
-                                    </ul>
-                                    <div class="tab-content px-1 pt-1">
-
-                                        {{-- First Tab --}}
-                                        <div role="tabpanel" class="tab-pane active" id="activeIcon1" aria-labelledby="activeIcon1-tab1" aria-expanded="true">
-
-                                            <section id="row-separator-form-layouts">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card">
-                                                            <div class="card-content collapse show">
-                                                                <div class="card-body">
-                                                                    <form class="form form-horizontal row-separator">
-                                                                        <div class="form-body">
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="name">Nom du produit</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="text" id="name" class="form-control" placeholder="Nom" value="{{ $product->name }}" name="name" disabled>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="brief_description">Brève description</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="text" id="brief_description" class="form-control" placeholder="Brève description" disabled value="{{ $product->brief_description }}" name="brief_description">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="description">Description</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <textarea id="description" class="form-control" placeholder="Description" name="description" rows="3" disabled>{{ $product->description }}</textarea>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="price">Prix</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="number" step="0.01" id="price" class="form-control" placeholder="Prix" name="price" disabled value="{{ $product->price }}">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="old_price">Ancien prix</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="number" step="0.01" id="old_price" class="form-control" placeholder="Ancien prix" name="old_price" disabled value="{{ $product->old_price }}">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="sku">SKU</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="text" id="sku" class="form-control" placeholder="SKU" name="sku" disabled value="{{ $product->sku }}">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="stock_status">État du stock</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <select id="stock_status" class="form-control" name="stock_status" disabled>
-                                                                                                <option>{{ $product->stock_status == 'instock' ? 'En stock' : 'Rupture de Stock' }}</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="quantity">Quantité</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="number" id="quantity" class="form-control" placeholder="Quantité" name="quantity" disabled value="{{ $product->quantity }}">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label class="col-md-3 label-control" for="subcategory_id">Sous-catégorie</label>
-                                                                                        <div class="col-md-9">
-                                                                                            <select id="subcategory_id" class="form-control" name="subcategory_id" disabled>
-                                                                                                <option>{{ $product->subcategory->name }}</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </form>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                </ul>
+                                <div class="product-content tab-content px-1 pt-1">
+                                    <div aria-expanded="true" aria-labelledby="description" class="tab-pane active" id="desc" role="tabpanel">
+                                        <p>
+                                            {{ $product->description }}
+                                        </p>
+                                        <br>
+                                    </div>
+                                    <div aria-labelledby="review" class="tab-pane" id="images">
+                                        <div class="row">
+                                            @foreach ($product->images as $image)
+                                                <div class="col-sm-4 col-4">
+                                                    <div class="product-img d-flex align-items-center ml-2">
+                                                        <img alt="Card image cap" class="img-fluid mb-1" src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}">
                                                     </div>
                                                 </div>
-                                            </section>
-                                        </div>
-
-
-
-                                        {{-- Second Tab --}}
-                                        <div class="tab-pane" id="linkIcon1" role="tabpanel" aria-labelledby="linkIcon1-tab1" aria-expanded="false">
-                                            <p>Chocolate bar gummies sesame snaps. Liquorice cake sesame snaps cotton candy cake sweet brownie.
-                                                Cotton candy candy canes brownie. Biscuit pudding sesame snaps pudding pudding sesame snaps biscuit
-                                                tiramisu.</p>
+                                            @endforeach
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     </div>
 </div>
@@ -217,5 +188,8 @@
 
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js') }}"></script>
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
+
+    <script src="{{ asset('assets/admin/js/scripts/pages/ecommerce-product-details.js') }}"></script>
+
 
 @endsection
