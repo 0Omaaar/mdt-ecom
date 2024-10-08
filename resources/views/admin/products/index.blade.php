@@ -148,7 +148,7 @@
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
                                                                     <a href="{{ route('admin.products.show', $product->id) }}" class="dropdown-item"><i
                                                                         class="la la-eye"></i> Voir Détails</a>
-                                                                    <button class="dropdown-item"><i
+                                                                    <button class="dropdown-item" data-toggle="modal" data-target="#editProduct{{ $product->id }}"><i
                                                                         class="la la-pencil"></i> Modifier</button>
                                                                     <button data-toggle="modal" data-target="#deleteProduct{{ $product->id }}" class="dropdown-item"><i
                                                                             class="la la-trash"></i> Supprimer</button>
@@ -156,8 +156,11 @@
                                                             </span>
                                                         </td>
 
-                                                        {{-- Delete Category Modal --}}
+                                                        {{-- Delete Product Modal --}}
                                                         @include('admin.products.delete')
+
+                                                        {{-- Edit Product Modal --}}
+                                                        @include('admin.products.edit')
 
                                                     </tr>
                                                 @endforeach

@@ -15,8 +15,10 @@ class ProductController extends Controller
 {
     public function index(){
         $products = Product::all();
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'categories', 'subCategories'));
     }
 
     public function show($id){
@@ -107,8 +109,47 @@ class ProductController extends Controller
 
             return redirect()->route('admin.products.index')->with('success', 'Produit ajouté avec succès');
         }catch(\Exception $e){
-            // return $e->getMessage();
+            $folderPath = public_path('images/tmp/');
+            if(File::isDirectory($folderPath)){
+                File::cleanDirectory($folderPath);
+            }
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
+        }
+    }
+
+    public function update(Request $request, $id){
+        try{
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'brief_description' => 'nullable|string|max:255',
+                'description' => 'required',
+                'price' => 'required|numeric|min:0',
+                'old_price' => 'nullable|numeric|min:0',
+                'sku' => 'required|string|max:255',
+                'stock_status' => 'required|in:instock,outstock',
+                'quantity' => 'required|integer|min:0',
+            ]);
+
+            $product = Product::findOrFail($id);
+            $product->name = $request->input('name');
+            $product->brief_description = $request->input('brief_description');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
+            $product->old_price = $request->input('old_price');
+            $product->sku = $request->input('sku');
+            $product->stock_status = $request->input('stock_status');
+            $product->quantity = $request->input('quantity');
+            $product->subcategory_id = $request->input('subcategory_id');
+
+            $subCategory = SubCategory::findOrFail($product->subcategory_id);
+            $product->category_id = $subCategory->category->id;
+
+            $product->save();
+
+            return redirect()->route('admin.products.index')->with('success', 'Produit modifié avec succès');
+        }catch(\Exception $e){
+            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de la modification du Produit.');
         }
     }
 
