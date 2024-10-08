@@ -9,6 +9,9 @@ use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
 
 
+use App\Models\Product;
+
+
 Route::get('/', function () {
     return view('user.home');
 });
@@ -16,7 +19,12 @@ Route::get('/', function () {
 
 //ADMIN ROUTES
 Route::get('/admin/index', function() {
-    return view('admin.index');
+    $totalProducts = Product::count();
+    $totalProductsInStock = Product::where('stock_status', 'instock')->count();
+    $totalProductsOutStock = Product::where('stock_status', 'outstock')->count();
+    $totalProductsLowStock = Product::where('quantity', '<', '10')->count();
+
+    return view('admin.index', compact('totalProducts', 'totalProductsInStock', 'totalProductsOutStock', 'totalProductsLowStock'));
 })->middleware('isAdmin')->name('admin.index');
 
 //categories
