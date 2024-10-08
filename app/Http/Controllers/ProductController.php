@@ -107,8 +107,39 @@ class ProductController extends Controller
 
             return redirect()->route('admin.products.index')->with('success', 'Produit ajouté avec succès');
         }catch(\Exception $e){
-            return $e->getMessage();
-            // return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
+            // return $e->getMessage();
+            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
+        }
+    }
+
+    public function destroy($id){
+        try{
+            $product = Product::findOrFail($id);
+            if($product != null){
+                if($product->image != null && File::exists(public_path('images/products/' . $product->id . '/' . $product->image))){
+                    File::delete(public_path('images/products/' . $product->id . '/' . $product->image));
+                }
+
+                if($product->images->count() > 0){
+                    foreach($product->images as $image){
+                        if(File::exists(public_path('images/products/' . $product->id . '/' . $image->path))){
+                            File::delete(public_path('images/products/' . $product->id . '/' . $image->path));
+                        }
+                    }
+                }
+
+                $folderPath = public_path('images/products/' . $product->id);
+                if(File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)){
+                    File::deleteDirectory($folderPath);
+                }
+
+                $product->delete();
+
+                return redirect()->route('admin.products.index')->with('success', 'Produit supprimé avec succès');
+            }
+
+        }catch(\Exception $e){
+            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de la suppression du Produit.');
         }
     }
 }

@@ -159,7 +159,7 @@
                                                         </td>
 
                                                         {{-- Delete Category Modal --}}
-                                                        {{-- @include('admin.categories.delete') --}}
+                                                        @include('admin.products.delete')
 
                                                     </tr>
                                                 @endforeach
