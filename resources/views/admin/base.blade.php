@@ -560,6 +560,28 @@
     <!-- END: Main Menu-->
 
 
+    @if (session()->has('success'))
+            <div style="margin-left: 70%; margin-top: 1%;">
+                <div id="error-alert" class="alert bg-success alert-arrow-left alert-dismissible mb-2" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ session()->get('success') }}</strong>
+                </div>
+            </div>
+    @endif
+
+    @if (session()->has('error'))
+            <div style="margin-left: 70%; margin-top: 1%;">
+                <div id="error-alert" class="alert bg-danger alert-arrow-left alert-dismissible mb-2" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ session()->get('error') }}</strong>
+                </div>
+            </div>
+    @endif
+
     @yield('content')
 
 
@@ -572,6 +594,17 @@
 
 
     @yield('script')
+
+    <script>
+        setTimeout(function (){
+            let alertElement = document.getElementById('error-alert');
+            if(alertElement){
+                alertElement.style.display = 'none';
+            }
+        }, 4000);
+    </script>
+
+
 </body>
 <!-- END: Body-->
 

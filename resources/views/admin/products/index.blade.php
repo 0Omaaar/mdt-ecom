@@ -142,7 +142,7 @@
                                                                 <button id="btnSearchDrop2" type="button"
                                                                     data-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="true"
-                                              f                      class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
+                                                                    class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
@@ -150,8 +150,6 @@
                                                                         class="la la-eye"></i> Voir Détails</a>
                                                                     <button class="dropdown-item"><i
                                                                         class="la la-pencil"></i> Modifier</button>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                                class="la la-eye"></i> Voir Produits</a>
                                                                     <button data-toggle="modal" data-target="#deleteProduct{{ $product->id }}" class="dropdown-item"><i
                                                                             class="la la-trash"></i> Supprimer</button>
                                                                 </span>
