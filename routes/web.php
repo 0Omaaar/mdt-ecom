@@ -7,14 +7,13 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
+use App\Http\Controllers\HomeController;
 
 
 use App\Models\Product;
 
 
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 //ADMIN ROUTES

@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-		<title>Electronic - Neoncart HTML5 Template</title>
+		<title>Mobidigitech</title>
 		<link rel="shortcut icon" href="{{asset('assets/user/images/logo/favourite_icon_01.png')}}">
 
 		<!-- fraimwork - css include -->
@@ -47,10 +47,6 @@
 		</div>
 		<!-- backtotop - end -->
 
-		<!-- preloader - start -->
-		<!-- <div id="preloader"></div> -->
-		<!-- preloader - end -->
-
 
 		<!-- header_section - start
 		================================================== -->
@@ -88,15 +84,14 @@
 							<form action="#">
 								<div class="medical_search_bar">
 									<div class="form_item">
-										<input type="search" name="search" placeholder="search here...">
+										<input type="search" name="search" placeholder="Chercher ici...">
 									</div>
 									<div class="option_select">
 										<select>
-											<option data-display="All Category">Select A Option</option>
-											<option value="1">Some option</option>
-											<option value="2">Another option</option>
-											<option value="3" disabled>A disabled option</option>
-											<option value="4">Potato</option>
+											<option data-display="Choisir Categorie">Choisir Une Categorie</option>
+                                            @foreach($categories as $category)
+                                                <option>{{ $category->name }}</option>
+                                            @endforeach
 										</select>
 									</div>
 									<button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>
@@ -109,7 +104,7 @@
 								<li>
 									<a href="{{ route('login') }}">
 										<i class="fas fa-user"></i>
-										<span>Login</span>
+										<span>Se Connecter</span>
 									</a>
 								</li>
 								<li>
@@ -122,7 +117,7 @@
 									<button type="button" class="cart_btn">
 										<span class="counter">2</span>
 										<i class="fas fa-shopping-cart"></i>
-										<span>Cart</span>
+										<span>Panier</span>
 									</button>
 								</li>
 							</ul>
@@ -160,17 +155,9 @@
 
 						<div class="col-lg-4 d-flex align-items-center justify-content-lg-end">
 							<div class="black_friday text-center">
-								<h3 class="text-uppercase">BLACK FRIDAY</h3>
-								<span>Get 45% off!</span>
-							</div>
-							<div class="language_select option_select">
-								<select>
-									<option data-display="Language Select">Select A Option</option>
-									<option value="1" selected>English</option>
-									<option value="2">Franch</option>
-									<option value="3" disabled>portuguese</option>
-									<option value="4">Spanish</option>
-								</select>
+								<h3 class="text-uppercase">OFFRE</h3>
+								<span>
+                                    Obtenez 45% de réduction!</span>
 							</div>
 						</div>
 					</div>
@@ -526,12 +513,12 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												Big screens in incredibly slim designs that in your hand.
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Browse Now</a>
+												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
@@ -541,12 +528,12 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												Big screens in incredibly slim designs that in your hand.
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Browse Now</a>
+												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
@@ -556,12 +543,12 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												Big screens in incredibly slim designs that in your hand.
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Browse Now</a>
+												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
