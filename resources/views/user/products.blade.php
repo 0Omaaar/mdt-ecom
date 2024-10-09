@@ -6,9 +6,11 @@
 		================================================== -->
 		<main>
 
+            @include('user.panier')
+
 			<!-- product_section - start
 			================================================== -->
-			<section class="product_section sec_ptb_100 clearfix">
+			<section class="product_section clearfix" style="margin-top: 2%;">
 				<div class="container maxw_1600">
 					<div class="row justify-content-lg-between">
 
@@ -35,17 +37,7 @@
 										</select>
 									</div>
 								</li>
-								<li>
-									<div class="shortby_select option_select">
-										<select>
-											<option data-display="Select:">Select A Option</option>
-											<option value="1" selected>Popularity</option>
-											<option value="2">Popularity</option>
-											<option value="3" disabled>Popularity</option>
-											<option value="4">Popularity</option>
-										</select>
-									</div>
-								</li>
+
 								<li><p class="result_text mb-0 d-flex align-items-center"><span class="active_page">1</span> of 3 <a class="next_btn" href="#!"><i class="fal fa-long-arrow-right"></i></a></p></li>
 							</ul>
 
@@ -495,117 +487,33 @@
 								<a href="#!" class="custom_btn btn_border border_electronic">Load more</a>
 							</div>
 
-							<div class="advertisement_image">
-								<a href="#!">
-									<img src="{{asset('assets/user/images/offer/electronic/img_04.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<aside class="electronic_sidebar sidebar_section">
 								<div class="sb_widget sb_collapse_category">
-									<h3 class="sb_widget_title">All Categories</h3>
+									<h3 class="sb_widget_title">Tous Les Categories</h3>
 									<div id="sb_category_accordion" class="sb_category_accordion">
-										<div class="card">
-											<div class="card-header">
-												<a data-toggle="collapse" href="#collapse_one">
-													Wearable Technology (84)
-												</a>
-											</div>
-											<div id="collapse_one" class="collapse show" data-parent="#sb_category_accordion">
-												<div class="card-body p-0">
-													<ul class="ul_li_block clearfix">
-														<li><a href="#!">Lights</a></li>
-														<li><a href="#!">Raincoats</a></li>
-														<li><a href="#!">Shorts</a></li>
-														<li><a href="#!">Pants</a></li>
-														<li><a href="#!">Shirts</a></li>
-														<li><a href="#!">Tires</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
+										@foreach ($categories as $category)
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <a data-toggle="collapse" href="#collapse_one{{ $category->id }}">
+                                                        {{ $category->name }} ({{ $category->subCategories->count() }})
+                                                    </a>
+                                                </div>
+                                                <div id="collapse_one{{ $category->id }}" class="collapse show" data-parent="#sb_category_accordion">
+                                                    <div class="card-body p-0">
+                                                        <ul class="ul_li_block clearfix">
+                                                            @foreach ($category->subCategories as $subCategory)
+                                                                <li><a href="#!">{{ $subCategory->name }}</a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
 
-										<div class="card">
-											<div class="card-header">
-												<a class="collapsed" data-toggle="collapse" href="#collapse_two">
-													Android VR  (36)
-												</a>
-											</div>
-											<div id="collapse_two" class="collapse" data-parent="#sb_category_accordion">
-												<div class="card-body p-0">
-													<ul class="ul_li_block clearfix">
-														<li><a href="#!">Lights</a></li>
-														<li><a href="#!">Raincoats</a></li>
-														<li><a href="#!">Shorts</a></li>
-														<li><a href="#!">Pants</a></li>
-														<li><a href="#!">Shirts</a></li>
-														<li><a href="#!">Tires</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
 
-										<div class="card">
-											<div class="card-header">
-												<a class="collapsed" data-toggle="collapse" href="#collapse_three">
-													iOS VR (8)
-												</a>
-											</div>
-											<div id="collapse_three" class="collapse" data-parent="#sb_category_accordion">
-												<div class="card-body p-0">
-													<ul class="ul_li_block clearfix">
-														<li><a href="#!">Lights</a></li>
-														<li><a href="#!">Raincoats</a></li>
-														<li><a href="#!">Shorts</a></li>
-														<li><a href="#!">Pants</a></li>
-														<li><a href="#!">Shirts</a></li>
-														<li><a href="#!">Tires</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-
-										<div class="card">
-											<div class="card-header">
-												<a class="collapsed" data-toggle="collapse" href="#collapse_four">
-													Video Consoles (18)
-												</a>
-											</div>
-											<div id="collapse_four" class="collapse" data-parent="#sb_category_accordion">
-												<div class="card-body p-0">
-													<ul class="ul_li_block clearfix">
-														<li><a href="#!">Lights</a></li>
-														<li><a href="#!">Raincoats</a></li>
-														<li><a href="#!">Shorts</a></li>
-														<li><a href="#!">Pants</a></li>
-														<li><a href="#!">Shirts</a></li>
-														<li><a href="#!">Tires</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-
-										<div class="card">
-											<div class="card-header">
-												<a class="collapsed" data-toggle="collapse" href="#collapse_five">
-													Accesories (31)
-												</a>
-											</div>
-											<div id="collapse_five" class="collapse" data-parent="#sb_category_accordion">
-												<div class="card-body p-0">
-													<ul class="ul_li_block clearfix">
-														<li><a href="#!">Lights</a></li>
-														<li><a href="#!">Raincoats</a></li>
-														<li><a href="#!">Shorts</a></li>
-														<li><a href="#!">Pants</a></li>
-														<li><a href="#!">Shirts</a></li>
-														<li><a href="#!">Tires</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 
