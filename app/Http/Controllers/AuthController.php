@@ -30,7 +30,7 @@ class AuthController extends Controller
                 return redirect()->route('admin.index');
             }
             else{
-                return redirect()->intended('/');
+                return redirect()->route('home');
             }
         }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->get('password'))
         ]);
 
-        return redirect()->intended('/');
+        return redirect()->route('login');
     }
 
 

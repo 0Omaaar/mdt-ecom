@@ -152,6 +152,33 @@
                                                 </div>
                                             </div>
 
+                                            <div class="row" style="margin-left: 20%; margin-top: 1%; margin-bottom: 1%;">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="selection" id="selection" class="form-check-input">
+                                                            <label class="form-check-label" for="selection">Notre sélection</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="top_ventes" id="top_ventes" class="form-check-input">
+                                                            <label class="form-check-label" for="top_ventes">Top Ventes</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="nouveautes" id="nouveautes" class="form-check-input">
+                                                            <label class="form-check-label" for="nouveautes">Nouveautés</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group row" style="margin-right: 15%">
@@ -214,7 +241,7 @@
         });
     </script>
 
-    
+
 
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>

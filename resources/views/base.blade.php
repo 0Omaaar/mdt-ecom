@@ -32,6 +32,10 @@
 		<!-- custom - css include -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/style.css') }}">
 
+        {{-- added css from sratch --}}
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/scratch.css') }}">
+
+
 	</head>
 
 

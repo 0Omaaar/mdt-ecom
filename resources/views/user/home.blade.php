@@ -1,5 +1,13 @@
 @extends('base')
 
+
+<style>
+
+
+
+
+</style>
+
 @section('content')
 
 
@@ -25,8 +33,21 @@
 										<ul class="alldepartments_menulist ul_li_block clearfix">
 											<li><a href="#!">Top 100 Offers</a></li>
 											<li><a href="#!">New Arrivals</a></li>
-											<li class="has_child"><a href="#!">Computers & Laptops</a></li>
-											<li class="has_child"><a href="#!">Cameras & Photo</a></li>
+											<li class="has_child">
+                                                <a href="#!">Computers & Laptops</a>
+                                                <ul class="dropdown_menu">
+                                                    <li><a href="#!">Laptops</a></li>
+                                                    <li><a href="#!">Desktops</a></li>
+                                                    <li><a href="#!">Monitors</a></li>
+                                                </ul>
+                                            </li>
+											<li class="has_child">
+                                                <a href="#!">Cameras & Photo</a>
+                                                <ul class="dropdown_menu">
+                                                    <li><a href="#!">Laptops</a></li>
+                                                    <li><a href="#!">Desktops</a></li>
+                                                    <li><a href="#!">Monitors</a></li>
+                                                </ul></li>
 											<li class="has_child"><a href="#!">Smart Phones & Tablets</a></li>
 											<li><a href="#!">Video Games & Consoles</a></li>
 											<li class="has_child"><a href="#!">TV & Audio</a></li>

@@ -26,6 +26,9 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('image');
+            $table->boolean('selection')->nullable()->default(false);
+            $table->boolean('nouveautes')->nullable()->default(false);
+            $table->boolean('top_ventes')->nullable()->default(false);
             $table->timestamps();
         });
     }

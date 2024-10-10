@@ -39,8 +39,6 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
-        // dd($request->all);
-
        try{
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -63,6 +61,9 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->selection = $request->has('selection');
+            $product->nouveautes = $request->has('nouveautes');
+            $product->top_ventes = $request->has('top_ventes');
 
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;
@@ -141,6 +142,9 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->selection = $request->has('selection');
+            $product->nouveautes = $request->has('nouveautes');
+            $product->top_ventes = $request->has('top_ventes');
 
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;
