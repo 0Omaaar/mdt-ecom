@@ -257,8 +257,8 @@
 
         FilePond.setOptions({
         server: {
-            process: '/upload',
-            revert: '/delete',
+            process: '{{ route('upload') }}',
+            revert: '{{ route('delete') }}',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },

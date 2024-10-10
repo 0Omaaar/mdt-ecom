@@ -81,14 +81,14 @@
 												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
 
 									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
 										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
-											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
+											<img src="{{asset('assets/user/images/slider/electronic/img_02.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
 											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
@@ -96,14 +96,14 @@
 												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
 
 									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
 										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
-											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
+											<img src="{{asset('assets/user/images/slider/electronic/img_03.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
 											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
@@ -111,7 +111,7 @@
 												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="#!" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
@@ -130,7 +130,12 @@
 									<img src="{{asset('assets/user/images/offer/electronic/img_02.jpg')}}" alt="image_not_found">
 								</a>
 							</div>
-							<div class="advertisement_image">
+							<div class="advertisement_image mt-2">
+								<a href="#!">
+									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
+								</a>
+							</div>
+							<div class="advertisement_image mt-5">
 								<a href="#!">
 									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
 								</a>

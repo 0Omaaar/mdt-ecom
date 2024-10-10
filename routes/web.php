@@ -42,8 +42,8 @@ Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class,
 
 
 //files upload
-Route::post('/upload', [UploadTemporaryImageController::class, 'upload']);
-Route::delete('/delete', [DeleteTemporaryImageController::class, 'delete']);
+Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');
+Route::delete('/delete', [DeleteTemporaryImageController::class, 'delete'])->name('delete');
 
 //products
 Route::get('/admin/products/index', [ProductController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.products.index');
