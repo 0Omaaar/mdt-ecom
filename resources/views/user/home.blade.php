@@ -13,8 +13,8 @@
 
         @section('under-header')
 
-            @include('user.under-header')
-            
+            @include('user.layouts.under-header')
+
         @endsection
 
 
@@ -22,7 +22,7 @@
 		================================================== -->
 		<main>
 
-            @include('user.panier')
+            @include('user.layouts.panier')
 
 
 			<!-- slider_section - start

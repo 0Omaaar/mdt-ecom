@@ -9,7 +9,7 @@
 
 
 
-            @include('user.panier')
+            @include('user.layouts.panier')
 
 
 

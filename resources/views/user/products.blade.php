@@ -4,14 +4,14 @@
 
         @section('under-header')
 
-            @include('user.under-header')
+            @include('user.layouts.under-header')
 
         @endsection
 
 <!-- main body - start ================================================== -->
 		<main>
 
-            @include('user.panier')
+            @include('user.layouts.panier')
 
 			<!-- product_section - start
 			================================================== -->
