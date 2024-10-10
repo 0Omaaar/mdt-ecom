@@ -19,4 +19,10 @@ class HomeController extends Controller
 
         return view('user.products', compact('categories'));
     }
+
+    public function product(){
+        $categories = Category::all();
+
+        return view('user.product', compact('categories'));
+    }
 }

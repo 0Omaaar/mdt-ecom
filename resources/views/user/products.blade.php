@@ -2,8 +2,13 @@
 
 @section('content')
 
-<!-- main body - start
-		================================================== -->
+        @section('under-header')
+
+            @include('user.under-header')
+
+        @endsection
+
+<!-- main body - start ================================================== -->
 		<main>
 
             @include('user.panier')

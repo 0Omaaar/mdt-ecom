@@ -1,14 +1,14 @@
 @charset "UTF-8";
 /* table of content - start
 ==================================================================================================== */
-/* 
+/*
 
 Project Name 	:  Neoncart
 File 			:  CSS Base
 Version 		:  1.0.0
 Author 			:  jthemes (https://themeforest.net/user/jthemes)
 
-================================================== 
+==================================================
 
 */
 /* table of content - end
@@ -277,7 +277,7 @@ hr {
   color: #ce0b2b;
 }
 
-/* bootstrap settings - start 
+/* bootstrap settings - start
 ================================================== */
 .container {
   max-width: 1200px;
@@ -430,9 +430,9 @@ hr {
 }
 
 /* all departments dropdown - end */
-/* bootstrap settings - end 
+/* bootstrap settings - end
 ================================================== */
-/* slick slider settings - start 
+/* slick slider settings - start
 ================================================== */
 .slick-dots {
   left: 50%;
@@ -602,9 +602,9 @@ hr {
   display: inline-block;
 }
 
-/* slick slider settings - end 
+/* slick slider settings - end
 ================================================== */
-/* list style settings - start 
+/* list style settings - start
 ================================================== */
 .ul_li,
 .ul_li_right,
@@ -869,7 +869,7 @@ hr {
 
 /* count down timer - end
 ================================================== */
-/* padding - margin setting - start 
+/* padding - margin setting - start
 ================================================== */
 .sec_ptb_50 {
   padding: 50px 0px;
@@ -9939,7 +9939,7 @@ button {
   min-height: 80px;
   padding: 15px 48px;
   align-items: center;
-  background-color: #1d1d1d;
+  background-color: #0063d1;
   transform: skewX(-4deg);
 }
 .electronic_deals_slider .item_header .title_text {
@@ -19413,14 +19413,14 @@ blockquote .blockquote_title {
 /* contact page - end
 ==================================================================================================== */
 /* ==================================================================================================== */
-/* 
+/*
 *	Project Name 	:  Neoncart
 *	File 			:  Responsive CSS Base
 *	Version 		:  1.0.0
 *	Author 			:  jthemes (https://themeforest.net/user/jthemes)
 *	css code for responsive layout To make Responsive
 
-================================================== 
+==================================================
 
 *	1 - media screen and (max-width: 1440px)
 *	2 - media screen and (max-width: 1280px)
