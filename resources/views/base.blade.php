@@ -90,7 +90,7 @@
 									</div>
 									<div class="option_select">
 										<select>
-											<option data-display="Choisir Categorie">Choisir Une Categorie</option>
+											<option data-display="Categories">Categories</option>
                                             @foreach($categories as $category)
                                                 <option>{{ $category->name }}</option>
                                             @endforeach

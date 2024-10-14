@@ -33,35 +33,24 @@
 						<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
 							<div class="alldepartments_menu_wrap">
 								<button class="alldepartments_btn bg_electronic_blue text-uppercase" type="button" data-toggle="collapse" data-target="#alldepartments_dropdown" aria-expanded="false" aria-controls="alldepartments_dropdown">
-									<i class="far fa-bars"></i> All Departments
+									<i class="far fa-bars"></i> Toutes les catégories
 								</button>
 								<div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
 									<div class="card">
 										<ul class="alldepartments_menulist ul_li_block clearfix">
-											<li><a href="#!">Top 100 Offers</a></li>
-											<li><a href="#!">New Arrivals</a></li>
-											<li class="has_child">
-                                                <a href="#!">Computers & Laptops</a>
-                                                <ul class="dropdown_menu">
-                                                    <li><a href="#!">Laptops</a></li>
-                                                    <li><a href="#!">Desktops</a></li>
-                                                    <li><a href="#!">Monitors</a></li>
-                                                </ul>
-                                            </li>
-											<li class="has_child">
-                                                <a href="#!">Cameras & Photo</a>
-                                                <ul class="dropdown_menu">
-                                                    <li><a href="#!">Laptops</a></li>
-                                                    <li><a href="#!">Desktops</a></li>
-                                                    <li><a href="#!">Monitors</a></li>
-                                                </ul></li>
-											<li class="has_child"><a href="#!">Smart Phones & Tablets</a></li>
-											<li><a href="#!">Video Games & Consoles</a></li>
-											<li class="has_child"><a href="#!">TV & Audio</a></li>
-											<li><a href="#!">Gadgets</a></li>
-											<li class="has_child"><a href="#!">Car Electronic & GPS</a></li>
-											<li class="has_child"><a href="#!">Accesories</a></li>
-											<li><a href="#!">Virtual Reality</a></li>
+											<li><a href="#!">Deals du jour</a></li>
+											<li><a href="#!">Notre sélection</a></li>
+											<li><a href="#!">Nouvelle arrivage</a></li>
+											@foreach ($categories as $category)
+                                                <li class="{{ $category->subCategories->count() > 0 ? 'has_child' : '' }}">
+                                                    <a href="#!">{{ $category->name }}</a>
+                                                    <ul class="dropdown_menu">
+                                                        @foreach ($category->subCategories as $subcategory)
+                                                            <li><a href="#!">{{ $subcategory->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endforeach
 										</ul>
 									</div>
 								</div>
@@ -70,7 +59,7 @@
 
 						<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
 							<div class="electronic_slider position-relative clearfix">
-								<div class="main_slider clearfix" data-slick='{"arrows": false}'>
+								<div class="main_slider clearfix" data-slick='{"arrows": false}' style="height: 300px;">
 									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
 										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
@@ -131,11 +120,6 @@
 								</a>
 							</div>
 							<div class="advertisement_image mt-2">
-								<a href="#!">
-									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-							<div class="advertisement_image mt-5">
 								<a href="#!">
 									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
 								</a>
