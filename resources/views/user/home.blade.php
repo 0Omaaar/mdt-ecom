@@ -1,582 +1,431 @@
 @extends('base')
 
-
 <style>
-
-
-
 
 </style>
 
 @section('content')
 
+    @section('under-header')
 
-        @section('under-header')
+        @include('user.layouts.under-header')
 
-            @include('user.layouts.under-header')
+    @endsection
 
-        @endsection
+    <!-- corps principal - début
+    ================================================== -->
+    <main>
 
+        @include('user.layouts.panier')
 
-		<!-- main body - start
-		================================================== -->
-		<main>
+        <!-- section_slider - début
+        ================================================== -->
+        <section class="slider_section sec_ptb_50 clearfix">
+            <div class="container maxw_1600">
+                <div class="row justify-content-lg-between">
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alldepartments_menu_wrap">
+                            <button class="alldepartments_btn bg_electronic_blue text-uppercase" type="button" data-toggle="collapse" data-target="#alldepartments_dropdown" aria-expanded="false" aria-controls="alldepartments_dropdown">
+                                <i class="far fa-bars"></i> Tous les départements
+                            </button>
+                            <div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
+                                <div class="card">
+                                    <ul class="alldepartments_menulist ul_li_block clearfix">
+                                        <li><a href="#!">Top 100 Offres</a></li>
+                                        <li><a href="#!">Nouveaux Arrivages</a></li>
+                                        <li class="has_child">
+                                            <a href="#!">Ordinateurs & Laptops</a>
+                                            <ul class="dropdown_menu">
+                                                <li><a href="#!">Laptops</a></li>
+                                                <li><a href="#!">Ordinateurs de bureau</a></li>
+                                                <li><a href="#!">Moniteurs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has_child">
+                                            <a href="#!">Appareils Photo & Photo</a>
+                                            <ul class="dropdown_menu">
+                                                <li><a href="#!">Laptops</a></li>
+                                                <li><a href="#!">Ordinateurs de bureau</a></li>
+                                                <li><a href="#!">Moniteurs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has_child"><a href="#!">Smartphones & Tablettes</a></li>
+                                        <li><a href="#!">Jeux Vidéo & Consoles</a></li>
+                                        <li class="has_child"><a href="#!">TV & Audio</a></li>
+                                        <li><a href="#!">Gadgets</a></li>
+                                        <li class="has_child"><a href="#!">Électronique Automobile & GPS</a></li>
+                                        <li class="has_child"><a href="#!">Accessoires</a></li>
+                                        <li><a href="#!">Réalité Virtuelle</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            @include('user.layouts.panier')
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                        <div class="electronic_slider position-relative clearfix">
+                            <div class="main_slider clearfix" data-slick='{"arrows": false}'>
+                                <div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
+                                    <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
+                                        <img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_non_trouvée">
+                                    </div>
+                                    <div class="slider_content">
+                                        <h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
+                                        <p data-animation="fadeInUp" data-delay=".8s">
+                                            De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
+                                        </p>
+                                        <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
+                                            <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
+                                    <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
+                                        <img src="{{asset('assets/user/images/slider/electronic/img_02.png')}}" alt="image_non_trouvée">
+                                    </div>
+                                    <div class="slider_content">
+                                        <h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
+                                        <p data-animation="fadeInUp" data-delay=".8s">
+                                            De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
+                                        </p>
+                                        <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
+                                            <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-			<!-- slider_section - start
-			================================================== -->
-			<section class="slider_section sec_ptb_50 clearfix">
-				<div class="container maxw_1600">
-					<div class="row justify-content-lg-between">
-						<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-							<div class="alldepartments_menu_wrap">
-								<button class="alldepartments_btn bg_electronic_blue text-uppercase" type="button" data-toggle="collapse" data-target="#alldepartments_dropdown" aria-expanded="false" aria-controls="alldepartments_dropdown">
-									<i class="far fa-bars"></i>  Toutes les catégories
-								</button>
-								<div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
-									<div class="card">
-										<ul class="alldepartments_menulist ul_li_block clearfix">
-											<li><a href="#!">Top 100 Offers</a></li>
-											<li><a href="#!">New Arrivals</a></li>
-											<li class="has_child">
-                                                <a href="#!">Computers & Laptops</a>
-                                                <ul class="dropdown_menu">
-                                                    <li><a href="#!">Laptops</a></li>
-                                                    <li><a href="#!">Desktops</a></li>
-                                                    <li><a href="#!">Monitors</a></li>
-                                                </ul>
-                                            </li>
-											<li class="has_child">
-                                                <a href="#!">Cameras & Photo</a>
-                                                <ul class="dropdown_menu">
-                                                    <li><a href="#!">Laptops</a></li>
-                                                    <li><a href="#!">Desktops</a></li>
-                                                    <li><a href="#!">Monitors</a></li>
-                                                </ul></li>
-											<li class="has_child"><a href="#!">Smart Phones & Tablets</a></li>
-											<li><a href="#!">Video Games & Consoles</a></li>
-											<li class="has_child"><a href="#!">TV & Audio</a></li>
-											<li><a href="#!">Gadgets</a></li>
-											<li class="has_child"><a href="#!">Car Electronic & GPS</a></li>
-											<li class="has_child"><a href="#!">Accesories</a></li>
-											<li><a href="#!">Virtual Reality</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
+                                <div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
+                                    <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
+                                        <img src="{{asset('assets/user/images/slider/electronic/img_03.png')}}" alt="image_non_trouvée">
+                                    </div>
+                                    <div class="slider_content">
+                                        <h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
+                                        <p data-animation="fadeInUp" data-delay=".8s">
+                                            De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
+                                        </p>
+                                        <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
+                                            <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-						<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
-							<div class="electronic_slider position-relative clearfix">
-								<div class="main_slider clearfix" data-slick='{"arrows": false}'>
-									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
-										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
-											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
-										</div>
-										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
-											<p data-animation="fadeInUp" data-delay=".8s">
-												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
-											</p>
-											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
-											</div>
-										</div>
-									</div>
+                            <!-- progression du slider -->
+                            <div class="slick-progress">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
 
-									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
-										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
-											<img src="{{asset('assets/user/images/slider/electronic/img_02.png')}}" alt="image_not_found">
-										</div>
-										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
-											<p data-animation="fadeInUp" data-delay=".8s">
-												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
-											</p>
-											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
-											</div>
-										</div>
-									</div>
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="advertisement_image mb_30">
+                            <a href="#!">
+                                <img src="{{asset('assets/user/images/offer/electronic/img_02.jpg')}}" alt="image_non_trouvée">
+                            </a>
+                        </div>
+                        <div class="advertisement_image mt-2">
+                            <a href="#!">
+                                <img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_non_trouvée">
+                            </a>
+                        </div>
+                        <div class="advertisement_image mt-5">
+                            <a href="#!">
+                                <img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_non_trouvée">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- section_slider - fin
+        ================================================== -->
 
-									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
-										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
-											<img src="{{asset('assets/user/images/slider/electronic/img_03.png')}}" alt="image_not_found">
-										</div>
-										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
-											<p data-animation="fadeInUp" data-delay=".8s">
-												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
-											</p>
-											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
-											</div>
-										</div>
-									</div>
-								</div>
+        <!-- section_produit - début
+        ================================================== -->
+        <section class="product_section mb_50 clearfix">
+            <div class="container maxw_1600" style="margin-bottom: 5%;">
+                <div class="electronic_content_container">
+                    <div class="row justify-content-lg-between">
 
-								<!-- slider progress -->
-								<div class="slick-progress">
-									<span></span>
-								</div>
-							</div>
-						</div>
+                        <div class="col-lg-4">
+                            <div class="electronic_deals_slider">
+                                <div class="item_header">
+                                    <h2 class="title_text text-white mb-0"><strong>Offres</strong> du jour</h2>
+                                </div>
+                                <div class="weekly_deals_carousel position-relative">
+                                    <div class="slideshow1_slider" data-slick='{"dots": false}'>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-						<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-							<div class="advertisement_image mb_30">
-								<a href="#!">
-									<img src="{{asset('assets/user/images/offer/electronic/img_02.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-							<div class="advertisement_image mt-2">
-								<a href="#!">
-									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-							<div class="advertisement_image mt-5">
-								<a href="#!">
-									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-						</div>
-					</div>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-				</div>
-			</section>
-			<!-- slider_section - end
-			================================================== -->
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-			<!-- product_section - start
-			================================================== -->
-			<section class="product_section mb_50 clearfix">
-				<div class="container maxw_1600" style="margin-bottom: 5%;">
-					<div class="electronic_content_container">
-						<div class="row justify-content-lg-between">
+                        <div class="col-lg-4">
+                            <div class="electronic_deals_slider">
+                                <div class="item_header">
+                                    <h2 class="title_text text-white mb-0"><strong>Nouveaux</strong> Arrivages</h2>
+                                </div>
+                                <div class="weekly_deals_carousel position-relative">
+                                    <div class="slideshow2_slider" data-slick='{"dots": false}'>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-							<div class="col-lg-4">
-								<div class="electronic_deals_slider">
-									<div class="item_header">
-										<h2 class="title_text text-white mb-0"><strong>Deals</strong> du jour</h2>
-									</div>
-									<div class="weekly_deals_carousel position-relative">
-										<div class="slideshow1_slider" data-slick='{"dots": false}'>
-											<div class="item">
-												<div class="electronic_deals_item">
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-											<div class="item">
-												<div class="electronic_deals_item">
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-											<div class="item">
-												<div class="electronic_deals_item">
+                        <div class="col-lg-4">
+                            <div class="electronic_deals_slider">
+                                <div class="item_header">
+                                    <h2 class="title_text text-white mb-0"><strong>Meilleures</strong> Ventes</h2>
+                                </div>
+                                <div class="weekly_deals_carousel position-relative">
+                                    <div class="slideshow3_slider" data-slick='{"dots": false}'>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										{{-- <div class="carousel_nav clearfix">
-											<button type="button" class="left_arrow d-inline-block"><i class="fal fa-angle-left mr-1"></i> Previous deal</button>
-											<button type="button" class="right_arrow d-inline-block">Next deal <i class="fal fa-angle-right ml-1"></i></button>
-										</div> --}}
-									</div>
-								</div>
-							</div>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_10.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-							<div class="col-lg-8">
-								<div class="electronic_product_group clearfix">
-									<ul class="electronic_tabs_nav nav ul_li_right clearfix">
-										<li><a class="active" data-toggle="tab" href="#featured_tab">Notre sélection</a></li>
-										<li><a data-toggle="tab" href="#onsale_tab">Top Ventes</a></li>
-										<li><a data-toggle="tab" href="#toprated_tab">Nouveautés</a></li>
-									</ul>
-									<div class="tab-content">
-										<div id="featured_tab" class="tab-pane fade active">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_11.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div id="onsale_tab" class="tab-pane fade">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$20</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div id="toprated_tab" class="tab-pane fade">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+                                        <div class="item">
+                                            <div class="electronic_deals_item">
+                                                <div class="item_price">
+                                                    <strong>$425.89</strong> <del>$239.99</del>
+                                                </div>
+                                                <h3 class="item_title mb-0">
+                                                    <a href="#!">Tablette Red EliteBook Revolve</a>
+                                                </h3>
+                                                <div class="item_image">
+                                                    <img src="{{asset('assets/user/images/shop/electronic/img_12.png')}}" alt="image_non_trouvée">
+                                                </div>
+                                                <div class="countdown_wrap">
+                                                    <div class="countdown_content">
+                                                        <h4>Dépêchez-vous!</h4>
+                                                        <p>Offre se termine dans :</p>
+                                                    </div>
+                                                    <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
+                                                </div>
 
 												<li>
 													<div class="electronic_product_item">
@@ -595,96 +444,114 @@
 														</div>
 													</div>
 												</li>
-
 												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
+
+<li>
+    <div class="electronic_product_item">
+        <ul class="product_label ul_li clearfix">
+            <li>-30 $</li>
+        </ul>
+        <div class="item_image">
+            <img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_non_trouvée">
+        </div>
+        <div class="item_content">
+            <span class="item_name">Haut-parleurs</span>
+            <h3 class="item_title">
+                <a href="#!">Système Audio Sans Fil Multiroom 360</a>
+            </h3>
+            <span class="item_price">685,00 $</span>
+        </div>
+    </div>
+</li>
+
 											</ul>
 										</div>
 									</div>
@@ -708,289 +575,290 @@
 			<!-- product_section - start
 			================================================== -->
 			<section class="product_section mb_50 clearfix">
-				<div class="container-fluid p-0">
-					<div class="row no-gutters">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-3">
+                <div class="alldepartments_dropdown audiovisual_entertainment d-block" data-background="{{asset('assets/user/images/backgrounds/bg_11.jpg')}}">
+                    <h3 class="title_text mb_30 text-white">
+                        <span data-bg-color="#333333"><i class="fal fa-plug"></i></span>
+                        <strong>Divertissement Audio & Visuel</strong> puissant
+                    </h3>
+                    <ul class="alldepartments_menulist ul_li_block clearfix">
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_01.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                PC de bureau
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_02.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Ultrabooks
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_03.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Smartphones
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_04.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Caméras Internet
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_05.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Accessoires
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_01.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                PC de bureau
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_02.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Ultrabooks
+                            </a>
+                        </li>
+                        <li class="has_child">
+                            <a href="#!">
+                                <span class="icon">
+                                    <img src="{{asset('assets/user/images/icons/electronic/icon_03.png')}}" alt="icône_non_trouvée">
+                                </span>
+                                Smartphones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-						<div class="col-lg-3">
-							<div class="alldepartments_dropdown audiovisual_entertainment d-block" data-background="{{asset('assets/user/images/backgrounds/bg_11.jpg')}}">
-								<h3 class="title_text mb_30 text-white">
-									<span data-bg-color="#333333"><i class="fal fa-plug"></i></span>
-									<strong>Powerful Audio & Visual</strong> entertainment
-								</h3>
-								<ul class="alldepartments_menulist ul_li_block clearfix">
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_01.png')}}" alt="icon_not_found">
-											</span>
-											Desktop PCs
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_02.png')}}" alt="icon_not_found">
-											</span>
-											Ultrabooks
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_03.png')}}" alt="icon_not_found">
-											</span>
-											Smartphones
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_04.png')}}" alt="icon_not_found">
-											</span>
-											Internet Cams
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_05.png')}}" alt="icon_not_found">
-											</span>
-											Accesories
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_01.png')}}" alt="icon_not_found">
-											</span>
-											Desktop PCs
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_02.png')}}" alt="icon_not_found">
-											</span>
-											Ultrabooks
-										</a>
-									</li>
-									<li class="has_child">
-										<a href="#!">
-											<span class="icon">
-												<img src="{{asset('assets/user/images/icons/electronic/icon_03.png')}}" alt="icon_not_found">
-											</span>
-											Smartphones
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
 
-						<div class="col-lg-9">
-							<div class="electronic_content_container">
-								<ul class="electronic_product_columns ul_li has_3columns mb_50 clearfix">
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_18.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+			<div class="col-lg-9">
+    <div class="electronic_content_container">
+        <ul class="electronic_product_columns ul_li has_3columns mb_50 clearfix">
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_18.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_19.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_19.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_20.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_20.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_20.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_20.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_21.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_21.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_22.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_22.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
 
-									<li>
-										<div class="electronic_product_listlayout">
-											<div class="item_image" data-bg-color="#f8f8f8">
-												<img src="{{asset('assets/user/images/shop/electronic/img_24.png')}}" alt="image_not_found">
-											</div>
-											<div class="item_content">
-												<div class="item_price">
-													<strong>$898.89</strong>
-													<del>$969.99</del>
-												</div>
-												<h3 class="item_title">
-													<a href="#!">
-														55" KU6470 6 Series Crystal Colour HDR
-													</a>
-												</h3>
-												<ul class="rating_star ul_li mb_15 clearfix">
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-													<li><i class="fal fa-star"></i></li>
-												</ul>
-												<ul class="product_label ul_li clearfix">
-													<li data-bg-color="#62ab00">-$30</li>
-												</ul>
-											</div>
-										</div>
-									</li>
+            <li>
+                <div class="electronic_product_listlayout">
+                    <div class="item_image" data-bg-color="#f8f8f8">
+                        <img src="{{asset('assets/user/images/shop/electronic/img_24.png')}}" alt="image_non_trouvée">
+                    </div>
+                    <div class="item_content">
+                        <div class="item_price">
+                            <strong>898,89 $</strong>
+                            <del>969,99 $</del>
+                        </div>
+                        <h3 class="item_title">
+                            <a href="#!">
+                                55" KU6470 6 Series Couleur Cristal HDR
+                            </a>
+                        </h3>
+                        <ul class="rating_star ul_li mb_15 clearfix">
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fas fa-star"></i></li>
+                            <li><i class="fal fa-star"></i></li>
+                        </ul>
+                        <ul class="product_label ul_li clearfix">
+                            <li data-bg-color="#62ab00">-30 $</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
 
 									<li>
 										<div class="electronic_product_listlayout">
