@@ -168,47 +168,7 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div id="accesories_tab" class="tab-pane active">
-								<h4 class="title_text mb_15">Perfectly Done</h4>
-								<p class="mb_30">
-									Praesent ornare, ex a interdum consectetur, lectus diam sodales elit, vitae egestas est enim ornare nisl. Nullam in lectus nec sem semper viverra. In lobortis egestas massa. Nam nec massa nisi. Suspendisse potenti. Quisque suscipit vulputate dui quis volutpat. Ut id elit facilisis, feugiat est in, tempus lacus. Ut ultrices dictum metus, a ultricies ex vulputate ac. Ut id cursus tellus, non tempor quam. Morbi porta diam nisi, id finibus nunc tincidunt eu.
-								</p>
-								<div class="row mb_15 justify-content-lg-between">
-									<div class="col-lg-6">
-										<div class="description_image mb_30">
-											<img src="{{asset('assets/user/images/details/electronic/img_06.jpg')}}" alt="image_not_found">
-										</div>
-									</div>
-
-									<div class="col-lg-6">
-										<div class="description_content">
-											<h4 class="title_text mb_15">Wireless</h4>
-											<p class="mb_30">
-												Fusce vitae nibh mi. Integer posuere, libero et ullamcorper facilisis, enim eros tincidunt orci, eget vestibulum sapien nisi ut leo. Cras finibus vel est ut mollis.
-											</p>
-
-											<h4 class="title_text mb_15">Fresh Design</h4>
-											<p class="mb_30">
-												Integer bibendum aliquet ipsum, in ultrices enim sodales sed. Quisque ut urna vitae lacus laoreet malesuada eu at massa. Pellentesque nibh augue, pellentesque nec dictum vel, pretium a arcu. Duis eu urna suscipit, lobortis elit quis, ullamcorper massa.
-											</p>
-
-											<h4 class="title_text mb_15">Fabolous Sound</h4>
-											<p class="mb_30">
-												Cras rutrum, nibh a sodales accumsan, elit sapien ultrices sapien, eget semper lectus ex congue elit. Nullam dui elit, fermentum a varius at, iaculis non dolor. In hac habitasse platea dictumst.
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="description_image mb_30">
-									<img src="{{asset('assets/user/images/details/electronic/img_07.jpg')}}" alt="image_not_found">
-									<a class="play_btn" href="http://www.youtube.com/watch?v=0O2aH4XLbto">
-										<i class="fas fa-play"></i>
-									</a>
-								</div>
-								<h4 class="title_text mb_15">Perfectly Done</h4>
-								<p class="mb_30">
-									Praesent ornare, ex a interdum consectetur, lectus diam sodales elit, vitae egestas est enim ornare nisl. Nullam in lectus nec sem semper viverra. In lobortis egestas massa. Nam nec massa nisi. Suspendisse potenti. Quisque suscipit vulputate dui quis volutpat. Ut id elit facilisis, feugiat est in, tempus lacus. Ut ultrices dictum metus, a ultricies ex vulputate ac. Ut id cursus tellus, non tempor quam. Morbi porta diam nisi, id finibus nunc tincidunt eu.
-								</p>
+                                {!! html_entity_decode($product->description) !!}
 							</div>
 
 							<div id="description_tab" class="tab-pane fade">

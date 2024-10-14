@@ -82,122 +82,90 @@
 						</div>
 
 						<div class="col-lg-3">
-							<aside class="electronic_sidebar sidebar_section">
-								<div class="sb_widget sb_collapse_category">
-									<h3 class="sb_widget_title">Tous Les Categories</h3>
-									<div id="sb_category_accordion" class="sb_category_accordion">
-										@foreach ($categories as $category)
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a data-toggle="collapse" href="#collapse_one{{ $category->id }}">
-                                                        {{ $category->name }} ({{ $category->subCategories->count() }})
-                                                    </a>
-                                                </div>
-                                                <div id="collapse_one{{ $category->id }}" class="collapse show" data-parent="#sb_category_accordion">
-                                                    <div class="card-body p-0">
-                                                        <ul class="ul_li_block clearfix">
-                                                            @foreach ($category->subCategories as $subCategory)
-                                                                <li><a href="#!">{{ $subCategory->name }}</a></li>
-                                                            @endforeach
-                                                        </ul>
+							<form id="filterForm" action="#" method="GET">
+                                <aside class="electronic_sidebar sidebar_section">
+                                    <div class="sb_widget sb_collapse_category">
+                                        <h3 class="sb_widget_title">Tous Les Categories</h3>
+                                        <div id="sb_category_accordion" class="sb_category_accordion">
+                                            @foreach ($categories as $category)
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <a data-toggle="collapse" href="#collapse_one{{ $category->id }}">
+                                                            {{ $category->name }} ({{ $category->subCategories->count() }})
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapse_one{{ $category->id }}" class="collapse show" data-parent="#sb_category_accordion">
+                                                        <div class="card-body p-0">
+                                                            <ul class="ul_li_block clearfix">
+                                                                @foreach ($category->subCategories as $subCategory)
+                                                                    <li><a href="javascript:void(0)" onclick="applyFilter('subcategory', '{{ $subCategory->name }}')">{{ $subCategory->name }}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            @endforeach
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="sb_widget sb_pricing_range">
+                                        <h3 class="sb_widget_title text-uppercase">Filtres</h3>
+                                        <div class="price-range-area clearfix">
+                                            <div id="slider-range" class="slider-range"></div>
+                                            <div class="price-text d-flex align-items-center">
+                                                <span>Prix:</span>
+                                                <input type="text" id="amount" readonly>
+                                                <input type="hidden" id="min_price" name="min_price">
+                                                <input type="hidden" id="max_price" name="max_price">
                                             </div>
-                                        @endforeach
+                                        </div>
+                                        <button type="button" onclick="applyPriceFilter()" class="btn btn-primary mt-3">Appliquer Filtre</button>
+                                    </div>
 
 
-									</div>
-								</div>
 
-								<div class="sb_widget sb_pricing_range">
-									<h3 class="sb_widget_title text-uppercase">Filters</h3>
-									<form action="#">
-										<div class="price-range-area clearfix">
-											<div id="slider-range" class="slider-range"></div>
-											<div class="price-text d-flex align-items-center">
-												<span>Price:</span>
-												<input type="text" id="amount" readonly>
-											</div>
-										</div>
-									</form>
-								</div>
+                                    <div class="sb_widget sb_color_checkbox">
+                                        <h3 class="sb_widget_title text-uppercase">Brands</h3>
+                                        <form action="#">
+                                            <ul class="ul_li_block clearfix">
+                                                <li>
+                                                    <div class="checkbox_item">
+                                                        <input id="oculus_rift_checkbox" type="checkbox" checked>
+                                                        <label for="oculus_rift_checkbox">Oculus Rift</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="checkbox_item">
+                                                        <input id="huawei_checkbox" type="checkbox">
+                                                        <label for="huawei_checkbox">Huawei</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="checkbox_item">
+                                                        <input id="htc_checkbox" type="checkbox">
+                                                        <label for="htc_checkbox">HTC</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="checkbox_item">
+                                                        <input id="samsung_checkbox" type="checkbox">
+                                                        <label for="samsung_checkbox">Samsung</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="checkbox_item">
+                                                        <input id="envato_checkbox" type="checkbox">
+                                                        <label for="envato_checkbox">Envato</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
 
-								<div class="sb_widget sb_color_checkbox">
-									<h3 class="sb_widget_title text-uppercase">Brands</h3>
-									<form action="#">
-										<ul class="ul_li_block clearfix">
-											<li>
-												<div class="checkbox_item">
-													<input id="oculus_rift_checkbox" type="checkbox" checked>
-													<label for="oculus_rift_checkbox">Oculus Rift</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="huawei_checkbox" type="checkbox">
-													<label for="huawei_checkbox">Huawei</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="htc_checkbox" type="checkbox">
-													<label for="htc_checkbox">HTC</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="samsung_checkbox" type="checkbox">
-													<label for="samsung_checkbox">Samsung</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="envato_checkbox" type="checkbox">
-													<label for="envato_checkbox">Envato</label>
-												</div>
-											</li>
-										</ul>
-									</form>
-								</div>
-
-								<div class="sb_widget sb_color_checkbox">
-									<h3 class="sb_widget_title text-uppercase">Color</h3>
-									<form action="#">
-										<ul class="ul_li_block clearfix">
-											<li>
-												<div class="checkbox_item">
-													<input id="black_color_checkbox" type="checkbox" checked>
-													<label for="black_color_checkbox">Black</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="white_color_checkbox" type="checkbox">
-													<label for="white_color_checkbox">White</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="blue_color_checkbox" type="checkbox">
-													<label for="blue_color_checkbox">Blue</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="green_color_checkbox" type="checkbox">
-													<label for="green_color_checkbox">Green</label>
-												</div>
-											</li>
-											<li>
-												<div class="checkbox_item">
-													<input id="yellow_color_checkbox" type="checkbox">
-													<label for="yellow_color_checkbox">Yellow</label>
-												</div>
-											</li>
-										</ul>
-									</form>
-								</div>
-							</aside>
+                                </aside>
+                            </form>
 						</div>
 
 					</div>
@@ -210,5 +178,66 @@
 		</main>
 		<!-- main body - end
 		================================================== -->
+
+@endsection
+
+
+
+@section('script')
+    <script>
+        function applyFilter(type, value){
+            let url = new URL(window.location.href);
+
+            url.search = '';
+
+            url.searchParams.set(type, encodeURIComponent(value));
+
+            window.location.href = url.toString();
+        }
+
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+        $(function() {
+        var minPrice = 0;
+        var maxPrice = 10000;
+
+        $("#slider-range").slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            values: [minPrice, maxPrice],
+            slide: function(event, ui) {
+                $("#amount").val(ui.values[0] + " DHS - " + ui.values[1] + " DHS");
+                $("#min_price").val(ui.values[0]);
+                $("#max_price").val(ui.values[1]);
+            }
+        });
+
+        $("#amount").val($("#slider-range").slider("values", 0) + " DHS - " + $("#slider-range").slider("values", 1) + " DHS");
+        $("#min_price").val($("#slider-range").slider("values", 0));
+        $("#max_price").val($("#slider-range").slider("values", 1));
+    });
+
+    function applyPriceFilter() {
+        var minPrice = $("#min_price").val();
+        var maxPrice = $("#max_price").val();
+
+        if (minPrice !== '' && maxPrice !== '') {
+            let url = new URL(window.location.href);
+
+            url.searchParams.set('min_price', minPrice);
+            url.searchParams.set('max_price', maxPrice);
+
+            window.location.href = url.toString();
+        } else {
+            alert('Veuillez selectioner un prix valide.');
+        }
+    }
+
+</script>
 
 @endsection

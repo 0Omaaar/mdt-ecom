@@ -277,6 +277,26 @@ hr {
   color: #ce0b2b;
 }
 
+@media only screen and (min-width: 750px) {
+  .main_slider {
+    height: 300px;
+  }
+
+  .slick-dots{
+    bottom: -180px !important;
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .main_slider {
+      height: 850px;
+    }
+    
+
+}
+
+
+
 /* bootstrap settings - start
 ================================================== */
 .container {

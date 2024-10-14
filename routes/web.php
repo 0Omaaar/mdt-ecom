@@ -16,6 +16,8 @@ use App\Models\Product;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
+// Route::get('/products/search', [HomeController::class, 'search'])->name('products.search');
+
 
 
 //ADMIN ROUTES

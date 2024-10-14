@@ -59,7 +59,7 @@
 
 						<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
 							<div class="electronic_slider position-relative clearfix">
-								<div class="main_slider clearfix" data-slick='{"arrows": false}' style="height: 300px;">
+								<div class="main_slider clearfix" data-slick='{"arrows": false}' >
 									<div class="item clearfix" data-background="{{asset('assets/user/images/slider/electronic/bg_01.jpg')}}">
 										<div class="slider_image order-last" data-animation="fadeInUp" data-delay=".4s">
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">

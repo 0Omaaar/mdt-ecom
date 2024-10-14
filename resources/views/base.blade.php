@@ -354,6 +354,8 @@
 		<!-- custom - jquery include -->
 		<script src="{{asset('assets/user/js/custom.js')}}"></script>
 
+        @yield('script')
+
 
 	</body>
 </html>
