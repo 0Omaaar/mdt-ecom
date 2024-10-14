@@ -257,7 +257,7 @@
 														<div class="item_content">
 															<span class="item_name">Speakers</span>
 															<h3 class="item_title">
-																<a href="{{ route('product') }}">Wireless Audio System Multiroom 360</a>
+																<a href="#">Wireless Audio System Multiroom 360</a>
 															</h3>
 															<span class="item_price">$685.00</span>
 														</div>

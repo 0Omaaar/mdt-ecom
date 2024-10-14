@@ -15,7 +15,7 @@ use App\Models\Product;
 //USER ROOTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
-Route::get('/product', [HomeController::class, 'product'])->name('product');
+Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 
 
 //ADMIN ROUTES
