@@ -33,7 +33,7 @@
 						<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
 							<div class="alldepartments_menu_wrap">
 								<button class="alldepartments_btn bg_electronic_blue text-uppercase" type="button" data-toggle="collapse" data-target="#alldepartments_dropdown" aria-expanded="false" aria-controls="alldepartments_dropdown">
-									<i class="far fa-bars"></i> All Departments
+									<i class="far fa-bars"></i>  Toutes les catégories
 								</button>
 								<div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
 									<div class="card">
