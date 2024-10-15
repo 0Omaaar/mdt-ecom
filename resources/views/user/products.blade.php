@@ -47,7 +47,7 @@
 								<div id="grid_layout" class="tab-pane active">
 									<ul class="electronic_product_columns ul_li has_4columns clearfix">
 										@foreach ($products as $product)
-                                            <li>
+                                            <li class="prod-item">
                                                 <a href="{{ route('product', ['id' => $product->id]) }}">
                                                     <div class="electronic_product_item">
                                                         <ul class="product_label ul_li clearfix">
@@ -56,8 +56,8 @@
                                                             @else
                                                                 <li style="background: rgb(216, 72, 72);">En Rupture de Stock</li>
                                                             @endif
-                                                         </ul>
-                                                        <div class="item_image">
+                                                        </ul>
+                                                        <div class="prod-img">
                                                             <img class="product-image" src="{{asset('images/products/' . $product->id . '/' . $product->image)}}" alt="image_not_found">
                                                         </div>
                                                         <div class="item_content">

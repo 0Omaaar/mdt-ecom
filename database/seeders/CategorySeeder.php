@@ -12,27 +12,27 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'image' => public_path('images/categories/1728899724.png'),
+                'image' => '1728899724.png',
                 'name' => 'PC Portable',
                 'slug' => 'pc-portable',
             ],
             [
-                'image' => public_path('images/categories/1728899678.jpg'),
+                'image' => '1728899678.jpg',
                 'name' => 'Pc Bureau',
                 'slug' => 'pc-bureau',
             ],
             [
-                'image' => public_path('images/categories/1728899805.jpg'),
+                'image' => '1728899805.jpg',
                 'name' => 'Écran PC',
                 'slug' => 'ecran-pc',
             ],
             [
-                'image' => public_path('images/categories/1728899874.jpg'),
+                'image' => '1728899874.jpg',
                 'name' => 'Accessoires',
                 'slug' => 'accessoires',
             ],
             [
-                'image' => public_path('images/categories/1728899929.jpg'),
+                'image' => '1728899929.jpg',
                 'name' => 'Imprimantes',
                 'slug' => 'imprimantes',
             ],

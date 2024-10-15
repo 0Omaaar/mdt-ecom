@@ -35,6 +35,10 @@
         {{-- added css from sratch --}}
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/scratch.css') }}">
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+        @yield('style')
+
 
 	</head>
 
@@ -355,6 +359,32 @@
 		<script src="{{asset('assets/user/js/custom.js')}}"></script>
 
         @yield('script')
+
+        @if (Session::has('success'))
+            <script>
+                swal(" ", "{{ Session::get('success') }}", "success", {
+                    button:true,
+                    button:'Fermer',
+                    timer: 5000,
+                    showCloseButton: true,
+                    showCloseButton: true,
+                    background: '#fefefe',
+                    iconColor: '#3085d6',
+                });
+            </script>
+        @elseif (Session::has('error'))
+            <script>
+                swal(" ", "{{ Session::get('error') }}", "error", {
+                    button:true,
+                    button:'Fermer',
+                    timer: 5000,
+                    showCloseButton: true,
+                    showCloseButton: true,
+                    background: '#fefefe',
+                    iconColor: '#3085d6',
+                });
+            </script>
+        @endif
 
 
 	</body>

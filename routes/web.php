@@ -8,15 +8,14 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
 use App\Http\Controllers\HomeController;
-
-
+use App\Http\Controllers\ReviewController;
 use App\Models\Product;
 
 //USER ROOTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
-// Route::get('/products/search', [HomeController::class, 'search'])->name('products.search');
+Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('review.store');
 
 
 
