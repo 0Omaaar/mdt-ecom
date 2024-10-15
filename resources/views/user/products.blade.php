@@ -24,7 +24,7 @@
 								<li>
 									<ul class="layout_btns nav ul_li clearfix" role="tablist">
 										<li>
-											<a class="active" data-toggle="tab" href="#grid_layout"><i class="fas fa-th"></i></a>
+											<a class="active"  href="{{ route('products') }}"><i class="fas fa-th"></i></a>
 										</li>
 									</ul>
 								</li>
@@ -58,7 +58,7 @@
                                                             @endif
                                                          </ul>
                                                         <div class="item_image">
-                                                            <img src="{{asset('images/products/' . $product->id . '/' . $product->image)}}" alt="image_not_found">
+                                                            <img class="product-image" src="{{asset('images/products/' . $product->id . '/' . $product->image)}}" alt="image_not_found">
                                                         </div>
                                                         <div class="item_content">
                                                             <span class="item_name">{{ $product->subcategory->name }}</span>

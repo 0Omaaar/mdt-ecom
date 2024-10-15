@@ -11,55 +11,55 @@ class SubcategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            'PC Portable' => Category::where('nom', 'PC Portable')->first()->id,
-            'Pc Bureau' => Category::where('nom', 'Pc Bureau')->first()->id,
-            'Accessoires' => Category::where('nom', 'Accessoires')->first()->id,
+            'PC Portable' => Category::where('name', 'PC Portable')->first()->id,
+            'Pc Bureau' => Category::where('name', 'Pc Bureau')->first()->id,
+            'Accessoires' => Category::where('name', 'Accessoires')->first()->id,
         ];
 
         DB::table('subcategories')->insert([
             [
                 'image' => public_path('images/subCategories/1728900093.png'),
-                'nom' => 'Pc Portable',
+                'name' => 'Pc Portable',
                 'category_id' => $categories['PC Portable']
             ],
             [
                 'image' => public_path('images/subCategories/1728900130.webp'),
-                'nom' => 'Pc Portable Gamer',
+                'name' => 'Pc Portable Gamer',
                 'category_id' => $categories['PC Portable']
             ],
             [
                 'image' => public_path('images/subCategories/1728900166.webp'),
-                'nom' => 'Pc Complet',
+                'name' => 'Pc Complet',
                 'category_id' => $categories['Pc Bureau']
             ],
             [
                 'image' => public_path('images/subCategories/1728900221.png'),
-                'nom' => 'Unité Centrale',
+                'name' => 'Unité Centrale',
                 'category_id' => $categories['Pc Bureau']
             ],
             [
                 'image' => public_path('images/subCategories/1728900316.webp'),
-                'nom' => 'Cartouche & Toner',
+                'name' => 'Cartouche & Toner',
                 'category_id' => $categories['Accessoires']
             ],
             [
                 'image' => public_path('images/subCategories/1728900360.png'),
-                'nom' => 'Accessoire Pc',
+                'name' => 'Accessoire Pc',
                 'category_id' => $categories['Accessoires']
             ],
             [
                 'image' => public_path('images/subCategories/1728900450.jpg'),
-                'nom' => 'Accessoire Téléphone',
+                'name' => 'Accessoire Téléphone',
                 'category_id' => $categories['Accessoires']
             ],
             [
                 'image' => public_path('images/subCategories/1728900493.jpg'),
-                'nom' => 'Stockage',
+                'name' => 'Stockage',
                 'category_id' => $categories['Accessoires']
             ],
             [
                 'image' => public_path('images/subCategories/1728900554.jpg'),
-                'nom' => 'Réseaux',
+                'name' => 'Réseaux',
                 'category_id' => $categories['Accessoires']
             ],
         ]);

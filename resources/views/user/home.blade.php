@@ -2631,7 +2631,7 @@
 			================================================== -->
 			<section class="feature_section bg_white clearfix" style="margin-top: 2%;">
 				<div class="container maxw_1600">
-					<div class="row justify-content-lg-between">
+					<div class="row justify-content-lg-between pt-4">
 
 						<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 							<div class="featured_products_wrap">
@@ -2710,10 +2710,6 @@
 									</div>
 								</div>
 
-								<a class="text_btn" href="#!">
-									<span>VIEW MORE</span>
-									<i class="fal fa-long-arrow-right"></i>
-								</a>
 							</div>
 						</div>
 
@@ -2759,10 +2755,6 @@
 									</div>
 								</div>
 
-								<a class="text_btn" href="#!">
-									<span>VIEW MORE</span>
-									<i class="fal fa-long-arrow-right"></i>
-								</a>
 							</div>
 						</div>
 
@@ -2808,10 +2800,7 @@
 									</div>
 								</div>
 
-								<a class="text_btn" href="#!">
-									<span>VIEW MORE</span>
-									<i class="fal fa-long-arrow-right"></i>
-								</a>
+
 							</div>
 						</div>
 
