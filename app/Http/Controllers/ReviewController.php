@@ -7,10 +7,17 @@ use App\Models\Product;
 use App\Models\Review;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller
 {
+    public function index(){
+        $reviews = Review::orderBy('created_at', 'DESC')->get();
+
+        return view('admin.reviews.index', compact('reviews'));
+    }
+
+
+
     public function store(Request $request, $id){
         try{
             $request->validate([
@@ -34,6 +41,17 @@ class ReviewController extends Controller
             return redirect()->back()->with('success', 'Votre Avis est envoyé avec succès, merci !');
         } catch(Exception $e) {
             return redirect()->back()->with('error', 'Une erreur est survenue lors d ajout de votre avis !');
+        }
+    }
+
+    public function destroy($id){
+        try{
+            $review = Review::findOrfail($id);
+            $review->delete();
+
+            return redirect()->back()->with('success', 'Avis supprimé avec succès');
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de suppression d avis !');
         }
     }
 }

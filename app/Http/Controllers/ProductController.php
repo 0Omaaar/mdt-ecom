@@ -184,7 +184,7 @@ class ProductController extends Controller
             }
 
         }catch(\Exception $e){
-            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de la suppression du Produit.');
+            return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de suppression du Produit.');
         }
     }
 }

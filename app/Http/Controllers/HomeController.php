@@ -23,7 +23,6 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $products = Product::query();
 
-        // Handle subcategory filter
         if ($request->has('subcategory')) {
             $subcategoryName = urldecode($request->query('subcategory'));
             $subcategory = SubCategory::where('name', $subcategoryName)->first();
@@ -32,24 +31,13 @@ class HomeController extends Controller
             }
         }
 
-        // Handle price filter
         if ($request->has('min_price') && $request->has('max_price')) {
-            // dd("here");
             $minPrice = $request->query('min_price');
             $maxPrice = $request->query('max_price');
 
-            // dd($minPrice, $maxPrice);
-            // Apply the price filter if values are set
-            // if (!empty($minPrice) && !empty($maxPrice)) {
-            //     dd("here");
-                $products->whereBetween('price', [$minPrice, $maxPrice]);
-
-                // dd($products);
-            // }
+            $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
-        // Execute the query to get the filtered products
-        $products = $products->get();
 
         return view('user.products', compact('categories', 'products', 'subcategories'));
     }

@@ -76,6 +76,8 @@
                                         @endforeach
 
 									</ul>
+
+                                    {{ $products->links() }}
 								</div>
 							</div>
 
