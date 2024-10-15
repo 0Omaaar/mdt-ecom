@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 
+use App\Mail\ReviewMail;
 use App\Models\Product;
 use App\Models\Review;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReviewController extends Controller
 {
@@ -42,6 +44,17 @@ class ReviewController extends Controller
         } catch(Exception $e) {
             return redirect()->back()->with('error', 'Une erreur est survenue lors d ajout de votre avis !');
         }
+    }
+
+    public function answerReviewWithMail(Request $request, $id){
+        $review = Review::findOrFail($id);
+
+        Mail::to($review->email)->queue(new ReviewMail($review, $request->response));
+
+        $review->status = 'Traité';
+        $review->save();
+
+        return redirect()->back()->with('success', 'Votre Réponse est envoyée avec succès');
     }
 
     public function destroy($id){

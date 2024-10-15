@@ -75,9 +75,7 @@
                                             </li>
                                         @endforeach
 
-									</ul>
-
-                                    {{ $products->links() }}
+									</ul> 
 								</div>
 							</div>
 

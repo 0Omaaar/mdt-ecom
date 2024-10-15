@@ -38,6 +38,7 @@ class HomeController extends Controller
             $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
+        $products = $products->get();
 
         return view('user.products', compact('categories', 'products', 'subcategories'));
     }

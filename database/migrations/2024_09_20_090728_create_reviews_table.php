@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('subject')->nullable();
             $table->text('message');
+            $table->string('status')->default('Non Traité');
             $table->timestamps();
         });
     }

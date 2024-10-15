@@ -108,6 +108,7 @@
                                                     <th>Nom</th>
                                                     <th>Email</th>
                                                     <th>Sujet</th>
+                                                    <th>Statut</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -127,6 +128,7 @@
                                                         <td>{{ $review->name }}</td>
                                                         <td>{{ $review->email }}</td>
                                                         <td>{{ $review->subject }}</td>
+                                                        <td><span class="badge badge-lg badge-{{ $review->status == 'Non Traité' ? 'danger' : 'success' }}">{{ $review->status }}</span></td>
                                                         <td>
                                                             <span class="dropdown">
                                                                 <button id="btnSearchDrop2" type="button"
@@ -149,8 +151,8 @@
                                                         {{-- Delete Review Modal --}}
                                                         @include('admin.reviews.delete')
 
-                                                        {{-- Edit Review Modal --}}
-                                                        {{-- @include('admin.categories.edit') --}}
+                                                        {{-- Show Review Modal --}}
+                                                        @include('admin.reviews.show-message')
                                                     </tr>
                                                 @endforeach
 

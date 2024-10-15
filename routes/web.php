@@ -58,3 +58,4 @@ Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy
 //reviews
 Route::get('/admin/reviews/index', [ReviewController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.reviews.index');
 Route::delete('/admin/reviews/delete/{id}', [ReviewController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.reviews.destroy');
+Route::post('/admin/review/answer/mail/{id}', [ReviewController::class, 'answerReviewWithMail'])->middleware('auth', 'isAdmin')->name('admin.reviews.answer');
