@@ -19,35 +19,46 @@
 				<div class="container maxw_1600">
 					<div class="row justify-content-lg-between">
 
-						<div class="col-lg-9 order-last">
-							<ul class="electronic_filter_bar ul_li mb_30">
-								<li>
-									<ul class="layout_btns nav ul_li clearfix" role="tablist">
-										<li>
-											<a class="active"  href="{{ route('products') }}"><i class="fas fa-th"></i></a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<div class="product_show option_select">
-										<select>
-											<option data-display="Show on page:">Select A Option</option>
-											<option value="1" selected>Show on page: 18</option>
-											<option value="2">Show on page: 20</option>
-											<option value="3" disabled>Show on page: 22</option>
-											<option value="4">Show on page: 24</option>
-										</select>
-									</div>
-								</li>
+                    <div class="col-lg-9 order-last">
+    <ul class="electronic_filter_bar ul_li mb_30">
+        <li>
+            <ul class="layout_btns nav ul_li clearfix" role="tablist">
+                <li>
+                    <a class="active" href="{{ route('products') }}"><i class="fas fa-th"></i></a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <div class="product_show option_select">
+                <select onchange="window.location.href=this.value">
+                    <option data-display="Show on page:">Select A Option</option>
+                    <option value="{{ route('products', ['per_page' => 18]) }}">Show on page: 18</option>
+                    <option value="{{ route('products', ['per_page' => 20]) }}">Show on page: 20</option>
+                    <option value="{{ route('products', ['per_page' => 22]) }}" disabled>Show on page: 22</option>
+                    <option value="{{ route('products', ['per_page' => 24]) }}">Show on page: 24</option>
+                </select>
+            </div>
+        </li>
 
-								<li><p class="result_text mb-0 d-flex align-items-center"><span class="active_page">1</span> of 3 <a class="next_btn" href="#!"><i class="fal fa-long-arrow-right"></i></a></p></li>
-							</ul>
+        <li>
+            <p class="result_text mb-0 d-flex align-items-center">
+                <span class="active_page">{{ $products->currentPage() }}</span> of {{ $products->lastPage() }}
+                <a class="next_btn" href="{{ $products->nextPageUrl() }}"><i class="fal fa-long-arrow-right"></i></a>
+            </p>
+        </li>
+    </ul>
+
+    <!-- Pagination Links -->
+    <!-- <div class="pagination">
+        {{ $products->links() }}
+    </div> -->
+</div>
 
 							<div class="tab-content mb_50">
 								<div id="grid_layout" class="tab-pane active">
 									<ul class="electronic_product_columns ul_li has_4columns clearfix">
 										@foreach ($products as $product)
-                                            <li class="prod-item">
+                                            <li>
                                                 <a href="{{ route('product', ['id' => $product->id]) }}">
                                                     <div class="electronic_product_item">
                                                         <ul class="product_label ul_li clearfix">
@@ -56,8 +67,8 @@
                                                             @else
                                                                 <li style="background: rgb(216, 72, 72);">En Rupture de Stock</li>
                                                             @endif
-                                                        </ul>
-                                                        <div class="prod-img">
+                                                         </ul>
+                                                        <div class="item_image">
                                                             <img class="product-image" src="{{asset('images/products/' . $product->id . '/' . $product->image)}}" alt="image_not_found">
                                                         </div>
                                                         <div class="item_content">
@@ -76,8 +87,6 @@
                                         @endforeach
 
 									</ul>
-
-                                    {{ $products->links() }}
 								</div>
 							</div>
 

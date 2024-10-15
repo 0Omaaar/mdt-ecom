@@ -22,7 +22,8 @@ class HomeController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $products = Product::query();
-
+    
+        // Filtering by subcategory
         if ($request->has('subcategory')) {
             $subcategoryName = urldecode($request->query('subcategory'));
             $subcategory = SubCategory::where('name', $subcategoryName)->first();
@@ -30,18 +31,21 @@ class HomeController extends Controller
                 $products->where('subcategory_id', $subcategory->id);
             }
         }
-
+    
+        // Filtering by price range
         if ($request->has('min_price') && $request->has('max_price')) {
             $minPrice = $request->query('min_price');
             $maxPrice = $request->query('max_price');
-
+    
             $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
-
-
+    
+        // Paginate the products, defaulting to 6 per page
+        $perPage = $request->input('per_page', 4);
+        $products = $products->latest()->paginate($perPage);
+    
         return view('user.products', compact('categories', 'products', 'subcategories'));
     }
-
 
     public function product($id){
         $categories = Category::all();
