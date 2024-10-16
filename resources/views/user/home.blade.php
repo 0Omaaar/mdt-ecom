@@ -13,7 +13,7 @@
 
         @section('under-header')
 
-            @include('user.layouts.under-header')
+            {{-- @include('user.layouts.under-header') --}}
 
         @endsection
 
@@ -43,10 +43,10 @@
 											<li><a href="#!">Nouvelle arrivage</a></li>
 											@foreach ($categories as $category)
                                                 <li class="{{ $category->subCategories->count() > 0 ? 'has_child' : '' }}">
-                                                    <a href="#!">{{ $category->name }}</a>
+                                                    <a href="#" class="category-link" data-id="{{ $category->id }}">{{ $category->name }}</a>
                                                     <ul class="dropdown_menu">
                                                         @foreach ($category->subCategories as $subcategory)
-                                                            <li><a href="#!">{{ $subcategory->name }}</a></li>
+                                                            <li><a href="#!" class="subcategory-link" data-id="{{ $subcategory->name }}">{{ $subcategory->name }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
@@ -2851,4 +2851,34 @@
 		================================================== -->
 
 
+@endsection
+
+
+@section('script')
+    <script>
+        document.querySelectorAll('.category-link').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var categoryId = this.getAttribute('data-id');
+
+                let url = new URL(window.location.href + 'products');
+                url.searchParams.set('category', categoryId);
+
+                window.location.href = url.toString();
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.subcategory-link').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var subcategoryId = this.getAttribute('data-id');
+
+                let url = new URL(window.location.href + 'products');
+                url.searchParams.set('subcategory', encodeURIComponent(subcategoryId));
+
+                window.location.href = url.toString();
+            });
+        });
+    </script>
 @endsection

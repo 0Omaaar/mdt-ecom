@@ -178,7 +178,7 @@ function create(input, value) {
         throw new ParchmentError("Unable to create " + input + " blot");
     }
     var BlotClass = match;
-    var node = 
+    var node =
     // @ts-ignore
     input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
     return new BlotClass(node, value);
@@ -9727,7 +9727,7 @@ var Tooltip = function () {
     if (this.quill.root === this.quill.scrollingContainer) {
       this.quill.root.addEventListener('scroll', function () {
         _this.root.style.marginTop = -1 * _this.quill.root.scrollTop + 'px';
-      });
+      }, { passive: true });
     }
     this.hide();
   }

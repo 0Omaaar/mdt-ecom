@@ -58,7 +58,7 @@
   $("[data-bg-color]").each(function () {
     $(this).css("background", $(this).attr("data-bg-color"))
   });
-  
+
   $('[data-background]').each(function() {
     $(this).css('background-image', 'url('+ $(this).attr('data-background') + ')');
   });
@@ -238,7 +238,7 @@
       itemSelector: '.grid-item',
       percentPosition: true,
       columnWidth: '.grid-sizer'
-    }); 
+    });
   });
   // masoney grid layout - end
   // --------------------------------------------------
@@ -285,16 +285,16 @@
   // isotope filtering - end
   // --------------------------------------------------
 
-  
+
   // quantity - start
   // --------------------------------------------------
-  
+
   function neoncart_quantity(){
     $(document).on('click', '.quantity_input .input_number_decrement, .quantity_input .input_number_increment', function (e) {
       var target = $(e.target),
       qty = target.closest('.quantity_input').find('input.input_number'),
       min, max, step, value;
-      
+
       if (qty.length) {
         min = qty.attr('min') || 0;
         max = qty.attr('max') || 0;
@@ -303,18 +303,18 @@
         max = parseInt(max);
         step = parseInt(step);
         value = parseInt(qty.val());
-        
+
         if (target.is('.input_number_increment')) {
           value += step;
         } else {
           value -= step;
         }
-        
+
         value = Math.max(min, value);
         if (max) {
           value = Math.min(max, value);
         }
-        
+
         qty.val(value).change();
       }
     });
@@ -322,16 +322,16 @@
   neoncart_quantity();
   // quantity - end
   // --------------------------------------------------
-  
+
   // zoom
   $('.zoom-image img').click(function (event) {
     var ix = $(this).offset().left;
     var iy = $(this).offset().top;
-    console.log(ix + '-' + iy);
+    // console.log(ix + '-' + iy);
 
     var mx = event.pageX;
     var my = event.pageY;
-    console.log(mx + '-' + my);
+    // console.log(mx + '-' + my);
   })
   $('.zoom-image img').hover(function () {
     var img = $(this).attr('src');
@@ -591,7 +591,7 @@
     prevArrow: ".main_left_arrow",
     nextArrow: ".main_right_arrow",
     customPaging: function (slider, i) {
-      console.log(slider);
+    //   console.log(slider);
       var slideNumber   = (i + 1),
       totalSlides = slider.slideCount;
       return '<a class="custom-dot" role="button" title="' + slideNumber + ' of ' + totalSlides + '"><span class="string">' + slideNumber + '</span></a>';
@@ -690,7 +690,7 @@
       var direction =
         Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
-      console.log("wheel scroll ", e.deltaX, e.deltaY, direction);
+    //   console.log("wheel scroll ", e.deltaX, e.deltaY, direction);
 
       if (direction > 0) {
         // next slide
@@ -719,12 +719,12 @@
   var onelook_slider_is_animating = false;
 
   onelook_slider.on("afterChange", function (index) {
-    console.log("Slide after change " + index);
+    // console.log("Slide after change " + index);
     onelook_slider_is_animating = false;
   });
 
   onelook_slider.on("beforeChange", function (index) {
-    console.log("Slide before change " + index);
+    // console.log("Slide before change " + index);
     onelook_slider_is_animating = true;
   });
 
@@ -767,12 +767,12 @@
   var mouse_scroll_slide_is_animating = false;
 
   mouse_scroll_slide.on("afterChange", function (index) {
-    console.log("Slide after change " + index);
+    // console.log("Slide after change " + index);
     mouse_scroll_slide_is_animating = false;
   });
 
   mouse_scroll_slide.on("beforeChange", function (index) {
-    console.log("Slide before change " + index);
+    // console.log("Slide before change " + index);
     mouse_scroll_slide_is_animating = true;
   });
 
@@ -1167,7 +1167,7 @@
     map.addMarker({
       lat: $markerLat,
       lng: $markerLon,
-      icon: $marker,    
+      icon: $marker,
       infoWindow: {
         content: $info
       }
