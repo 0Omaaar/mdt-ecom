@@ -94,6 +94,10 @@
                                             </li>
                                         @endforeach
 
+                                        @if ($products->count() == 0)
+                                            <p style="margin-left: 35%; margin-top: 10%;">Aucun Produit n'est disponible avec ce Filtre .</p>
+                                        @endif
+
 									</ul>
 
 								</div>
@@ -147,39 +151,17 @@
 
 
                                     <div class="sb_widget sb_color_checkbox">
-                                        <h3 class="sb_widget_title text-uppercase">Brands</h3>
+                                        <h3 class="sb_widget_title text-uppercase">Marques</h3>
                                         <form action="#">
                                             <ul class="ul_li_block clearfix">
-                                                <li>
-                                                    <div class="checkbox_item">
-                                                        <input id="oculus_rift_checkbox" type="checkbox" checked>
-                                                        <label for="oculus_rift_checkbox">Oculus Rift</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="checkbox_item">
-                                                        <input id="huawei_checkbox" type="checkbox">
-                                                        <label for="huawei_checkbox">Huawei</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="checkbox_item">
-                                                        <input id="htc_checkbox" type="checkbox">
-                                                        <label for="htc_checkbox">HTC</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="checkbox_item">
-                                                        <input id="samsung_checkbox" type="checkbox">
-                                                        <label for="samsung_checkbox">Samsung</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="checkbox_item">
-                                                        <input id="envato_checkbox" type="checkbox">
-                                                        <label for="envato_checkbox">Envato</label>
-                                                    </div>
-                                                </li>
+                                                @foreach ($brands as $brand)
+                                                    <li>
+                                                        <div class="checkbox_item">
+                                                            <input id="brand_{{ $brand->id }}" type="checkbox" class="brand_checkbox" value="{{ $brand->id }}">
+                                                            <label for="brand_{{ $brand->id }}">{{ $brand->name }}</label>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </form>
                                     </div>
@@ -204,6 +186,20 @@
 
 
 @section('script')
+
+    <script>
+        document.querySelectorAll('.brand_checkbox').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    var brandId = this.value;
+
+                    let url = new URL(window.location.href);
+                    url.searchParams.set('brand', brandId);
+                    window.location.href = url.toString();
+                }
+            });
+        });
+    </script>
 
     <script>
         document.getElementById('perPageSelect').addEventListener('change', function() {

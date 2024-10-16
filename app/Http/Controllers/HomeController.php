@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
@@ -22,6 +23,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $products = Product::query();
+        $brands = Brand::all();
 
         if ($request->has('subcategory')) {
             $subcategoryName = urldecode($request->query('subcategory'));
@@ -38,10 +40,18 @@ class HomeController extends Controller
             $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
+        if($request->has('brand')){
+            $brand_id = urldecode($request->query('brand'));
+            $brand = Brand::findOrFail($brand_id);
+            if($brand){
+                $products->where('brand_id', $brand_id);
+            }
+        }
+
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 
-        return view('user.products', compact('categories', 'products', 'subcategories'));
+        return view('user.products', compact('categories', 'products', 'subcategories', 'brands'));
     }
 
 
