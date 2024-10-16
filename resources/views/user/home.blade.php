@@ -1,12 +1,19 @@
 @extends('base')
 
 
-<style>
+@section('style')
+    <style>
+        @media only screen and (max-width: 768px) {
+            .electronic_tabs_nav {
+                margin-top: 20px;
+            }
 
-
-
-
-</style>
+            .nouv {
+                margin-top: 30px;
+            }
+        }
+    </style>
+@endsection
 
 @section('content')
 
@@ -225,7 +232,7 @@
 									<ul class="electronic_tabs_nav nav ul_li_right clearfix">
 										<li><a class="active" data-toggle="tab" href="#featured_tab">Notre sélection</a></li>
 										<li><a data-toggle="tab" href="#onsale_tab">Top Ventes</a></li>
-										<li><a data-toggle="tab" href="#toprated_tab">Nouveautés</a></li>
+										<li><a data-toggle="tab" class="nouv" href="#toprated_tab">Nouveautés</a></li>
 									</ul>
 									<div class="tab-content">
 										<div id="featured_tab" class="tab-pane fade active">
