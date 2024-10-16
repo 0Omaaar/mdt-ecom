@@ -38,7 +38,8 @@ class HomeController extends Controller
             $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
-        $products = $products->get();
+        $perPage = $request->input('per_page', 12);
+        $products = $products->paginate($perPage);
 
         return view('user.products', compact('categories', 'products', 'subcategories'));
     }

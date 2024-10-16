@@ -30,17 +30,36 @@
 								</li>
 								<li>
 									<div class="product_show option_select">
-										<select>
-											<option data-display="Show on page:">Select A Option</option>
-											<option value="1" selected>Show on page: 18</option>
-											<option value="2">Show on page: 20</option>
-											<option value="3" disabled>Show on page: 22</option>
-											<option value="4">Show on page: 24</option>
-										</select>
+										<select id="perPageSelect" name="per_page">
+                                            <option data-display="Show on page:" disabled>Select A Option</option>
+                                            <option value="18" {{ request('per_page') == 12 ? 'selected' : '' }}>Show on page: 12</option>
+                                            <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>Show on page: 20</option>
+                                            <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>Show on page: 30</option>
+                                            <option value="40" {{ request('per_page') == 40 ? 'selected' : '' }}>Show on page: 40</option>
+                                        </select>
 									</div>
 								</li>
 
-								<li><p class="result_text mb-0 d-flex align-items-center"><span class="active_page">1</span> of 3 <a class="next_btn" href="#!"><i class="fal fa-long-arrow-right"></i></a></p></li>
+								<li>
+                                    <p class="result_text mb-0 d-flex align-items-center">
+                                        @if($products->currentPage() > 1)
+                                            <a class="next_btn" href="{{ $products->previousPageUrl() }}&per_page={{ request('per_page', 12) }}"
+                                                style="margin-right: 10px;">
+                                                <i class="fal fa-long-arrow-left"></i>
+                                            </a>
+                                        @endif
+
+                                        <span class="active_page">{{ $products->currentPage() }}</span> of {{ $products->lastPage() }}
+
+                                         @if($products->currentPage() < $products->lastPage())
+                                            <a class="next_btn" href="{{ $products->nextPageUrl() }}&per_page={{ request('per_page', 12) }}">
+                                                <i class="fal fa-long-arrow-right"></i>
+                                            </a>
+                                        @endif
+                                    </p>
+
+
+                                </li>
 							</ul>
 
 							<div class="tab-content mb_50">
@@ -77,8 +96,6 @@
 
 									</ul>
 
-
-                                    
 								</div>
 							</div>
 
@@ -187,6 +204,19 @@
 
 
 @section('script')
+
+    <script>
+        document.getElementById('perPageSelect').addEventListener('change', function() {
+        var perPage = this.value;
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl);
+
+         url.searchParams.set('per_page', perPage);
+
+         window.location.href = url.toString();
+    });
+
+    </script>
     <script>
         function applyFilter(type, value){
             let url = new URL(window.location.href);
