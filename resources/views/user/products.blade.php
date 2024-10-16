@@ -43,7 +43,7 @@
 								<li>
                                     <p class="result_text mb-0 d-flex align-items-center">
                                         @if($products->currentPage() > 1)
-                                            <a class="next_btn" href="{{ $products->previousPageUrl() }}&per_page={{ request('per_page', 12) }}"
+                                            <a class="next_btn" href="{{ $products->appends(request()->except('page'))->previousPageUrl() }}&per_page={{ request('per_page', 12) }}"
                                                 style="margin-right: 10px;">
                                                 <i class="fal fa-long-arrow-left"></i>
                                             </a>
@@ -52,7 +52,7 @@
                                         <span class="active_page">{{ $products->currentPage() }}</span> of {{ $products->lastPage() }}
 
                                          @if($products->currentPage() < $products->lastPage())
-                                            <a class="next_btn" href="{{ $products->nextPageUrl() }}&per_page={{ request('per_page', 12) }}">
+                                            <a class="next_btn" href="{{ $products->appends(request()->except('page'))->nextPageUrl() }}&per_page={{ request('per_page', 12) }}">
                                                 <i class="fal fa-long-arrow-right"></i>
                                             </a>
                                         @endif
