@@ -26,39 +26,48 @@
             overflow: hidden;
             max-width: 1200px;
             width: 100%;
+            justify-content: space-between;
         }
 
         .login-form-section {
-            padding: 80px;
+            padding: 40px;
             flex: 1 1 400px;
             min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .login-form-section h1 {
-            font-size: 36px;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .form-item {
-            margin-bottom: 23px;
+            margin-bottom: 20px;
             position: relative;
+            width: 100%;
+            max-width: 400px;
         }
 
         .form-item input {
-            width: 80%;
-            padding: 10px 40px; /* Adjust padding for icon */
+            width: 100%;
+            padding: 12px 40px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
+            box-sizing: border-box;
         }
 
         .form-item i {
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            color: #aaa; /* Icon color */
+            color: #aaa;
         }
 
         .login-button {
@@ -70,11 +79,12 @@
             font-size: 18px;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease; /* Smooth transition */
+            transition: background-color 0.3s ease;
+            max-width: 400px;
         }
 
         .login-button:hover {
-            background-color: black; /* Change color on hover */
+            background-color: black;
         }
 
         .register-link {
@@ -93,18 +103,56 @@
         .promo-section {
             flex: 1 1 600px;
             min-width: 300px;
-            background-image: url('assets/user/images/reg_bg_02.PNG');
+            background-image: url('assets/user/images/reg_bg_02.PNG'); /* Change this to the correct path */
             background-size: cover;
             background-position: center;
+            display: block;
         }
 
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
+                align-items: center;
             }
 
             .login-form-section, .promo-section {
                 width: 100%;
+                padding: 20px;
+            }
+
+            .login-form-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .promo-section {
+                height: 200px; /* Set a fixed height for the promo image on smaller screens */
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-form-section {
+                padding: 10px;
+            }
+
+            .form-item input {
+                padding: 10px 35px;
+                font-size: 14px;
+            }
+
+            .login-button {
+                font-size: 16px;
+            }
+
+            .promo-section {
+                height: 200px; /* Maintain height for smaller screens */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .promo-section {
+                height: auto; /* Adjust the height dynamically for larger screens */
             }
         }
     </style>
@@ -131,7 +179,7 @@
         </form>
     </div>
     <div class="promo-section">
-        <!-- Promotional content can go here -->
+        <!-- Promo section with background image -->
     </div>
 </div>
 
