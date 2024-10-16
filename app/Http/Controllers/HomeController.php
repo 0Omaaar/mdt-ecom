@@ -48,6 +48,13 @@ class HomeController extends Controller
             }
         }
 
+        if($request->has('category')){
+            $categoryId = urldecode($request->query('category'));
+            if($categoryId){
+                $products->where('category_id', $categoryId);
+            }
+        }
+
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 

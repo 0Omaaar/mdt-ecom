@@ -93,12 +93,12 @@
 										<input type="search" name="search" placeholder="Chercher ici...">
 									</div>
 									<div class="option_select">
-										<select>
-											<option data-display="Categories">Categories</option>
+										<select id="categorySelect" onchange="applyFilterByCategory()">
+                                            <option data-display="Categories">Categories</option>
                                             @foreach($categories as $category)
-                                                <option>{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
-										</select>
+                                        </select>
 									</div>
 									<button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>
 								</div>
@@ -386,6 +386,19 @@
             </script>
         @endif
 
+
+        <script>
+            function applyFilterByCategory() {
+                const selectElement = document.getElementById('categorySelect');
+                const selectedCategoryId = selectElement.value;
+
+                if (selectedCategoryId) {
+                    let url = new URL(window.location.href + 'products');
+                    url.searchParams.set('category', selectedCategoryId);
+                    window.location.href = url.toString();
+                }
+            }
+        </script>
 
 	</body>
 </html>
