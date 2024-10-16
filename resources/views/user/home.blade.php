@@ -696,7 +696,7 @@
 					<div class="row no-gutters">
 
 						<div class="col-lg-3">
-							<div class="alldepartments_dropdown audiovisual_entertainment d-block" data-background="{{asset('assets/user/images/backgrounds/bg_11.jpg')}}">
+							<div class="alldepartments_dropdown audiovisual_entertainment d-block" data-background="{{asset('assets/user/images/backgrounds/bg_11.jpg') }}" >
 								<h3 class="title_text mb_30 text-white">
 									<span data-bg-color="#333333"><i class="fal fa-plug"></i></span>
 									<strong>Powerful Audio & Visual</strong> entertainment
