@@ -107,7 +107,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="old_price">Ancien prix</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" step="0.01" id="old_price" class="form-control" placeholder="Ancien prix" name="old_price">
+                                                            <input type="number" step="0.01" id="old_price" class="form-control" placeholder="Ancien prix" name="old_price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -145,6 +145,21 @@
                                                                 <option selected disabled>--Choisir Sous Catégorie--</option>
                                                                 @foreach ($subCategories as $subCategory)
                                                                     <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-left: 20%; margin-top: 1%; margin-bottom: 1%;">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <select id="brand_id" class="form-control" name="brand_id" required style="margin-left: 75%" required>
+                                                                <option selected disabled>--Choisir Marque--</option>
+                                                                @foreach ($brands as $brand)
+                                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -196,7 +211,7 @@
                                                     <div class="form-group row" style="margin-right: 15%">
                                                         <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Images</label>
                                                         <div class="col-md-9">
-                                                            <input type="file" id="images" name="images[]" multiple>
+                                                            <input type="file" id="images" name="images[]" multiple required>
                                                         </div>
                                                     </div>
                                                 </div>

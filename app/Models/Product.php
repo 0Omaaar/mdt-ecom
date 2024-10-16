@@ -27,4 +27,8 @@ class Product extends Model
     public function reviews(){
         return $this->hasMany(Review::class);
     }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
 }

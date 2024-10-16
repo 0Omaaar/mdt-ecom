@@ -1,6 +1,7 @@
 <?php
 include_once 'auth.php';
 
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -59,3 +60,10 @@ Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy
 Route::get('/admin/reviews/index', [ReviewController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.reviews.index');
 Route::delete('/admin/reviews/delete/{id}', [ReviewController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.reviews.destroy');
 Route::post('/admin/review/answer/mail/{id}', [ReviewController::class, 'answerReviewWithMail'])->middleware('auth', 'isAdmin')->name('admin.reviews.answer');
+
+
+//brands
+Route::get('/admin/brands/index', [BrandController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.brands.index');
+Route::post('/admin/brands/store', [BrandController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.brands.store');
+Route::put('/admin/brands/update/{id}', [BrandController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.brands.update');
+Route::delete('/admin/brands/delete/{id}', [BrandController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.brands.destroy');

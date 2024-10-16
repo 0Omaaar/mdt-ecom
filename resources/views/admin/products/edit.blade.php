@@ -147,6 +147,22 @@
                                     </div>
 
                                     <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <label>Marque</label>
+                                                    <select id="brand_id" class="form-control" name="brand_id" style="margin-right: 25%;" required>
+                                                        <option selected value="{{ $product->brand->id }}">{{ $product->brand->name }}</option>
+                                                        @foreach ($brands as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="form-check">

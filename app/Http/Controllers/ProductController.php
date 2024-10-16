@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Category;
@@ -17,8 +18,10 @@ class ProductController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $subCategories = SubCategory::all();
+        $brands = Brand::all();
 
-        return view('admin.products.index', compact('products', 'categories', 'subCategories'));
+
+        return view('admin.products.index', compact('products', 'categories', 'subCategories', 'brands'));
     }
 
     public function show($id){
@@ -33,8 +36,9 @@ class ProductController extends Controller
 
     public function create(){
         $subCategories = SubCategory::all();
+        $brands = Brand::all();
 
-        return view('admin.products.create', compact('subCategories'));
+        return view('admin.products.create', compact('subCategories', 'brands'));
     }
 
     public function store(Request $request){
@@ -61,6 +65,7 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->brand_id= $request->input('brand_id');
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
             $product->top_ventes = $request->has('top_ventes');
@@ -142,6 +147,7 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->brand_id = $request->input('brand_id');
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
             $product->top_ventes = $request->has('top_ventes');

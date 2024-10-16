@@ -323,6 +323,10 @@
                     class="la la-th-large"></i><span class="menu-title"
                     data-i18n="Shop">Sous Categories</span></a>
                 </li>
+                <li class=" nav-item"><a href="{{ route('admin.brands.index') }}"><i
+                    class="la la-th-large"></i><span class="menu-title"
+                    data-i18n="Shop">Marques</span></a>
+                </li>
                 <li class=" nav-item"><a href="#"><i class="la la-clipboard"></i><span class="menu-title"
                     data-i18n="Product">Produits</span></a>
                 <ul class="menu-content">

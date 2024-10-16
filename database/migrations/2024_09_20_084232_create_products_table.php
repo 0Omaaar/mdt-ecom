@@ -23,8 +23,10 @@ return new class extends Migration
             $table->unsignedInteger('quantity');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id');
+            // $table->unsignedBigInteger('brand_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
+            // $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('image');
             $table->boolean('selection')->nullable()->default(false);
             $table->boolean('nouveautes')->nullable()->default(false);

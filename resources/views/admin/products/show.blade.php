@@ -112,6 +112,11 @@
                                         <span class="float-right">
                                             QTE : <span class="badge badge-lg">{{ $product->quantity }}</span>
                                         </span>
+
+                                    </div>
+
+                                    <div>
+                                        <span>Marque : <b>{{ $product->brand->name }}</b></span>
                                     </div>
                                     <!-- Product Information -->
                                     <div class="product-info">
