@@ -56,10 +56,10 @@ class HomeController extends Controller
             }
         }
 
-        if($request->has('name')){
+        if ($request->has('name')) {
             $productName = urldecode($request->query('name'));
-            if($productName){
-                $products->where('name', $productName);
+            if ($productName) {
+                $products->where('name', 'like', '%' . $productName . '%');
             }
         }
 

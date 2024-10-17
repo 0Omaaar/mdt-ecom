@@ -121,7 +121,9 @@
 <body>
 
 <div class="register-container">
-    <img src="{{ asset('images/Login/imginscr.png') }}" alt="Logo">
+    <a href="{{ route('home') }}"> <!-- Make the logo clickable -->
+        <img src="{{ asset('images/Login/imginscr.png') }}" alt="Logo"> <!-- Logo Image -->
+    </a>
     <h1>Inscription</h1>
     <form action="{{ route('register.custom') }}" method="POST">
         @csrf

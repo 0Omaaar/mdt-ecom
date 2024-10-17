@@ -99,7 +99,9 @@
 <body>
 
 <div class="login-container">
-    <img src="{{ asset('images/Login/imgs.png') }}" alt="login">
+    <a href="{{ route('home') }}"> <!-- Make the logo clickable -->
+        <img src="{{ asset('images/Login/imgs.png') }}" alt="login">
+    </a>
 
     <h1>Bienvenue chez Mobidigitech</h1>
     <p>Saisissez votre adresse e-mail et mot de passe pour vous connecter à Mobidigitech.</p>
