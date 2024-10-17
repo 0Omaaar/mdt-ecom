@@ -13,9 +13,10 @@ class HomeController extends Controller
     public function index(){
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $dayDeals = Product::where('dayDeals', true)->get();
 
 
-        return view('user.home', compact('categories', 'subcategories'));
+        return view('user.home', compact('categories', 'subcategories', 'dayDeals'));
     }
 
     public function products(Request $request)

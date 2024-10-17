@@ -115,9 +115,11 @@
 
                                     </div>
 
-                                    <div>
-                                        <span>Marque : <b>{{ $product->brand->name }}</b></span>
-                                    </div>
+                                    @if ($product->brand)
+                                        <div>
+                                            <span>Marque : <b>{{ $product->brand->name }}</b></span>
+                                        </div>
+                                    @endif
                                     <!-- Product Information -->
                                     <div class="product-info">
                                         <p>

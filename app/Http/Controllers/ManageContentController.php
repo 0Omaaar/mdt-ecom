@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -25,6 +29,15 @@ class ManageContentController extends Controller
     public function offer2(){
 
         return view('admin.manage_content.offers.offer2');
+    }
+
+    public function dayDealsProducts(){
+        $products = Product::where('dayDeals', true)->get();
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $brands = Brand::all();
+
+        return view('admin.manage_content.dayDeals.index', compact('products', 'categories', 'subCategories', 'brands'));
     }
 
 

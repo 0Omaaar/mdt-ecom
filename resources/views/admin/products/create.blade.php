@@ -167,8 +167,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row" style="margin-left: 20%; margin-top: 1%; margin-bottom: 1%;">
-                                                <div class="col-md-4">
+                                            <div class="row" style=" margin-top: 1%; margin-bottom: 1%;">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="selection" id="selection" class="form-check-input">
@@ -176,7 +176,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="dayDeals" id="dayDeals" class="form-check-input">
+                                                            <label class="form-check-label" for="dayDeals">Deal Du Jour</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="top_ventes" id="top_ventes" class="form-check-input">
@@ -184,7 +192,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="nouveautes" id="nouveautes" class="form-check-input">
@@ -194,9 +202,18 @@
                                                 </div>
                                             </div>
 
+
+
+
+
+
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <p class="text-muted mt-3"><span style="color: red;">NB :  </span>Si le Produit sera placé dans la section
+                                                        <b>Deals Du Jour</b>, La taille doit être : <strong>342 x 324</strong></p>
                                                     <div class="form-group row" style="margin-right: 15%">
+
+
                                                         <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Miniature</label>
                                                         <div class="col-md-9">
                                                             <input type="file" id="image" name="image" required>

@@ -89,3 +89,9 @@ Route::get('/admin/manage/content/index', [ManageContentController::class, 'inde
     Route::delete('/offer1/delete', [ManageContentController::class, 'deleteOffre1'])->name('offre1.delete');
     Route::post('/offer2/upload', [ManageContentController::class, 'uploadOffre2'])->name('offre2.upload');
     Route::delete('/offer2/delete', [ManageContentController::class, 'deleteOffre2'])->name('offre2.delete');
+
+
+    //day deals
+    Route::get('/admin/manage/content/dayDeals', [ManageContentController::class, 'dayDealsProducts'])->middleware('auth', 'isAdmin')->name('admin.content.dayDeals');
+    Route::post('/offer1/upload', [ManageContentController::class, 'uploadOffre1'])->name('offre1.upload');
+    Route::delete('/offer1/delete', [ManageContentController::class, 'deleteOffre1'])->name('offre1.delete');

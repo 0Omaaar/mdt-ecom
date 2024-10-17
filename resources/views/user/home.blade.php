@@ -11,6 +11,10 @@
             .nouv {
                 margin-top: 30px;
             }
+
+            .item_title, .item_price{
+                margin-left: 25px;
+            }
         }
     </style>
 @endsection
@@ -154,75 +158,39 @@
 									</div>
 									<div class="weekly_deals_carousel position-relative">
 										<div class="slideshow1_slider" data-slick='{"dots": false}'>
-											<div class="item">
-												<div class="electronic_deals_item">
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
 
-											<div class="item">
-												<div class="electronic_deals_item">
 
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
+                                            @foreach ($dayDeals as $dayDeal)
+                                                <div class="item">
+                                                    <div class="electronic_deals_item">
+                                                        <div class="item_price">
+                                                            <strong>{{ $dayDeal->price }} DHS</strong> <del>{{ $dayDeal->old_price }} DHS</del>
+                                                        </div>
+                                                        <h3 class="item_title mb-0">
+                                                            <a href="{{ route('product', $dayDeal->id) }}">{{ $dayDeal->name }}</a>
+                                                        </h3>
+                                                        <div class="item_image">
+                                                            <a href="{{ route('product', $dayDeal->id) }}">
+                                                                <img src="{{asset('images/products/' . $dayDeal->id . '/' . $dayDeal->image)}}" alt="image_not_found">
+                                                            </a>
+                                                        </div>
+                                                        <div class="countdown_wrap">
+                                                            <div class="countdown_content">
+                                                                <h4>Dépêche-toi!</h4>
+                                                                <p>L'offre se termine :</p>
+                                                            </div>
+                                                            <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2024/10/24"></ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
 
-											<div class="item">
-												<div class="electronic_deals_item">
 
-													<div class="item_price">
-														<strong>$425.89</strong> <del>$239.99</del>
-													</div>
-													<h3 class="item_title mb-0">
-														<a href="#!">Tablet Red EliteBook Revolve</a>
-													</h3>
-													<div class="item_image">
-														<img src="{{asset('assets/user/images/shop/electronic/img_01.png')}}" alt="image_not_found">
-													</div>
-													<div class="countdown_wrap">
-														<div class="countdown_content">
-															<h4>Hurry up!</h4>
-															<p>Offer ends in:</p>
-														</div>
-														<ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2021/3/24"></ul>
-													</div>
-												</div>
-											</div>
 										</div>
-										{{-- <div class="carousel_nav clearfix">
-											<button type="button" class="left_arrow d-inline-block"><i class="fal fa-angle-left mr-1"></i> Previous deal</button>
-											<button type="button" class="right_arrow d-inline-block">Next deal <i class="fal fa-angle-right ml-1"></i></button>
-										</div> --}}
+										<div class="carousel_nav clearfix">
+											<button type="button" class="left_arrow d-inline-block"><i class="fal fa-angle-left mr-1"></i>Précédant</button>
+											<button type="button" class="right_arrow d-inline-block">Suivant<i class="fal fa-angle-right ml-1"></i></button>
+										</div>
 									</div>
 								</div>
 							</div>

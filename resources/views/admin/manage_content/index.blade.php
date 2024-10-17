@@ -46,7 +46,7 @@
 
                 <area target="_blank" alt="offre2" title="offre2" href="{{ route('admin.content.offer2') }}" coords="1903,880,1459,673" shape="rect">
 
-                <area target="_blank" alt="" title="" href="/here" coords="36,1020,577,1812" shape="rect">
+                <area target="_blank" alt="dayDeals" title="dayDeals" href="{{ route('admin.content.dayDeals') }}" coords="36,1020,577,1812" shape="rect">
 
                 <area target="_blank" alt="" title="" href="/hhhhhh" coords="70,3457,564,3952" shape="rect">
 

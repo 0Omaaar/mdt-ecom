@@ -152,7 +152,9 @@
                                                 <div class="form-check">
                                                     <label>Marque</label>
                                                     <select id="brand_id" class="form-control" name="brand_id" style="margin-right: 25%;" required>
-                                                        <option selected value="{{ $product->brand->id }}">{{ $product->brand->name }}</option>
+                                                        @if ($product->brand)
+                                                            <option selected value="{{ $product->brand->id }}">{{ $product->brand->name }}</option>
+                                                        @endif
                                                         @foreach ($brands as $brand)
                                                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                         @endforeach
