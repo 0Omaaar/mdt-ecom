@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManageContentController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Product;
 
@@ -67,3 +68,24 @@ Route::get('/admin/brands/index', [BrandController::class, 'index'])->middleware
 Route::post('/admin/brands/store', [BrandController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.brands.store');
 Route::put('/admin/brands/update/{id}', [BrandController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.brands.update');
 Route::delete('/admin/brands/delete/{id}', [BrandController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.brands.destroy');
+
+
+//manage content
+Route::get('/admin/manage/content/index', [ManageContentController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.content.index');
+    //sliders
+    Route::get('/admin/manage/content/sliders', [ManageContentController::class, 'sliders'])->middleware('auth', 'isAdmin')->name('admin.content.sliders');
+    Route::post('/slider1/upload', [ManageContentController::class, 'uploadS1'])->name('slider1.upload');
+    Route::delete('/slider1/delete', [ManageContentController::class, 'deleteS1'])->name('slider1.delete');
+    Route::post('/slider2/upload', [ManageContentController::class, 'uploadS2'])->name('slider2.upload');
+    Route::delete('/slider2/delete', [ManageContentController::class, 'deleteS2'])->name('slider2.delete');
+    Route::post('/slider3/upload', [ManageContentController::class, 'uploadS3'])->name('slider3.upload');
+    Route::delete('/slider3/delete', [ManageContentController::class, 'deleteS3'])->name('slider3.delete');
+
+
+    //offers
+    Route::get('/admin/manage/content/offer1', [ManageContentController::class, 'offer1'])->middleware('auth', 'isAdmin')->name('admin.content.offer1');
+    Route::get('/admin/manage/content/offer2', [ManageContentController::class, 'offer2'])->middleware('auth', 'isAdmin')->name('admin.content.offer2');
+    Route::post('/offer1/upload', [ManageContentController::class, 'uploadOffre1'])->name('offre1.upload');
+    Route::delete('/offer1/delete', [ManageContentController::class, 'deleteOffre1'])->name('offre1.delete');
+    Route::post('/offer2/upload', [ManageContentController::class, 'uploadOffre2'])->name('offre2.upload');
+    Route::delete('/offer2/delete', [ManageContentController::class, 'deleteOffre2'])->name('offre2.delete');
