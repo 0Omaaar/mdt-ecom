@@ -55,6 +55,13 @@ class HomeController extends Controller
             }
         }
 
+        if($request->has('name')){
+            $productName = urldecode($request->query('name'));
+            if($productName){
+                $products->where('name', $productName);
+            }
+        }
+
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 

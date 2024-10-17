@@ -87,23 +87,23 @@
 						</div>
 
 						<div class="col-lg-6">
-							<form action="#">
-								<div class="medical_search_bar">
-									<div class="form_item">
-										<input type="search" name="search" placeholder="Chercher ici...">
-									</div>
-									<div class="option_select">
-										<select id="categorySelect" onchange="applyFilterByCategory()">
+                            <form action="javascript:void(0);" onsubmit="searchProductsByName()">
+                                <div class="medical_search_bar">
+                                    <div class="form_item">
+                                        <input type="search" placeholder="Chercher ici..." id="search">
+                                    </div>
+                                    <div class="option_select">
+                                        <select id="categorySelect" onchange="applyFilterByCategory()">
                                             <option data-display="Categories">Categories</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
-									</div>
-									<button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>
-								</div>
-							</form>
-						</div>
+                                    </div>
+                                    <button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
 
 						<div class="col-lg-3">
 							<ul class="electronic_action_btns ul_li_right clearfix">
@@ -398,6 +398,48 @@
                     window.location.href = url.toString();
                 }
             }
+        </script>
+
+        <script>
+            let input = document.getElementById('search');
+            let productName = '';
+            input.addEventListener("input", function(){
+                productName = input.value;
+            })
+
+            function searchProductsByName() {
+                let currentPath = window.location.pathname;
+                let url;
+
+                if (currentPath === '/' || currentPath === '/products') {
+                    if (!currentPath.includes('/products')) {
+                        url = new URL(window.location.origin + '/products');
+                    } else {
+                        url = new URL(window.location.href);
+                    }
+                } else if (currentPath.includes('/product/')) {
+                    url = new URL(window.location.origin + '/products');
+                } else {
+                    url = new URL(window.location.href);
+                }
+
+                url.searchParams.set('name', productName);
+
+                window.location.href = url.toString();
+
+             }
+
+            window.addEventListener('DOMContentLoaded', (event) => {
+                let urlParams = new URLSearchParams(window.location.search);
+
+                let productName = urlParams.get('name');
+
+                if (productName) {
+                    document.getElementById('search').value = productName;
+                }
+            });
+
+
         </script>
 
 	</body>
