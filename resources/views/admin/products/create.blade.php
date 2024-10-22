@@ -167,8 +167,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row" style=" margin-top: 1%; margin-bottom: 1%;">
-                                                <div class="col-md-3">
+                                            <div class="row" style=" margin-top: 1%; margin-bottom: 1%; margin-left: 19%;">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="selection" id="selection" class="form-check-input">
@@ -176,7 +176,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="dayDeals" id="dayDeals" class="form-check-input">
@@ -184,7 +184,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="top_ventes" id="top_ventes" class="form-check-input">
@@ -192,7 +192,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <input type="checkbox" name="nouveautes" id="nouveautes" class="form-check-input">
@@ -200,12 +200,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="best_price" id="best_price" class="form-check-input">
+                                                            <label class="form-check-label" for="best_price">Meilleur Prix</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-
-
-
-
-
 
                                             <div class="row">
                                                 <div class="col-md-12">

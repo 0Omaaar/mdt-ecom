@@ -70,6 +70,7 @@ class ProductController extends Controller
             $product->nouveautes = $request->has('nouveautes');
             $product->top_ventes = $request->has('top_ventes');
             $product->dayDeals = $request->has('dayDeals');
+            $product->best_price = $request->has('best_price');
 
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;
@@ -152,6 +153,8 @@ class ProductController extends Controller
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
             $product->top_ventes = $request->has('top_ventes');
+            $product->dayDeals = $request->has('dayDeals');
+            $product->best_price = $request->has('best_price');
 
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;

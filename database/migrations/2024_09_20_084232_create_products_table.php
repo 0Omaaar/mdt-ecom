@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('nouveautes')->nullable()->default(false);
             $table->boolean('top_ventes')->nullable()->default(false);
             $table->boolean('dayDeals')->nullable()->default(false);
+            $table->boolean('best_price')->nullable()->default(false);
             $table->timestamps();
         });
     }
