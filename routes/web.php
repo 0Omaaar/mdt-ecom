@@ -75,6 +75,11 @@ Route::delete('/admin/brands/delete/{id}', [BrandController::class, 'destroy'])-
 Route::post('/addToCart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::delete('/removeItemFromCart/{id}', [CartController::class, 'removeItemFromCart'])->name('removeItemFromCart');
 
+//cart page
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/addQuantity/{id}', [CartController::class, 'addQuantity'])->name('cart.addQuantity');
+Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decreaseQuantity');
+
 //manage content
 Route::get('/admin/manage/content/index', [ManageContentController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.content.index');
     //sliders

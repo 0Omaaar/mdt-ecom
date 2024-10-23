@@ -33,7 +33,7 @@
                 </ul>
 
                 <ul class="btns_group ul_li_block clearfix">
-                    <li><a href="#">Voir le Panier</a></li>
+                    <li><a href="{{ route('cart.index') }}">Voir le Panier</a></li>
                     <li><a href="#">Passer à la Caisse</a></li>
                 </ul>
             @else

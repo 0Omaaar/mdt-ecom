@@ -2507,7 +2507,7 @@ button {
   transform: translateY(-50%);
 }
 .cart_sidebar .cart_items_list .remove_btn:hover {
-  color: red;
+  color: rgb(30, 84, 231);
 }
 .cart_sidebar .cart_items_list .item_image {
   max-width: 70px;
@@ -18883,7 +18883,7 @@ blockquote .blockquote_title {
 }
 .cart_product .remove_btn:hover {
   color: #ffffff;
-  background-color: #ce0b2b;
+  background-color: rgb(30, 84, 231);
 }
 
 .coupon_wrap .form_item {

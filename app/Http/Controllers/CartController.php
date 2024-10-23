@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CartController extends Controller
 {
@@ -16,6 +19,13 @@ class CartController extends Controller
     public function __construct()
     {
         $this->session_id = session()->getId();
+    }
+
+    public function index(){
+        $categories = Category::all();
+        $cart = $this->getUserCart();
+
+        return view('user.cart.cart', compact('categories', 'cart'));
     }
 
     public function addToCart(Request $request, $id){
@@ -84,6 +94,65 @@ class CartController extends Controller
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
         }
+    }
+
+    public function addQuantity($id){
+        DB::beginTransaction();
+        try{
+            $cartItem = CartItem::findOrFail($id);
+            if ($cartItem->quantity < $cartItem->product->quantity) {
+
+                $cartItem->quantity++;
+                $cartItem->save();
+
+                $cart = Cart::findOrFail($cartItem->cart_id);
+                $cart->total_price += $cartItem->product->price;
+                $cart->save();
+
+                DB::commit();
+                return redirect()->back();
+            } else {
+                return redirect()->back()->with('error', 'Quantité maximum atteinte pour ce produit.');
+            }
+         }catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+    public function decreaseQuantity($id){
+        DB::beginTransaction();
+        try{
+            $cartItem = CartItem::findOrFail($id);
+            if($cartItem->quantity > 1){
+
+                $cartItem->quantity--;
+                $cartItem->save();
+
+                $cart = Cart::findOrFail($cartItem->cart_id);
+                $cart->total_price -= $cartItem->product->price;
+                $cart->save();
+
+                DB::commit();
+                return redirect()->back();
+            }else{
+                return redirect()->back()->with('error', 'Quantité minimale atteinte pour ce produit.');
+            }
+        }catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+
+    public function getUserCart(){
+        $cart = null;
+        if(Auth::check()){
+            dd("Still working on sessions");
+        }else{
+            $cart = Cart::where('session_id', $this->session_id)->first();
+        }
+        return $cart;
     }
 
 }
