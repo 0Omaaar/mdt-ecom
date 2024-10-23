@@ -15081,7 +15081,7 @@ button {
   align-items: center;
   display: inline-flex;
   justify-content: center;
-  background-color: #f2f2f2;
+  background-color: white;
 }
 .filter_sidebar .close_btn:hover {
   color: #ffffff;

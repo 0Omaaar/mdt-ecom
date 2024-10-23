@@ -13,7 +13,7 @@
             @include('user.layouts.panier')
 
 
- 
+
 			<!-- electronic_details - start
 			================================================== -->
 			<section class="electronic_details clearfix mt-4">
@@ -89,14 +89,19 @@
 								<ul class="btns_group ul_li mb_15 clearfix">
 									<li>
 										<div class="quantity_input">
-											<form action="#">
-												<input class="input_number" type="text" value="1">
+											<form action="{{ route('addToCart', ['id' => $product->id]) }}" id="cartForm" method="POST">
+                                                @csrf
+												<input class="input_number" type="text" value="1" name="quantity">
 												<span class="input_number_decrement">–</span>
 												<span class="input_number_increment">+</span>
 											</form>
 										</div>
 									</li>
-									<li><a class="custom_btn bg_electronic_blue" href="#!"><i class="fas fa-cart-arrow-down mr-2"></i>Ajouter Au Panier</a></li>
+									<li>
+                                        <a class="custom_btn bg_electronic_blue" onclick="document.getElementById('cartForm').submit();">
+                                            <i class="fas fa-cart-arrow-down mr-2"></i>Ajouter Au Panier
+                                        </a>
+                                    </li>
 								</ul>
 								<div class="row align-items-center">
 									<div class="col-lg-5">

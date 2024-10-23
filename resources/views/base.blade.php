@@ -131,7 +131,7 @@
                                 @endif
 								<li>
 									<button type="button" class="cart_btn">
-										<span class="counter">2</span>
+										<span class="counter">@yield('itemsCount')</span>
 										<i class="fas fa-shopping-cart"></i>
 										<span>Panier</span>
 									</button>
@@ -364,7 +364,7 @@
             <script>
                 swal(" ", "{{ Session::get('success') }}", "success", {
                     button:true,
-                    button:'Fermer',
+                    button:'Ok',
                     timer: 5000,
                     showCloseButton: true,
                     showCloseButton: true,
@@ -376,7 +376,7 @@
             <script>
                 swal(" ", "{{ Session::get('error') }}", "error", {
                     button:true,
-                    button:'Fermer',
+                    button:'Ok',
                     timer: 5000,
                     showCloseButton: true,
                     showCloseButton: true,

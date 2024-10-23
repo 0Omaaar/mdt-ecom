@@ -3,20 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+
+    public $session_id;
+
+    public function __construct()
+    {
+        $this->session_id = session()->getId();
+    }
+
     public function index(){
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
+        $cart = $this->getUserCart();
 
-
-        return view('user.home', compact('categories', 'subcategories', 'dayDeals'));
+        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart'));
     }
 
     public function products(Request $request)
@@ -25,6 +35,9 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $products = Product::query();
         $brands = Brand::all();
+
+        $cart = $this->getUserCart();
+
 
         if ($request->has('subcategory')) {
             $subcategoryName = urldecode($request->query('subcategory'));
@@ -66,7 +79,7 @@ class HomeController extends Controller
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 
-        return view('user.products', compact('categories', 'products', 'subcategories', 'brands'));
+        return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart'));
     }
 
 
@@ -75,7 +88,19 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $product = Product::findOrFail($id);
 
-        return view('user.product', compact('categories', 'product', 'subcategories'));
+        $cart = $this->getUserCart();
+
+        return view('user.product', compact('categories', 'product', 'subcategories', 'cart'));
     }
 
+
+    public function getUserCart(){
+        $cart = null;
+        if(Auth::check()){
+            dd("Still working on sessions");
+        }else{
+            $cart = Cart::where('session_id', $this->session_id)->first();
+        }
+        return $cart;
+    }
 }

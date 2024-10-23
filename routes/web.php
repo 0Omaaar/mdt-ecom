@@ -2,6 +2,7 @@
 include_once 'auth.php';
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -69,6 +70,10 @@ Route::post('/admin/brands/store', [BrandController::class, 'store'])->middlewar
 Route::put('/admin/brands/update/{id}', [BrandController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.brands.update');
 Route::delete('/admin/brands/delete/{id}', [BrandController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.brands.destroy');
 
+
+//cart
+Route::post('/addToCart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::delete('/removeItemFromCart/{id}', [CartController::class, 'removeItemFromCart'])->name('removeItemFromCart');
 
 //manage content
 Route::get('/admin/manage/content/index', [ManageContentController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.content.index');
