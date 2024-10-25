@@ -40,7 +40,6 @@ class SubCategoryController extends Controller
 
             return redirect()->route('admin.subCategories.index')->with('success', 'Categorie ajoutée avec succès');
         }catch(\Exception $e){
-            dd($e);
             return redirect()->route('admin.subCategories.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de la catégorie.');
         }
     }

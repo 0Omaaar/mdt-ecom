@@ -50,7 +50,7 @@ Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class,
 
 //admin orders
 Route::get('/admin/orders/index', [OrderController::class, 'getOrders'])->middleware('auth', 'isAdmin')->name('admin.orders.index');
-
+Route::get('/admin/order/show/{id}', [OrderController::class, 'showOrder'])->middleware('auth', 'isAdmin')->name('admin.orders.show');
 
 //files upload
 Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');

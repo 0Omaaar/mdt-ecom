@@ -44,10 +44,16 @@ class CartController extends Controller
                 return redirect()->back()->with('error', 'Quantité du produit insuffisante !');
             }
 
-            if (!Auth::check()) {
-                $cart = Cart::firstOrCreate([
-                    'session_id' => $this->session_id
-                ]);
+
+                if(Auth::check()){
+                    $cart = Cart::firstOrCreate([
+                        'user_id' => Auth::user()->id
+                    ]);
+                }else{
+                    $cart = Cart::firstOrCreate([
+                        'session_id' => $this->session_id
+                    ]);
+                }
 
                 $cartItem = CartItem::updateOrCreate(
                     ['cart_id' => $cart->id, 'product_id' => $product->id],
@@ -63,9 +69,7 @@ class CartController extends Controller
                 $cart->save();
 
                 return redirect()->back()->with('success', 'Produit ajouté au panier.');
-            } else {
-                dd("Still working on sessions process");
-            }
+
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
         }
@@ -148,7 +152,7 @@ class CartController extends Controller
     public function getUserCart(){
         $cart = null;
         if(Auth::check()){
-            dd("Still working on sessions");
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
         }else{
             $cart = Cart::where('session_id', $this->session_id)->first();
         }

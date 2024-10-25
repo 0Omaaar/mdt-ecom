@@ -73,7 +73,17 @@
 
                     @php
                         $sessionId = session()->getId();
-                        $orderExists = \App\Models\Order::where('session_id', $sessionId)->exists();
+                        if(Auth::check()){
+                            $orderExists = \App\Models\Order::where('user_id', Auth::user()->id)->exists();
+                            $order = \App\Models\Order::where('user_id', Auth::user()->id)
+                                ->whereDate('created_at', \Carbon\Carbon::today())
+                                ->first();
+                        }else{
+                            $orderExists = \App\Models\Order::where('session_id', $sessionId)->exists();
+                            $order = \App\Models\Order::where('session_id', $sessionId)
+                                ->whereDate('created_at', \Carbon\Carbon::today())
+                                ->first();
+                        }
                     @endphp
 
                     <ul class="checkout_step ul_li clearfix">
@@ -87,7 +97,7 @@
 
                     </ul>
 
-                    @if ($cart && $cart->items->count() > 0)
+                    @if ($order && $order->items->count() > 0)
 
                         <div class="order_complete_alart text-center mb-5 mt-5">
                             <h2>Félicitations ! Votre <b style="color: rgb(43, 179, 43)">Commande</b> a été passée avec succès.</h2>

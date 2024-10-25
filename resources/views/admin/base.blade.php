@@ -11,7 +11,7 @@
     <meta name="keywords"
         content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
-    <title>Dashboard eCommerce - Modern Admin - Clean Bootstrap 4 Dashboard HTML Template + Bitcoin Dashboard</title>
+    <title>MDT-ADMIN</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
     <link
@@ -40,7 +40,7 @@
                     <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('admin.index') }}"><img
                                 class="brand-logo" alt="modern admin logo"
                                 src="{{ asset('assets/admin/images/logo/logo.png') }}">
-                            <h3 class="brand-text">Modern</h3>
+                            <h3 class="brand-text">MDT</h3>
                         </a></li>
                     <li class="nav-item d-none d-lg-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0"
                             data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white"

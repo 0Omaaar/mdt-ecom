@@ -286,11 +286,13 @@
 @endsection
 
 @section('script')
-    <script>
-        function updateTotalPrice(additionalCost) {
-            const originalPrice = parseFloat({{ $cart->total_price }});
-            const newTotal = originalPrice + additionalCost;
-            document.querySelector('#total_price').textContent = newTotal.toFixed(2) + ' DH';
-        }
-    </script>
+    @if ($cart)
+        <script>
+            function updateTotalPrice(additionalCost) {
+                const originalPrice = parseFloat({{ $cart->total_price }});
+                const newTotal = originalPrice + additionalCost;
+                document.querySelector('#total_price').textContent = newTotal.toFixed(2) + ' DH';
+            }
+        </script>
+    @endif
 @endsection

@@ -36,7 +36,7 @@ class CheckoutController extends Controller
     public function getUserCart(){
         $cart = null;
         if(Auth::check()){
-            dd("Still working on sessions");
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
         }else{
             $cart = Cart::where('session_id', $this->session_id)->first();
         }

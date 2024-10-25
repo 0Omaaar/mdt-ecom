@@ -97,7 +97,7 @@ class HomeController extends Controller
     public function getUserCart(){
         $cart = null;
         if(Auth::check()){
-            $cart = Cart::findOrFail(Auth::user()->id);
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
         }else{
             $cart = Cart::where('session_id', $this->session_id)->first();
         }

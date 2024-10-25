@@ -80,7 +80,6 @@ class BrandController extends Controller
 
             return redirect()->route('admin.brands.index')->with('success', 'Marque supprimée avec succès');
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->route('admin.brands.index')->with('error', 'Une Erreur est survenue lors de la suppression de la marque.');
         }
     }

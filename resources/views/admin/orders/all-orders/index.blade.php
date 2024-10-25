@@ -145,8 +145,8 @@
                                                                         class="la la-pencil"></i> Modifier</button>
                                                                     <a href="#" class="dropdown-item"><i
                                                                             class="la la-eye"></i> Voir Sous Categories</a>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                                class="la la-eye"></i> Voir Produits</a>
+                                                                    <a href="{{ route('admin.orders.show', ['id' => $order->id]) }}" class="dropdown-item"><i
+                                                                                class="la la-eye"></i> Voir la Commande</a>
                                                                     <button data-toggle="modal" data-target="#delete" class="dropdown-item"><i
                                                                             class="la la-trash"></i> Supprimer</button>
                                                                 </span>
