@@ -472,19 +472,18 @@
                             </div>
                             <div class="card-footer">
                                 <div class="chart-title mb-1 text-center">
-                                    <h6>Total monthly Sales.</h6>
+                                    <h6>Total Commandes Par Mois.</h6>
                                 </div>
                                 <div class="chart-stats text-center">
-                                    <a href="#" class="btn btn-sm btn-danger box-shadow-2 mr-1">Statistics <i
-                                            class="ft-bar-chart"></i></a> <span class="text-muted">for the last
-                                        year.</span>
+                                    <a href="{{ route('admin.index') }}" class="btn btn-sm btn-danger box-shadow-2 mr-1">Statistiques <i
+                                            class="ft-bar-chart"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--/Recent Orders & Monthly Sales -->
- 
+
             </div>
         </div>
     </div>
@@ -511,6 +510,10 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script>
+        var salesData = @json($monthlySales);
+    </script>
+
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
     <!-- END: Page JS-->
 @endsection

@@ -115,12 +115,14 @@
                                         </a>
                                     </li>
                                 @endif
-								<li>
-									<a href="shop_cart.html">
-										<i class="fas fa-heart"></i>
-										<span>Wishlist</span>
-									</a>
-								</li>
+								@if (Auth::check())
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-arrow-right"></i>
+                                            <span>Mes Commandes</span>
+                                        </a>
+                                    </li>
+                                @endif
                                 @if (\Auth::check())
                                     <li>
                                         <a href="{{ route('signout') }}">
@@ -411,7 +413,7 @@
                 let currentPath = window.location.pathname;
                 let url;
 
-                if (currentPath === '/' || currentPath === '/products') {
+                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout' || currentPath === '/order-completed') {
                     if (!currentPath.includes('/products')) {
                         url = new URL(window.location.origin + '/products');
                     } else {

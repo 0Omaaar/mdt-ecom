@@ -22,7 +22,7 @@ $(window).on("load", function(){
 
     Morris.Bar({
         element: 'monthly-sales',
-        data: [{month: 'Jan', sales: 100 }, {month: 'Feb', sales: 100 }, {month: 'Mar', sales: 100 }, {month: 'Apr', sales: 100 }, {month: 'May', sales: 100 }, {month: 'Jun', sales: 100 }, {month: 'Jul', sales: 100 }, {month: 'Aug', sales: 100 }, {month: 'Sep', sales: 100 }, {month: 'Oct', sales: 100 }, {month: 'Nov', sales: 100 }, {month: 'Dec', sales: 100 }],
+        data: salesData,
         xkey: 'month',
         ykeys: ['sales'],
         labels: ['Sales'],
@@ -36,6 +36,7 @@ $(window).on("load", function(){
         barColors: ['#FF394F'],
         hideHover: 'auto',
     });
+
 
 });
 (function(window, document, $) {

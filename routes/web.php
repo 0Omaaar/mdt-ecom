@@ -16,6 +16,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 
 //USER ROOTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -33,7 +34,25 @@ Route::get('/admin/index', function() {
     $totalProductsLowStock = Product::where('quantity', '<', '10')->count();
     $orders = Order::latest()->take(5)->get();
 
-    return view('admin.index', compact('totalProducts', 'totalProductsInStock', 'totalProductsOutStock', 'totalProductsLowStock', 'orders'));
+    $monthlySales = [];
+    for ($month = 1; $month <= 12; $month++) {
+        $monthlySales[] = [
+            'month' => Carbon::create()->month($month)->format('M'),
+            'sales' => Order::where('status', 'terminée')
+                           ->whereMonth('created_at', $month)
+                           ->whereYear('created_at', Carbon::now()->year)
+                           ->count(),
+        ];
+    }
+
+    return view('admin.index', compact(
+        'totalProducts',
+        'totalProductsInStock',
+        'totalProductsOutStock',
+        'totalProductsLowStock',
+        'orders',
+        'monthlySales'
+    ));
 })->middleware('isAdmin')->name('admin.index');
 
 //categories
