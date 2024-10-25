@@ -11,7 +11,7 @@ $(window).on("load", function(){
     var new_orders = new PerfectScrollbar('#recent-buyers, #new-orders',{
         wheelPropagation: true
     });
-    
+
     /********************************************
     *               Monthly Sales               *
     ********************************************/
@@ -22,7 +22,7 @@ $(window).on("load", function(){
 
     Morris.Bar({
         element: 'monthly-sales',
-        data: [{month: 'Jan', sales: 1835 }, {month: 'Feb', sales: 2356 }, {month: 'Mar', sales: 1459 }, {month: 'Apr', sales: 1289 }, {month: 'May', sales: 1647 }, {month: 'Jun', sales: 2156 }, {month: 'Jul', sales: 1835 }, {month: 'Aug', sales: 2356 }, {month: 'Sep', sales: 1459 }, {month: 'Oct', sales: 1289 }, {month: 'Nov', sales: 1647 }, {month: 'Dec', sales: 2156 }],
+        data: [{month: 'Jan', sales: 100 }, {month: 'Feb', sales: 2356 }, {month: 'Mar', sales: 1459 }, {month: 'Apr', sales: 1289 }, {month: 'May', sales: 1647 }, {month: 'Jun', sales: 2156 }, {month: 'Jul', sales: 1835 }, {month: 'Aug', sales: 2356 }, {month: 'Sep', sales: 1459 }, {month: 'Oct', sales: 1289 }, {month: 'Nov', sales: 1647 }, {month: 'Dec', sales: 2156 }],
         xkey: 'month',
         ykeys: ['sales'],
         labels: ['Sales'],
@@ -36,10 +36,10 @@ $(window).on("load", function(){
         barColors: ['#FF394F'],
         hideHover: 'auto',
     });
-    
+
 });
 (function(window, document, $) {
-    'use strict';    
+    'use strict';
     /*************************************************
     *               Score Chart                      *
     *************************************************/
@@ -203,7 +203,7 @@ $(window).on("load", function(){
                 {meta:'Revenue', value: 12},
                 {meta:'Revenue', value: 7},
                 {meta:'Revenue', value: 14},
-             
+
             ]
         ]
     }, {

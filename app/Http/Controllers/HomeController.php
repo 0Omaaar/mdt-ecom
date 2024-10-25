@@ -97,8 +97,7 @@ class HomeController extends Controller
     public function getUserCart(){
         $cart = null;
         if(Auth::check()){
-            //check if the authenticated user has some products on session
-            dd("Still working on sessions");
+            $cart = Cart::findOrFail(Auth::user()->id);
         }else{
             $cart = Cart::where('session_id', $this->session_id)->first();
         }

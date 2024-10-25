@@ -282,6 +282,17 @@
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="Ecommerce"></i>
                 </li>
+                <li class=" nav-item"><a href=""><i class="la la-clipboard"></i><span
+                            class="menu-title" data-i18n="Shop">Commandes</span></a>
+
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="#"><i></i><span
+                               >Nouvelles Commandes</span></a>
+                    </li>
+                    <li><a class="menu-item" href="{{ route('admin.orders.index') }}"><i></i><span
+                                >Toutes les Commandes</span></a>
+                    </li>
+                </ul></li>
                 <li class=" nav-item"><a href="{{ route('admin.reviews.index') }}"><i class="la la-th-large"></i><span
                             class="menu-title" data-i18n="Shop">Avis</span></a>
                 </li>

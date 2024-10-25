@@ -48,7 +48,15 @@
             .returnShop:hover{
                 color: #2980b9;
                 transform: scale(1.1);
-             }
+            }
+
+            .isDisabled {
+                color: currentColor;
+                cursor: not-allowed;
+                opacity: 0.5;
+                text-decoration: none;
+            }
+
 
 
         </style>
@@ -62,9 +70,25 @@
 
         <section class="cart_section clearfix" style="margin-top: 30px;">
                 <div class="container">
+
+                    @php
+                        $sessionId = session()->getId();
+                        $orderExists = \App\Models\Order::where('session_id', $sessionId)->exists();
+                    @endphp
+
+                    <ul class="checkout_step ul_li clearfix">
+                        <li class="active"><a href="{{ route('cart.index') }}"><span>01.</span> Panier</a></li>
+                        <li><a href="{{ route('checkout.page') }}"><span>02.</span>Détails de facturation</a></li>
+                        @if ($orderExists)
+                            <li><a href="{{ route('order.completed') }}"><span>03.</span> Commande Terminée</a></li>
+                        @else
+                            <a href="javascript:void(0);" class="isDisabled"><span>03.</span> Commande Terminée</a>
+                        @endif
+                    </ul>
+
                     @if ($cart && $cart->items->count() > 0)
 
-                    <div class="cart_table mb_50">
+                    <div class="cart_table mb_50 mt-5">
                         <table class="table">
                             <a href="{{ route('products') }}" class="returnShop">Retour à la Boutique</a>
                             <thead class="text-uppercase">
@@ -84,7 +108,8 @@
                                                     <img src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}" alt="image_not_found">
                                                 </div>
                                                 <div class="item_content">
-                                                    <h4 class="item_title">{{ $item->product->name }}</h4>
+                                                    <h4 class="item_title"><a style="color: #333e48"
+                                                         href="{{ route('product', ['id' => $item->product_id]) }}">{{ $item->product->name }}</a></h4>
                                                     <span class="item_type">{{ $item->product->category->name }}</span>
                                                 </div>
                                                 <form action="{{ route('removeItemFromCart', ['id' => $item->id]) }}" method="POST">
@@ -122,7 +147,7 @@
                                 <ul class="ul_li_block clearfix">
                                     <li><span>Total</span> <span>{{ $cart->total_price }} DHS</span></li>
                                 </ul>
-                                <a href="#" class="custom_btn bg_success">Valider la Commande</a>
+                                <a href="{{ route('checkout.page') }}" class="custom_btn bg_success">Valider la Commande</a>
                             </div>
                         </div>
                     </div>

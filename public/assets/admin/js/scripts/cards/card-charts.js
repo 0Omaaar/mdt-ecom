@@ -655,7 +655,7 @@
         element: 'monthly-sales',
         data: [{
             month: 'Jan',
-            sales: 1835
+            sales: 100
         }, {
             month: 'Feb',
             sales: 2356

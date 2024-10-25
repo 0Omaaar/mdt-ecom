@@ -179,7 +179,7 @@
                                                                 <h4>Dépêche-toi!</h4>
                                                                 <p>L'offre se termine :</p>
                                                             </div>
-                                                            <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2024/10/24"></ul>
+                                                            <ul class="countdown_timer timein_box ul_li clearfix" data-countdown="2024/11/24"></ul>
                                                         </div>
                                                     </div>
                                                 </div>

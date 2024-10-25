@@ -122,7 +122,7 @@ hr {
   transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .form_item input:focus, .form_item textarea:focus {
-  border-color: #ce0b2b;
+  border-color: #0063d1;
 }
 .form_item input {
   height: 60px;
@@ -182,8 +182,8 @@ hr {
   font-family: "Font Awesome 5 Pro";
 }
 .checkbox_item input:checked {
-  border-color: #ce0b2b;
-  background-color: #ce0b2b;
+  border-color: #0063d1;
+  background-color: #0063d1;
 }
 .checkbox_item input:checked:before {
   opacity: 1;
@@ -5734,11 +5734,11 @@ button {
   border-bottom: 2px solid #f3f4f6;
 }
 .sports_sidebar .form_item input {
-  border-color: #f3f4f6;
-  background-color: #f3f4f6;
+  border-color: #0063d1;
+  background-color: #0063d1;
 }
 .sports_sidebar .form_item input:focus {
-  border-color: #ff3f3f;
+  border-color: #0063d1;
 }
 .sports_sidebar .sb_category li:not(:last-child) {
   margin-bottom: 0px;
@@ -18978,8 +18978,8 @@ blockquote .blockquote_title {
 }
 .checkout_step .active a {
   color: #ffffff;
-  border-color: #ce0b2b;
-  background-color: #ce0b2b;
+  border-color: black;
+  background-color: #0063d1;
 }
 .checkout_step .active a span {
   opacity: 0.39;
@@ -19014,7 +19014,7 @@ blockquote .blockquote_title {
   font-family: "Jost", sans-serif;
 }
 .checkout_collapse_content .wrap_heade a:hover {
-  color: #ce0b2b;
+  color: #0063d1;
 }
 .checkout_collapse_content .card-body {
   border-top: 2px solid #e6e6e6;

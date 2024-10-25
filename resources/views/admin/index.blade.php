@@ -351,12 +351,12 @@
                     <div id="recent-transactions" class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Recent Transactions</h4>
+                                <h4 class="card-title">Commandes Récentes</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right"
-                                                href="invoice-summary.html" target="_blank">Invoice Summary</a></li>
+                                                href="#" target="_blank">Voir Plus de Détails</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -366,251 +366,45 @@
                                         <thead>
                                             <tr>
                                                 <th class="border-top-0">Status</th>
-                                                <th class="border-top-0">Invoice#</th>
-                                                <th class="border-top-0">Customer Name</th>
-                                                <th class="border-top-0">Products</th>
-                                                <th class="border-top-0">Categories</th>
-                                                <th class="border-top-0">Shipping</th>
-                                                <th class="border-top-0">Amount</th>
+                                                <th class="border-top-0">IdCommande</th>
+                                                <th class="border-top-0">Nom Client</th>
+                                                <th class="border-top-0">Produits</th>
+                                                <th class="border-top-0">Type Livraison</th>
+                                                <th class="border-top-0">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-truncate"><i
-                                                        class="la la-dot-circle-o success font-medium-1 mr-1"></i> Paid
-                                                </td>
-                                                <td class="text-truncate"><a href="#">INV-001001</a></td>
-                                                <td class="text-truncate">
-                                                    <span class="avatar avatar-xs">
-                                                        <img class="box-shadow-2"
-                                                            src="{{ asset('assets/admin/images/portrait/small/avatar-s-4.png') }}"
-                                                            alt="avatar">
-                                                    </span>
-                                                    <span>Elizabeth W.</span>
-                                                </td>
-                                                <td class="text-truncate p-1">
-                                                    <ul class="list-unstyled users-list m-0">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Kimberly Simmons"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-1.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Willie Torres"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-2.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Rebecca Jones"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-4.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li class="avatar avatar-sm">
-                                                            <span class="badge badge-info">+1 more</span>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-danger round">Food</button>
-                                                </td>
-                                                <td>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar"
-                                                            style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-truncate">$ 1200.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-truncate"><i
-                                                        class="la la-dot-circle-o danger font-medium-1 mr-1"></i>
-                                                    Declined</td>
-                                                <td class="text-truncate"><a href="#">INV-001002</a></td>
-                                                <td class="text-truncate">
-                                                    <span class="avatar avatar-xs">
-                                                        <img class="box-shadow-2"
-                                                            src="{{ asset('assets/admin/images/portrait/small/avatar-s-5.png') }}"
-                                                            alt="avatar">
-                                                    </span>
-                                                    <span>Doris R.</span>
-                                                </td>
-                                                <td class="text-truncate p-1">
-                                                    <ul class="list-unstyled users-list m-0">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Kimberly Simmons"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-5.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Willie Torres"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-6.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li class="avatar avatar-sm">
-                                                            <span class="badge badge-info">+2 more</span>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-warning round">Electronics</button>
-                                                </td>
-                                                <td>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar"
-                                                            style="width: 45%" aria-valuenow="45" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-truncate">$ 1850.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-truncate"><i
-                                                        class="la la-dot-circle-o warning font-medium-1 mr-1"></i>
-                                                    Pending</td>
-                                                <td class="text-truncate"><a href="#">INV-001003</a></td>
-                                                <td class="text-truncate">
-                                                    <span class="avatar avatar-xs">
-                                                        <img class="box-shadow-2"
-                                                            src="{{ asset('assets/admin/images/portrait/small/avatar-s-6.png') }}"
-                                                            alt="avatar">
-                                                    </span>
-                                                    <span>Megan S.</span>
-                                                </td>
-                                                <td class="text-truncate p-1">
-                                                    <ul class="list-unstyled users-list m-0">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Kimberly Simmons"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-2.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Willie Torres"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-5.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-success round">Groceries</button>
-                                                </td>
-                                                <td>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-truncate">$ 3200.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-truncate"><i
-                                                        class="la la-dot-circle-o success font-medium-1 mr-1"></i>
-                                                    Paid</td>
-                                                <td class="text-truncate"><a href="#">INV-001004</a></td>
-                                                <td class="text-truncate">
-                                                    <span class="avatar avatar-xs">
-                                                        <img class="box-shadow-2"
-                                                            src="{{ asset('assets/admin/images/portrait/small/avatar-s-7.png') }}"
-                                                            alt="avatar">
-                                                    </span>
-                                                    <span>Andrew D.</span>
-                                                </td>
-                                                <td class="text-truncate p-1">
-                                                    <ul class="list-unstyled users-list m-0">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Kimberly Simmons"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-6.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Willie Torres"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-1.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li class="avatar avatar-sm">
-                                                            <span class="badge badge-info">+1 more</span>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-info round">Apparels</button>
-                                                </td>
-                                                <td>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                                            style="width: 65%" aria-valuenow="65" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-truncate">$ 4500.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-truncate"><i
-                                                        class="la la-dot-circle-o success font-medium-1 mr-1"></i>
-                                                    Paid</td>
-                                                <td class="text-truncate"><a href="#">INV-001005</a></td>
-                                                <td class="text-truncate">
-                                                    <span class="avatar avatar-xs">
-                                                        <img class="box-shadow-2"
-                                                            src="{{ asset('assets/admin/images/portrait/small/avatar-s-9.png') }}"
-                                                            alt="avatar">
-                                                    </span>
-                                                    <span>Walter R.</span>
-                                                </td>
-                                                <td class="text-truncate p-1">
-                                                    <ul class="list-unstyled users-list m-0">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Kimberly Simmons"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-5.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-original-title="Willie Torres"
-                                                            class="avatar avatar-sm pull-up">
-                                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                                src="{{ asset('assets/admin/images/portfolio/portfolio-3.jpg') }}"
-                                                                alt="Avatar">
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-danger round">Food</button>
-                                                </td>
-                                                <td>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar"
-                                                            style="width: 35%" aria-valuenow="35" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-truncate">$ 1500.00</td>
-                                            </tr>
+                                            @foreach ($orders as $order)
+                                                <tr>
+                                                    <td class="text-truncate"><i class="la la-dot-circle-o
+                                                        {{ $order->payment_status == 'payé' ? 'success' : ($order->payment_status == 'non payé' ? 'danger' : 'warning') }}
+                                                        font-medium-1 mr-1">
+                                                    </i>{{ $order->payment_status }}
+                                                    </td>
+                                                    <td class="text-truncate"><a href="#">{{ $order->id }}</a></td>
+                                                    <td class="text-truncate">
+                                                        <span>{{ $order->nom }}  </span>
+                                                    </td>
+                                                    <td class="text-truncate p-1">
+                                                        <ul class="list-unstyled users-list m-0">
+                                                            @foreach ($order->items as $item)
+                                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                                data-original-title="{{ $item->product->sku }}"
+                                                                class="avatar avatar-sm pull-up">
+                                                                    <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
+                                                                        src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}"
+                                                                        alt="Produit ">
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-danger round" style="text-transform: uppercase">{{ $order->shipping_method }}</button>
+                                                    </td>
+                                                    <td class="text-truncate">{{ $order->total_price }} DHS</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -690,252 +484,7 @@
                     </div>
                 </div>
                 <!--/Recent Orders & Monthly Sales -->
-
-                <!-- Basic Horizontal Timeline -->
-                <div class="row match-height">
-                    <div class="col-xl-4 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Basic Card</h4>
-                            </div>
-                            <div class="card-content">
-                                <img class="img-fluid" src="{{ asset('assets/admin/images/carousel/05.jpg') }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                            <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
-                                <span class="float-left">3 hours ago</span>
-                                <span class="float-right">
-                                    <a href="#" class="card-link">Read More <i class="fa fa-angle-right"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Horizontal Timeline</h4>
-                                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="card-text">
-                                        <section class="cd-horizontal-timeline">
-                                            <div class="timeline">
-                                                <div class="events-wrapper">
-                                                    <div class="events">
-                                                        <ol>
-                                                            <li><a href="#0" data-date="16/01/2015"
-                                                                    class="selected">16 Jan</a></li>
-                                                            <li><a href="#0" data-date="28/02/2015">28 Feb</a>
-                                                            </li>
-                                                            <li><a href="#0" data-date="20/04/2015">20 Mar</a>
-                                                            </li>
-                                                            <li><a href="#0" data-date="20/05/2015">20 May</a>
-                                                            </li>
-                                                            <li><a href="#0" data-date="09/07/2015">09 Jul</a>
-                                                            </li>
-                                                            <li><a href="#0" data-date="30/08/2015">30 Aug</a>
-                                                            </li>
-                                                            <li><a href="#0" data-date="15/09/2015">15 Sep</a>
-                                                            </li>
-                                                        </ol>
-                                                        <span class="filling-line" aria-hidden="true"></span>
-                                                    </div>
-                                                    <!-- .events -->
-                                                </div>
-                                                <!-- .events-wrapper -->
-                                                <ul class="cd-timeline-navigation">
-                                                    <li><a href="#0" class="prev inactive">Prev</a></li>
-                                                    <li><a href="#0" class="next">Next</a></li>
-                                                </ul>
-                                                <!-- .cd-timeline-navigation -->
-                                            </div>
-                                            <!-- .timeline -->
-                                            <div class="events-content">
-                                                <ol>
-                                                    <li class="selected" data-date="16/01/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-5.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="28/02/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-6.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="20/04/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-7.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="20/05/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-8.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="09/07/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-9.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="30/08/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-6.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                    <li data-date="15/09/2015">
-                                                        <blockquote class="blockquote border-0">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <img class="media-object img-xl mr-1"
-                                                                        src="{{ asset('assets/admin/images/portrait/small/avatar-s-7.png') }}"
-                                                                        alt="Generic placeholder image">
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    Sometimes life is going to hit you in the head with
-                                                                    a brick. Don't lose faith.
-                                                                </div>
-                                                            </div>
-                                                            <footer class="blockquote-footer text-right">Steve Jobs
-                                                                <cite title="Source Title">Entrepreneur</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <p class="lead mt-2">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Illum praesentium officia, fugit recusandae ipsa, quia velit
-                                                            nulla adipisci? Consequuntur aspernatur at.
-                                                        </p>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                            <!-- .events-content -->
-                                        </section>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Basic Horizontal Timeline -->
+ 
             </div>
         </div>
     </div>

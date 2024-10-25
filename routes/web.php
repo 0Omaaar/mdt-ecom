@@ -5,13 +5,16 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageContentController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Order;
 use App\Models\Product;
 
 //USER ROOTES
@@ -28,8 +31,9 @@ Route::get('/admin/index', function() {
     $totalProductsInStock = Product::where('stock_status', 'instock')->count();
     $totalProductsOutStock = Product::where('stock_status', 'outstock')->count();
     $totalProductsLowStock = Product::where('quantity', '<', '10')->count();
+    $orders = Order::latest()->take(5)->get();
 
-    return view('admin.index', compact('totalProducts', 'totalProductsInStock', 'totalProductsOutStock', 'totalProductsLowStock'));
+    return view('admin.index', compact('totalProducts', 'totalProductsInStock', 'totalProductsOutStock', 'totalProductsLowStock', 'orders'));
 })->middleware('isAdmin')->name('admin.index');
 
 //categories
@@ -43,6 +47,9 @@ Route::get('/admin/subCategories/index', [SubCategoryController::class, 'index']
 Route::post('/admin/subCategories/store', [SubCategoryController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.subCategories.store');
 Route::put('/admin/subCategories/update/{id}', [SubCategoryController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.subCategories.update');
 Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.subCategories.destroy');
+
+//admin orders
+Route::get('/admin/orders/index', [OrderController::class, 'getOrders'])->middleware('auth', 'isAdmin')->name('admin.orders.index');
 
 
 //files upload
@@ -79,6 +86,13 @@ Route::delete('/removeItemFromCart/{id}', [CartController::class, 'removeItemFro
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/addQuantity/{id}', [CartController::class, 'addQuantity'])->name('cart.addQuantity');
 Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decreaseQuantity');
+
+//checkout page
+Route::get('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
+Route::get('/order-completed', [CheckoutController::class, 'orderCompleted'])->name('order.completed');
+
+//orders
+Route::post('/create/order', [OrderController::class, 'createOrder'])->name('order.create');
 
 //manage content
 Route::get('/admin/manage/content/index', [ManageContentController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.content.index');

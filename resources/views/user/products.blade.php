@@ -2,6 +2,11 @@
 
 @section('content')
 
+        @php
+            use Illuminate\Support\Str;
+        @endphp
+
+
         @section('under-header')
 
             @include('user.layouts.under-header')
@@ -82,7 +87,7 @@
                                                         <div class="item_content">
                                                             <span class="item_name">{{ $product->subcategory->name }}</span>
                                                             <h3 class="item_title">
-                                                                <a href="{{ route('product', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                                                <a href="{{ route('product', ['id' => $product->id]) }}">{{ Str::limit($product->name, 50, '...') }}</a>
                                                             </h3>
                                                             <div class="price-container">
                                                                 <span class="item_price">{{ $product->price }} DHS</span>
