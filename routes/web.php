@@ -77,7 +77,6 @@ Route::get('/admin/index', function() {
         'orders',
         'monthlySales',
         'mostOrderedProducts',
-        'totalRevenue'
     ));
 })->middleware('isAdmin')->name('admin.index');
 

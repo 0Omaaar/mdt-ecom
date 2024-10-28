@@ -215,9 +215,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="card-footer">
-                        <strong>Total:</strong> {{ number_format($totalRevenue, 2) }} DHS <!-- Display total revenue -->
-                    </div>
+                
                 </div>
             </div>
         </div>
