@@ -147,6 +147,11 @@ Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity']
 Route::get('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
 Route::get('/order-completed', [CheckoutController::class, 'orderCompleted'])->name('order.completed');
 
+
+//get user orders page
+Route::get('/my-orders', [HomeController::class, 'orders'])->middleware('auth')->name('my-orders');
+
+
 //orders
 Route::post('/create/order', [OrderController::class, 'createOrder'])->name('order.create');
 

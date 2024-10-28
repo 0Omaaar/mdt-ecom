@@ -39,7 +39,7 @@
 
         @yield('style')
 
-
+         
 	</head>
 
 
@@ -117,7 +117,7 @@
                                 @endif
 								@if (Auth::check())
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('my-orders') }}">
                                             <i class="fas fa-arrow-right"></i>
                                             <span>Mes Commandes</span>
                                         </a>
@@ -324,8 +324,7 @@
 		<!-- footer_section - end
 		================================================== -->
 
-
-		<!-- fraimwork - jquery include -->
+       <!-- fraimwork - jquery include -->
 		<script src="{{asset('assets/user/js/jquery-3.5.1.min.js')}}"></script>
 		<script src="{{asset('assets/user/js/popper.min.js')}}"></script>
 		<script src="{{asset('assets/user/js/bootstrap.min.js')}}"></script>

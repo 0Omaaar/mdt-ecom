@@ -6,8 +6,10 @@ use App\Models\Brand;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\SubCategory;
+use ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -102,5 +104,15 @@ class HomeController extends Controller
             $cart = Cart::where('session_id', $this->session_id)->first();
         }
         return $cart;
+    }
+
+    public function orders(){
+        $user_id = Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->latest()->get();
+
+        $cart = $this->getUserCart();
+        $categories = Category::all();
+
+        return view('user.orders.index', compact('orders', 'cart', 'categories'));
     }
 }
