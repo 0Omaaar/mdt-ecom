@@ -38,7 +38,7 @@ Route::get('/admin/index', function() {
     for ($month = 1; $month <= 12; $month++) {
         $monthlySales[] = [
             'month' => Carbon::create()->month($month)->format('M'),
-            'sales' => Order::where('status', 'terminée')
+            'sales' => Order::where('status', 'validée')
                            ->whereMonth('created_at', $month)
                            ->whereYear('created_at', Carbon::now()->year)
                            ->count(),
