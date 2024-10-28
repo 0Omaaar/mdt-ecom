@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -76,7 +77,7 @@ class OrderController extends Controller
                 return redirect()->back()->with('error', 'Une erreur s\'est produite: Panier introuvable');
             }
 
-                DB::commit();
+            DB::commit();
             return redirect()->route('order.completed');
         }catch(\Exception $e){
             DB::rollBack();
@@ -110,5 +111,82 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         return view('admin.orders.all-orders.show', compact('order'));
+    }
+
+    public function validate($id){
+        try{
+            DB::beginTransaction();
+            $order = Order::findOrFail($id);
+            if($order->status != 'validée'){
+                $order->status = 'validée';
+                $order->save();
+
+                foreach($order->items as $item){
+                    $product = Product::findOrFail($item->product_id);
+
+                    if ($product->quantity < $item->quantity) {
+                        DB::rollBack();
+                        return redirect()->back()->with('error', 'Quantité insuffisante pour le produit : ' . $product->name);
+                    }
+
+                    $product->quantity -= $item->quantity;
+                    $product->save();
+                }
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Commande marquée Validée !');
+
+            }
+
+            return redirect()->back()->with('error', 'Commande Déjà Validée !');
+        }catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+    public function cancel($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $order = Order::findOrFail($id);
+
+            if ($order->status == 'annulée') {
+                return redirect()->back()->with('error', 'Commande déjà annulée !');
+            }
+
+            $order->status = 'annulée';
+            $order->save();
+
+            foreach ($order->items as $item) {
+                $product = Product::findOrFail($item->product_id);
+                $product->quantity += $item->quantity;
+                $product->save();
+            }
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Commande marquée comme annulée et les quantités de produits ont été restaurées !');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+
+    public function delete($id){
+        try{
+            $order = Order::findOrFail($id);
+            if($order->status != 'validée'){
+                $order->delete();
+
+                return redirect()->back()->with('success', 'Commande supprimée avec succès !');
+            }
+
+            return redirect()->back()->with('error', 'Une commande validée ne peut pas être supprimée !');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
     }
 }

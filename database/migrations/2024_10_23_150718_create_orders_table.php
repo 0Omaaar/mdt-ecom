@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('session_id')->nullable();
             $table->decimal('total_price', 10, 2)->default(0);
-            $table->enum('status', ['en attente', 'terminée', 'annulée'])->default('en attente');
+            $table->enum('status', ['en attente', 'validée', 'annulée'])->default('en attente');
             $table->enum('payment_status', ['non payé', 'payé', 'remboursé'])->default('non payé');
             $table->string('shipping_method')->nullable();
             $table->string('payment_method')->nullable();

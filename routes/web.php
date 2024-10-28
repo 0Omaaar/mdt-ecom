@@ -70,6 +70,9 @@ Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class,
 //admin orders
 Route::get('/admin/orders/index', [OrderController::class, 'getOrders'])->middleware('auth', 'isAdmin')->name('admin.orders.index');
 Route::get('/admin/order/show/{id}', [OrderController::class, 'showOrder'])->middleware('auth', 'isAdmin')->name('admin.orders.show');
+Route::get('/admin/order/validate/{id}', [OrderController::class, 'validate'])->middleware('auth', 'isAdmin')->name('admin.orders.validate');
+Route::get('/admin/order/cancel/{id}', [OrderController::class, 'cancel'])->middleware('auth', 'isAdmin')->name('admin.orders.cancel');
+Route::delete('/admin/order/delete/{id}', [OrderController::class, 'delete'])->middleware('auth', 'isAdmin')->name('admin.orders.delete');
 
 //files upload
 Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');

@@ -126,7 +126,9 @@
                                                     <tr>
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>{{ $order->id }}</td>
-                                                        <td style="text-transform: uppercase;" class="badge mt-1">{{ $order->status }}</td>
+                                                        <td style="text-transform: uppercase; font-weight: bolder;"
+                                                            class="badge badge-{{ $order->status == 'validée' ? 'success' : ($order->status == 'en attente' ? '' : 'danger') }} mt-1"
+                                                            >{{ $order->status }}</td>
                                                         <td style="text-transform: uppercase; font-weight: bolder; color: rgb(163, 39, 39)">{{ $order->payment_status }}</td>
                                                         <td>{{ $order->nom }}</td>
                                                         <td style="text-transform: uppercase;">{{ $order->shipping_method }}</td>
@@ -141,20 +143,24 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <button data-toggle="modal" data-target="#edit" class="dropdown-item"><i
-                                                                        class="la la-pencil"></i> Modifier</button>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                            class="la la-eye"></i> Voir Sous Categories</a>
+                                                                    @if ($order->status != 'validée')
+                                                                        <a class="dropdown-item" href="{{ route('admin.orders.validate', $order->id) }}"><i
+                                                                            class="la la-check"></i> Valider La Commande</a>
+                                                                    @endif
+                                                                    @if ($order->status != 'annulée')
+                                                                        <a href="{{ route('admin.orders.cancel', $order->id) }}" class="dropdown-item"><i
+                                                                            class="la la-ban"></i> Annuler La Commande</a>
+                                                                    @endif
                                                                     <a href="{{ route('admin.orders.show', ['id' => $order->id]) }}" class="dropdown-item"><i
                                                                                 class="la la-eye"></i> Voir la Commande</a>
-                                                                    <button data-toggle="modal" data-target="#delete" class="dropdown-item"><i
+                                                                    <button data-toggle="modal" data-target="#delete{{ $order->id }}" class="dropdown-item"><i
                                                                             class="la la-trash"></i> Supprimer</button>
                                                                 </span>
                                                             </span>
                                                         </td>
 
-
-
+                                                        {{-- Delete Order Modal --}}
+                                                        @include('admin.orders.all-orders.delete')
                                                     </tr>
                                                 @endforeach
 
