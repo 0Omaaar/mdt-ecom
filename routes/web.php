@@ -17,6 +17,8 @@ use App\Http\Controllers\ReviewController;
 use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 //USER ROOTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,7 +28,7 @@ Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('revi
 
 
 
-//ADMIN ROUTES
+// ADMIN ROUTE
 Route::get('/admin/index', function() {
     $totalProducts = Product::count();
     $totalProductsInStock = Product::where('stock_status', 'instock')->count();
@@ -34,16 +36,38 @@ Route::get('/admin/index', function() {
     $totalProductsLowStock = Product::where('quantity', '<', '10')->count();
     $orders = Order::latest()->take(5)->get();
 
+    // Get the most ordered products with their details and customers who ordered them
+    $mostOrderedProducts = DB::table('order_items')
+        ->select('order_items.product_id', DB::raw('count(*) as order_count'), 'products.name', 'products.price')
+        ->join('products', 'order_items.product_id', '=', 'products.id')
+        ->groupBy('order_items.product_id', 'products.name', 'products.price')
+        ->orderBy('order_count', 'desc')
+        ->get();
+
+    // Fetching customers for each product
+    foreach ($mostOrderedProducts as $product) {
+        $product->customers = DB::table('orders')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->where('order_items.product_id', $product->product_id)
+            ->select('users.*')
+            ->get();
+    }
+
+    // Calculate monthly sales
     $monthlySales = [];
     for ($month = 1; $month <= 12; $month++) {
         $monthlySales[] = [
             'month' => Carbon::create()->month($month)->format('M'),
             'sales' => Order::where('status', 'validée')
-                           ->whereMonth('created_at', $month)
-                           ->whereYear('created_at', Carbon::now()->year)
-                           ->count(),
+                ->whereMonth('created_at', $month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->count(),
         ];
     }
+
+    // Calculate total revenue from all orders
+    $totalRevenue = Order::sum('total_price');
 
     return view('admin.index', compact(
         'totalProducts',
@@ -51,9 +75,15 @@ Route::get('/admin/index', function() {
         'totalProductsOutStock',
         'totalProductsLowStock',
         'orders',
-        'monthlySales'
+        'monthlySales',
+        'mostOrderedProducts',
+        'totalRevenue'
     ));
 })->middleware('isAdmin')->name('admin.index');
+
+
+
+
 
 //categories
 Route::get('/admin/categories/index', [CategoryController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.categories.index');
