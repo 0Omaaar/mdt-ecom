@@ -189,4 +189,55 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
         }
     }
+
+    public function cancelPayment($id){
+        try{
+            $order = Order::findOrFail($id);
+
+            if ($order->payment_status == 'non payé') {
+                return redirect()->back()->with('error', 'Commande déjà non Payée !');
+            }
+
+            $order->payment_status = 'non payé';
+            $order->save();
+
+            return redirect()->back()->with('success', 'Commande marquée non Payée !');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+    public function validatePayment($id){
+        try{
+            $order = Order::findOrFail($id);
+
+            if ($order->payment_status == 'payé') {
+                return redirect()->back()->with('error', 'Commande déjà Payée !');
+            }
+
+            $order->payment_status = 'payé';
+            $order->save();
+
+            return redirect()->back()->with('success', 'Commande marquée Payée !');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
+
+    public function rembourser($id){
+        try{
+            $order = Order::findOrFail($id);
+
+            if ($order->payment_status == 'remboursé') {
+                return redirect()->back()->with('error', 'Commande déjà Remboursée !');
+            }
+
+            $order->payment_status = 'remboursé';
+            $order->save();
+
+            return redirect()->back()->with('success', 'Commande marquée Remboursée !');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Une erreur s\'est produite : ' . $e->getMessage());
+        }
+    }
 }

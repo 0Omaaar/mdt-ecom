@@ -129,7 +129,12 @@
                                                         <td style="text-transform: uppercase; font-weight: bolder;"
                                                             class="badge badge-{{ $order->status == 'validée' ? 'success' : ($order->status == 'en attente' ? '' : 'danger') }} mt-1"
                                                             >{{ $order->status }}</td>
-                                                        <td style="text-transform: uppercase; font-weight: bolder; color: rgb(163, 39, 39)">{{ $order->payment_status }}</td>
+                                                        <td style="text-transform: uppercase; font-weight: bolder;
+                                                            color: {{ $order->payment_status == 'payé' ? '#28a745' :
+                                                                    ($order->payment_status == 'non payé' ? '#dc3545' :
+                                                                    ($order->payment_status == 'en attente' ? '#ffc107' : '#6c757d')) }}">
+                                                            {{ $order->payment_status }}
+                                                        </td>
                                                         <td>{{ $order->nom }}</td>
                                                         <td style="text-transform: uppercase;">{{ $order->shipping_method }}</td>
                                                         <td>{{ $order->items()->count() }}</td>
@@ -141,21 +146,40 @@
                                                                     aria-expanded="true"
                                                                          class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
                                                                         class="ft-settings"></i></button>
-                                                                <span aria-labelledby="btnSearchDrop2"
-                                                                    class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
                                                                     @if ($order->status != 'validée')
-                                                                        <a class="dropdown-item" href="{{ route('admin.orders.validate', $order->id) }}"><i
-                                                                            class="la la-check"></i> Valider La Commande</a>
+                                                                        <a class="dropdown-item" href="{{ route('admin.orders.validate', $order->id) }}">
+                                                                            <i class="la la-check-circle text-success"></i> Valider La Commande
+                                                                        </a>
                                                                     @endif
                                                                     @if ($order->status != 'annulée')
-                                                                        <a href="{{ route('admin.orders.cancel', $order->id) }}" class="dropdown-item"><i
-                                                                            class="la la-ban"></i> Annuler La Commande</a>
+                                                                        <a href="{{ route('admin.orders.cancel', $order->id) }}" class="dropdown-item">
+                                                                            <i class="la la-times-circle text-danger"></i> Annuler La Commande
+                                                                        </a>
                                                                     @endif
-                                                                    <a href="{{ route('admin.orders.show', ['id' => $order->id]) }}" class="dropdown-item"><i
-                                                                                class="la la-eye"></i> Voir la Commande</a>
-                                                                    <button data-toggle="modal" data-target="#delete{{ $order->id }}" class="dropdown-item"><i
-                                                                            class="la la-trash"></i> Supprimer</button>
+                                                                    @if ($order->payment_status != 'payé')
+                                                                        <a href="{{ route('admin.payments.validate', $order->id) }}" class="dropdown-item">
+                                                                            <i class="la la-money text-success"></i> Valider Payment
+                                                                        </a>
+                                                                    @endif
+                                                                    @if ($order->payment_status != 'non payé')
+                                                                        <a href="{{ route('admin.payments.cancel', $order->id) }}" class="dropdown-item">
+                                                                            <i class="la la-ban text-warning"></i> Annuler Payment
+                                                                        </a>
+                                                                    @endif
+                                                                    @if ($order->payment_status != 'remboursé')
+                                                                        <a href="{{ route('admin.payments.rembourser', $order->id) }}" class="dropdown-item">
+                                                                            <i class="la la-undo text-info"></i> Rembourser Payment
+                                                                        </a>
+                                                                    @endif
+                                                                    <a href="{{ route('admin.orders.show', ['id' => $order->id]) }}" class="dropdown-item">
+                                                                        <i class="la la-eye text-primary"></i> Voir la Commande
+                                                                    </a>
+                                                                    <button data-toggle="modal" data-target="#delete{{ $order->id }}" class="dropdown-item">
+                                                                        <i class="la la-trash text-danger"></i> Supprimer
+                                                                    </button>
                                                                 </span>
+
                                                             </span>
                                                         </td>
 

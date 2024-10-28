@@ -73,6 +73,10 @@ Route::get('/admin/order/show/{id}', [OrderController::class, 'showOrder'])->mid
 Route::get('/admin/order/validate/{id}', [OrderController::class, 'validate'])->middleware('auth', 'isAdmin')->name('admin.orders.validate');
 Route::get('/admin/order/cancel/{id}', [OrderController::class, 'cancel'])->middleware('auth', 'isAdmin')->name('admin.orders.cancel');
 Route::delete('/admin/order/delete/{id}', [OrderController::class, 'delete'])->middleware('auth', 'isAdmin')->name('admin.orders.delete');
+Route::get('/admin/order/payments/cancel/{id}', [OrderController::class, 'cancelPayment'])->middleware('auth', 'isAdmin')->name('admin.payments.cancel');
+Route::get('/admin/order/payments/validate/{id}', [OrderController::class, 'validatePayment'])->middleware('auth', 'isAdmin')->name('admin.payments.validate');
+Route::get('/admin/order/payments/rembourser/{id}', [OrderController::class, 'rembourser'])->middleware('auth', 'isAdmin')->name('admin.payments.rembourser');
+
 
 //files upload
 Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');
