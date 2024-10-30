@@ -39,7 +39,7 @@
 
         @yield('style')
 
-         
+
 	</head>
 
 
@@ -412,15 +412,20 @@
                 let currentPath = window.location.pathname;
                 let url;
 
-                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout' || currentPath === '/order-completed') {
+                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout'
+                || currentPath === '/order-completed' || currentPath === '/my-orders') {
                     if (!currentPath.includes('/products')) {
                         url = new URL(window.location.origin + '/products');
                     } else {
                         url = new URL(window.location.href);
                     }
                 } else if (currentPath.includes('/product/')) {
-                    url = new URL(window.location.origin + '/products');
-                } else {
+                    if (!currentPath.includes('/products')) {
+                        url = new URL(window.location.origin + '/products');
+                    } else {
+                        url = new URL(window.location.href);
+                    }
+                 } else {
                     url = new URL(window.location.href);
                 }
 
