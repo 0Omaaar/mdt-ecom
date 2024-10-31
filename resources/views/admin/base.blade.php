@@ -13,7 +13,6 @@
     <meta name="author" content="PIXINVENT">
     <title>MDT-ADMIN</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700"
         rel="stylesheet">
@@ -54,7 +53,7 @@
                     <ul class="nav navbar-nav mr-auto float-left">
                         <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#"><i
                                     class="ficon ft-maximize"></i></a></li>
-                        
+
                     </ul>
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"

@@ -8,7 +8,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
 		<title>Mobidigitech</title>
-		<link rel="shortcut icon" href="{{asset('assets/user/images/logo/favourite_icon_01.png')}}">
+		<link rel="shortcut icon" href="{{asset('assets/user/images/logo/logo_16_2x.png')}}">
 
 		<!-- fraimwork - css include -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/bootstrap.min.css') }}">
