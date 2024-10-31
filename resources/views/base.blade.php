@@ -8,7 +8,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
 		<title>Mobidigitech</title>
-		<link rel="shortcut icon" href="{{asset('assets/user/images/logo/favourite_icon_01.png')}}">
+		<link rel="shortcut icon" href="{{asset('assets/user/images/logo/logo_16_2x.png')}}">
 
 		<!-- fraimwork - css include -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/bootstrap.min.css') }}">
@@ -39,7 +39,7 @@
 
         @yield('style')
 
-         
+
 	</head>
 
 
@@ -412,15 +412,20 @@
                 let currentPath = window.location.pathname;
                 let url;
 
-                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout' || currentPath === '/order-completed') {
+                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout'
+                || currentPath === '/order-completed' || currentPath === '/my-orders') {
                     if (!currentPath.includes('/products')) {
                         url = new URL(window.location.origin + '/products');
                     } else {
                         url = new URL(window.location.href);
                     }
                 } else if (currentPath.includes('/product/')) {
-                    url = new URL(window.location.origin + '/products');
-                } else {
+                    if (!currentPath.includes('/products')) {
+                        url = new URL(window.location.origin + '/products');
+                    } else {
+                        url = new URL(window.location.href);
+                    }
+                 } else {
                     url = new URL(window.location.href);
                 }
 
@@ -445,4 +450,3 @@
 
 	</body>
 </html>
-
