@@ -34,6 +34,12 @@ Route::get('/admin/index', function() {
     $totalProductsInStock = Product::where('stock_status', 'instock')->count();
     $totalProductsOutStock = Product::where('stock_status', 'outstock')->count();
     $totalProductsLowStock = Product::where('quantity', '<', '10')->count();
+
+    $totalOrders = Order::count();
+    $totalOrdersEnAttente = Order::where('status', 'en attente')->count();
+    $totalOrdersValidee = Order::where('status', 'validée')->count();
+    $totalOrdersAnnulee = Order::where('status', 'annulée')->count();
+
     $orders = Order::latest()->take(5)->get();
 
     $mostOrderedProducts = DB::table('order_items')
@@ -59,7 +65,6 @@ Route::get('/admin/index', function() {
         ];
     }
 
-
     return view('admin.index', compact(
         'totalProducts',
         'totalProductsInStock',
@@ -68,6 +73,10 @@ Route::get('/admin/index', function() {
         'orders',
         'monthlySales',
         'mostOrderedProducts',
+        'totalOrders',
+        'totalOrdersEnAttente',
+        'totalOrdersValidee',
+        'totalOrdersAnnulee'
     ));
 })->middleware('isAdmin')->name('admin.index');
 
