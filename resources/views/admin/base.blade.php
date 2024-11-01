@@ -27,7 +27,7 @@
     </script>
 
     <script>
-        Pusher.logToConsole = true;
+        Pusher.logToConsole = false;
 
         var pusher = new Pusher('2e4b553e44bb6711d59a', {
             cluster: 'eu'
@@ -35,8 +35,6 @@
 
         var channel = pusher.subscribe('neworder-channel');
         channel.bind('new-order', function(data) {
-
-            // toastr.success('Nouvelle Notification, Veuillez vérifier la barre des Notifications !');
 
             // alert(JSON.stringify(data));
             var notificationList = document.querySelector('.dropdown-menu .media-list');
@@ -113,6 +111,9 @@
                             href="{{ route('home') }}" target="_blank"><i class="ficon ft-send" title="Visiter Site Web"></i>  </a>
                         </li>
 
+                        @php
+                            $notifications = App\Models\Notification::latest()->take(5)->get();
+                        @endphp
 
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
                                 href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span
@@ -122,19 +123,26 @@
                                     <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span>
                                     </h6><span class="notification-tag badge badge-danger float-right m-0">0 New</span>
                                 </li>
+
+
                                 <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
-                                        {{-- <div class="media">
-                                            <div class="media-left align-self-center"><i
-                                                    class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">You have new order!</h6>
-                                                <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor
-                                                    sit amet, consectetuer elit.</p><small>
-                                                    <time class="media-meta text-muted"
-                                                        datetime="2015-06-11T18:29:20+08:00">30 minutes
-                                                        ago</time></small>
+                                    @foreach ($notifications as $notification)
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
                                             </div>
-                                        </div> --}}
+                                            <div class="media-body">
+                                                <h6 class="media-heading"
+                                                @if ($notification->subject == 'new-order')
+                                                    onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
+                                                @endif
+                                                >{{ $notification->content }}</h6>
+                                                <small>
+                                                    <time class="media-meta text-muted">{{ $notification->created_at->diffForHumans() }}</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </li>
 
                             </ul>
