@@ -19,6 +19,58 @@
 
     @yield('head')
 
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+    <script>
+        const routeToOrder = "{{ route('admin.orders.show', ':id') }}";
+    </script>
+
+    <script>
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('2e4b553e44bb6711d59a', {
+            cluster: 'eu'
+        });
+
+        var channel = pusher.subscribe('neworder-channel');
+        channel.bind('new-order', function(data) {
+
+            // toastr.success('Nouvelle Notification, Veuillez vérifier la barre des Notifications !');
+
+            // alert(JSON.stringify(data));
+            var notificationList = document.querySelector('.dropdown-menu .media-list');
+
+            var notificationItem = document.createElement('a');
+             notificationItem.href = routeToOrder.replace(':id', JSON.stringify(data.orderId));
+
+
+            notificationItem.innerHTML = `
+                <div class="media">
+                    <div class="media-left align-self-center">
+                        <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
+                    </div>
+                    <div class="media-body">
+                        <h6 class="media-heading">Nouvelle Commande</h6>
+                        <small>
+                            <time class="media-meta text-muted">${new Date().toLocaleTimeString()}</time>
+                        </small>
+                    </div>
+                </div>
+            `;
+
+            notificationList.prepend(notificationItem);
+
+            var badge = document.querySelector('.badge-danger.badge-up.badge-glow');
+            var count = parseInt(badge.innerText) || 0;
+            badge.innerText = count + 1;
+
+            var notificationTag = document.querySelector('.notification-tag');
+            notificationTag.innerText = `${count + 1} New`;
+
+        });
+    </script>
+
 </head>
 <!-- END: Head-->
 
@@ -55,6 +107,7 @@
                                     class="ficon ft-maximize"></i></a></li>
 
                     </ul>
+                    {{-- notifs --}}
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
                             href="{{ route('home') }}" target="_blank"><i class="ficon ft-send" title="Visiter Site Web"></i>  </a>
@@ -63,14 +116,14 @@
 
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
                                 href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span
-                                    class="badge badge-pill badge-danger badge-up badge-glow">5</span></a>
+                                    class="badge badge-pill badge-danger badge-up badge-glow">0</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
                                     <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span>
-                                    </h6><span class="notification-tag badge badge-danger float-right m-0">5 New</span>
+                                    </h6><span class="notification-tag badge badge-danger float-right m-0">0 New</span>
                                 </li>
                                 <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
-                                        <div class="media">
+                                        {{-- <div class="media">
                                             <div class="media-left align-self-center"><i
                                                     class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
                                             <div class="media-body">
@@ -81,57 +134,9 @@
                                                         datetime="2015-06-11T18:29:20+08:00">30 minutes
                                                         ago</time></small>
                                             </div>
-                                        </div>
-                                    </a><a href="javascript:void(0)">
-                                        <div class="media">
-                                            <div class="media-left align-self-center"><i
-                                                    class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading red darken-1">99% Server load</h6>
-                                                <p class="notification-text font-small-3 text-muted">Aliquam tincidunt
-                                                    mauris eu risus.</p><small>
-                                                    <time class="media-meta text-muted"
-                                                        datetime="2015-06-11T18:29:20+08:00">Five hour
-                                                        ago</time></small>
-                                            </div>
-                                        </div>
-                                    </a><a href="javascript:void(0)">
-                                        <div class="media">
-                                            <div class="media-left align-self-center"><i
-                                                    class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
-                                                <p class="notification-text font-small-3 text-muted">Vestibulum auctor
-                                                    dapibus neque.</p><small>
-                                                    <time class="media-meta text-muted"
-                                                        datetime="2015-06-11T18:29:20+08:00">Today</time></small>
-                                            </div>
-                                        </div>
-                                    </a><a href="javascript:void(0)">
-                                        <div class="media">
-                                            <div class="media-left align-self-center"><i
-                                                    class="ft-check-circle icon-bg-circle bg-cyan mr-0"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Complete the task</h6><small>
-                                                    <time class="media-meta text-muted"
-                                                        datetime="2015-06-11T18:29:20+08:00">Last week</time></small>
-                                            </div>
-                                        </div>
-                                    </a><a href="javascript:void(0)">
-                                        <div class="media">
-                                            <div class="media-left align-self-center"><i
-                                                    class="ft-file icon-bg-circle bg-teal mr-0"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Generate monthly report</h6><small>
-                                                    <time class="media-meta text-muted"
-                                                        datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
-                                            </div>
-                                        </div>
-                                    </a></li>
-                                <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
-                                        href="javascript:void(0)">Read all notifications</a></li>
+                                        </div> --}}
+                                </li>
+
                             </ul>
                         </li>
 

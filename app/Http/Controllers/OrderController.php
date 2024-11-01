@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewOrder;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -54,6 +55,11 @@ class OrderController extends Controller
 
                 $order->save();
 
+
+                // session()->put('success', 'Nouvelle Notification, Veuillez vérifier la barre des Notifications !');
+                event(new NewOrder($order->id));
+
+
                 //order items
                 if($cart->items()->count() > 0){
                     foreach($cart->items as $item){
@@ -78,6 +84,8 @@ class OrderController extends Controller
             }
 
             DB::commit();
+
+
             return redirect()->route('order.completed');
         }catch(\Exception $e){
             DB::rollBack();
