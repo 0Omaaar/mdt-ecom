@@ -19,7 +19,9 @@ use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\brand;
 
 //USER ROOTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -30,8 +32,13 @@ Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('revi
 
 
 Route::get('/contact', function () {
-    return view('user.contact'); // Adjust the path as necessary
-});
+    $categories = Category::all();
+    $subcategories = SubCategory::all();
+    $products = Product::query();
+    $brands = Brand::all();
+    $randomProducts = Product::inRandomOrder()->take(6)->get();
+    return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts')); // Adjust the path as necessary
+})->name('contact'); 
 
 
 

@@ -1,144 +1,111 @@
+@extends('base')
+@section('content')
+		<!-- main body - start
+		================================================== -->
+		<main>
 
-<div class="contact_us_6">
-  <style>
-    .contact_us_6 * {
-      font-family: Nunito, sans-serif;
-    }
-    .contact_us_6 .text-blk {
-      margin: 0;
-      line-height: 25px;
-    }
-    .contact_us_6 .responsive-cell-block {
-      min-height: 75px;
-    }
-    .contact_us_6 input:focus,
-    .contact_us_6 textarea:focus {
-      outline: none;
-      border-color: #03a9f4;
-    }
-    .contact_us_6 .container-block {
-      min-height: 75px;
-      width: 100%;
-      padding: 10px;
-      display: block;
-    }
-    .contact_us_6 .form-wrapper {
-      background-color: white;
-      max-width: 450px;
-      text-align: center;
-      padding: 50px 40px;
-      box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 20px 7px;
-      border-radius: 6px;
-      margin: 90px 0 60px 0;
-    }
-    .contact_us_6 .contactus-head {
-      font-size: 36px;
-      line-height: 52px;
-      font-weight: 900;
-    }
-    .contact_us_6 .input {
-      width: 100%;
-      height: 50px;
-      padding: 1px 15px;
-      border: 2px solid #eeeeee;
-      font-size: 16px;
-      color: black;
-      transition: border-color 0.3s ease;
-    }
-    .contact_us_6 .textinput {
-      width: 98%;
-      min-height: 150px;
-      padding: 20px 15px;
-      border: 2px solid #eeeeee;
-      font-size: 16px;
-    }
-    .contact_us_6 .submit-btn {
-      width: 98%;
-      background-color: #03a9f4;
-      height: 60px;
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-      border: none;
-      border-radius: 40px;
-    }
-    .contact_us_6 .map-box {
-      width: 100%;
-      height: 320px;
-    }
-  </style>
 
-  <div class="responsive-container-block container">
-    <form class="form-box">
-      <div class="form-wrapper">
-        <p class="contactus-head">Get in Touch</p>
-        <div class="responsive-container-block">
-          <div class="responsive-cell-block" id="firstNameBlock">
-            <p class="text-blk input-title">FIRST NAME</p>
-            <input class="input" id="firstName" name="FirstName" placeholder="Please enter first name...">
-          </div>
-          <div class="responsive-cell-block" id="emailBlock">
-            <p class="text-blk input-title">EMAIL</p>
-            <input class="input" id="email" name="Email" placeholder="Please enter email...">
-          </div>
-          <div class="responsive-cell-block" id="phoneBlock">
-            <p class="text-blk input-title">PHONE NUMBER</p>
-            <input class="input" id="phone" name="PhoneNumber" placeholder="Please enter phone number...">
-          </div>
-          <div class="responsive-cell-block" id="queryBlock">
-            <p class="text-blk input-title">WHAT DO YOU HAVE IN MIND?</p>
-            <textarea class="textinput" id="query" placeholder="Please enter query..."></textarea>
-          </div>
-        </div>
-        <button type="submit" class="submit-btn">Submit</button>
-      </div>
-    </form>
+			
+			<!-- sidebar mobile menu & sidebar cart - end
+			================================================== -->
 
-    <div class="responsive-cell-block" id="contactInfo">
-      <div class="map-part">
-        <p class="text-blk map-contactus-head">Reach us at</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis diam lectus sapien.</p>
-        <div class="social-media-links">
-          <a href="#"><img class="link-img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png"></a>
-          <a href="#"><img class="link-img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-facebook.png"></a>
-          <a href="#"><img class="link-img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-instagram.png"></a>
-          <a href="#"><img class="link-img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-linkedin.png"></a>
-        </div>
-      </div>
-      <div class="map-box" id="map"></div>
+
+			
+			
+			
+
+			<!-- map_section - start
+			================================================== -->
+			<div class="map_section clearfix">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13240.51951354877!2d-6.8878281!3d33.9377875!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda713e204e80bfb%3A0x3c291a4ced8c30bd!2sMobidigitech!5e0!3m2!1sfr!2sma!4v1730717744278!5m2!1sfr!2sma" width="1800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+			<!-- map_section - end
+			================================================== -->
+
+
+			<!-- main_contact_section - start
+			================================================== -->
+			<section class="main_contact_section sec_ptb_100 clearfix">
+				<div class="container">
+					<div class="row justify-content-lg-between">
+
+                    <div class="col-lg-5">
+    <div class="main_contact_content">
+        <h3 class="title_text mb_15">Nous Contacter</h3>
+        <p class="mb_50">
+            Si vous êtes intéressé à travailler avec nous, veuillez nous contacter.
+        </p>
+        <ul class="main_contact_info ul_li_block clearfix">
+            <li>
+                <span class="icon">
+                    <i class="fal fa-map-marked-alt"></i>
+                </span>
+                <p class="mb-0">
+                    
+                Adresse
+                Rue Alkitres 643/84 Magasin N 2 Guich Loudaya
+                </p>
+            </li>
+            <li>
+                <span class="icon">
+                    <i class="fal fa-phone-volume"></i>
+                </span>
+                <p class="mb-0">080-8576413 </p>
+            </li>
+            <li>
+                <span class="icon">
+                    <i class="fal fa-paper-plane"></i>
+                </span>
+                <p class="mb-0">sales@mobidigitech.com</p>
+            </li>
+        </ul>
     </div>
-  </div>
 </div>
-<script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
-<script>
-  // Initialize Google Maps
-  function initMap() {
-    const location = { lat: 12.9716, lng: 77.5946 }; // Coordinates for Bengaluru, you can update this as needed
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: location,
-    });
-    new google.maps.Marker({
-      position: location,
-      map: map,
-    });
-  }
 
-  // Add event listeners for live feedback on form inputs
-  document.getElementById("firstName").addEventListener("input", function() {
-    this.style.borderColor = this.value ? "#03a9f4" : "#eeeeee";
-  });
-  document.getElementById("email").addEventListener("input", function() {
-    this.style.borderColor = this.value ? "#03a9f4" : "#eeeeee";
-  });
-  document.getElementById("phone").addEventListener("input", function() {
-    this.style.borderColor = this.value ? "#03a9f4" : "#eeeeee";
-  });
-  document.getElementById("query").addEventListener("input", function() {
-    this.style.borderColor = this.value ? "#03a9f4" : "#eeeeee";
-  });
-</script>
+<div class="col-lg-7">
+    <div class="main_contact_form">
+        <h3 class="title_text mb_30">Retour d'Information</h3>
+        <form action="#">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form_item">
+                        <input type="text" name="name" placeholder="Votre Nom">
+                    </div>
+                </div>
 
-<!-- Load Google Maps API -->
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form_item">
+                        <input type="email" name="email" placeholder="Votre Email">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form_item">
+                        <input type="text" name="subject" placeholder="Objet">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_item">
+                <textarea name="message" placeholder="Votre Message"></textarea>
+            </div>
+            <button type="submit" class="custom_btn bg_default_red text-uppercase">Voir les projets</button>
+        </form>
+    </div>
+</div>
+
+						
+					</div>
+				</div>
+			</section>
+			<!-- main_contact_section - end
+			================================================== -->
+
+
+		</main>
+		<!-- main body - end
+		================================================== -->
+
+@endsection
 
 

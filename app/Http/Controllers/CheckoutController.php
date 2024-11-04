@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,15 +21,19 @@ class CheckoutController extends Controller
     public function checkoutPage(){
         $cart = $this->getUserCart();
         $categories = Category::all();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
 
-        return view('user.cart.checkout', compact('cart', 'categories'));
+
+        return view('user.cart.checkout', compact('cart', 'categories', 'randomProducts'));
     }
 
     public function orderCompleted(){
         $cart = $this->getUserCart();
         $categories = Category::all();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
 
-        return view('user.cart.orderCompleted', compact('cart', 'categories'));
+
+        return view('user.cart.orderCompleted', compact('cart', 'categories', 'randomProducts'));
     }
 
 

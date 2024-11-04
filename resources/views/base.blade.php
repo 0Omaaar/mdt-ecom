@@ -172,6 +172,7 @@
 
 
 
+
 <!-- footer_section - start -->
 <footer class="footer_section electronic_footer clearfix">
     <div class="footer_widget_area clearfix">
@@ -185,13 +186,13 @@
                             </a>
                         </div>
                         <p class="mb_30">
-						Mobidigitech.com est une entreprise dynamique spécialisée dans les produits IT, le développement de sites web, la gestion des médias sociaux, le marketing numérique, ainsi que la réparation d’appareils électroniques. Nous sommes fiers de fournir à nos clients des solutions technologiques complètes et de haute qualité.                        </p>
+                            Mobidigitech.com est une entreprise dynamique spécialisée dans les produits IT, le développement de sites web, la gestion des médias sociaux, le marketing numérique, ainsi que la réparation d’appareils électroniques. Nous sommes fiers de fournir à nos clients des solutions technologiques complètes et de haute qualité.
+                        </p>
 
                         <div class="footer_electronic_hotline mb_30">
                             <i class="fal fa-headset"></i>
                             <h4>VOUS AVEZ DES QUESTIONS ? APPELEZ-NOUS 24/7 !</h4>
-                            <span>
-							080-8576413</span>
+                            <span>080-8576413</span>
                         </div>
 
                         <ul class="circle_social_links ul_li clearfix">
@@ -223,7 +224,7 @@
                                 <li><a href="{{ route('login') }}">Mes Commandes</a></li>
                             @endif
                             <li class="cart_btn"><a href="javascript:void(0)">Mon Panier</a></li>
-                            <li><a href="{{ route('home') }}">Service Client</a></li>
+                            <li><a href="{{ route('contact') }}">Service Client</a></li>
                             <li><a href="{{ route('home') }}">Retours/Échanges</a></li>
                             <li><a href="{{ route('home') }}">FAQs</a></li>
                             <li><a href="{{ route('home') }}">Support Produit</a></li>
@@ -256,22 +257,26 @@
                             <div class="col-lg-6 col-md-6">
                                 @foreach ($randomProducts as $index => $product)
                                     @if ($index % 2 != 0)
-                                    <div class="electronic_product_small">
-                                        <a class="item_image" href="{{ route('product', $product->id) }}">
-                                            <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_introuvable">
-                                        </a>
-                                        <div class="item_content">
-                                            <h4 class="item_title">
-                                                <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 14, '...') }}</a>
-                                            </h4>
-                                            <span class="item_price">{{ $product->price }} DH</span>
+                                        <div class="electronic_product_small">
+                                            <a class="item_image" href="{{ route('product', $product->id) }}">
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_introuvable">
+                                            </a>
+                                            <div class="item_content">
+                                                <h4 class="item_title">
+                                                    <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 14, '...') }}</a>
+                                                </h4>
+                                                <span class="item_price">{{ $product->price }} DH</span>
+                                            </div>
                                         </div>
-                                    </div>
                                     @endif
                                 @endforeach
                             </div>
                         </div>
                     </div>
+
+                   
+                    
+                    
                 </div>
 
             </div>
@@ -281,10 +286,11 @@
     <div class="footer_bottom text-center bg_black clearfix">
         <div class="container maxw_1600">
             <p class="copyright_text mb-0">©  2024
-			Tous droits réservés. <a href="{{ route('home') }}" class="author_link">MOBIDIGITECH</a> marketplace eCommerce. </p>
+            Tous droits réservés. <a href="{{ route('home') }}" class="author_link">MOBIDIGITECH</a> marketplace eCommerce. </p>
         </div>
     </div>
 </footer>
+<!-- footer_section - end -->
 	<!-- footer_section - end================================================== -->
 
        <!-- fraimwork - jquery include -->

@@ -24,8 +24,10 @@ class CartController extends Controller
     public function index(){
         $categories = Category::all();
         $cart = $this->getUserCart();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
 
-        return view('user.cart.cart', compact('categories', 'cart'));
+
+        return view('user.cart.cart', compact('categories', 'cart', 'randomProducts'));
     }
 
     public function addToCart(Request $request, $id){
