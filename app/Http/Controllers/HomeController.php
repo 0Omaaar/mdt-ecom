@@ -38,6 +38,8 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $products = Product::query();
         $brands = Brand::all();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
+
 
         $cart = $this->getUserCart();
 
@@ -82,7 +84,7 @@ class HomeController extends Controller
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 
-        return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart'));
+        return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart', 'randomProducts'));
     }
 
 
@@ -90,10 +92,12 @@ class HomeController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $product = Product::findOrFail($id);
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
+
 
         $cart = $this->getUserCart();
 
-        return view('user.product', compact('categories', 'product', 'subcategories', 'cart'));
+        return view('user.product', compact('categories', 'product', 'subcategories', 'cart', 'randomProducts'));
     }
 
 
@@ -110,10 +114,12 @@ class HomeController extends Controller
     public function orders(){
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', $user_id)->latest()->get();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
+
 
         $cart = $this->getUserCart();
         $categories = Category::all();
 
-        return view('user.orders.index', compact('orders', 'cart', 'categories'));
+        return view('user.orders.index', compact('orders', 'cart', 'categories', 'randomProducts'));
     }
 }
