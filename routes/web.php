@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageContentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SettingsContoller;
 use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -28,9 +29,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('review.store');
-
-
-
 Route::get('/contact', function () {
     $categories = Category::all();
     $subcategories = SubCategory::all();
@@ -38,7 +36,7 @@ Route::get('/contact', function () {
     $brands = Brand::all();
     $randomProducts = Product::inRandomOrder()->take(6)->get();
     return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts')); // Adjust the path as necessary
-})->name('contact'); 
+})->name('contact');
 
 
 
@@ -94,10 +92,6 @@ Route::get('/admin/index', function() {
         'totalOrdersAnnulee'
     ));
 })->middleware('isAdmin')->name('admin.index');
-
- 
-
-
 
 
 //categories
@@ -195,3 +189,8 @@ Route::get('/admin/manage/content/index', [ManageContentController::class, 'inde
     Route::get('/admin/manage/content/dayDeals', [ManageContentController::class, 'dayDealsProducts'])->middleware('auth', 'isAdmin')->name('admin.content.dayDeals');
     Route::post('/offer1/upload', [ManageContentController::class, 'uploadOffre1'])->name('offre1.upload');
     Route::delete('/offer1/delete', [ManageContentController::class, 'deleteOffre1'])->name('offre1.delete');
+
+
+Route::get('/admin/settings/index', [SettingsContoller::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.settings.index');
+Route::put('/admin/settings/updateInfos', [SettingsContoller::class, 'updateAdminInfos'])->middleware('auth', 'isAdmin')->name('admin.settings.updateInfos');
+Route::post('/admin/settings/updateEmailNotifs', [SettingsContoller::class, 'updateEmailNotifs'])->middleware('auth', 'isAdmin')->name('admin.settings.updateEmailNotifs');
