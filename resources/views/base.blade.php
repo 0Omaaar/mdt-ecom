@@ -45,6 +45,10 @@
 
 	<body class="home_electronic">
 
+    @php
+        use Illuminate\Support\Str;
+    @endphp
+
 
 		<!-- backtotop - start -->
 		<div id="thetop"></div>
@@ -191,9 +195,9 @@
                         </div>
 
                         <ul class="circle_social_links ul_li clearfix">
-                            <li><a href="https://www.facebook.com/mobiditech2022!"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://www.instagram.com/mobidigitech2022/!"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a href="https://www.facebook.com/mobidigitech"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.instagram.com/mobidigitech"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="{{ route('home') }}"><i class="fab fa-pinterest-p"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -202,13 +206,9 @@
                     <div class="footer_widget footer_useful_links clearfix">
                         <h3 class="footer_widget_title text-white text-uppercase">TROUVEZ-LE VITE</h3>
                         <ul class="ul_li_block clearfix">
-                            <li><a href="#!">Ordinateurs Portables, Ultrabooks & Ordinateurs</a></li>
-                            <li><a href="#!">Appareils Photo & Photographie</a></li>
-                            <li><a href="#!">Smartphones & Tablettes</a></li>
-                            <li><a href="#!">Jeux Vidéo & Consoles</a></li>
-                            <li><a href="#!">Télévision & Audio</a></li>
-                            <li><a href="#!">Gadgets</a></li>
-                            <li><a href="#!">Électronique Automobile & GPS</a></li>
+                            @foreach ($categories as $category)
+                                <li><a href="{{ route('products', 'category=' . $category->id) }}">{{ $category->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -217,99 +217,63 @@
                     <div class="footer_widget footer_useful_links clearfix">
                         <h3 class="footer_widget_title text-white text-uppercase">SERVICE CLIENT</h3>
                         <ul class="ul_li_block clearfix">
-                            <li><a href="#!">Mon Compte</a></li>
-                            <li><a href="#!">Suivre ma Commande</a></li>
-                            <li><a href="#!">Liste de Souhaits</a></li>
-                            <li><a href="#!">Service Client</a></li>
-                            <li><a href="#!">Retours/Échanges</a></li>
-                            <li><a href="#!">FAQs</a></li>
-                            <li><a href="#!">Support Produit</a></li>
+                            @if (\Auth::check())
+                                <li><a href="{{ route('my-orders') }}">Mes Commandes</a></li>
+                            @else
+                                <li><a href="{{ route('login') }}">Mes Commandes</a></li>
+                            @endif
+                            <li class="cart_btn"><a href="javascript:void(0)">Mon Panier</a></li>
+                            <li><a href="{{ route('home') }}">Service Client</a></li>
+                            <li><a href="{{ route('home') }}">Retours/Échanges</a></li>
+                            <li><a href="{{ route('home') }}">FAQs</a></li>
+                            <li><a href="{{ route('home') }}">Support Produit</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-12">
                     <div class="footer_widget footer_recent_post">
-                        <h3 class="footer_widget_title text-white text-uppercase mb-0">Sélection Hebdomadaire</h3>
+                        <h3 class="footer_widget_title text-white text-uppercase mb-0">Sélection pour Vous</h3>
                         <div class="row justify-content-lg-between">
                             <div class="col-lg-6 col-md-6">
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_27.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!">Serie 8 </a>
-                                        </h4>
-                                        <span class="item_price">600.00 DH</span>
-                                    </div>
-                                </div>
-
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_31.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!">playstation 4</a>
-                                        </h4>
-                                        <span class="item_price">2500.00 DH</span>
-                                    </div>
-                                </div>
-
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_24.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!">Air Pods Pro 2eme </a>
-                                        </h4>
-                                        <span class="item_price">300.00 DH</span>
-                                    </div>
-                                </div>
+                                @foreach ($randomProducts as $index => $product)
+                                    @if ($index % 2 == 0)
+                                        <div class="electronic_product_small">
+                                            <a class="item_image" href="{{ route('product', $product->id) }}">
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_introuvable">
+                                            </a>
+                                            <div class="item_content">
+                                                <h4 class="item_title">
+                                                    <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 14, '...') }}</a>
+                                                </h4>
+                                                <span class="item_price">{{ $product->price }} DH</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
 
                             <div class="col-lg-6 col-md-6">
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_23.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!">Iphone XS</a>
-                                        </h4>
-                                        <span class="item_price">3000.00 DH </span>
+                                @foreach ($randomProducts as $index => $product)
+                                    @if ($index % 2 != 0)
+                                    <div class="electronic_product_small">
+                                        <a class="item_image" href="{{ route('product', $product->id) }}">
+                                            <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_introuvable">
+                                        </a>
+                                        <div class="item_content">
+                                            <h4 class="item_title">
+                                                <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 14, '...') }}</a>
+                                            </h4>
+                                            <span class="item_price">{{ $product->price }} DH</span>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_26.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!"> Pc Portable DEEl</a>
-                                        </h4>
-                                        <span class="item_price">3500.00 DH</span>
-                                    </div>
-                                </div>
-
-                                <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
-                                        <img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_introuvable">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="item_title">
-                                            <a href="#!">playstation 4</a>
-                                        </h4>
-                                        <span class="item_price">3100.00 DH</span>
-                                    </div>
-                                </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -317,7 +281,7 @@
     <div class="footer_bottom text-center bg_black clearfix">
         <div class="container maxw_1600">
             <p class="copyright_text mb-0">©  2024
-			Tous droits réservés. <a href="#!" class="author_link">MOBIDIGITECH</a> marketplace eCommerce. </p>
+			Tous droits réservés. <a href="{{ route('home') }}" class="author_link">MOBIDIGITECH</a> marketplace eCommerce. </p>
         </div>
     </div>
 </footer>

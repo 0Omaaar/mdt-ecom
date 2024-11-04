@@ -3152,8 +3152,9 @@ button {
 .electronic_header .header_top {
   display: flex;
   padding: 30px 0px;
-  min-height: 180px;
+  /* min-height: 180px; */
   align-items: center;
+  height: 99px;
 }
 .electronic_header .header_bottom {
   display: flex;
@@ -4518,7 +4519,7 @@ button {
   font-weight: 500;
 }
 .electronic_footer .footer_widget_area {
-  padding: 80px 0px;
+  padding: 29px 0px;
   background-color: #171717;
 }
 .electronic_footer .footer_electronic_hotline h4 {
