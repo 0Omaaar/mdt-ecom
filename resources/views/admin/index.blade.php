@@ -39,6 +39,7 @@
             cursor: pointer;
         }
     </style>
+
 @endsection
 
 @php

@@ -1,6 +1,7 @@
 <?php
 include_once 'auth.php';
 
+use App\Events\NewOrder;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,7 @@ Route::get('/admin/index', function() {
     ));
 })->middleware('isAdmin')->name('admin.index');
 
+ 
 
 
 

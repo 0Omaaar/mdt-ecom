@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewOrder;
 use App\Models\Cart;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -54,6 +56,16 @@ class OrderController extends Controller
 
                 $order->save();
 
+
+                $notification = new Notification();
+                $notification->subject = 'new-order';
+                $notification->content = 'Nouvelle Commande, Cliquer ici pour plus de Détails !';
+                $notification->subject_id = $order->id;
+                $notification->save();
+
+                event(new NewOrder($order->id));
+
+
                 //order items
                 if($cart->items()->count() > 0){
                     foreach($cart->items as $item){
@@ -78,6 +90,8 @@ class OrderController extends Controller
             }
 
             DB::commit();
+
+
             return redirect()->route('order.completed');
         }catch(\Exception $e){
             DB::rollBack();
