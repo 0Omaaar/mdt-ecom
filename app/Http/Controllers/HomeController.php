@@ -27,8 +27,9 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
         $cart = $this->getUserCart();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
 
-        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart'));
+        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart', 'randomProducts'));
     }
 
     public function products(Request $request)

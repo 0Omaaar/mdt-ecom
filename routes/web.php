@@ -28,6 +28,13 @@ Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('revi
 
 
 
+Route::get('/contact', function () {
+    return view('user.contact'); // Adjust the path as necessary
+});
+
+
+
+
 // ADMIN ROUTE
 Route::get('/admin/index', function() {
     $totalProducts = Product::count();
