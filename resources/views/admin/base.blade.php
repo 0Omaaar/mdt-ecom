@@ -159,7 +159,7 @@
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
                                         class="ft-user"></i> Edit Profile</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
-                                    href="{{ route('signout') }}"><i class="ft-setting"></i> Paramètres</a>
+                                    href={{ route('admin.settings.index') }}><i class="ft-server"></i> Paramètres</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
                                     href="{{ route('signout') }}"><i class="ft-power"></i> Logout</a>
                             </div>
@@ -245,6 +245,14 @@
                         <li><a class="menu-item" href="{{ route('admin.content.dayDeals') }}"><i></i><span>Deals Du Jour</span></a>
                         </li>
                     </ul>
+                </li>
+
+                <li class=" navigation-header"><span data-i18n="User Interface">Settings</span><i
+                    class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
+                    data-original-title="User Interface"></i>
+                </li>
+                <li class=" nav-item"><a href="{{ route('admin.settings.index') }}"><i class="la la-server"></i><span class="menu-title"
+                            data-i18n="Components">Configuration</span></a>
                 </li>
             </ul>
         </div>
