@@ -34,7 +34,7 @@
 
                 <ul class="btns_group ul_li_block clearfix">
                     <li><a href="{{ route('cart.index') }}">Voir le Panier</a></li>
-                    <li><a href="#">Passer à la Caisse</a></li>
+                    <li><a href="{{ route('checkout.page') }}">Passer à la Caisse</a></li>
                 </ul>
             @else
                 <p style="text-align: center">Votre Panier est Vide.</p>

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->decimal('shipping_cost', 10, 2)->default(0);
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewOrder;
+use App\Mail\NotificationMail;
 use App\Models\Cart;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -57,6 +60,7 @@ class OrderController extends Controller
                 $order->save();
 
 
+                //send notification to admin's dash
                 $notification = new Notification();
                 $notification->subject = 'new-order';
                 $notification->content = 'Nouvelle Commande, Cliquer ici pour plus de Détails !';
@@ -64,7 +68,6 @@ class OrderController extends Controller
                 $notification->save();
 
                 event(new NewOrder($order->id));
-
 
                 //order items
                 if($cart->items()->count() > 0){
@@ -90,6 +93,10 @@ class OrderController extends Controller
             }
 
             DB::commit();
+
+            //send mail notification
+            $adminEmail = Setting::where('subject', 'email_notifications')->first();
+            Mail::to($adminEmail->content)->queue(new NotificationMail('notification-order', $adminEmail, 'Nouvelle Commande'));
 
 
             return redirect()->route('order.completed');

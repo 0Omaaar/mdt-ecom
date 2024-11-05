@@ -88,17 +88,19 @@
 
                     @if ($cart && $cart->items->count() > 0)
 
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="checkout_collapse_content">
-                                    <div class="wrap_heade">
-                                        <p class="mb-0">
-                                            Client existant ? <a href="{{ route('login') }}">Cliquez ici pour vous connecter</a>
-                                        </p>
+                        @if (!Auth::check())
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout_collapse_content">
+                                        <div class="wrap_heade">
+                                            <p class="mb-0">
+                                                Client existant ? <a href="{{ route('login') }}">Cliquez ici pour vous connecter</a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <form action="{{ route('order.create') }}" method="POST">
                             @csrf
                             <div class="billing_form mb_50">
@@ -109,14 +111,14 @@
                                             <div class="col-lg-6">
                                                 <div class="form_item">
                                                     <span class="input_title">Prénom<sup>*</sup></span>
-                                                    <input type="text" name="prenom">
+                                                    <input type="text" name="prenom" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-6">
                                                 <div class="form_item">
                                                     <span class="input_title">Nom<sup>*</sup></span>
-                                                    <input type="text" name="nom">
+                                                    <input type="text" name="nom" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,31 +132,27 @@
 
                                         <div class="form_item">
                                             <span class="input_title">Adresse<sup>*</sup></span>
-                                            <input type="text" name="adresse" placeholder="العنوان">
+                                            <input type="text" name="adresse" placeholder="العنوان" required>
                                         </div>
 
                                         <div class="form_item">
                                             <span class="input_title">Ville<sup>*</sup></span>
-                                            <input type="text" name="ville">
+                                            <input type="text" name="ville" required>
                                         </div>
 
                                         <div class="form_item">
                                             <span class="input_title">CIN<sup>*</sup></span>
-                                            <input type="text" name="cin" placeholder="رقم بطاقة التعريف الوطنية">
+                                            <input type="text" name="cin" placeholder="رقم بطاقة التعريف الوطنية" required>
                                         </div>
 
                                         <div class="form_item">
                                             <span class="input_title">Téléphone<sup>*</sup></span>
-                                            <input type="tel" name="phone">
+                                            <input type="tel" name="phone" required>
                                         </div>
 
                                         <div class="form_item">
                                             <span class="input_title">Adresse E-mail<sup>*</sup></span>
-                                            <input type="email" name="email" placeholder="عنوان البريد الإلكتروني">
-                                        </div>
-
-                                        <div class="checkbox_item">
-                                            <label for="account_create_checkbox"><input id="account_create_checkbox" type="checkbox"> Créer un Compte ?</label>
+                                            <input type="email" name="email" placeholder="عنوان البريد الإلكتروني" required>
                                         </div>
 
                                         <hr>

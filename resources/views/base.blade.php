@@ -274,9 +274,9 @@
                         </div>
                     </div>
 
-                   
-                    
-                    
+
+
+
                 </div>
 
             </div>
@@ -363,12 +363,33 @@
                 const selectedCategoryId = selectElement.value;
 
                 if (selectedCategoryId) {
-                    let url = new URL(window.location.href + 'products');
+                    let currentPath = window.location.pathname;
+                    let url;
+
+                    if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath === '/checkout'
+                        || currentPath === '/order-completed' || currentPath === '/my-orders') {
+                        if (!currentPath.includes('/products')) {
+                            url = new URL(window.location.origin + '/products');
+                        } else {
+                            url = new URL(window.location.href);
+                        }
+                    } else if (currentPath.includes('/product/')) {
+                        if (!currentPath.includes('/products')) {
+                            url = new URL(window.location.origin + '/products');
+                        } else {
+                            url = new URL(window.location.href);
+                        }
+                    } else {
+                        url = new URL(window.location.href);
+                    }
+
                     url.searchParams.set('category', selectedCategoryId);
+
                     window.location.href = url.toString();
                 }
             }
         </script>
+
 
         <script>
             let input = document.getElementById('search');
