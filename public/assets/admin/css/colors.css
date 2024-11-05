@@ -440,12 +440,12 @@ input:focus ~ .bg-primary {
   background-color: #666ee8 !important; }
 
 .btn-primary {
-  border-color: #666ee8 !important;
-  background-color: #666ee8 !important;
+  border-color: #0063D1 !important;
+  background-color: #0063D1 !important;
   color: #FFFFFF; }
   .btn-primary:hover {
-    border-color: #7c83eb !important;
-    background-color: #7c83eb !important;
+    border-color: #0d19b9 !important;
+    background-color: #0d19b9 !important;
     color: #FFF !important; }
   .btn-primary:focus, .btn-primary:active {
     border-color: #232fde !important;

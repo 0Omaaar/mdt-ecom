@@ -53,15 +53,7 @@
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right">
-                        <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Action</button>
-                        <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i
-                                    class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item"
-                                href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item"
-                                href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
-                                    class="fa fa-cog mr-1"></i> Settings</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -79,98 +71,84 @@
                                             Categorie</button>
 
                                         @include('admin.subCategories.add')
-                                        <span class="dropdown">
-                                            <button id="btnSearchDrop1" type="button" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="true"
-                                                class="btn btn-warning btn-sm dropdown-toggle dropdown-menu-right"><i
-                                                    class="ft-download-cloud white"></i></button>
-                                            <span aria-labelledby="btnSearchDrop1"
-                                                class="dropdown-menu mt-1 dropdown-menu-right">
-                                                <a href="#" class="dropdown-item"><i class="la la-calendar"></i>
-                                                    Due
-                                                    Date</a>
-                                                <a href="#" class="dropdown-item"><i class="la la-random"></i>
-                                                    Priority </a>
-                                                <a href="#" class="dropdown-item"><i class="la la-bar-chart"></i>
-                                                    Balance Due</a>
-                                                <a href="#" class="dropdown-item"><i class="la la-user"></i> Assign
-                                                    to</a>
-                                            </span>
-                                        </span>
-                                        <button class="btn btn-success btn-sm"><i class="ft-settings white"></i></button>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="card-content">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table id="invoices-list"
-                                            class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th>N</th>
-                                                    <th>Image</th>
-                                                    <th>Nom</th>
-                                                    <th>Categorie</th>
-                                                    {{-- <th>Nombre Produits</th> --}}
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($subCategories as $subCategory)
-                                                    <tr>
-                                                        <td>{{ $loop->index + 1 }}</td>
-                                                        <td>
-                                                            @if($subCategory->image != null)
-                                                                <img src="{{ asset('images/subCategories/' . $subCategory->image) }}"
-                                                                style="border-radius: 4%"
-                                                                alt="{{ $subCategory->name }}" width="50" height="50">
-                                                            @else
-                                                                <span style="color: rgb(234, 109, 109)">Aucune image</span>
-                                                            @endif</td>
-                                                        <td>{{ $subCategory->name }}</td>
-                                                        <td><span class="badge badge-dark badge-lg">{{ $subCategory->category->name }}</span></td>
-                                                        {{-- <td><span
-                                                                class="badge badge-success badge-lg">{{ $subCategory->products()->count() }}</span>
-                                                        </td> --}}
-                                                        <td>
-                                                            <span class="dropdown">
-                                                                <button id="btnSearchDrop2" type="button"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="true"
-                                              f                      class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
-                                                                        class="ft-settings"></i></button>
-                                                                <span aria-labelledby="btnSearchDrop2"
-                                                                    class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <button data-toggle="modal" data-target="#editSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
-                                                                        class="la la-pencil"></i> Modifier</button>
-                                                                    <button data-toggle="modal" data-target="#showCategory{{ $subCategory->id }}" class="dropdown-item"><i
-                                                                        class="la la-eye"></i> Voir Categorie</button>
-                                                                    <a href="#" class="dropdown-item"><i
-                                                                                class="la la-eye"></i> Voir Produits</a>
-                                                                    <button data-toggle="modal" data-target="#deleteSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
-                                                                            class="la la-trash"></i> Supprimer</button>
-                                                                </span>
-                                                            </span>
-                                                        </td>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="invoices-list"
+                   class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
+                <thead>
+                    <tr>
+                        <th>N</th>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Categorie</th>
+                        {{-- <th>Nombre Produits</th> --}}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($subCategories as $subCategory)
+                        <tr>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>
+                                @if($subCategory->image != null)
+                                    <img src="{{ asset('images/subCategories/' . $subCategory->image) }}"
+                                         style="border-radius: 4%"
+                                         alt="{{ $subCategory->name }}" width="50" height="50">
+                                @else
+                                    <span style="color: rgb(234, 109, 109)">Aucune image</span>
+                                @endif
+                            </td>
+                            <td>{{ $subCategory->name }}</td>
+                            <td>
+                                <span class="badge badge-dark badge-lg" style="background-color: #FAB003; color: #fff;">{{ $subCategory->category->name }}</span>
+                            </td>
+                            {{-- <td><span
+                                    class="badge badge-success badge-lg">{{ $subCategory->products()->count() }}</span>
+                            </td> --}}
+                            <td>
+                                <span class="dropdown">
+                                <button id="btnSearchDrop2" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true"
+                                        class="btn dropdown-toggle dropdown-menu-right" style="background-color: #0063D1; color: white;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#0063D1'">
+                                            <i class="ft-settings"></i>
+                                </button>
+                                    <span aria-labelledby="btnSearchDrop2"
+                                          class="dropdown-menu mt-1 dropdown-menu-right">
+                                        <button data-toggle="modal" data-target="#editSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
+                                            class="la la-pencil"></i> Modifier</button>
+                                        <button data-toggle="modal" data-target="#showCategory{{ $subCategory->id }}" class="dropdown-item"><i
+                                            class="la la-eye"></i> Voir Categorie</button>
+                                        <a href="#" class="dropdown-item"><i
+                                                class="la la-eye"></i> Voir Produits</a>
+                                        <button data-toggle="modal" data-target="#deleteSubCategory{{ $subCategory->id }}" class="dropdown-item"><i
+                                                class="la la-trash"></i> Supprimer</button>
+                                    </span>
+                                </span>
+                            </td>
 
-                                                        {{-- Delete Sub Category Modal --}}
-                                                        @include('admin.subCategories.delete')
+                            {{-- Delete Sub Category Modal --}}
+                            @include('admin.subCategories.delete')
 
-                                                        {{-- Edit Sub Category Modal --}}
-                                                        @include('admin.subCategories.edit')
+                            {{-- Edit Sub Category Modal --}}
+                            @include('admin.subCategories.edit')
 
-                                                        {{-- Show Category Modal --}}
-                                                        @include('admin.subCategories.showCategory')
-                                                    </tr>
-                                                @endforeach
+                            {{-- Show Category Modal --}}
+                            @include('admin.subCategories.showCategory')
+                        </tr>
+                    @endforeach
 
-                                            </tbody>
+                </tbody>
 
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+            </table>
+        </div>
+    </div>
+</div>
                         </div>
                     </div>
                 </section>

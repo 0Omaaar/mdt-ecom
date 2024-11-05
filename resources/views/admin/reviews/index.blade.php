@@ -134,7 +134,7 @@
                                                                 <button id="btnSearchDrop2" type="button"
                                                                     data-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="true"
-                                              f                      class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
+                                                                    class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
