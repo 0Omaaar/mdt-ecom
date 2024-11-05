@@ -5,14 +5,9 @@
 		<main>
 
 
-			
+
 			<!-- sidebar mobile menu & sidebar cart - end
 			================================================== -->
-
-
-			
-			
-			
 
 			<!-- map_section - start
 			================================================== -->
@@ -30,71 +25,72 @@
 					<div class="row justify-content-lg-between">
 
                     <div class="col-lg-5">
-    <div class="main_contact_content">
-        <h3 class="title_text mb_15">Nous Contacter</h3>
-        <p class="mb_50">
-            Si vous êtes intéressé à travailler avec nous, veuillez nous contacter.
-        </p>
-        <ul class="main_contact_info ul_li_block clearfix">
-            <li>
-                <span class="icon">
-                    <i class="fal fa-map-marked-alt"></i>
-                </span>
-                <p class="mb-0">
-                    
-                Adresse
-                Rue Alkitres 643/84 Magasin N 2 Guich Loudaya
-                </p>
-            </li>
-            <li>
-                <span class="icon">
-                    <i class="fal fa-phone-volume"></i>
-                </span>
-                <p class="mb-0">080-8576413 </p>
-            </li>
-            <li>
-                <span class="icon">
-                    <i class="fal fa-paper-plane"></i>
-                </span>
-                <p class="mb-0">sales@mobidigitech.com</p>
-            </li>
-        </ul>
-    </div>
-</div>
+                <div class="main_contact_content">
+                    <h3 class="title_text mb_15">Nous Contacter</h3>
+                    <p class="mb_50">
+                        Si vous êtes intéressé à travailler avec nous, veuillez nous contacter.
+                    </p>
+                    <ul class="main_contact_info ul_li_block clearfix">
+                        <li>
+                            <span class="icon">
+                                <i class="fal fa-map-marked-alt"></i>
+                            </span>
+                            <p class="mb-0">
 
-<div class="col-lg-7">
-    <div class="main_contact_form">
-        <h3 class="title_text mb_30">Retour d'Information</h3>
-        <form action="#">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form_item">
-                        <input type="text" name="name" placeholder="Votre Nom">
+                            Adresse
+                            Rue Alkitres 643/84 Magasin N 2 Guich Loudaya
+                            </p>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <i class="fal fa-phone-volume"></i>
+                            </span>
+                            <p class="mb-0">080-8576413 </p>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <i class="fal fa-paper-plane"></i>
+                            </span>
+                            <p class="mb-0">sales@mobidigitech.com</p>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="main_contact_form">
+                        <h3 class="title_text mb_30">Retour d'Information</h3>
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form_item">
+                                        <input type="text" name="name" placeholder="Votre Nom">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form_item">
+                                        <input type="email" name="email" placeholder="Votre Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form_item">
+                                        <input type="text" name="subject" placeholder="Objet">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form_item">
+                                <textarea name="message" placeholder="Votre Message"></textarea>
+                            </div>
+                            <button type="submit" class="custom_btn bg_default_red text-uppercase">Envoyer</button>
+                        </form>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form_item">
-                        <input type="email" name="email" placeholder="Votre Email">
-                    </div>
-                </div>
 
-                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form_item">
-                        <input type="text" name="subject" placeholder="Objet">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form_item">
-                <textarea name="message" placeholder="Votre Message"></textarea>
-            </div>
-            <button type="submit" class="custom_btn bg_default_red text-uppercase">Voir les projets</button>
-        </form>
-    </div>
-</div>
-
-						
 					</div>
 				</div>
 			</section>

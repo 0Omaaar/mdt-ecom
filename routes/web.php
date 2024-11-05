@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
@@ -29,14 +30,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('review.store');
-Route::get('/contact', function () {
-    $categories = Category::all();
-    $subcategories = SubCategory::all();
-    $products = Product::query();
-    $brands = Brand::all();
-    $randomProducts = Product::inRandomOrder()->take(6)->get();
-    return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts')); // Adjust the path as necessary
-})->name('contact');
+Route::get('/contact',[ContactController::class, 'index'])->name('contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 
 
@@ -156,13 +151,12 @@ Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity']
 Route::get('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
 Route::get('/order-completed', [CheckoutController::class, 'orderCompleted'])->name('order.completed');
 
-
 //get user orders page
 Route::get('/my-orders', [HomeController::class, 'orders'])->middleware('auth')->name('my-orders');
 
-
 //orders
 Route::post('/create/order', [OrderController::class, 'createOrder'])->name('order.create');
+
 
 //manage content
 Route::get('/admin/manage/content/index', [ManageContentController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.content.index');

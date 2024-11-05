@@ -43,7 +43,7 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Toutes les Commandes</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Liste Commandes</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -57,22 +57,12 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="content-body">
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-head">
-                                <div class="card-header">
-                                    <h4 class="card-title">Commandes</h4>
-                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                                    <div class="heading-elements">
-
-                                    
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -81,12 +71,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>N</th>
-                                                    <th>ID Commande</th>
+                                                    <th>IDC</th>
                                                     <th>Statut</th>
                                                     <th>Payment</th>
                                                     <th>Client</th>
-                                                    <th>Type Livraison</th>
-                                                    <th>Nombre Produits</th>
+                                                    <th>Type Liv</th>
+                                                    <th>Nombre Prod</th>
                                                     <th>Date Commande</th>
                                                     <th>Actions</th>
                                                 </tr>

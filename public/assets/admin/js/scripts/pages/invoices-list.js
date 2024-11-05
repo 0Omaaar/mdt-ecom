@@ -19,7 +19,7 @@ $(document).ready(function() {
         //     { "visible": false, "targets": 10 },
         // ],
         // "order": [[ 2, 'desc' ]],
-        "displayLength": 25,
+        "displayLength": 10,
         // "drawCallback": function ( settings ) {
         //     var api = this.api();
         //     var rows = api.rows( {page:'current'} ).nodes();

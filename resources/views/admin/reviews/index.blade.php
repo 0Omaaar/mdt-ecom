@@ -51,21 +51,12 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="content-body">
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-head">
-                                <div class="card-header">
-                                    <h4 class="card-title">Avis</h4>
-                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="table-responsive">

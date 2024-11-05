@@ -49,7 +49,7 @@
                         <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">Nouvelle Commande</h6>
+                        <h6 class="media-heading">Nouvelle Notification</h6>
                         <small>
                             <time class="media-meta text-muted">${new Date().toLocaleTimeString()}</time>
                         </small>
@@ -135,6 +135,8 @@
                                                 <h6 class="media-heading"
                                                 @if ($notification->subject == 'new-order')
                                                     onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
+                                                @elseif ($notification->subject == 'new-contact')
+                                                    onclick="window.location.href='#'"
                                                 @endif
                                                 >{{ $notification->content }}</h6>
                                                 <small>

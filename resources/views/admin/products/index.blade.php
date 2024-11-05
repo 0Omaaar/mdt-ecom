@@ -31,6 +31,10 @@
     <!-- END: Custom CSS-->
 @endsection
 @section('content')
+
+        @php
+            use Illuminate\Support\Str;
+        @endphp
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -51,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="content-body">
                 <section class="row">
@@ -66,9 +70,9 @@
                                                 class="ft-plus white"></i> Ajouter Un Produit</a>
 
 
-                                        
-                                        
-                                        
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +106,7 @@
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
                                                             @endif</td>
-                                                        <td>{{ $product->name }}</td>
+                                                        <td>{{ Str::limit($product->name, 30, '...') }}</td>
                                                         <td><span class="badge badge-dark badge-lg">{{ $product->sku }}</span></td>
                                                         <td>{{ $product->price }}</td>
                                                         <td><span class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}"
