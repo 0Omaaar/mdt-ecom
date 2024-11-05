@@ -81,7 +81,11 @@
 												{{ $slider1->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ $slider1->content ? route('product', $slider1->content) : route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider1->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @if ($slider1->content)
+												    <a href="{{ route('product', ['id' => $slider1->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider1->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @else
+                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider1->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @endif
 											</div>
 										</div>
 									</div>
@@ -96,8 +100,12 @@
 												{{ $slider2->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ $slider2->content ? route('product', $slider2->content) : route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider2->optional_content_3 ?? 'Explorer maintenant' }}</a>
-											</div>
+                                                @if ($slider2->content)
+                                                    <a href="{{ route('product', ['id' => $slider2->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider2->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @else
+                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider2->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @endif
+                                            </div>
 										</div>
 									</div>
 
@@ -111,8 +119,12 @@
 												{{ $slider3->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-												<a href="{{ $slider3->content ? route('product', $slider3->content) : route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider3->optional_content_3 ?? 'Explorer maintenant' }}</a>
-											</div>
+                                                @if ($slider3->content)
+                                                    <a href="{{ route('product', ['id' => $slider3->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider3->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @else
+                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider3->optional_content_3 ?? 'Explorer maintenant' }}</a>
+                                                @endif
+                                            </div>
 										</div>
 									</div>
 								</div>
