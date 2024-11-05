@@ -76,16 +76,12 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_01.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">{{ $slider1->optional_content_1 ?? 'Le cadeau que vous souhaitez' }}</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												{{ $slider1->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                                @if ($slider1 && $slider1->content)
-												    <a href="{{ route('product', ['id' => $slider1->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider1->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @else
-                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider1->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @endif
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
 											</div>
 										</div>
 									</div>
@@ -95,17 +91,13 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_02.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">{{ $slider2->optional_content_1 ?? 'Le cadeau que vous souhaitez' }}</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												{{ $slider2->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                                @if ($slider2 && $slider2->content)
-                                                    <a href="{{ route('product', ['id' => $slider2->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider2->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @else
-                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider2->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @endif
-                                            </div>
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+											</div>
 										</div>
 									</div>
 
@@ -114,17 +106,13 @@
 											<img src="{{asset('assets/user/images/slider/electronic/img_03.png')}}" alt="image_not_found">
 										</div>
 										<div class="slider_content">
-											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">{{ $slider3->optional_content_1 ?? 'Le cadeau que vous souhaitez' }}</h3>
+											<h3 class="text-uppercase" data-animation="fadeInUp" data-delay=".6s">Le cadeau que vous souhaitez</h3>
 											<p data-animation="fadeInUp" data-delay=".8s">
-												{{ $slider3->optional_content_2 ?? 'De grands pcs dans des designs incroyablement fins qui tiennent dans votre main.' }}
+												De grands écrans dans des designs incroyablement fins qui tiennent dans votre main.
 											</p>
 											<div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                                @if ($slider3 && $slider3->content)
-                                                    <a href="{{ route('product', ['id' => $slider3->content]) }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider3->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @else
-                                                    <a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">{{ $slider3->optional_content_3 ?? 'Explorer maintenant' }}</a>
-                                                @endif
-                                            </div>
+												<a href="{{ route('products') }}" class="custom_btn btn_sm btn_border border_electronic">Explorer maintenant</a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -137,31 +125,41 @@
 						</div>
 
 						<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-							<div class="advertisement_image mb_30">
-								<a
-                                    @if ($offer1)
-                                        href="{{ route('product', $offer1->content) }}"
-                                    @else
-                                        href="#"
-                                    @endif
-                                >
-									<img src="{{asset('assets/user/images/offer/electronic/img_02.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-							<div class="advertisement_image mt-2">
-								<a
-                                    @if ($offer2)
-                                        href="{{ route('product', $offer2->content) }}"
-                                    @else
-                                        href="#"
-                                    @endif
-                                >
-									<img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
-								</a>
-							</div>
-						</div>
-					</div>
+    <div class="advertisement_image mb_30 image-container">
+        <a
+            @if ($offer1)
+                href="{{ route('product', $offer1->content) }}"
+            @else
+                href="#"
+            @endif
+        >
+            <img src="{{asset('assets/user/images/offer/electronic/img_02.jpg')}}" alt="image_not_found">
+        </a>
+    </div>
+    <div class="advertisement_image mt-2 image-container">
+        <a
+            @if ($offer2)
+                href="{{ route('product', $offer2->content) }}"
+            @else
+                href="#"
+            @endif
+        >
+            <img src="{{asset('assets/user/images/offer/electronic/img_03.jpg')}}" alt="image_not_found">
+        </a>
+    </div>
+</div>
+<style>
+	/* Zoom effect */
+.image-container img {
+    transition: transform 0.3s ease-in-out;
+}
 
+/* When hovered, zoom in the image */
+.image-container:hover img {
+    transform: scale(1.05) translateY(-5px); /* Slight zoom and upward shift */
+}
+
+</style>
 				</div>
 			</section>
 			<!-- slider_section - end
