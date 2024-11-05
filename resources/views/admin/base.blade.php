@@ -136,7 +136,7 @@
                                                 @if ($notification->subject == 'new-order')
                                                     onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
                                                 @elseif ($notification->subject == 'new-contact')
-                                                    onclick="window.location.href='#'"
+                                                    onclick="window.location.href='{{ route('admin.contact.index') }}'"
                                                 @endif
                                                 >{{ $notification->content }}</h6>
                                                 <small>
@@ -218,8 +218,15 @@
                                 >Toutes les Commandes</span></a>
                     </li>
                 </ul></li>
+                <li class=" navigation-header"><span data-i18n="Ecommerce">Clients</span><i
+                    class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
+                    data-original-title="Ecommerce"></i>
+                </li>
                 <li class=" nav-item"><a href="{{ route('admin.reviews.index') }}"><i class="la la-th-large"></i><span
                             class="menu-title" data-i18n="Shop">Avis</span></a>
+                </li>
+                <li class=" nav-item"><a href="{{ route('admin.contact.index') }}"><i class="la la-th-large"></i><span
+                            class="menu-title" data-i18n="Shop">Contact Messages</span></a>
                 </li>
 
                 <li class=" navigation-header"><span data-i18n="User Interface">Gestion Contenu</span><i

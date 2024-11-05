@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewOrder;
+use App\Mail\ContactMail;
 use App\Mail\NotificationMail;
+use App\Mail\ReviewMail;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Contact;
@@ -60,6 +62,37 @@ class ContactController extends Controller
             DB::rollback();
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Une erreur est survenue lors d ajout de votre Message !');
+        }
+    }
+
+
+    // admin functions
+
+    public function admin_index(){
+        $contacts = Contact::latest()->get();
+
+        return view('admin.contact.index', compact('contacts'));
+    }
+
+    public function answerContactWithMail(Request $request, $id){
+        $contact = Contact::findOrFail($id);
+
+        Mail::to($contact->email)->queue(new ContactMail($contact, $request->response));
+
+        $contact->status = 'Traité';
+        $contact->save();
+
+        return redirect()->back()->with('success', 'Votre Réponse est envoyée avec succès');
+    }
+
+    public function destroy($id){
+        try{
+            $contact = Contact::findOrfail($id);
+            $contact->delete();
+
+            return redirect()->back()->with('success', 'Message supprimé avec succès');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de suppression de message !');
         }
     }
 }
