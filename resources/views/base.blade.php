@@ -224,10 +224,10 @@
                                 <li><a href="{{ route('login') }}">Mes Commandes</a></li>
                             @endif
                             <li class="cart_btn"><a href="javascript:void(0)">Mon Panier</a></li>
-                            <li><a href="{{ route('contact') }}">Service Client</a></li>
-                            <li><a href="{{ route('home') }}">Retours/Échanges</a></li>
                             <li><a href="{{ route('home') }}">FAQs</a></li>
-                            <li><a href="{{ route('home') }}">Support Produit</a></li>
+                            <li><a href="{{ route('contact') }}">Retours/Échanges</a></li>
+                            <li><a href="{{ route('contact') }}">Support Produit</a></li>
+                            <li><a href="{{ route('contact') }}">Service Client</a></li>
                         </ul>
                     </div>
                 </div>
