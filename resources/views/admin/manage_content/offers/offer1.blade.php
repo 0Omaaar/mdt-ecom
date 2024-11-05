@@ -36,6 +36,10 @@
      href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
      rel="stylesheet"
      />
+
+    @php
+        use Illuminate\Support\Str;
+    @endphp
 @endsection
 @section('content')
 
@@ -81,20 +85,26 @@
                     </div>
                 </div>
 
-                {{-- <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                     <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
                         <h5 style="margin: 0; color: #333;">Sélectionner un Produit</h5>
                     </div>
                     <div class="card-content" style="padding: 20px;">
-                        <div class="card-body">
-                            <label for="product-select" style="color: #555; font-weight: bold;">Choisissez un produit :</label>
-                            <select id="product-select" class="form-control mb-3" onchange="redirectToProduct()">
-                                <option value="">-- Sélectionner un produit --</option>
-                                <option value="/product/1">Produit 1</option>
-                            </select>
-                        </div>
+                        <form action="{{ route('admin.content.offer1.path-product') }}" method="POST" id="product-form">
+                            @csrf
+                            <div class="card-body">
+                                <label for="product-select" style="color: #555; font-weight: bold;">Choisissez un produit :</label>
+                                <select id="product-select" class="form-control mb-3" name="product_id">
+                                    <option disabled selected>-- Sélectionner un produit --</option>
+                                    @foreach ($products as $product)
+                                        <option value="{{ $product->id }}">{{ Str::limit($product->name, 50, '...') }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                </div> --}}
+                </div>
+                
                 <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                     <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
                         <h5 style="margin: 0; color: #333;">Accès aux Détails</h5>
@@ -139,9 +149,15 @@
             maxFiles: 1,
         });
 
-
     </script>
 
+
+    <script>
+        document.getElementById('product-select').addEventListener('change', function() {
+            let form = document.getElementById('product-form');
+            form.submit();
+        });
+    </script>
 
 
     <script src="{{ asset('assets/admin/js/resizer.js') }}"></script>

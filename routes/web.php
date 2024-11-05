@@ -174,6 +174,7 @@ Route::get('/admin/manage/content/index', [ManageContentController::class, 'inde
     Route::delete('/slider2/delete', [ManageContentController::class, 'deleteS2'])->name('slider2.delete');
     Route::post('/slider3/upload', [ManageContentController::class, 'uploadS3'])->name('slider3.upload');
     Route::delete('/slider3/delete', [ManageContentController::class, 'deleteS3'])->name('slider3.delete');
+    Route::post('/admin/manage/sliders/upload-details/{id}', [ManageContentController::class, 'uploadSliderDetails'])->middleware('auth', 'isAdmin')->name('admin.manage.sliders.upload-details');
 
 
     //offers
@@ -181,8 +182,11 @@ Route::get('/admin/manage/content/index', [ManageContentController::class, 'inde
     Route::get('/admin/manage/content/offer2', [ManageContentController::class, 'offer2'])->middleware('auth', 'isAdmin')->name('admin.content.offer2');
     Route::post('/offer1/upload', [ManageContentController::class, 'uploadOffre1'])->name('offre1.upload');
     Route::delete('/offer1/delete', [ManageContentController::class, 'deleteOffre1'])->name('offre1.delete');
+    Route::post('/admin/offer1/path-product', [ManageContentController::class, 'uploadPathProductOffer1'])->middleware('auth', 'isAdmin')->name('admin.content.offer1.path-product');
     Route::post('/offer2/upload', [ManageContentController::class, 'uploadOffre2'])->name('offre2.upload');
     Route::delete('/offer2/delete', [ManageContentController::class, 'deleteOffre2'])->name('offre2.delete');
+    Route::post('/admin/offer2/path-product', [ManageContentController::class, 'uploadPathProductOffer2'])->middleware('auth', 'isAdmin')->name('admin.content.offer2.path-product');
+
 
 
     //day deals

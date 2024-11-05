@@ -95,6 +95,50 @@
                         </div>
 
                         <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                            <form action="{{ route('admin.manage.sliders.upload-details', 1) }}" method="POST" id="product-form">
+                                @csrf
+                                <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
+                                    <h5 style="margin: 0; color: #333;">Détails Produit</h5>
+                                </div>
+                                <div class="card-content" style="padding: 20px;">
+                                    <div class="card-body">
+                                        <div>
+                                            <label for="product-select" style="color: #555; font-weight: bold;">Choisissez un produit :</label>
+                                            <select id="product-select" class="form-control mb-3" name="product_id">
+                                                <option disabled selected>-- Sélectionner un produit --</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}"
+                                                        {{ $slider1Setting && $slider1Setting->content == $product->id ? 'selected' : '' }}
+                                                        >{{ Str::limit($product->name, 50, '...') }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="title" style="color: #555; font-weight: bold;">Titre :</label>
+                                            <input type="text" id="title" name="title" class="form-control" placeholder="Entrez le titre" value="{{ $slider1Setting->optional_content_1 ?? ''}}">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="description" style="color: #555; font-weight: bold;">Description :</label>
+                                            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Entrez la description">{{ $slider1Setting->optional_content_2 ?? ''}}</textarea>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="button_name" style="color: #555; font-weight: bold;">Nom du Bouton :</label>
+                                            <input type="text" id="button_name" name="button_name" class="form-control" placeholder="Entrez le nom du bouton" value="{{ $slider1Setting->optional_content_3 ?? ''}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-footer" style="text-align: right; padding: 15px;">
+                                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                             <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
                                 <h5 style="margin: 0; color: #333;">Accès aux Détails</h5>
                             </div>
@@ -136,6 +180,50 @@
                         </div>
 
                         <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                            <form action="{{ route('admin.manage.sliders.upload-details', 2) }}" method="POST" id="product-form">
+                                @csrf
+                                <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
+                                    <h5 style="margin: 0; color: #333;">Détails Produit</h5>
+                                </div>
+                                <div class="card-content" style="padding: 20px;">
+                                    <div class="card-body">
+                                        <div>
+                                            <label for="product-select" style="color: #555; font-weight: bold;">Choisissez un produit :</label>
+                                            <select id="product-select" class="form-control mb-3" name="product_id">
+                                                <option disabled selected>-- Sélectionner un produit --</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}"
+                                                        {{ $slider2Setting && $slider2Setting->content == $product->id ? 'selected' : '' }}
+                                                        >{{ Str::limit($product->name, 50, '...') }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="title" style="color: #555; font-weight: bold;">Titre :</label>
+                                            <input type="text" id="title" name="title" class="form-control" placeholder="Entrez le titre" value="{{ $slider2Setting->optional_content_1 ?? '' }}">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="description" style="color: #555; font-weight: bold;">Description :</label>
+                                            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Entrez la description">{{ $slider2Setting->optional_content_2 ?? '' }}</textarea>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="button_name" style="color: #555; font-weight: bold;">Nom du Bouton :</label>
+                                            <input type="text" id="button_name" name="button_name" class="form-control" placeholder="Entrez le nom du bouton" value="{{ $slider2Setting->optional_content_3 ?? '' }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-footer" style="text-align: right; padding: 15px;">
+                                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                             <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
                                 <h5 style="margin: 0; color: #333;">Accès aux Détails</h5>
                             </div>
@@ -174,6 +262,51 @@
                                 </form>
                             </div>
                         </div>
+
+                        <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                            <form action="{{ route('admin.manage.sliders.upload-details', 3) }}" method="POST" id="product-form">
+                                @csrf
+                                <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">
+                                    <h5 style="margin: 0; color: #333;">Détails Produit</h5>
+                                </div>
+                                <div class="card-content" style="padding: 20px;">
+                                    <div class="card-body">
+                                        <div>
+                                            <label for="product-select" style="color: #555; font-weight: bold;">Choisissez un produit :</label>
+                                            <select id="product-select" class="form-control mb-3" name="product_id">
+                                                <option disabled selected>-- Sélectionner un produit --</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}"
+                                                        {{ $slider3Setting && $slider3Setting->content == $product->id ? 'selected' : '' }}
+                                                        >{{ Str::limit($product->name, 50, '...') }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="title" style="color: #555; font-weight: bold;">Titre :</label>
+                                            <input type="text" id="title" name="title" class="form-control" placeholder="Entrez le titre" value="{{ $slider3Setting->optional_content_1 ?? '' }}">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="description" style="color: #555; font-weight: bold;">Description :</label>
+                                            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Entrez la description">{{ $slider3Setting->optional_content_2 ?? '' }}</textarea>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="button_name" style="color: #555; font-weight: bold;">Nom du Bouton :</label>
+                                            <input type="text" id="button_name" name="button_name" class="form-control" placeholder="Entrez le nom du bouton" value="{{ $slider3Setting->optional_content_3 ?? '' }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-footer" style="text-align: right; padding: 15px;">
+                                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                                </div>
+                            </form>
+                        </div>
+
 
                         <div class="card" style="border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                             <div class="card-header" style="background-color: #f5f5f5; padding: 15px; border-bottom: 1px solid #e0e0e0;">

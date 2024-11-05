@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\SubCategory;
 use ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,15 @@ class HomeController extends Controller
         $dayDeals = Product::where('dayDeals', true)->get();
         $cart = $this->getUserCart();
         $randomProducts = Product::inRandomOrder()->take(6)->get();
+        $offer1 = Setting::where('subject', 'offre1-produit-id')->first();
+        $offer2 = Setting::where('subject', 'offre2-produit-id')->first();
+        $slider1 = Setting::where('subject', 'content-slider-1')->first();
+        $slider2 = Setting::where('subject', 'content-slider-2')->first();
+        $slider3 = Setting::where('subject', 'content-slider-3')->first();
 
-        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart', 'randomProducts'));
+
+        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart'
+        , 'randomProducts', 'offer1', 'offer2', 'slider1', 'slider2', 'slider3'));
     }
 
     public function products(Request $request)
