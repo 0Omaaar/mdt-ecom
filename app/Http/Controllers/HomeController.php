@@ -28,7 +28,7 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
         $cart = $this->getUserCart();
-        $randomProducts = Product::inRandomOrder()->take(6)->get();
+        $randomProducts = Product::inRandomOrder()->take(8)->get();
         $offer1 = Setting::where('subject', 'offre1-produit-id')->first();
         $offer2 = Setting::where('subject', 'offre2-produit-id')->first();
         $slider1 = Setting::where('subject', 'content-slider-1')->first();

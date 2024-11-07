@@ -16,6 +16,30 @@
                 margin-left: 25px;
             }
         }
+
+		.add_to_cart_button {
+        display: none; /* Hide button by default */
+        margin: 0 auto; /* Center button */
+        padding: 10px 20px;
+        background-color: white;
+        color: red;
+        border: 2px solid red;
+        border-radius: 20px;
+        font-weight: bold;
+        text-align: center;
+        cursor: not-allowed; /* Show as disabled */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        width: fit-content; /* Adjust width to fit content */
+    }
+    .electronic_product_item:hover .add_to_cart_button {
+        display: block; /* Show button on hover */
+    }
+    .add_to_cart_button:hover {
+        background-color: red; /* Change background to red on hover */
+        color: white; /* Change text color to white */
+        cursor: pointer; /* Pointer cursor on hover */
+    }
+
     </style>
 @endsection
 
@@ -220,462 +244,101 @@
 							</div>
 
 							<div class="col-lg-8">
-								<div class="electronic_product_group clearfix">
-									<ul class="electronic_tabs_nav nav ul_li_right clearfix">
-										<li><a class="active" data-toggle="tab" href="#featured_tab">Notre sélection</a></li>
-										<li><a data-toggle="tab" href="#onsale_tab">Top Ventes</a></li>
-										<li><a data-toggle="tab" class="nouv" href="#toprated_tab">Nouveautés</a></li>
-									</ul>
-									<div class="tab-content">
-										<div id="featured_tab" class="tab-pane fade active">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+    <div class="electronic_product_group clearfix">
+        <ul class="electronic_tabs_nav nav ul_li_right clearfix">
+            <li><a class="active" data-toggle="tab" href="#featured_tab">Notre sélection</a></li>
+            <li><a data-toggle="tab" href="#onsale_tab">Top Ventes</a></li>
+            <li><a data-toggle="tab" class="nouv" href="#toprated_tab">Nouveautés</a></li>
+        </ul>
+        
+        <div class="tab-content">
+            <div id="featured_tab" class="tab-pane fade active">
+                <ul class="electronic_product_columns ul_li has_4columns clearfix">
+                    @foreach ($randomProducts as $product)
+                        <li>
+                            <div class="electronic_product_item" onmouseover="showButton(this)" onmouseout="hideButton(this)">
+                                <ul class="product_label ul_li clearfix">
+                                    @if ($product->discount)
+                                        <li>-{{ $product->discount }}%</li>
+                                    @endif
+                                </ul>
+                                <div class="item_image">
+                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_not_found">
+                                </div>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
+                                    </h3>
+                                    <span class="item_price">{{ $product->price }} DH</span>
+                                </div>
+                                <button class="add_to_cart_button" disabled>Ajouter au panier</button>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+            <div id="onsale_tab" class="tab-pane fade">
+                <ul class="electronic_product_columns ul_li has_4columns clearfix">
+                    @foreach ($randomProducts as $product)
+                        <li>
+                            <div class="electronic_product_item" onmouseover="showButton(this)" onmouseout="hideButton(this)">
+                                <ul class="product_label ul_li clearfix">
+                                    @if ($product->discount)
+                                        <li>-{{ $product->discount }}%</li>
+                                    @endif
+                                </ul>
+                                <div class="item_image">
+                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_not_found">
+                                </div>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
+                                    </h3>
+                                    <span class="item_price">{{ $product->price }} DH</span>
+                                </div>
+                                <button class="add_to_cart_button" disabled>Ajouter au panier</button>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            
+            <!-- Optionally, add other tabs with similar structure here -->
+        </div>
+    </div>
+</div>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<style>
+    .add_to_cart_button {
+        display: none; /* Hide button by default */
+        margin-top: 10px;
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: not-allowed; /* Show as disabled */
+    }
+    .electronic_product_item:hover .add_to_cart_button {
+        display: block; /* Show button on hover */
+    }
+</style>
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
+<script>
+    function showButton(element) {
+        const button = element.querySelector('.add_to_cart_button');
+        button.disabled = false; // Enable the button on hover
+        button.style.cursor = 'pointer'; // Change cursor to pointer
+    }
 
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div id="onsale_tab" class="tab-pane fade">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$20</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div id="toprated_tab" class="tab-pane fade">
-											<ul class="electronic_product_columns ul_li has_4columns clearfix">
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_02.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_03.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_04.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_05.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_06.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_07.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_08.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="electronic_product_item">
-														<ul class="product_label ul_li clearfix">
-															<li>-$30</li>
-														</ul>
-														<div class="item_image">
-															<img src="{{asset('assets/user/images/shop/electronic/img_09.png')}}" alt="image_not_found">
-														</div>
-														<div class="item_content">
-															<span class="item_name">Speakers</span>
-															<h3 class="item_title">
-																<a href="#!">Wireless Audio System Multiroom 360</a>
-															</h3>
-															<span class="item_price">$685.00</span>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
+    function hideButton(element) {
+        const button = element.querySelector('.add_to_cart_button');
+        button.disabled = true; // Disable the button when not hovering
+        button.style.cursor = 'not-allowed'; // Change cursor back to not allowed
+    }
+</script>
 						</div>
-					</div>
+					
 				</div>
 			</section>
 			<!-- product_section - end
