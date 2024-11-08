@@ -20,10 +20,10 @@
 
 	.add_to_cart_button {
 		opacity: 0;
-		
+
 		visibility: hidden;
-		margin-top:15px;
-		
+		margin-top: 15px;
+
 		padding: 10px 20px;
 		background-color: white;
 		color: #0063D1;
@@ -32,24 +32,24 @@
 		font-weight: bold;
 		text-align: center;
 		cursor: not-allowed;
-		
+
 		transition: opacity 0.3s ease, visibility 0.3s ease;
-		
+
 		width: fit-content;
 	}
 
 	.electronic_product_item:hover .add_to_cart_button {
 		opacity: 1;
-		
+
 		visibility: visible;
 	}
 
 	.add_to_cart_button:hover {
 		background-color: #0063D1;
-		
+
 		color: white;
 		cursor: pointer;
-		
+
 	}
 </style>
 @endsection
@@ -271,14 +271,19 @@
 													<li>-{{ $product->discount }}%</li>
 													@endif
 												</ul>
+												
 												<div class="item_image">
 													<img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_not_found">
 												</div>
 												<div class="item_content">
+												<span class="item_name">{{ $product->subcategory->name }}</span>
 													<h3 class="item_title">
 														<a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
 													</h3>
-													<span class="item_price">{{ $product->price }} DH</span>
+													<div class="price-container">
+														<span class="item_price">{{ $product->price }} DHS</span>
+														<span><del>{{ $product->old_price }}</del></span>
+													</div>
 												</div>
 												<button class="add_to_cart_button" disabled>Ajouter au panier</button>
 											</div>
