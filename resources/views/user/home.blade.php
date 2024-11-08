@@ -266,19 +266,22 @@
 										@foreach ($randomProducts as $product)
 										<li>
 											<div class="electronic_product_item">
+
 												<ul class="product_label ul_li clearfix">
-													@if ($product->discount)
-													<li>-{{ $product->discount }}%</li>
+													@if ($product->stock_status == 'instock')
+													<li>En Stock</li>
+													@else
+													<li style="background: rgb(216, 72, 72);">En Rupture de Stock</li>
 													@endif
 												</ul>
-												
+
 												<div class="item_image">
 													<img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}" alt="image_not_found">
 												</div>
 												<div class="item_content">
-												<span class="item_name">{{ $product->subcategory->name }}</span>
+													<span class="item_name">{{ $product->subcategory->name }}</span>
 													<h3 class="item_title">
-														<a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
+														<a href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 25, '...') }}</a>
 													</h3>
 													<div class="price-container">
 														<span class="item_price">{{ $product->price }} DHS</span>
