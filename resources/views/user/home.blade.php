@@ -22,7 +22,7 @@
 		opacity: 0;
 		
 		visibility: hidden;
-		margin: 0 auto;
+		margin-top:15px;
 		
 		padding: 10px 20px;
 		background-color: white;
@@ -48,7 +48,6 @@
 		background-color: #0063D1;
 		
 		color: white;
-		
 		cursor: pointer;
 		
 	}
