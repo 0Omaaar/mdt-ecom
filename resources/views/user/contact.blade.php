@@ -4,6 +4,7 @@
 		================================================== -->
 		<main>
 
+            @include('user.layouts.panier')
 
 
 			<!-- sidebar mobile menu & sidebar cart - end

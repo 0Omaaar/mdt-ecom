@@ -7,6 +7,7 @@ use App\Mail\ContactMail;
 use App\Mail\NotificationMail;
 use App\Mail\ReviewMail;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Notification;
@@ -14,18 +15,31 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public $session_id;
+
+    public function __construct()
+    {
+        $this->session_id = session()->getId();
+    }
+
+
     public function index(){
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $products = Product::query();
         $brands = Brand::all();
         $randomProducts = Product::inRandomOrder()->take(6)->get();
-        return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts'));
+        $cart = $this->getUserCart();
+
+
+        return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts'
+            , 'cart'));
     }
 
     public function store(Request $request){
@@ -94,5 +108,15 @@ class ContactController extends Controller
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Une erreur est survenue lors de suppression de message !');
         }
+    }
+
+    public function getUserCart(){
+        $cart = null;
+        if(Auth::check()){
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+        }else{
+            $cart = Cart::where('session_id', $this->session_id)->first();
+        }
+        return $cart;
     }
 }

@@ -121,7 +121,7 @@
                                     <tr class="accordion-item">
                                         <td colspan="6">
                                             <div class="accordion-header">
-                                                Détails de la Commande #{{ $loop->index + 1 }}
+                                                Détails de la Commande #{{ $order->id }}
                                             </div>
                                             <div class="accordion-body">
                                                 <ul class="list-unstyled">
