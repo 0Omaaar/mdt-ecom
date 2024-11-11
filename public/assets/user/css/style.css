@@ -10539,7 +10539,7 @@ button {
   font-size: 12px;
   font-weight: 500;
   border-radius: 2px;
-  background-color: #62ab00;
+  
 }
 .electronic_product_item .item_image {
   display: flex;
@@ -10547,10 +10547,10 @@ button {
   align-items: center;
   margin-bottom: 13px;
   justify-content: center;
-  background-color: #f2f2f2;
+
 }
 .electronic_product_item .item_image img {
-  max-height: 135px;
+  max-height: 200px;
 }
 .electronic_product_item .item_name {
   display: block;
