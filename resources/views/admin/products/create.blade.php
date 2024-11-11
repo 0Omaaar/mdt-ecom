@@ -156,7 +156,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-check">
-                                                            <select id="brand_id" class="form-control" name="brand_id" required style="margin-left: 75%" required>
+                                                            <select id="brand_id" class="form-control" name="brand_id" required style="margin-left: 75%">
                                                                 <option selected disabled>--Choisir Marque--</option>
                                                                 @foreach ($brands as $brand)
                                                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>

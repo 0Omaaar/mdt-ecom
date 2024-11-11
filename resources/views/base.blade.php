@@ -39,6 +39,15 @@
 
         @yield('style')
 
+        <style>
+            .search-bar{
+                max-width: 44%;
+            }
+
+            .btn-bar{
+                margin-left: 4%;
+            }
+        </style>
 
 	</head>
 
@@ -70,7 +79,9 @@
 						<div class="col-lg-3">
 							<div class="brand_logo">
 								<a class="brand_link" href="{{ route('home') }}">
-									<img src="{{asset('assets/user/images/logo/logo_16_1x.png')}}" srcset="{{asset('assets/user/images/logo/logo_16_2x.png')}}"  alt="logo_not_found">
+									<img src="{{asset('assets/user/images/logo/logo_16_1x.png')}}" srcset="{{asset('assets/user/images/logo/logo_16_2x.png')}}"
+                                        style="max-width: 70%"
+                                    alt="logo_not_found">
 								</a>
 
 								<ul class="mh_action_btns ul_li clearfix">
@@ -90,7 +101,7 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-6 search-bar">
                             <form action="javascript:void(0);" onsubmit="searchProductsByName()">
                                 <div class="medical_search_bar">
                                     <div class="form_item">
@@ -109,7 +120,7 @@
                             </form>
                         </div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 btn-bar">
 							<ul class="electronic_action_btns ul_li_right clearfix">
 								@if (!\Auth::check())
                                     <li>

@@ -40,7 +40,7 @@
             var notificationList = document.querySelector('.dropdown-menu .media-list');
 
             var notificationItem = document.createElement('a');
-             notificationItem.href = routeToOrder.replace(':id', JSON.stringify(data.orderId));
+            notificationItem.href = routeToOrder.replace(':id', JSON.stringify(data.orderId));
 
 
             notificationItem.innerHTML = `
@@ -108,7 +108,8 @@
                     {{-- notifs --}}
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
-                            href="{{ route('home') }}" target="_blank"><i class="ficon ft-send" title="Visiter Site Web"></i>  </a>
+                                href="{{ route('home') }}" target="_blank"><i class="ficon ft-send"
+                                    title="Visiter Site Web"></i> </a>
                         </li>
 
                         @php
@@ -126,25 +127,24 @@
 
 
                                 <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
-                                    @foreach ($notifications as $notification)
-                                        <div class="media">
-                                            <div class="media-left align-self-center">
-                                                <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading"
-                                                @if ($notification->subject == 'new-order')
-                                                    onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
+                                        @foreach ($notifications as $notification)
+                                            <div class="media">
+                                                <div class="media-left align-self-center">
+                                                    <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading"
+                                                        @if ($notification->subject == 'new-order') onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
                                                 @elseif ($notification->subject == 'new-contact')
-                                                    onclick="window.location.href='{{ route('admin.contact.index') }}'"
-                                                @endif
-                                                >{{ $notification->content }}</h6>
-                                                <small>
-                                                    <time class="media-meta text-muted">{{ $notification->created_at->diffForHumans() }}</time>
-                                                </small>
+                                                    onclick="window.location.href='{{ route('admin.contact.index') }}'" @endif>
+                                                        {{ $notification->content }}</h6>
+                                                    <small>
+                                                        <time
+                                                            class="media-meta text-muted">{{ $notification->created_at->diffForHumans() }}</time>
+                                                    </small>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
                                 </li>
 
                             </ul>
@@ -158,12 +158,11 @@
                                     class="avatar avatar-online"><img
                                         src="{{ asset('assets/admin/images/portrait/small/avatar-s-19.png') }}"
                                         alt="avatar"><i></i></span></a>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
-                                        class="ft-user"></i> Edit Profile</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div></div><a class="dropdown-item" href={{ route('admin.settings.index') }}><i
+                                        class="ft-server"></i> Paramètres</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
-                                    href={{ route('admin.settings.index') }}><i class="ft-server"></i> Paramètres</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item"
-                                    href="{{ route('signout') }}"><i class="ft-power"></i> Logout</a>
+                                    href="{{ route('signout') }}"><i class="ft-power"></i> Déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -188,79 +187,84 @@
                             data-i18n="Shop">Categories</span></a>
                 </li>
                 <li class=" nav-item"><a href="{{ route('admin.subCategories.index') }}"><i
-                    class="la la-th-large"></i><span class="menu-title"
-                    data-i18n="Shop">Sous Categories</span></a>
+                            class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Sous
+                            Categories</span></a>
                 </li>
                 <li class=" nav-item"><a href="{{ route('admin.brands.index') }}"><i
-                    class="la la-th-large"></i><span class="menu-title"
-                    data-i18n="Shop">Marques</span></a>
+                            class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Marques</span></a>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-clipboard"></i><span class="menu-title"
-                    data-i18n="Product">Produits</span></a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="{{ route('admin.products.index') }}"><i></i><span
-                               >Liste des Produits</span></a>
-                    </li>
-                    <li><a class="menu-item" href="{{ route('admin.products.create') }}"><i></i><span
-                                >Ajouter Produit</span></a>
-                    </li>
-                </ul>
+                            data-i18n="Product">Produits</span></a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{ route('admin.products.index') }}"><i></i><span>Liste des
+                                    Produits</span></a>
+                        </li>
+                        <li><a class="menu-item" href="{{ route('admin.products.create') }}"><i></i><span>Ajouter
+                                    Produit</span></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class=" navigation-header"><span data-i18n="Ecommerce">Ecommerce</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="Ecommerce"></i>
                 </li>
-                <li class=" nav-item"><a href=""><i class="la la-clipboard"></i><span
-                            class="menu-title" data-i18n="Shop">Commandes</span></a>
+                <li class=" nav-item"><a href=""><i class="la la-clipboard"></i><span class="menu-title"
+                            data-i18n="Shop">Commandes</span></a>
 
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="{{ route('admin.orders.index') }}"><i></i><span
-                                >Toutes les Commandes</span></a>
-                    </li>
-                </ul></li>
-                <li class=" navigation-header"><span data-i18n="Ecommerce">Clients</span><i
-                    class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
-                    data-original-title="Ecommerce"></i>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{ route('admin.orders.index') }}"><i></i><span>Toutes les
+                                    Commandes</span></a>
+                        </li>
+                    </ul>
                 </li>
-                <li class=" nav-item"><a href="{{ route('admin.reviews.index') }}"><i class="la la-th-large"></i><span
-                            class="menu-title" data-i18n="Shop">Avis</span></a>
+                <li class=" navigation-header"><span data-i18n="Ecommerce">Clients</span><i class="la la-ellipsis-h"
+                        data-toggle="tooltip" data-placement="right" data-original-title="Ecommerce"></i>
                 </li>
-                <li class=" nav-item"><a href="{{ route('admin.contact.index') }}"><i class="la la-th-large"></i><span
-                            class="menu-title" data-i18n="Shop">Contact Messages</span></a>
+                <li class=" nav-item"><a href="{{ route('admin.reviews.index') }}"><i
+                            class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Avis</span></a>
+                </li>
+                <li class=" nav-item"><a href="{{ route('admin.contact.index') }}"><i
+                            class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Contact
+                            Messages</span></a>
                 </li>
 
                 <li class=" navigation-header"><span data-i18n="User Interface">Gestion Contenu</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="User Interface"></i>
                 </li>
-                <li class=" nav-item"><a href="{{ route('admin.content.index') }}"><i class="la la-server"></i><span class="menu-title"
-                            data-i18n="Components">Aperçu Page d'accueil</span></a>
+                <li class=" nav-item"><a href="{{ route('admin.content.index') }}"><i class="la la-server"></i><span
+                            class="menu-title" data-i18n="Components">Aperçu Page d'accueil</span></a>
                 </li>
-                <li class=" nav-item"><a href="{{ route('admin.content.sliders') }}"><i class="la la-server"></i><span class="menu-title"
+                <li class=" nav-item"><a href="{{ route('admin.content.sliders') }}"><i
+                            class="la la-server"></i><span class="menu-title"
                             data-i18n="Components">Sliders</span></a>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-file-text"></i><span class="menu-title"
                             data-i18n="Authentication">Offres</span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{ route('admin.content.offer1') }}"><i></i><span>Offre 1</span></a>
+                        <li><a class="menu-item" href="{{ route('admin.content.offer1') }}"><i></i><span>Offre
+                                    1</span></a>
                         </li>
-                        <li><a class="menu-item" href="{{ route('admin.content.offer2') }}"><i></i><span>Offre 2</span></a>
+                        <li><a class="menu-item" href="{{ route('admin.content.offer2') }}"><i></i><span>Offre
+                                    2</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-file-text"></i><span class="menu-title"
                             data-i18n="deals">Deals Jour</span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{ route('admin.content.dayDeals') }}"><i></i><span>Deals Du Jour</span></a>
+                        <li><a class="menu-item" href="{{ route('admin.content.dayDeals') }}"><i></i><span>Deals Du
+                                    Jour</span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li class=" navigation-header"><span data-i18n="User Interface">Settings</span><i
-                    class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
-                    data-original-title="User Interface"></i>
+                        class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
+                        data-original-title="User Interface"></i>
                 </li>
-                <li class=" nav-item"><a href="{{ route('admin.settings.index') }}"><i class="la la-server"></i><span class="menu-title"
+                <li class=" nav-item"><a href="{{ route('admin.settings.index') }}"><i
+                            class="la la-server"></i><span class="menu-title"
                             data-i18n="Components">Configuration</span></a>
                 </li>
             </ul>
@@ -271,25 +275,25 @@
 
 
     @if (session()->has('success'))
-            <div style="margin-left: 70%; margin-top: 1%;">
-                <div id="error-alert" class="alert bg-success alert-arrow-left alert-dismissible mb-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>{{ session()->get('success') }}</strong>
-                </div>
+        <div style="margin-left: 70%; margin-top: 1%;">
+            <div id="error-alert" class="alert bg-success alert-arrow-left alert-dismissible mb-2" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{ session()->get('success') }}</strong>
             </div>
+        </div>
     @endif
 
     @if (session()->has('error'))
-            <div style="margin-left: 70%; margin-top: 1%;">
-                <div id="error-alert" class="alert bg-danger alert-arrow-left alert-dismissible mb-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>{{ session()->get('error') }}</strong>
-                </div>
+        <div style="margin-left: 70%; margin-top: 1%;">
+            <div id="error-alert" class="alert bg-danger alert-arrow-left alert-dismissible mb-2" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{ session()->get('error') }}</strong>
             </div>
+        </div>
     @endif
 
     @yield('content')
@@ -306,9 +310,9 @@
     @yield('script')
 
     <script>
-        setTimeout(function (){
+        setTimeout(function() {
             let alertElement = document.getElementById('error-alert');
-            if(alertElement){
+            if (alertElement) {
                 alertElement.style.display = 'none';
             }
         }, 3000);

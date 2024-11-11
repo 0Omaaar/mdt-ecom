@@ -29,12 +29,17 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
+
+    <style>
+        .modal-edit{
+            width: 165%;
+        }
+    </style>
 @endsection
 @section('content')
-
-        @php
-            use Illuminate\Support\Str;
-        @endphp
+    @php
+        use Illuminate\Support\Str;
+    @endphp
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -99,18 +104,22 @@
                                                     <tr>
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
-                                                            @if($product->image != null)
-                                                                <img src="{{ asset('images/products/'. $product->id . '/' . $product->image) }}"
-                                                                style="border-radius: 4%"
-                                                                alt="{{ $product->name }}" width="50" height="50">
+                                                            @if ($product->image != null)
+                                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                                    style="border-radius: 4%" alt="{{ $product->name }}"
+                                                                    width="50" height="50">
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
-                                                            @endif</td>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ Str::limit($product->name, 30, '...') }}</td>
-                                                        <td><span class="badge badge-dark badge-lg">{{ $product->sku }}</span></td>
+                                                        <td><span
+                                                                class="badge badge-dark badge-lg">{{ $product->sku }}</span>
+                                                        </td>
                                                         <td>{{ $product->price }}</td>
-                                                        <td><span class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}"
-                                                            >{{ $product->stock_status }}</span></td>
+                                                        <td><span
+                                                                class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}">{{ $product->stock_status }}</span>
+                                                        </td>
                                                         <td>{{ $product->category->name }}</td>
                                                         <td>{{ $product->subcategory->name }}</td>
                                                         <td>
@@ -122,12 +131,16 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <a href="{{ route('admin.products.show', $product->id) }}" class="dropdown-item"><i
-                                                                        class="la la-eye"></i> Voir Détails</a>
-                                                                    <button class="dropdown-item" data-toggle="modal" data-target="#editProduct{{ $product->id }}"><i
-                                                                        class="la la-pencil"></i> Modifier</button>
-                                                                    <button data-toggle="modal" data-target="#deleteProduct{{ $product->id }}" class="dropdown-item"><i
-                                                                            class="la la-trash"></i> Supprimer</button>
+                                                                    <a href="{{ route('admin.products.show', $product->id) }}"
+                                                                        class="dropdown-item"><i class="la la-eye"></i> Voir
+                                                                        Détails</a>
+                                                                    <button class="dropdown-item" data-toggle="modal"
+                                                                        data-target="#editProduct{{ $product->id }}"><i
+                                                                            class="la la-pencil"></i> Modifier</button>
+                                                                    <button data-toggle="modal"
+                                                                        data-target="#deleteProduct{{ $product->id }}"
+                                                                        class="dropdown-item"><i class="la la-trash"></i>
+                                                                        Supprimer</button>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -157,8 +170,6 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
-
 @endsection
 
 
@@ -198,7 +209,7 @@
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        function removePreviewAdd(){
+        function removePreviewAdd() {
             var output = document.getElementById('image-preview');
             output.src = '';
             output.style.display = 'none';
@@ -220,6 +231,5 @@
             output.src = '';
             // output.style.display = 'none';
         }
-
     </script>
 @endsection

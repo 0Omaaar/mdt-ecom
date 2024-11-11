@@ -1,6 +1,6 @@
 <div class="modal text-left" style="margin-top: 0%" id="editProduct{{ $product->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content modal-edit">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel62">Modifier Produit</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -146,12 +146,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
-                                        <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
                                             <div class="form-group">
                                                 <div class="form-check">
                                                     <label>Marque</label>
-                                                    <select id="brand_id" class="form-control" name="brand_id" style="margin-right: 25%;" required>
+                                                    <select id="brand_id" class="form-control" name="brand_id">
                                                         @if ($product->brand)
                                                             <option selected value="{{ $product->brand->id }}">{{ $product->brand->name }}</option>
                                                         @endif
