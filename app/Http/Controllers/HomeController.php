@@ -23,12 +23,13 @@ class HomeController extends Controller
         $this->session_id = session()->getId();
     }
 
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $bestCategories = Category::where('slug', 'pc-portable')
-                                    ->orWhere('slug', 'pc-bureau')
-                                    ->orWhere('slug', 'accessoires')
-                                    ->get();
+            ->orWhere('slug', 'pc-bureau')
+            ->orWhere('slug', 'accessoires')
+            ->get();
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
         $cart = $this->getUserCart();
@@ -44,15 +45,30 @@ class HomeController extends Controller
         $slider3 = Setting::where('subject', 'content-slider-3')->first();
 
 
-        return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart'
-        , 'randomProducts', 'offer1', 'offer2', 'slider1', 'slider2', 'slider3', 'selectionProducts',
-            'nouveauteProducts', 'topVentesProducts', 'bestCategories', 'latestProducts'));
+        return view('user.home', compact(
+            'categories',
+            'subcategories',
+            'dayDeals',
+            'cart',
+            'randomProducts',
+            'offer1',
+            'offer2',
+            'slider1',
+            'slider2',
+            'slider3',
+            'selectionProducts',
+            'nouveauteProducts',
+            'topVentesProducts',
+            'bestCategories',
+            'latestProducts'
+        ));
     }
 
     public function products(Request $request)
     {
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $randomSubCategories = SubCategory::inRandomOrder()->get();
         $products = Product::query();
         $brands = Brand::all();
         $randomProducts = Product::inRandomOrder()->take(6)->get();
@@ -76,17 +92,17 @@ class HomeController extends Controller
             $products->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
-        if($request->has('brand')){
+        if ($request->has('brand')) {
             $brand_id = urldecode($request->query('brand'));
             $brand = Brand::findOrFail($brand_id);
-            if($brand){
+            if ($brand) {
                 $products->where('brand_id', $brand_id);
             }
         }
 
-        if($request->has('category')){
+        if ($request->has('category')) {
             $categoryId = urldecode($request->query('category'));
-            if($categoryId){
+            if ($categoryId) {
                 $products->where('category_id', $categoryId);
             }
         }
@@ -101,11 +117,12 @@ class HomeController extends Controller
         $perPage = $request->input('per_page', 12);
         $products = $products->paginate($perPage);
 
-        return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart', 'randomProducts'));
+        return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart', 'randomProducts', 'randomSubCategories'));
     }
 
 
-    public function product($id){
+    public function product($id)
+    {
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $product = Product::findOrFail($id);
@@ -118,17 +135,19 @@ class HomeController extends Controller
     }
 
 
-    public function getUserCart(){
+    public function getUserCart()
+    {
         $cart = null;
-        if(Auth::check()){
+        if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
-        }else{
+        } else {
             $cart = Cart::where('session_id', $this->session_id)->first();
         }
         return $cart;
     }
 
-    public function orders(){
+    public function orders()
+    {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', $user_id)->latest()->get();
         $randomProducts = Product::inRandomOrder()->take(6)->get();

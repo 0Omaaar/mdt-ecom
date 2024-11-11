@@ -54,7 +54,7 @@
             color: white;
             cursor: pointer;
 
-        }
+        } 
     </style>
 @endsection
 
@@ -88,16 +88,16 @@
                         <div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
                             <div class="card">
                                 <ul class="alldepartments_menulist ul_li_block clearfix">
-                                    <li><a href="#!">Deals du jour</a></li>
-                                    <li><a href="#!">Notre sélection</a></li>
-                                    <li><a href="#!">Nouvelle arrivage</a></li>
+                                    <li><a href="javascript:void(0)">Deals du jour</a></li>
+                                    <li><a href="javascript:void(0)">Notre sélection</a></li>
+                                    <li><a h href="javascript:void(0)">Nouvelle arrivage</a></li>
                                     @foreach ($categories as $category)
                                         <li class="{{ $category->subCategories->count() > 0 ? 'has_child' : '' }}">
-                                            <a href="#" class="category-link"
+                                            <a href="javascript:void(0)" class="category-link"
                                                 data-id="{{ $category->id }}">{{ $category->name }}</a>
                                             <ul class="dropdown_menu">
                                                 @foreach ($category->subCategories as $subcategory)
-                                                    <li><a href="#!" class="subcategory-link"
+                                                    <li><a href="javascript:void(0)"class="subcategory-link"
                                                             data-id="{{ $subcategory->name }}">{{ $subcategory->name }}</a>
                                                     </li>
                                                 @endforeach
@@ -198,7 +198,7 @@
                         <a
                             @if ($offer1) href="{{ route('product', $offer1->content) }}"
 							@else
-							href="#" @endif>
+                            href="javascript:void(0)" @endif>
                             <img src="{{ asset('assets/user/images/offer/electronic/img_02.jpg') }}"
                                 alt="image_not_found">
                         </a>
@@ -207,7 +207,7 @@
                         <a
                             @if ($offer2) href="{{ route('product', $offer2->content) }}"
 							@else
-							href="#" @endif>
+                            href="javascript:void(0)" @endif>
                             <img src="{{ asset('assets/user/images/offer/electronic/img_03.jpg') }}"
                                 alt="image_not_found">
                         </a>
@@ -478,7 +478,7 @@
                                                         class="tab-pane active"
                                                         src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                                         alt="image_not_found">
-                                                    @foreach ($product->images as $image)
+                                                    @foreach ($product->images->take(3) as $image)
                                                         <img id="child_tab1_{{ $product->id }}_{{ $loop->index + 2 }}"
                                                             class="tab-pane fade"
                                                             src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
@@ -494,7 +494,7 @@
                                                                 alt="image_not_found">
                                                         </a>
                                                     </li>
-                                                    @foreach ($product->images as $image)
+                                                    @foreach ($product->images->take(3) as $image)
                                                         <li>
                                                             <a data-toggle="tab"
                                                                 href="#child_tab1_{{ $product->id }}_{{ $loop->index + 2 }}">
@@ -567,7 +567,7 @@
                                         <div class="item_image" data-bg-color="#ecf7f3">
                                             <a href="{{ route('product', $product->id) }}">
                                                 <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                alt="image_not_found">
+                                                    alt="image_not_found">
                                             </a>
                                         </div>
                                         <div class="item_content position-relative">
@@ -621,7 +621,7 @@
                         <div class="mb_50 clearfix">
                             @foreach ($randomProducts->take(3) as $product)
                                 <div class="electronic_product_small">
-                                    <a class="item_image" href="#!">
+                                    <a class="item_image" href="{{ route('product', $product->id) }}">
                                         <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                             alt="image_not_found">
                                     </a>

@@ -4,11 +4,11 @@
             <div class="col-lg-8">
                 <nav class="main_menu clearfix">
                     <ul class="ul_li text-uppercase clearfix">
-                        <li><a href="#!">Super offres</a></li>
-                        <li><a href="#!">Fête des Mères</a></li>
-                        <li><a href="#!">Semaine de la Pomme</a></li>
-                        <li><a href="#!">Vente Logitech</a></li>
-                        <li><a href="#!">Vente de Casques</a></li>
+                        @foreach ($randomSubCategories->take(4) as $subCategory)
+                            <li><a href="javascript:void(0)"
+                                    onclick="applyFilter('subcategory', '{{ $subCategory->name }}')">Vente
+                                    {{ $subCategory->name }}</a></li>
+                        @endforeach
                     </ul>
                 </nav>
             </div>
