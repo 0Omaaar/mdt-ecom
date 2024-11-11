@@ -25,13 +25,18 @@ class HomeController extends Controller
 
     public function index(){
         $categories = Category::all();
+        $bestCategories = Category::where('slug', 'pc-portable')
+                                    ->orWhere('slug', 'pc-bureau')
+                                    ->orWhere('slug', 'accessoires')
+                                    ->get();
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
         $cart = $this->getUserCart();
         $selectionProducts = Product::where('selection', true)->get();
         $nouveauteProducts = Product::where('nouveautes', true)->get();
         $topVentesProducts = Product::where('top_ventes', true)->get();
-        $randomProducts = Product::inRandomOrder()->take(8)->get();
+        $randomProducts = Product::inRandomOrder()->take(6)->get();
+        $latestProducts = Product::latest()->get();
         $offer1 = Setting::where('subject', 'offre1-produit-id')->first();
         $offer2 = Setting::where('subject', 'offre2-produit-id')->first();
         $slider1 = Setting::where('subject', 'content-slider-1')->first();
@@ -41,7 +46,7 @@ class HomeController extends Controller
 
         return view('user.home', compact('categories', 'subcategories', 'dayDeals', 'cart'
         , 'randomProducts', 'offer1', 'offer2', 'slider1', 'slider2', 'slider3', 'selectionProducts',
-            'nouveauteProducts', 'topVentesProducts'));
+            'nouveauteProducts', 'topVentesProducts', 'bestCategories', 'latestProducts'));
     }
 
     public function products(Request $request)

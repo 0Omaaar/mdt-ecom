@@ -127,7 +127,8 @@
                                                         <div class="card-body p-0">
                                                             <ul class="ul_li_block clearfix">
                                                                 @foreach ($category->subCategories as $subCategory)
-                                                                    <li><a href="javascript:void(0)" onclick="applyFilter('subcategory', '{{ $subCategory->name }}')">{{ $subCategory->name }}</a></li>
+                                                                    <li><a href="javascript:void(0)" onclick="applyFilter('subcategory', '{{ $subCategory->name }}')"
+                                                                        >{{ $subCategory->name }}</a></li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>
