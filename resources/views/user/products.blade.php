@@ -83,7 +83,7 @@
                                             <div class="electronic_product_item">
                                                 <ul class="product_label ul_li clearfix">
                                                     @if ($product->stock_status == 'instock')
-                                                        <li>En Stock</li>
+                                                        <li style="background: rgb(89, 185, 89)">En Stock</li>
                                                     @else
                                                         <li style="background: rgb(216, 72, 72);">En Rupture de Stock
                                                         </li>

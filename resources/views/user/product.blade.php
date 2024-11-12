@@ -1,5 +1,16 @@
 @extends('base')
 
+@section('style')
+    <style>
+        @media (max-width: 768px) {
+            .images-nav {
+                top: 70%;
+            }
+
+        }
+    </style>
+@endsection
+
 @section('content')
     <main>
 
@@ -9,7 +20,7 @@
         @include('user.layouts.panier')
 
         <!-- electronic_details - start
-        ================================================== -->
+                ================================================== -->
         <section class="electronic_details clearfix mt-4">
             <div class="container maxw_1600">
                 <div class="row mb_50 justify-content-lg-between">
@@ -31,7 +42,7 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <ul class="nav ul_li clearfix" role="tablist">
+                            <ul class="nav ul_li clearfix images-nav" role="tablist">
                                 <li>
                                     <a class="active" data-toggle="tab" href="#di_tab_0">
                                         <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
@@ -75,11 +86,7 @@
                                 </ul>
                                 {{-- <button type="button" class="add_review_btn">Read all 3 reviews</button> --}}
                             </div>
-                            <hr>
-                            <div class="action_btns d-flex align-items-center mb_15 clearfix">
-                                <a href="#!"><span><i class="far fa-heart"></i></span> Ajouter à la liste de
-                                    souhaits</a>
-                            </div>
+                            <hr> 
                             <div class="ul_li_block mb_15 clearfix">
                                 {!! html_entity_decode($product->brief_description) !!}
                             </div>
@@ -171,10 +178,10 @@
             </div>
         </section>
         <!-- electronic_details - end
-        ================================================== -->
+                ================================================== -->
 
         <!-- product_section - start
-        ================================================== -->
+                ================================================== -->
         <section class="product_section sec_ptb_100 clearfix">
             <div class="container maxw_1600">
                 <div class="electronic_related_products position-relative">
@@ -191,8 +198,10 @@
                                         @endif
                                     </ul>
                                     <div class="item_image">
-                                        <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                        <a href="{{ route('product', $prod->id) }}">
+                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
                                             alt="image_not_found">
+                                        </a>
                                     </div>
                                     <div class="item_content">
                                         <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -349,7 +358,7 @@
             </div>
         </section>
         <!-- product_section - end
-        ================================================== -->
+                ================================================== -->
 
     </main>
 @endsection

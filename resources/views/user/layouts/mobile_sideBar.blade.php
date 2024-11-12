@@ -16,13 +16,13 @@
             <h3 class="title_text mb_15 text-uppercase"><i class="far fa-bars mr-2"></i> Menu</h3>
             <ul class="ul_li_block clearfix">
                 <li>
-                    <a href="{{ route('home') }}" aria-expanded="false">Acceuil</a>
+                    <a href="{{ route('home') }}"  >Acceuil</a>
                 </li>
                 <li>
-                    <a href="{{ route('products') }}" aria-expanded="false">Produits</a>
+                    <a href="{{ route('products') }}" >Produits</a>
                 </li>
                 <li>
-                    <a href="{{ route('contact') }}" aria-expanded="false">Contact</a>
+                    <a href="{{ route('contact') }}" >Contact</a>
                 </li>
             </ul>
         </div>

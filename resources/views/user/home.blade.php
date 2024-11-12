@@ -55,6 +55,21 @@
             cursor: pointer;
 
         }
+
+        @media (max-width: 768px) {
+            .item_title{
+                margin-left: -5px;
+            }
+
+            .item_price{
+                margin-left: -5px;
+             }
+
+            .add_to_cart_button{
+                margin-left: 20%;
+            }
+        }
+
     </style>
 @endsection
 
@@ -241,7 +256,7 @@
 
 
                                     @foreach ($dayDeals as $dayDeal)
-                                        <div class="item" style="height: 800px;">
+                                        <div class="item"  >
                                             <div class="electronic_deals_item">
                                                 <div class="item_price">
                                                     <strong>{{ $dayDeal->price }} DHS</strong>
@@ -251,9 +266,9 @@
                                                     <a
                                                         href="{{ route('product', $dayDeal->id) }}">{{ Str::limit($dayDeal->name, 40, '...') }}</a>
                                                 </h3>
-                                                <div class="ul_li_block mb_15 clearfix mt-5">
+                                                {{-- <div class="ul_li_block mb_15 clearfix mt-5">
                                                     {!! html_entity_decode($dayDeal->brief_description) !!}
-                                                </div>
+                                                </div> --}}
                                                 <div class="item_image">
                                                     <a href="{{ route('product', $dayDeal->id) }}">
                                                         <img src="{{ asset('images/products/' . $dayDeal->id . '/' . $dayDeal->image) }}"
@@ -319,11 +334,11 @@
                                                             class="item_name">{{ $product->subcategory->name }}</span>
                                                         <h3 class="item_title">
                                                             <a
-                                                                href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 25, '...') }}</a>
+                                                                href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
                                                         </h3>
                                                         <div class="price-container">
                                                             <span class="item_price">{{ $product->price }} DHS</span>
-                                                            <span><del>{{ $product->old_price }}</del></span>
+                                                            <span class="item_price"><del>{{ $product->old_price }}</del></span>
                                                         </div>
                                                     </div>
                                                     <form method="POST"
@@ -346,7 +361,7 @@
 
                                                     <ul class="product_label ul_li clearfix">
                                                         @if ($product->stock_status == 'instock')
-                                                            <li>En Stock</li>
+                                                            <li style="background: rgb(89, 185, 89)">En Stock</li>
                                                         @else
                                                             <li style="background: rgb(216, 72, 72);">En Rupture de
                                                                 Stock</li>
@@ -391,7 +406,7 @@
 
                                                     <ul class="product_label ul_li clearfix">
                                                         @if ($product->stock_status == 'instock')
-                                                            <li>En Stock</li>
+                                                            <li style="background: rgb(89, 185, 89)">En Stock</li>
                                                         @else
                                                             <li style="background: rgb(216, 72, 72);">En Rupture de
                                                                 Stock</li>
