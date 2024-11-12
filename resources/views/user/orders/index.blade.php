@@ -62,7 +62,8 @@
             color: rgb(26, 22, 22);
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             padding: 15px 20px;
             font-weight: bold;
             font-size: 1.1em;
@@ -71,7 +72,6 @@
         .table th {
             background-color: #f2f2f2;
         }
-
     </style>
 @endsection
 
@@ -83,18 +83,21 @@
 
 <main>
 
+    @include('user.layouts.mobile_sideBar')
+
+
     <section class="cart_section clearfix" style="margin-top: 30px">
         <div class="container">
 
             <div class="checkout_step">
                 <ul class="checkout_step ul_li clearfix">
-                    <li class="active"><a href="{{ route('my-orders') }}"><span>01.</span>Mes Commandes ({{ $orders->count() }})</a></li>
+                    <li class="active"><a href="{{ route('my-orders') }}"><span>01.</span>Mes Commandes
+                            ({{ $orders->count() }})</a></li>
                 </ul>
             </div>
 
             <div class="accordion" id="accordionExample">
                 @if ($orders && $orders->count() > 0)
-
                     <div class="cart_table mb_50 mt-5">
                         <table class="table">
                             <a href="{{ route('products') }}" class="returnShop">Retour à la Boutique</a>
@@ -127,11 +130,14 @@
                                                 <ul class="list-unstyled">
                                                     @foreach ($order->items as $item)
                                                         <li class="order-item">
-                                                            <img src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}" alt="image_not_found">
+                                                            <img src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}"
+                                                                alt="image_not_found">
                                                             <div class="order-item-details">
-                                                                <a href="{{ route('product', ['id' => $item->product_id]) }}">{{ Str::limit($item->product->name, 35, '...') }}</a>
+                                                                <a
+                                                                    href="{{ route('product', ['id' => $item->product_id]) }}">{{ Str::limit($item->product->name, 35, '...') }}</a>
                                                             </div>
-                                                            <div class="order-item-quantity">{{ $item->quantity }}</div>
+                                                            <div class="order-item-quantity">{{ $item->quantity }}
+                                                            </div>
                                                             <div class="order-item-price">{{ $item->price }} DHS</div>
                                                         </li>
                                                     @endforeach
@@ -143,10 +149,11 @@
                             </tbody>
                         </table>
                     </div>
-
                 @else
-                    <p class="empty-cart-message" style="margin-top: 10%;">Votre Liste de commandes est actuellement vide.</p>
-                    <a href="{{ route('products') }}" class="return-to-shop-btn" style="margin-bottom: 12%; margin-top: 10%;">Retour à la boutique</a>
+                    <p class="empty-cart-message" style="margin-top: 10%;">Votre Liste de commandes est actuellement
+                        vide.</p>
+                    <a href="{{ route('products') }}" class="return-to-shop-btn"
+                        style="margin-bottom: 12%; margin-top: 10%;">Retour à la boutique</a>
                 @endif
 
             </div>

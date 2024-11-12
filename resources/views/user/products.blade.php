@@ -14,6 +14,8 @@
 <!-- main body - start ================================================== -->
 <main>
 
+    @include('user.layouts.mobile_sideBar')
+
     @include('user.layouts.panier')
 
     <!-- product_section - start

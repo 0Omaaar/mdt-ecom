@@ -93,8 +93,8 @@
 									<li>
 										<button type="button" class="cart_btn">
 											<i class="fal fa-shopping-cart"></i>
-											<span class="btn_badge">2</span>
-										</button>
+											<span class="btn_badge" style="background-color: #0063D1">@yield('itemsCount')</span>
+ 										</button>
 									</li>
 									<li><button type="button" class="mobile_menu_btn"><i class="far fa-bars"></i></button></li>
 								</ul>
@@ -193,7 +193,7 @@
                     <div class="footer_widget footer_about">
                         <div class="brand_logo mb_30">
                             <a href="{{ route('home') }}">
-                                <img src="{{asset('assets/user/images/logo/logo_17_1x.png')}}" srcset="{{asset('assets/user/images/logo/logo_17_2x.png')}}" alt="logo_introuvable">
+                                <img src="{{asset('assets/user/images/logo/logo_16_2x.png')}}" srcset="{{asset('assets/user/images/logo/logo_16_2x.png')}} 2x" alt="logo_introuvable">
                             </a>
                         </div>
                         <p class="mb_30">
