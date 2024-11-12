@@ -10832,7 +10832,7 @@ button {
   border: 1px solid #ececec;
 }
 .electronic_product_biglistlayout .item_image img {
-  max-height: 180px;
+  max-height: 225px;
 }
 .electronic_product_biglistlayout .child_items_nav {
   left: 0px;
@@ -10968,7 +10968,7 @@ button {
   border: 1px solid #ececec;
 }
 .electronic_product_small .item_image img {
-  max-height: 100px;
+  max-height: 125px;
   transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .electronic_product_small:hover .item_image img {
