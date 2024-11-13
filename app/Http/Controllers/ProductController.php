@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $products = Product::all();
         $categories = Category::all();
         $subCategories = SubCategory::all();
@@ -24,26 +25,41 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products', 'categories', 'subCategories', 'brands'));
     }
 
-    public function show($id){
-        try{
+    public function show($id)
+    {
+        try {
             $product = Product::findOrFail($id);
 
             return view('admin.products.show', compact('product'));
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->route('admin.products.index');
         }
     }
 
-    public function create(){
+    public function create()
+    {
         $subCategories = SubCategory::all();
         $brands = Brand::all();
 
         return view('admin.products.create', compact('subCategories', 'brands'));
     }
 
-    public function store(Request $request){
+    public function edit($id)
+    {
+        $categories = Category::all();
+        $brands = Brand::all();
+        $subCategories = SubCategory::all();
+        $product = Product::findOrFail($id);
+        $images = $product->images;
+        $image = $product->image;
 
-       try{
+        return view('admin.products.edit', compact('categories', 'brands', 'subCategories', 'product', 'images', 'image'));
+    }
+
+    public function store(Request $request)
+    {
+
+        try {
             $request->validate([
                 'name' => 'required|string|max:255',
                 'brief_description' => 'nullable',
@@ -65,7 +81,7 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
-            $product->brand_id= $request->input('brand_id');
+            $product->brand_id = $request->input('brand_id');
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
             $product->top_ventes = $request->has('top_ventes');
@@ -80,7 +96,7 @@ class ProductController extends Controller
 
             $temporaryImages = TemporaryImage::all();
 
-            foreach($temporaryImages as $temporaryImage){
+            foreach ($temporaryImages as $temporaryImage) {
                 $imagePath = public_path('images/tmp/' . $temporaryImage->folder . '/' . $temporaryImage->file);
 
                 $newFolderPath = public_path('images/products/' . $product->id);
@@ -91,14 +107,14 @@ class ProductController extends Controller
 
                 $newImagePath = $newFolderPath . '/' . $temporaryImage->file;
 
-                if(File::exists($imagePath)){
+                if (File::exists($imagePath)) {
                     File::copy($imagePath, $newImagePath);
                     File::delete($imagePath);
                 }
 
-                if($temporaryImage->miniature == 1){
+                if ($temporaryImage->miniature == 1) {
                     $product->image = $temporaryImage->file;
-                }else{
+                } else {
                     $image = new Image();
                     $image->path = $temporaryImage->file;
                     $image->product_id = $product->id;
@@ -106,7 +122,7 @@ class ProductController extends Controller
                 }
 
                 $folderPath = public_path('images/tmp/' . $temporaryImage->folder);
-                if(File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)){
+                if (File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)) {
                     File::deleteDirectory($folderPath);
                 }
 
@@ -116,17 +132,19 @@ class ProductController extends Controller
             $product->save();
 
             return redirect()->route('admin.products.index')->with('success', 'Produit ajouté avec succès');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $folderPath = public_path('images/tmp/');
-            if(File::isDirectory($folderPath)){
+            if (File::isDirectory($folderPath)) {
                 File::cleanDirectory($folderPath);
             }
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de l\'ajout de produit.');
         }
     }
 
-    public function update(Request $request, $id){
-        try{
+
+    public function update(Request $request, $id)
+    {
+        try {
 
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -159,32 +177,63 @@ class ProductController extends Controller
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;
 
+            if ($request->hasFile('image')) {
+                $oldImagePath = public_path('images/products/' . $product->id . '/' . $product->image);
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
+
+                $imageName = uniqid() . '.' . $request->image->extension();
+                $request->image->move(public_path('images/products/' . $product->id . '/'), $imageName);
+                $product->image = $imageName;
+            }
+
+            if ($request->hasFile('images')) {
+                foreach ($product->images as $oldImage) {
+                    $oldImagePath = public_path('images/products/'.$product->id.'/'.$oldImage->path);
+                    if (File::exists($oldImagePath)) {
+                        File::delete($oldImagePath);
+                    }
+                    $oldImage->delete();
+                }
+
+                foreach ($request->file('images') as $image) {
+                    $imageName = uniqid() . '.' . $image->extension();
+                    $image->move(public_path('images/products/'.$product->id.'/'), $imageName);
+
+                    $product->images()->create(['path' => $imageName]);
+                }
+            }
+
+
             $product->save();
 
             return redirect()->route('admin.products.index')->with('success', 'Produit modifié avec succès');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de la modification du Produit.');
         }
     }
 
-    public function destroy($id){
-        try{
+    public function destroy($id)
+    {
+        try {
             $product = Product::findOrFail($id);
-            if($product != null){
-                if($product->image != null && File::exists(public_path('images/products/' . $product->id . '/' . $product->image))){
+            if ($product != null) {
+                if ($product->image != null && File::exists(public_path('images/products/' . $product->id . '/' . $product->image))) {
                     File::delete(public_path('images/products/' . $product->id . '/' . $product->image));
                 }
 
-                if($product->images->count() > 0){
-                    foreach($product->images as $image){
-                        if(File::exists(public_path('images/products/' . $product->id . '/' . $image->path))){
+                if ($product->images->count() > 0) {
+                    foreach ($product->images as $image) {
+                        if (File::exists(public_path('images/products/' . $product->id . '/' . $image->path))) {
                             File::delete(public_path('images/products/' . $product->id . '/' . $image->path));
                         }
                     }
                 }
 
                 $folderPath = public_path('images/products/' . $product->id);
-                if(File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)){
+                if (File::isDirectory($folderPath) && File::isEmptyDirectory($folderPath)) {
                     File::deleteDirectory($folderPath);
                 }
 
@@ -192,8 +241,7 @@ class ProductController extends Controller
 
                 return redirect()->route('admin.products.index')->with('success', 'Produit supprimé avec succès');
             }
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de suppression du Produit.');
         }
     }

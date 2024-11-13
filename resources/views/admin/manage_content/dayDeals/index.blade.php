@@ -37,7 +37,8 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Liste Produits Avec Option <b>Deals du Jour</b></h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Liste Produits Avec Option <b>Deals du Jour</b>
+                    </h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -48,19 +49,6 @@
                                 <li class="breadcrumb-item active">Gestion
                                 </li>
                             </ol>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-header-right col-md-6 col-12">
-                    <div class="btn-group float-md-right">
-                        <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Action</button>
-                        <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i
-                                    class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item"
-                                href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item"
-                                href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
-                                    class="fa fa-cog mr-1"></i> Settings</a>
                         </div>
                     </div>
                 </div>
@@ -123,18 +111,22 @@
                                                     <tr>
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
-                                                            @if($product->image != null)
-                                                                <img src="{{ asset('images/products/'. $product->id . '/' . $product->image) }}"
-                                                                style="border-radius: 4%"
-                                                                alt="{{ $product->name }}" width="50" height="50">
+                                                            @if ($product->image != null)
+                                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                                    style="border-radius: 4%" alt="{{ $product->name }}"
+                                                                    width="50" height="50">
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
-                                                            @endif</td>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $product->name }}</td>
-                                                        <td><span class="badge badge-dark badge-lg">{{ $product->sku }}</span></td>
+                                                        <td><span
+                                                                class="badge badge-dark badge-lg">{{ $product->sku }}</span>
+                                                        </td>
                                                         <td>{{ $product->price }}</td>
-                                                        <td><span class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}"
-                                                            >{{ $product->stock_status }}</span></td>
+                                                        <td><span
+                                                                class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}">{{ $product->stock_status }}</span>
+                                                        </td>
                                                         <td>{{ $product->category->name }}</td>
                                                         <td>{{ $product->subcategory->name }}</td>
                                                         <td>
@@ -146,12 +138,16 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <a href="{{ route('admin.products.show', $product->id) }}" class="dropdown-item"><i
-                                                                        class="la la-eye"></i> Voir Détails</a>
-                                                                    <button class="dropdown-item" data-toggle="modal" data-target="#editProduct{{ $product->id }}"><i
-                                                                        class="la la-pencil"></i> Modifier</button>
-                                                                    <button data-toggle="modal" data-target="#deleteProduct{{ $product->id }}" class="dropdown-item"><i
-                                                                            class="la la-trash"></i> Supprimer</button>
+                                                                    <a href="{{ route('admin.products.show', $product->id) }}"
+                                                                        class="dropdown-item"><i class="la la-eye"></i>
+                                                                        Voir Détails</a>
+                                                                    <button class="dropdown-item" data-toggle="modal"
+                                                                        data-target="#editProduct{{ $product->id }}"><i
+                                                                            class="la la-pencil"></i> Modifier</button>
+                                                                    <button data-toggle="modal"
+                                                                        data-target="#deleteProduct{{ $product->id }}"
+                                                                        class="dropdown-item"><i class="la la-trash"></i>
+                                                                        Supprimer</button>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -181,8 +177,6 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
-
 @endsection
 
 
@@ -222,7 +216,7 @@
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        function removePreviewAdd(){
+        function removePreviewAdd() {
             var output = document.getElementById('image-preview');
             output.src = '';
             output.style.display = 'none';
@@ -244,6 +238,5 @@
             output.src = '';
             // output.style.display = 'none';
         }
-
     </script>
 @endsection

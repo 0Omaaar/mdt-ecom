@@ -31,7 +31,7 @@
     <!-- END: Custom CSS-->
 
     <style>
-        .modal-edit{
+        .modal-edit {
             width: 165%;
         }
     </style>
@@ -112,7 +112,7 @@
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
                                                             @endif
                                                         </td>
-                                                        <td>{{ Str::limit($product->name, 30, '...') }}</td>
+                                                        <td>{{ Str::limit($product->name, 15, '...') }}</td>
                                                         <td><span
                                                                 class="badge badge-dark badge-lg">{{ $product->sku }}</span>
                                                         </td>
@@ -121,7 +121,7 @@
                                                                 class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}">{{ $product->stock_status }}</span>
                                                         </td>
                                                         <td>{{ $product->category->name }}</td>
-                                                        <td>{{ $product->subcategory->name }}</td>
+                                                        <td>{{ Str::limit($product->subcategory->name, 10, '...') }}</td>
                                                         <td>
                                                             <span class="dropdown">
                                                                 <button id="btnSearchDrop2" type="button"
@@ -134,9 +134,9 @@
                                                                     <a href="{{ route('admin.products.show', $product->id) }}"
                                                                         class="dropdown-item"><i class="la la-eye"></i> Voir
                                                                         Détails</a>
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#editProduct{{ $product->id }}"><i
-                                                                            class="la la-pencil"></i> Modifier</button>
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('admin.products.edit', $product->id) }}"><i
+                                                                            class="la la-pencil"></i> Modifier</a>
                                                                     <button data-toggle="modal"
                                                                         data-target="#deleteProduct{{ $product->id }}"
                                                                         class="dropdown-item"><i class="la la-trash"></i>
@@ -148,8 +148,6 @@
                                                         {{-- Delete Product Modal --}}
                                                         @include('admin.products.delete')
 
-                                                        {{-- Edit Product Modal --}}
-                                                        @include('admin.products.edit')
 
                                                     </tr>
                                                 @endforeach

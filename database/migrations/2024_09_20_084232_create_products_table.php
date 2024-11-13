@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subcategory_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->boolean('selection')->nullable()->default(false);
             $table->boolean('nouveautes')->nullable()->default(false);
             $table->boolean('top_ventes')->nullable()->default(false);

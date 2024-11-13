@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ClearTmpController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
@@ -116,10 +117,17 @@ Route::get('/admin/order/payments/rembourser/{id}', [OrderController::class, 're
 Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');
 Route::delete('/delete', [DeleteTemporaryImageController::class, 'delete'])->name('delete');
 
+Route::post('/upload/update/{id}', [ProductController::class, 'upload_update'])->name('upload.update');
+Route::delete('/delete/update/{id}', [ProductController::class, 'delete_update'])->name('delete.update');
+
+Route::post('/clear-temp', [ClearTmpController::class, 'clearTempFolder'])->name('clear.temp');
+
+
 //products
 Route::get('/admin/products/index', [ProductController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.products.index');
 Route::get('/admin/product/{id}', [ProductController::class, 'show'])->middleware('auth', 'isAdmin')->name('admin.products.show');
 Route::get('/admin/products/create', [ProductController::class, 'create'])->middleware('auth', 'isAdmin')->name('admin.products.create');
+Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->middleware('auth', 'isAdmin')->name('admin.products.edit');
 Route::post('/admin/products/store', [ProductController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.products.store');
 Route::put('/admin/products/update/{id}', [ProductController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.products.update');
 Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.products.destroy');

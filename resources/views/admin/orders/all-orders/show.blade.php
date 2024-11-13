@@ -64,14 +64,6 @@
                     </div>
                 </div>
             </div>
-            <div class="content-header-right col-md-6 col-12">
-                <div class="btn-group float-md-right">
-                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                    <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="content-detached content-right">
             <div class="content-body">
