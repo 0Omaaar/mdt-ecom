@@ -109,6 +109,10 @@
                                                             </span>
                                                         </td>
                                                     </tr>
+                                                     {{-- Delete Review Modal --}}
+                                                     @include('admin.newsletters.delete')
+
+
                                                 @endforeach
                                             </tbody>
                                             @include('admin.newsletters.sendMail')
