@@ -29,7 +29,8 @@ class ContactController extends Controller
     }
 
 
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $products = Product::query();
@@ -38,12 +39,19 @@ class ContactController extends Controller
         $cart = $this->getUserCart();
 
 
-        return view('user.contact', compact( 'categories','subcategories','products','brands','randomProducts'
-            , 'cart'));
+        return view('user.contact', compact(
+            'categories',
+            'subcategories',
+            'products',
+            'brands',
+            'randomProducts',
+            'cart'
+        ));
     }
 
-    public function store(Request $request){
-        try{
+    public function store(Request $request)
+    {
+        try {
             DB::beginTransaction();
             $request->validate([
                 'name' => 'string|max:255',
@@ -72,23 +80,24 @@ class ContactController extends Controller
             DB::commit();
 
             return redirect()->back()->with('success', 'Votre Message est envoyé avec succès, merci !');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
-            dd($e->getMessage());
-            return redirect()->back()->with('error', 'Une erreur est survenue lors d ajout de votre Message !');
+            return redirect()->back()->with('error', 'Une erreur est survenue lors d\'ajout de votre Message !');
         }
     }
 
 
     // admin functions
 
-    public function admin_index(){
+    public function admin_index()
+    {
         $contacts = Contact::latest()->get();
 
         return view('admin.contact.index', compact('contacts'));
     }
 
-    public function answerContactWithMail(Request $request, $id){
+    public function answerContactWithMail(Request $request, $id)
+    {
         $contact = Contact::findOrFail($id);
 
         Mail::to($contact->email)->queue(new ContactMail($contact, $request->response));
@@ -99,22 +108,24 @@ class ContactController extends Controller
         return redirect()->back()->with('success', 'Votre Réponse est envoyée avec succès');
     }
 
-    public function destroy($id){
-        try{
+    public function destroy($id)
+    {
+        try {
             $contact = Contact::findOrfail($id);
             $contact->delete();
 
             return redirect()->back()->with('success', 'Message supprimé avec succès');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de suppression de message !');
         }
     }
 
-    public function getUserCart(){
+    public function getUserCart()
+    {
         $cart = null;
-        if(Auth::check()){
+        if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
-        }else{
+        } else {
             $cart = Cart::where('session_id', $this->session_id)->first();
         }
         return $cart;

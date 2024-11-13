@@ -15,6 +15,7 @@ use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageContentController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SettingsContoller;
@@ -33,6 +34,7 @@ Route::get('/product/{id}', [HomeController::class, 'product'])->name('product')
 Route::post('/send/review/{id}', [ReviewController::class, 'store'])->name('review.store');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
 
 
 
@@ -116,9 +118,6 @@ Route::get('/admin/order/payments/rembourser/{id}', [OrderController::class, 're
 //files upload
 Route::post('/upload', [UploadTemporaryImageController::class, 'upload'])->name('upload');
 Route::delete('/delete', [DeleteTemporaryImageController::class, 'delete'])->name('delete');
-
-Route::post('/upload/update/{id}', [ProductController::class, 'upload_update'])->name('upload.update');
-Route::delete('/delete/update/{id}', [ProductController::class, 'delete_update'])->name('delete.update');
 
 Route::post('/clear-temp', [ClearTmpController::class, 'clearTempFolder'])->name('clear.temp');
 
@@ -204,3 +203,11 @@ Route::get('/admin/manage/content/index', [ManageContentController::class, 'inde
 Route::get('/admin/settings/index', [SettingsContoller::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.settings.index');
 Route::put('/admin/settings/updateInfos', [SettingsContoller::class, 'updateAdminInfos'])->middleware('auth', 'isAdmin')->name('admin.settings.updateInfos');
 Route::post('/admin/settings/updateEmailNotifs', [SettingsContoller::class, 'updateEmailNotifs'])->middleware('auth', 'isAdmin')->name('admin.settings.updateEmailNotifs');
+
+
+Route::get('/admin/newsletter/index', [NewsletterController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.newsletter.index');
+Route::delete('/admin/newsletter/destroy/{id}', [NewsletterController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.newsletter.destroy');
+Route::post('/admin/newsletter/sendMail', [NewsletterController::class, 'sendMail'])->middleware('auth', 'isAdmin')->name('admin.newsletter.mail');
+Route::get('/test', function(){
+    return view('emails.newsletter');
+});

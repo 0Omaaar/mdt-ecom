@@ -210,7 +210,6 @@ class ProductController extends Controller
 
             return redirect()->route('admin.products.index')->with('success', 'Produit modifié avec succès');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de la modification du Produit.');
         }
     }

@@ -666,36 +666,37 @@
 
     <!-- electronic_newsletter - start
    ================================================== -->
-    <section class="electronic_newsletter clearfix">
-        <div class="container maxw_1600">
-            <div
-                class="row align-items-center justify-content-lg-between justify-content-md-center justify-content-sm-center">
-                <div class="col-lg-3 col-md-7 col-sm-9 col-xs-12">
-                    <div class="title_wrap">
-                        <i class="fal fa-paper-plane"></i>
-                        <h2>Sign up for Newsletter</h2>
-                        <p class="mb-0">...and receive $20 coupon for first shopping.</p>
-                    </div>
+   <section class="electronic_newsletter clearfix">
+    <div class="container maxw_1600">
+        <div class="row align-items-center justify-content-lg-between justify-content-md-center justify-content-sm-center">
+            <div class="col-lg-3 col-md-7 col-sm-9 col-xs-12">
+                <div class="title_wrap">
+                    <i class="fal fa-paper-plane"></i>
+                    <h2>Inscrivez-vous à notre newsletter</h2>
+                    <p class="mb-0">...et recevez un coupon de réduction pour votre premier achat.</p>
                 </div>
+            </div>
 
-                <div class="col-lg-5 col-md-7 col-sm-9 col-xs-12">
-                    <form action="#">
-                        <div class="form_item">
-                            <input type="email" name="email" placeholder="Enter your email address">
-                            <button type="submit" class="custom_btn bg_electronic_blue">Sign up</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-lg-3 col-md-7 col-sm-9 col-xs-12">
-                    <div class="payment_mathoud">
-                        <p>WE USING SAFE PAYMENTS</p>
-                        <img src="{{ asset('assets/user/images/payment_methods_01.png') }}" alt="image_not_found">
+            <div class="col-lg-5 col-md-7 col-sm-9 col-xs-12">
+                <form action="{{ route('newsletter.store') }}" method="POST">
+                    @csrf
+                    <div class="form_item">
+                        <input type="email" name="email" placeholder="Entrez votre adresse e-mail">
+                        <button type="submit" class="custom_btn bg_electronic_blue">S'inscrire</button>
                     </div>
+                </form>
+            </div>
+
+            <div class="col-lg-3 col-md-7 col-sm-9 col-xs-12">
+                <div class="payment_mathoud">
+                    <p>NOUS UTILISONS DES PAIEMENTS SÉCURISÉS</p>
+                    <img src="{{ asset('assets/user/images/payment_methods_01.png') }}" alt="image_not_found">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     <!-- electronic_newsletter - end
    ================================================== -->
 

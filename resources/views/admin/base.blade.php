@@ -227,6 +227,9 @@
                             class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Contact
                             Messages</span></a>
                 </li>
+                <li class=" nav-item"><a href="{{ route('admin.newsletter.index') }}"><i
+                            class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">NewsLetters</span></a>
+                </li>
 
                 <li class=" navigation-header"><span data-i18n="User Interface">Gestion Contenu</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
