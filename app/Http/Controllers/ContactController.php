@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
+
 
 class ContactController extends Controller
 {
@@ -53,6 +55,24 @@ class ContactController extends Controller
     {
         try {
             DB::beginTransaction();
+
+            $recaptchaResponse = $request->input('g-recaptcha-response');
+            if (is_null($recaptchaResponse)) {
+                return redirect()->back()->with('error', 'Please complete the reCAPTCHA.');
+            }
+
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => config('services.recaptcha.secret'),
+                'response' => $recaptchaResponse,
+                'remoteip' => $request->ip(),
+            ]);
+
+            $result = $response->json();
+            if (!$result['success']) {
+                return back()->with('error', 'reCAPTCHA validation failed.');
+            }
+
+
             $request->validate([
                 'name' => 'string|max:255',
                 'email' => 'email',

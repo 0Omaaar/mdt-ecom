@@ -92,6 +92,9 @@
                                 <div class="form_item">
                                     <textarea name="message" placeholder="Votre Message"></textarea>
                                 </div>
+
+                                <div class="g-recaptcha mt-4" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+
                                 <button type="submit" class="custom_btn bg_default_red text-uppercase">Envoyer</button>
                             </form>
                         </div>
