@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/user/css/scratch.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    
+
     <script async src="https://www.google.com/recaptcha/api.js"></script>
 
 
@@ -435,18 +435,18 @@
             if (selectedCategoryId) {
                 let currentPath = window.location.pathname;
                 let url;
-                
-                if (currentPath === '/public/' || currentPath === '/public/products' || currentPath === '/public/cart' || currentPath ===
-                    '/public/checkout' ||
-                    currentPath === '/public/order-completed' || currentPath === '/public/my-orders') {
+
+                if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath ===
+                    '/checkout' ||
+                    currentPath === '/order-completed' || currentPath === '/my-orders') {
                     if (!currentPath.includes('/products')) {
-                        url = new URL(window.location.origin + '/public/products');
+                        url = new URL(window.location.origin + '/products');
                     } else {
-                        url = new URL(window.location.href + '/public');
+                        url = new URL(window.location.href);
                     }
                 } else if (currentPath.includes('/product/')) {
                     if (!currentPath.includes('/products')) {
-                        url = new URL(window.location.origin + '/public/products');
+                        url = new URL(window.location.origin + '/products');
                     } else {
                         url = new URL(window.location.href);
                     }
@@ -473,17 +473,17 @@
             let currentPath = window.location.pathname;
             let url;
 
-            if (currentPath === '/public/' || currentPath === '/public/products' || currentPath === '/public/cart' || currentPath ===
-                '/public/checkout' ||
-                currentPath === '/public/order-completed' || currentPath === '/public/my-orders') {
+            if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath ===
+                '/checkout' ||
+                currentPath === '/order-completed' || currentPath === '/my-orders') {
                 if (!currentPath.includes('/products')) {
-                    url = new URL(window.location.origin + '/public/products');
+                    url = new URL(window.location.origin + '/products');
                 } else {
                     url = new URL(window.location.href);
                 }
             } else if (currentPath.includes('/product/')) {
                 if (!currentPath.includes('/products')) {
-                    url = new URL(window.location.origin + '/public/products');
+                    url = new URL(window.location.origin + '/products');
                 } else {
                     url = new URL(window.location.href);
                 }
