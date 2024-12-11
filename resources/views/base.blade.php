@@ -65,7 +65,7 @@
         }
 
         .logo_image_mobile {
-            max-width: 70%;
+            max-width: 88%;
         }
 
         @media (max-width: 768px) {
@@ -84,7 +84,66 @@
             }
 
             .logo_image_mobile {
-                max-width: 135%;
+                max-width: 94%;
+            }
+        }
+
+        .preload {
+            overflow: hidden;
+        }
+
+        .loader-wrapper {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 6px solid transparent;
+            border-top: 6px solid #0063D1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-inner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #007bff, #0063D1);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
             }
         }
     </style>
@@ -92,7 +151,7 @@
 </head>
 
 
-<body class="home_electronic">
+<body class="home_electronic preload">
 
     @php
         use Illuminate\Support\Str;
@@ -119,9 +178,11 @@
                     <div class="col-lg-3">
                         <div class="brand_logo">
                             <a class="brand_link" href="{{ route('home') }}">
-                                <img src="{{ asset('assets/user/images/logo/logo_16_1x.png') }}"
+                                {{-- <img src="{{ asset('assets/user/images/logo/logo_16_1x.png') }}"
                                     srcset="{{ asset('assets/user/images/logo/logo_16_2x.png') }}" alt="logo_not_found"
-                                    class="logo_image_mobile">
+                                    class="logo_image_mobile"> --}}
+                                <img src="{{ asset('assets/logo.png') }}" srcset="{{ asset('assets/logo.png') }}"
+                                    alt="logo_not_found" class="logo_image_mobile">
                             </a>
 
                             <ul class="mh_action_btns ul_li clearfix">
@@ -227,7 +288,9 @@
     @yield('content')
 
 
-
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
 
     <!-- footer_section - start -->
     <footer class="footer_section electronic_footer clearfix">
@@ -505,6 +568,15 @@
             if (productName) {
                 document.getElementById('search').value = productName;
             }
+        });
+    </script>
+
+    <script>
+        $(window).on("load", function() {
+            $(".loader-wrapper").fadeOut("slow");
+
+            $("body").removeClass("preload");
+
         });
     </script>
 

@@ -109,7 +109,7 @@
                                     <li><a href="javascript:void(0)">Deals du jour</a></li>
                                     <li><a href="javascript:void(0)">Notre sélection</a></li>
                                     <li><a h href="javascript:void(0)">Nouvelle arrivage</a></li>
-                                    @foreach ($categories as $category)
+                                    @foreach ($categories->take(5) as $category)
                                         <li class="{{ $category->subCategories->count() > 0 ? 'has_child' : '' }}">
                                             <a href="javascript:void(0)" class="category-link"
                                                 data-id="{{ $category->id }}">{{ $category->name }}</a>
