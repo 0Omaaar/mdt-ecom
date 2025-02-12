@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Product;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
@@ -74,10 +75,64 @@ class DolibarrService
         }
     }
 
+    public function getProductDetails($id)
+    {
+        try {
+            $response = $this->client->get("http://192.168.1.56/api/index.php/products/{$id}", [
+                'headers' => [
+                    'DOLAPIKEY' => $this->apiKey,
+                ]
+            ]);
+
+            $product = json_decode($response->getBody(), true);
+
+            if (empty($product)) {
+                return []; // Return an empty array if the product is not found
+            }
+
+
+            // Fetching the documents (images) for the product
+            $documentsResponse = $this->client->get("http://192.168.1.56/api/index.php/documents?modulepart=product&id={$id}&ref={$product['ref']}", [
+                'headers' => [
+                    'DOLAPIKEY' => $this->apiKey,
+                ]
+            ]);
+
+            $product['documents'] = json_decode($documentsResponse->getBody(), true);
+
+            // Processing the documents to construct image URLs
+            $images = [];
+
+
+            foreach ($product['documents'] as $document) {
+                if ($document['type'] === 'file') {
+                    // Construct the image URL
+                    $imageUrl = "http://192.168.1.56/viewimage.php?modulepart=product&file={$product['ref']}/{$document['name']}";
+
+                    // Add the image URL to the images array
+                    $images[] = [
+                        'name' => $document['name'],
+                        'url' => $imageUrl,
+                        'size' => $document['size'],
+                    ];
+                }
+            }
+
+
+
+            //Merging the images into the product data
+            $product['images'] = $images;
+
+            return $product;
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+
 
     public function storeVisibleProductsToDatabase($products)
     {
-        // dd($products);
         foreach ($products as $product) {
             try {
                 // Map API data to database fields
@@ -100,19 +155,52 @@ class DolibarrService
                     'best_price' => false,
                 ];
 
+                //images implementation
+                if (!empty($product['documents'])) {
+                    $this->downloadAndStoreImages($product['ref'], $product['documents']);
+                    $data['image'] = "products/{$product['ref']}/" . basename($product['documents'][0]['name']);
+                }
+
                 // Save or update the product based on SKU
                 Product::updateOrCreate(
                     ['sku' => $data['sku']],
                     $data
                 );
-
-
-
             } catch (\Exception $e) {
-                 $e->getMessage();
+                $e->getMessage();
             }
         }
+    }
 
+    private function downloadAndStoreImages(string $productRef, array $documents): void
+    {
+        
+        $basePath = public_path('products/' . $productRef);
+
+        // Create the directory if it doesn't exist
+        if (!file_exists($basePath)) {
+            mkdir($basePath, 0755, true);
+        }
+
+        foreach ($documents as $document) {
+            try {
+                // Construct the image URL
+                $imageUrl = "http://192.168.1.56/viewimage.php?modulepart=product&file={$productRef}/{$document['name']}";
+
+                // Fetch the image content
+                $response = $this->client->get($imageUrl, [
+                    'headers' => [
+                        'DOLAPIKEY' => $this->apiKey,
+                    ],
+                ]);
+
+                // Save the image to the local directory
+                $filePath = $basePath . '/' . basename($document['name']);
+                file_put_contents($filePath, $response->getBody());
+            } catch (\Exception $e) {
+                $e->getMessage();
+            }
+        }
     }
 
 

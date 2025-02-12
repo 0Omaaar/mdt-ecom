@@ -33,8 +33,6 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
-
-
 @endsection
 
 @php
@@ -42,99 +40,135 @@
 @endphp
 
 @section('content')
-<div class="app-content content">
-    <div class="content-wrapper">
-        <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                <h3 class="content-header-title mb-0 d-inline-block">Settings</h3>
-                <div class="row breadcrumbs-top d-inline-block">
-                    <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Acceuil</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.settings.index') }}">Paramètres</a>
-                            </li>
-                        </ol>
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                    <h3 class="content-header-title mb-0 d-inline-block">Settings</h3>
+                    <div class="row breadcrumbs-top d-inline-block">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Acceuil</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.settings.index') }}">Paramètres</a>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="content-body">
-            <!-- Row separator layout section start -->
-            <section id="row-separator-form-layouts">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-content collapse show">
-                                <div class="card-body">
-                                    <form class="form form-horizontal row-separator" method="POST" action="{{ route('admin.settings.updateInfos') }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-body">
-                                            <h4 class="form-section"><i class="la la-user"></i>Informations Personnelles</h4>
+            <div class="content-body">
+                <!-- Row separator layout section start -->
+                <section id="row-separator-form-layouts">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <form class="form form-horizontal row-separator" method="POST"
+                                            action="{{ route('admin.settings.updateInfos') }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-body">
+                                                <h4 class="form-section"><i class="la la-user"></i>Informations Personnelles
+                                                </h4>
                                                 <div class="form-group row mx-auto">
-                                                    <label class="col-md-3 label-control" for="projectinput1">Nom Complet</label>
+                                                    <label class="col-md-3 label-control" for="projectinput1">Nom
+                                                        Complet</label>
                                                     <div class="col-md-9">
-                                                        <input type="text" id="projectinput1" class="form-control" value="{{ $admin->name }}" name="name">
+                                                        <input type="text" id="projectinput1" class="form-control"
+                                                            value="{{ $admin->name }}" name="name">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mx-auto">
                                                     <label class="col-md-3 label-control" for="projectinput2">Email</label>
                                                     <div class="col-md-9">
-                                                        <input type="email" id="projectinput2" class="form-control" value="{{ $admin->email }}" name="email">
+                                                        <input type="email" id="projectinput2" class="form-control"
+                                                            value="{{ $admin->email }}" name="email">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row mx-auto">
-                                                    <label class="col-md-3 label-control" for="projectinput3">Ancien mot de Passe</label>
+                                                    <label class="col-md-3 label-control" for="projectinput3">Ancien mot de
+                                                        Passe</label>
                                                     <div class="col-md-9">
-                                                        <input type="password" id="projectinput3" class="form-control" placeholder="Votre Ancien mot de passe" name="old_password">
+                                                        <input type="password" id="projectinput3" class="form-control"
+                                                            placeholder="Votre Ancien mot de passe" name="old_password">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row mx-auto last">
-                                                    <label class="col-md-3 label-control" for="projectinput4">Nouveau mot de Passe</label>
+                                                    <label class="col-md-3 label-control" for="projectinput4">Nouveau mot
+                                                        de Passe</label>
                                                     <div class="col-md-9">
-                                                        <input type="password" id="projectinput4" class="form-control" placeholder="Votre Nouveau mot de passe" name="new_password">
+                                                        <input type="password" id="projectinput4" class="form-control"
+                                                            placeholder="Votre Nouveau mot de passe" name="new_password">
                                                     </div>
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary" style="margin-left: 45%;">
                                                     <i class="la la-check"></i> Save
                                                 </button>
-                                        </div>
+                                            </div>
 
-                                    </form>
+                                        </form>
 
 
-                                    <form class="form form-horizontal row-separator mt-2" method="POST" action="{{ route('admin.settings.updateEmailNotifs') }}">
-                                        @csrf
-                                        @method('POST')
-                                        <div class="form-body">
-                                            <h4 class="form-section"><i class="la la-user"></i>Adresse email pour recevoir les notifications</h4>
+                                        <form class="form form-horizontal row-separator mt-2" method="POST"
+                                            action="{{ route('admin.settings.updateEmailNotifs') }}">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="form-body">
+                                                <h4 class="form-section"><i class="la la-user"></i>Adresse email pour
+                                                    recevoir les notifications</h4>
                                                 <div class="form-group row mx-auto">
-                                                    <label class="col-md-3 label-control" for="projectinput1">Email</label>
+                                                    <label class="col-md-3 label-control"
+                                                        for="projectinput1">Email</label>
                                                     <div class="col-md-9">
-                                                        <input type="email" id="projectinput1" class="form-control" value="{{ $emailNotifications->content }}" name="content">
+                                                        <input type="email" id="projectinput1" class="form-control"
+                                                            value="{{ $emailNotifications->content }}" name="content">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary" style="margin-left: 45%;">
                                                     <i class="la la-check"></i> Save
                                                 </button>
-                                        </div>
+                                            </div>
 
-                                    </form>
+                                        </form>
+
+
+                                        <form class="form form-horizontal row-separator mt-2" action="javascript:void(0)">
+                                            <div class="form-body">
+                                                <h4 class="form-section"><i class="la la-user"></i>Update System</h4>
+                                                <div class="form-group row mx-auto">
+                                                    <label class="col-md-3 label-control"
+                                                        for="projectinput1">Produits</label>
+                                                    <div class="col-md-9">
+                                                        <a href="{{ route('dolibarr.products') }}"
+                                                            class="btn btn-info">
+                                                            <i class="la la-eye"></i> Voir Produits
+                                                        </a>
+                                                        <a href="{{ route('dolibarr.products.store') }}"
+                                                            class="btn btn-success">
+                                                            <i class="la la-check"></i> Update
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </section>
+                </section>
 
+            </div>
         </div>
     </div>
-</div>
 @endsection
 
 

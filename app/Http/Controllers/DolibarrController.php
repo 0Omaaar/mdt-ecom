@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\DolibarrService;
+use Exception;
 use Illuminate\Http\Request;
 
 class DolibarrController extends Controller
@@ -16,14 +17,32 @@ class DolibarrController extends Controller
 
     public function getProducts()
     {
-        $products = $this->dolibarrService->getProducts();
-
-        return response()->json($products);
+        try {
+            $products = $this->dolibarrService->getProducts();
+            return view('admin.settings.dolibarr.products', compact('products'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
-    public function storeVisibleProductsToDatabase(){
-        $products = $this->dolibarrService->getProducts();
-        $this->dolibarrService->storeVisibleProductsToDatabase($products);
-        return response()->json(['message' => 'Products stored successfully']);
+    public function getProductDetails($id)
+    {
+        try {
+            $product = $this->dolibarrService->getProductDetails($id);
+            return view('admin.settings.dolibarr.product', compact('product'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function storeVisibleProductsToDatabase()
+    {
+        try {
+            $products = $this->dolibarrService->getProducts();
+            $this->dolibarrService->storeVisibleProductsToDatabase($products);
+            return redirect()->back()->with('success', 'Products stored successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

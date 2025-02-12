@@ -230,5 +230,7 @@ Route::get('/test', function(){
 
 
 //dolibarr
-Route::get('/dolibarr/products', [DolibarrController::class, 'getProducts'])->name('dolibarr.products');
 Route::get('/dolibarr/products/store', [DolibarrController::class, 'storeVisibleProductsToDatabase'])->name('dolibarr.products.store');
+
+Route::get('/dolibarr/products', [DolibarrController::class, 'getProducts'])->name('dolibarr.products');
+Route::get('/dolibarr/products/{id}',[DolibarrController::class, 'getProductDetails'])->name('dolibarr.products.details');
