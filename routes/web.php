@@ -13,6 +13,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UploadTemporaryImageController;
 use App\Http\Controllers\DeleteTemporaryImageController;
+use App\Http\Controllers\DolibarrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KartiController;
 use App\Http\Controllers\ManageContentController;
@@ -38,7 +39,7 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
 Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
 
 
-//KARTI API 
+//KARTI API
 Route::prefix('giftcards')->group(function () {
     Route::get('/brands', [KartiController::class, 'getBrands'])->name('giftcards.brands');
     Route::get('/denoms/{brandId}', [KartiController::class, 'getDenoms'])->name('giftcards.denoms');
@@ -219,3 +220,15 @@ Route::post('/admin/newsletter/sendMail', [NewsletterController::class, 'sendMai
 Route::get('/test', function(){
     return view('emails.newsletter');
 });
+
+
+
+
+
+
+
+
+
+//dolibarr
+Route::get('/dolibarr/products', [DolibarrController::class, 'getProducts'])->name('dolibarr.products');
+Route::get('/dolibarr/products/store', [DolibarrController::class, 'storeVisibleProductsToDatabase'])->name('dolibarr.products.store');
