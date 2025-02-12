@@ -19,16 +19,16 @@
 <!-- Includes CSS for Dolibarr theme -->
 <link rel="stylesheet" type="text/css" href="/theme/eldy/style.css.php?lang=fr_FR&amp;theme=eldy&amp;entity=1&amp;layout=classic&amp;version=19.0.0&amp;revision=48">
 <!-- Includes JS for JQuery -->
-<script nonce="87f2c705" src="/includes/jquery/js/jquery.min.js?layout=classic&amp;version=19.0.0"></script>
-<script nonce="87f2c705" src="/includes/jquery/js/jquery-ui.min.js?layout=classic&amp;version=19.0.0"></script>
-<script nonce="87f2c705" src="/includes/jquery/plugins/jnotify/jquery.jnotify.min.js?layout=classic&amp;version=19.0.0"></script>
-<script nonce="87f2c705" src="/includes/jquery/plugins/select2/dist/js/select2.full.min.js?layout=classic&amp;version=19.0.0"></script>
-<script nonce="87f2c705" src="/includes/jquery/plugins/multiselect/jquery.multi-select.js?layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/includes/jquery/js/jquery.min.js?layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/includes/jquery/js/jquery-ui.min.js?layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/includes/jquery/plugins/jnotify/jquery.jnotify.min.js?layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/includes/jquery/plugins/select2/dist/js/select2.full.min.js?layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/includes/jquery/plugins/multiselect/jquery.multi-select.js?layout=classic&amp;version=19.0.0"></script>
 <!-- Includes JS of Dolibarr -->
-<script nonce="87f2c705" src="/core/js/lib_head.js.php?lang=fr_FR&amp;layout=classic&amp;version=19.0.0"></script>
+<script nonce="3cb8c29b" src="/core/js/lib_head.js.php?lang=fr_FR&amp;layout=classic&amp;version=19.0.0"></script>
 <!-- Includes JS added by page -->
-<script nonce="87f2c705" src="/includes/jstz/jstz.min.js?lang=fr_FR"></script>
-<script nonce="87f2c705" src="/core/js/dst.js?lang=fr_FR"></script>
+<script nonce="3cb8c29b" src="/includes/jstz/jstz.min.js?lang=fr_FR"></script>
+<script nonce="3cb8c29b" src="/core/js/dst.js?lang=fr_FR"></script>
 </head>
 
 <!-- BEGIN PHP TEMPLATE LOGIN.TPL.PHP -->

@@ -137,6 +137,7 @@ class DolibarrService
             try {
                 // Map API data to database fields
                 $data = [
+                    'dolibarr_id' => $product['id'],
                     'name' => $product['array_options']['options_web_name'] ?? $product['label'],
                     'brief_description' => $product['array_options']['options_web_brief_description'] ?? null,
                     'description' => $product['array_options']['options_web_description'] ?? '--',
@@ -161,6 +162,9 @@ class DolibarrService
                     $data['image'] = "products/{$product['ref']}/" . basename($product['documents'][0]['name']);
                 }
 
+                // Remove deleted products from dolibarr database
+                $this->removeDeletedProductsInDolibarr($products);
+
                 // Save or update the product based on SKU
                 Product::updateOrCreate(
                     ['sku' => $data['sku']],
@@ -172,9 +176,15 @@ class DolibarrService
         }
     }
 
+
+    public function removeDeletedProductsInDolibarr($products){
+        $dolibarrIds = array_column($products, 'id');
+        Product::whereNotIn('dolibarr_id', $dolibarrIds)->delete();
+    }
+
     private function downloadAndStoreImages(string $productRef, array $documents): void
     {
-        
+
         $basePath = public_path('products/' . $productRef);
 
         // Create the directory if it doesn't exist
