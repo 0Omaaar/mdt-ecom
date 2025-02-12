@@ -6,6 +6,7 @@ use App\Models\Product;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Storage;
 
 class DolibarrService
 {
@@ -158,7 +159,7 @@ class DolibarrService
 
                 //images implementation
                 if (!empty($product['documents'])) {
-                    $this->downloadAndStoreImages($product['ref'], $product['documents']);
+                    $this->downloadAndStoreImages($product['ref'], $product['documents'], $product['id']);
                     $data['image'] = "products/{$product['ref']}/" . basename($product['documents'][0]['name']);
                 }
 
@@ -177,15 +178,15 @@ class DolibarrService
     }
 
 
-    public function removeDeletedProductsInDolibarr($products){
+    public function removeDeletedProductsInDolibarr($products)
+    {
         $dolibarrIds = array_column($products, 'id');
         Product::whereNotIn('dolibarr_id', $dolibarrIds)->delete();
     }
 
-    private function downloadAndStoreImages(string $productRef, array $documents): void
+    private function downloadAndStoreImages(string $productRef, array $documents, string $dolibarr_id): void
     {
-
-        $basePath = public_path('products/' . $productRef);
+        $basePath = public_path('productsDolibarr/' . $dolibarr_id);
 
         // Create the directory if it doesn't exist
         if (!file_exists($basePath)) {
@@ -195,7 +196,7 @@ class DolibarrService
         foreach ($documents as $document) {
             try {
                 // Construct the image URL
-                $imageUrl = "http://192.168.1.56/viewimage.php?modulepart=product&file={$productRef}/{$document['name']}";
+                $imageUrl = "http://192.168.1.56/api/index.php/documents/download?modulepart=product&original_file={$productRef}/{$document['name']}";
 
                 // Fetch the image content
                 $response = $this->client->get($imageUrl, [
@@ -205,8 +206,26 @@ class DolibarrService
                 ]);
 
                 // Save the image to the local directory
-                $filePath = $basePath . '/' . basename($document['name']);
-                file_put_contents($filePath, $response->getBody());
+
+                $responseData = json_decode($response->getBody(), true);
+                if (
+                    isset($responseData['filename']) &&
+                    isset($responseData['content-type']) &&
+                    isset($responseData['content'])
+                ) {
+                    // Extract file details
+                    $filename = $responseData['filename'];
+                    $contentType = $responseData['content-type'];
+                    $fileContent = base64_decode($responseData['content']);
+
+                    // Save the file to the local directory
+                    $filePath = $basePath . '/' .  $filename;
+                    file_put_contents($filePath, $fileContent);
+
+                    //
+                } else {
+                    //
+                }
             } catch (\Exception $e) {
                 $e->getMessage();
             }
