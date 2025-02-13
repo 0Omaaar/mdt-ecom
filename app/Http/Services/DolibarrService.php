@@ -170,10 +170,12 @@ class DolibarrService
                 if (!empty($product['documents'])) {
                     $this->downloadAndStoreImages($product['ref'], $product['documents'], $data['dolibarr_id']);
                     $data['image'] = $product['documents'][0]['name'];
-                }
 
-                // Remove deleted products from dolibarr database
-                $this->removeDeletedProductsInDolibarr($products);
+
+
+                    // Remove unused images
+                    $this->removeUnusedImages($data['dolibarr_id'], $product['documents']);
+                }
 
                 // Save or update the product based on SKU
                 Product::updateOrCreate(
@@ -184,6 +186,9 @@ class DolibarrService
                 $e->getMessage();
             }
         }
+
+        // Remove deleted products from dolibarr database
+        $this->removeDeletedProductsInDolibarr($products);
     }
 
 
@@ -191,17 +196,42 @@ class DolibarrService
     {
         $dolibarrIds = array_column($products, 'id');
 
-        $products = Product::whereNotIn('dolibarr_id', $dolibarrIds)->get();
+        $localProducts = Product::whereNotIn('dolibarr_id', $dolibarrIds)->get();
 
-
-        foreach($products as $product){
-            if(File::isDirectory(public_path('productsDolibarr/' . $product->dolibarr_id))){
+        //remove directories for non existing products
+        foreach ($localProducts as $product) {
+            if (File::isDirectory(public_path('productsDolibarr/' . $product->dolibarr_id))) {
                 File::deleteDirectory(public_path('productsDolibarr/' . $product->dolibarr_id));
             }
         }
 
 
         Product::whereNotIn('dolibarr_id', $dolibarrIds)->delete();
+    }
+
+
+    public function removeUnusedImages($dolibarrId, $apiDocuments)
+    {
+        $localDirectory = public_path('productsDolibarr/' . $dolibarrId);
+
+        // Ensure the directory exists
+        if (!File::isDirectory($localDirectory)) {
+            return;
+        }
+
+        // Get all local files in the directory
+        $localFiles = File::files($localDirectory);
+
+        // Extract filenames from the API documents
+        $apiFilenames = array_column($apiDocuments, 'name');
+
+        // Loop through local files and delete any not in the API response
+        foreach ($localFiles as $file) {
+            $filename = $file->getFilename();
+            if (!in_array($filename, $apiFilenames)) {
+                File::delete($file->getPathname());
+            }
+        }
     }
 
     private function downloadAndStoreImages(string $productRef, array $documents, string $dolibarr_id): void
