@@ -68,13 +68,13 @@
                         <div class="card">
                             <div class="card-head">
                                 <div class="card-header">
-                                    <h4 class="card-title">Produit {{ $product['ref'] }}</h4>
+                                    <h4 class="card-title">Produit {{ $product['ref'] ?? '--'}}</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                                 </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    @if ($product['images'])
+                                    @if ($product && $product['images'])
                                         @foreach ($product['images'] as $image)
                                             <div class="col-md-3">
                                                 <a href="{{ $image['url'] }}" target="_blank" download="{{ $product['ref'] }}">

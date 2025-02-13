@@ -105,9 +105,17 @@
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
                                                             @if ($product->image != null)
-                                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                                    style="border-radius: 4%" alt="{{ $product->name }}"
-                                                                    width="50" height="50">
+                                                                @if ($product->dolibarr_id != null)
+                                                                    <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                                        style="border-radius: 4%"
+                                                                        alt="{{ $product->name }}" width="50"
+                                                                        height="50">
+                                                                @else
+                                                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                                        style="border-radius: 4%"
+                                                                        alt="{{ $product->name }}" width="50"
+                                                                        height="50">
+                                                                @endif
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
                                                             @endif

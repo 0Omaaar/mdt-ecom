@@ -80,8 +80,13 @@
                                                 class="badge {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }} round">
                                                 {{ $product->stock_status }}
                                             </div>
-                                            <img alt="Card image cap" class="img-fluid mb-1"
-                                                src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}">
+                                            @if ($product->dolibarr_id != null)
+                                                <img alt="Card image cap" class="img-fluid mb-1"
+                                                    src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}">
+                                            @else
+                                                <img alt="Card image cap" class="img-fluid mb-1"
+                                                    src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}">
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-sm-8 col-12">
@@ -153,6 +158,16 @@
                                         </div>
                                         <div aria-labelledby="review" class="tab-pane" id="images">
                                             <div class="row">
+                                                @if ($product->dolibarr_id != null && $filesPath)
+                                                    @foreach ($filesPath as $image)
+                                                        <div class="col-sm-4 col-4">
+                                                            <div class="product-img d-flex align-items-center ml-2">
+                                                                <img alt="Card image cap" class="img-fluid mb-1"
+                                                                    src="{{ asset($image) }}">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                                 @if ($product->images->count() > 0)
                                                     @foreach ($product->images as $image)
                                                         <div class="col-sm-4 col-4">

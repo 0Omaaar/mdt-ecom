@@ -6,7 +6,11 @@ use App\Models\Product;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PDO;
+
+use function PHPUnit\Framework\directoryExists;
 
 class DolibarrService
 {
@@ -87,11 +91,14 @@ class DolibarrService
 
             $product = json_decode($response->getBody(), true);
 
+            // dd($product);
+
             if (empty($product)) {
                 return []; // Return an empty array if the product is not found
             }
 
-
+            // dd("here");
+            // dd($product['ref']);
             // Fetching the documents (images) for the product
             $documentsResponse = $this->client->get("http://192.168.1.56/api/index.php/documents?modulepart=product&id={$id}&ref={$product['ref']}", [
                 'headers' => [
@@ -103,6 +110,7 @@ class DolibarrService
 
             // Processing the documents to construct image URLs
             $images = [];
+
 
 
             foreach ($product['documents'] as $document) {
@@ -134,6 +142,7 @@ class DolibarrService
 
     public function storeVisibleProductsToDatabase($products)
     {
+        // dd($products);
         foreach ($products as $product) {
             try {
                 // Map API data to database fields
@@ -159,8 +168,8 @@ class DolibarrService
 
                 //images implementation
                 if (!empty($product['documents'])) {
-                    $this->downloadAndStoreImages($product['ref'], $product['documents'], $product['id']);
-                    $data['image'] = "products/{$product['ref']}/" . basename($product['documents'][0]['name']);
+                    $this->downloadAndStoreImages($product['ref'], $product['documents'], $data['dolibarr_id']);
+                    $data['image'] = $product['documents'][0]['name'];
                 }
 
                 // Remove deleted products from dolibarr database
@@ -181,6 +190,17 @@ class DolibarrService
     public function removeDeletedProductsInDolibarr($products)
     {
         $dolibarrIds = array_column($products, 'id');
+
+        $products = Product::whereNotIn('dolibarr_id', $dolibarrIds)->get();
+
+
+        foreach($products as $product){
+            if(File::isDirectory(public_path('productsDolibarr/' . $product->dolibarr_id))){
+                File::deleteDirectory(public_path('productsDolibarr/' . $product->dolibarr_id));
+            }
+        }
+
+
         Product::whereNotIn('dolibarr_id', $dolibarrIds)->delete();
     }
 
@@ -194,6 +214,7 @@ class DolibarrService
         }
 
         foreach ($documents as $document) {
+            // dd($document);
             try {
                 // Construct the image URL
                 $imageUrl = "http://192.168.1.56/api/index.php/documents/download?modulepart=product&original_file={$productRef}/{$document['name']}";
@@ -208,6 +229,7 @@ class DolibarrService
                 // Save the image to the local directory
 
                 $responseData = json_decode($response->getBody(), true);
+                // dd($responseData);
                 if (
                     isset($responseData['filename']) &&
                     isset($responseData['content-type']) &&
@@ -220,6 +242,7 @@ class DolibarrService
 
                     // Save the file to the local directory
                     $filePath = $basePath . '/' .  $filename;
+                    // dd($filePath);
                     file_put_contents($filePath, $fileContent);
 
                     //
@@ -227,7 +250,6 @@ class DolibarrService
                     //
                 }
             } catch (\Exception $e) {
-                $e->getMessage();
             }
         }
     }

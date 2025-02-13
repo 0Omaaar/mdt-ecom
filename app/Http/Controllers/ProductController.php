@@ -29,6 +29,19 @@ class ProductController extends Controller
     {
         try {
             $product = Product::findOrFail($id);
+            if ($product->dolibarr_id != null) {
+                $directoryPath = public_path('productsDolibarr/' . $product->dolibarr_id);
+                if (File::exists($directoryPath)) {
+                    $files = File::files($directoryPath);
+                    $filesPath = [];
+                    foreach ($files as $file) {
+                        if ($file->getFilename() != $product->image) {
+                            $filesPath[] = 'productsDolibarr/' . $product->dolibarr_id . '/' . $file->getFilename();
+                        }
+                    }
+                }
+                return view('admin.products.show', compact('product', 'filesPath'));
+            }
 
             return view('admin.products.show', compact('product'));
         } catch (\Exception $e) {
@@ -190,7 +203,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($product->images as $oldImage) {
-                    $oldImagePath = public_path('images/products/'.$product->id.'/'.$oldImage->path);
+                    $oldImagePath = public_path('images/products/' . $product->id . '/' . $oldImage->path);
                     if (File::exists($oldImagePath)) {
                         File::delete($oldImagePath);
                     }
@@ -199,7 +212,7 @@ class ProductController extends Controller
 
                 foreach ($request->file('images') as $image) {
                     $imageName = uniqid() . '.' . $image->extension();
-                    $image->move(public_path('images/products/'.$product->id.'/'), $imageName);
+                    $image->move(public_path('images/products/' . $product->id . '/'), $imageName);
 
                     $product->images()->create(['path' => $imageName]);
                 }
