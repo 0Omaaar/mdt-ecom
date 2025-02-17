@@ -90,9 +90,15 @@
                                                     @endif
                                                 </ul>
                                                 <div class="prod-img">
-                                                    <img class="product-image"
-                                                        src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                        alt="image_not_found">
+                                                    @if ($product->dolibarr_id == null)
+                                                        <img class="product-image"
+                                                            src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                            alt="image_not_found">
+                                                    @else
+                                                        <img class="product-image"
+                                                            src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                            alt="image_not_found">
+                                                    @endif
                                                 </div>
                                                 <div class="item_content">
                                                     <span class="item_name">{{ $product->subcategory->name }}</span>

@@ -167,8 +167,8 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-                                                @endif
-                                                @if ($product->images->count() > 0)
+                                                {{-- @endif --}}
+                                                @elseif ($product->images->count() > 0)
                                                     @foreach ($product->images as $image)
                                                         <div class="col-sm-4 col-4">
                                                             <div class="product-img d-flex align-items-center ml-2">

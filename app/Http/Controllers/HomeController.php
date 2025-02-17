@@ -12,6 +12,7 @@ use App\Models\Setting;
 use App\Models\SubCategory;
 use ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -30,14 +31,27 @@ class HomeController extends Controller
             ->orWhere('slug', 'pc-bureau')
             ->orWhere('slug', 'accessoires')
             ->get();
+            
         $subcategories = SubCategory::all();
         $dayDeals = Product::where('dayDeals', true)->get();
+        $dayDeals = $this->attachDolibarrImagesToProducts($dayDeals);
+
         $cart = $this->getUserCart();
         $selectionProducts = Product::where('selection', true)->get();
+        $selectionProducts = $this->attachDolibarrImagesToProducts($selectionProducts);
+
         $nouveauteProducts = Product::where('nouveautes', true)->get();
+        $nouveauteProducts = $this->attachDolibarrImagesToProducts($nouveauteProducts);
+
         $topVentesProducts = Product::where('top_ventes', true)->get();
+        $topVentesProducts = $this->attachDolibarrImagesToProducts($topVentesProducts);
+
         $randomProducts = Product::inRandomOrder()->take(6)->get();
-        $latestProducts = Product::latest()->get();
+        $randomProducts = $this->attachDolibarrImagesToProducts($randomProducts);
+
+        $latestProducts = Product::latest()->take(10)->get();
+        $latestProducts = $this->attachDolibarrImagesToProducts($latestProducts);
+
         $offer1 = Setting::where('subject', 'offre1-produit-id')->first();
         $offer2 = Setting::where('subject', 'offre2-produit-id')->first();
         $slider1 = Setting::where('subject', 'content-slider-1')->first();
@@ -62,6 +76,36 @@ class HomeController extends Controller
             'bestCategories',
             'latestProducts'
         ));
+    }
+
+    public function attachDolibarrImagesToProducts($products)
+    {
+        foreach ($products as $product) {
+            if ($product->dolibarr_id != null) {
+                $directoryPath = public_path('productsDolibarr/' . $product->dolibarr_id);
+
+                if (File::exists($directoryPath)) {
+                    $files = File::files($directoryPath);
+
+                    $imagePaths = [];
+                    foreach ($files as $file) {
+                        if (in_array($file->getExtension(), ['jpg', 'jpeg', 'png', 'gif'])) {
+                            if ($file->getFilename() != $product->image) {
+                                $imagePaths[] = 'productsDolibarr/' . $product->dolibarr_id . '/' . $file->getFilename();
+                            }
+                        }
+                    }
+
+                    $product->dolibarrImages = $imagePaths;
+                } else {
+                    $product->dolibarrImages = [];
+                }
+            } else {
+                $product->dolibarrImages = [];
+            }
+        }
+
+        return $products;
     }
 
     public function products(Request $request)

@@ -20,7 +20,7 @@
         @include('user.layouts.panier')
 
         <!-- electronic_details - start
-                ================================================== -->
+                                                            ================================================== -->
         <section class="electronic_details clearfix mt-4">
             <div class="container maxw_1600">
                 <div class="row mb_50 justify-content-lg-between">
@@ -29,15 +29,26 @@
                             <div class="tab-content">
                                 <div id="di_tab_0" class="tab-pane active">
                                     <div class="image_wrap">
-                                        <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                            alt="image_not_found">
+                                        @if ($product->dolibarr_id == null)
+                                            <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                alt="image_not_found">
+                                        @else
+                                            <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                alt="image_not_found">
+                                        @endif
+
                                     </div>
                                 </div>
                                 @foreach ($product->images as $image)
                                     <div id="di_tab_{{ $loop->index + 1 }}" class="tab-pane">
                                         <div class="image_wrap">
-                                            <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
-                                                alt="image_not_found">
+                                            @if ($product->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -45,15 +56,25 @@
                             <ul class="nav ul_li clearfix images-nav" role="tablist">
                                 <li>
                                     <a class="active" data-toggle="tab" href="#di_tab_0">
-                                        <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                            alt="image_not_found">
+                                        @if ($product->dolibarr_id == null)
+                                            <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                alt="image_not_found">
+                                        @else
+                                            <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                alt="image_not_found">
+                                        @endif
                                     </a>
                                 </li>
                                 @foreach ($product->images as $image)
                                     <li>
                                         <a data-toggle="tab" href="#di_tab_{{ $loop->index + 1 }}">
-                                            <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
-                                                alt="image_not_found">
+                                            @if ($product->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </a>
                                     </li>
                                 @endforeach
@@ -86,7 +107,7 @@
                                 </ul>
                                 {{-- <button type="button" class="add_review_btn">Read all 3 reviews</button> --}}
                             </div>
-                            <hr> 
+                            <hr>
                             <div class="ul_li_block mb_15 clearfix">
                                 {!! html_entity_decode($product->brief_description) !!}
                             </div>
@@ -178,10 +199,10 @@
             </div>
         </section>
         <!-- electronic_details - end
-                ================================================== -->
+                                                            ================================================== -->
 
         <!-- product_section - start
-                ================================================== -->
+                                                            ================================================== -->
         <section class="product_section sec_ptb_100 clearfix">
             <div class="container maxw_1600">
                 <div class="electronic_related_products position-relative">
@@ -199,8 +220,13 @@
                                     </ul>
                                     <div class="item_image">
                                         <a href="{{ route('product', $prod->id) }}">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                            alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="item_content">
@@ -227,8 +253,13 @@
                                             @endif
                                         </ul>
                                         <div class="item_image">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                                alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                         <div class="item_content">
                                             <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -253,8 +284,13 @@
                                             @endif
                                         </ul>
                                         <div class="item_image">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                                alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                         <div class="item_content">
                                             <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -279,8 +315,13 @@
                                             @endif
                                         </ul>
                                         <div class="item_image">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                                alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                         <div class="item_content">
                                             <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -305,8 +346,13 @@
                                             @endif
                                         </ul>
                                         <div class="item_image">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                                alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                         <div class="item_content">
                                             <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -331,8 +377,13 @@
                                             @endif
                                         </ul>
                                         <div class="item_image">
-                                            <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
-                                                alt="image_not_found">
+                                            @if ($prod->dolibarr_id == null)
+                                                <img src="{{ asset('images/products/' . $prod->id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @else
+                                                <img src="{{ asset('productsDolibarr/' . $prod->dolibarr_id . '/' . $prod->image) }}"
+                                                    alt="image_not_found">
+                                            @endif
                                         </div>
                                         <div class="item_content">
                                             <span class="item_name">{{ $prod->subcategory->name }}</span>
@@ -358,7 +409,7 @@
             </div>
         </section>
         <!-- product_section - end
-                ================================================== -->
+                                                            ================================================== -->
 
     </main>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Image;
 use App\Models\Product;
 use Exception;
 use GuzzleHttp\Client;
@@ -142,7 +143,7 @@ class DolibarrService
 
     public function storeVisibleProductsToDatabase($products)
     {
-        // dd($products);
+
         foreach ($products as $product) {
             try {
                 // Map API data to database fields
@@ -171,10 +172,11 @@ class DolibarrService
                     $this->downloadAndStoreImages($product['ref'], $product['documents'], $data['dolibarr_id']);
                     $data['image'] = $product['documents'][0]['name'];
 
-
-
                     // Remove unused images
                     $this->removeUnusedImages($data['dolibarr_id'], $product['documents']);
+
+
+                    $this->syncProductImages($data['dolibarr_id'], array_slice($product['documents'], 1));
                 }
 
                 // Save or update the product based on SKU
@@ -189,6 +191,70 @@ class DolibarrService
 
         // Remove deleted products from dolibarr database
         $this->removeDeletedProductsInDolibarr($products);
+    }
+
+    protected function syncProductImages($dolibarrId, $apiDocuments)
+    {
+
+        // Find the product by dolibarr_id
+        $product = Product::where('dolibarr_id', $dolibarrId)->first();
+
+        if (!$product) {
+            return;
+        }
+
+        // Extract filenames from the API documents
+        $apiFilenames = array_column($apiDocuments, 'name');
+
+        // Construct full paths for the API documents
+        $apiImagePaths = array_map(function ($filename) use ($dolibarrId) {
+            return 'productsDolibarr/' . $dolibarrId . '/' . $filename;
+        }, $apiFilenames);
+
+        // Get existing image paths for the product
+        $existingImagePaths = $product->images()->pluck('path')->toArray();
+
+        // Attach new images
+        // dd($apiDocuments);
+        foreach ($apiDocuments as $document) {
+            $filename = $document['name'];
+            $filePath = $filename;
+
+            // Check if the image already exists
+            $existingImage = Image::where('product_id', $product->id)
+                ->where('path', $filePath)
+                ->first();
+
+            if (!$existingImage) {
+                // Create a new image record
+                Image::create([
+                    'product_id' => $product->id,
+                    'path' => $filePath,
+                ]);
+            }
+        }
+
+        // $product->save();
+        // dd($apiImagePaths);
+        // Detach images that are no longer in the API response
+        // $product->images()->whereNotIn('path', $apiImagePaths)->delete();
+        // $localFiles = File::files(public_path('productsDolibarr/' . $dolibarrId));
+        // $dbFiles = $product->images()->pluck('path')->toArray();
+        //  foreach ($localFiles as $file) {
+        //     $filename = $file->getFilename();
+
+        //     $existsInDB = collect($dbFiles)->contains(function ($dbPath) use ($filename) {
+        //         return $dbPath === $filename;
+        //     });
+
+        //     if (!$existsInDB) {
+        //         dd($filename);
+        //         $image = Image::where('path', 'LIKE', "%{$filename}")->first();
+        //         dd($image);
+        //         // Delete the record from the database
+        //         Image::where('path', 'LIKE', "%{$filename}")->delete();
+        //     }
+        // }
     }
 
 

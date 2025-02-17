@@ -187,8 +187,13 @@
                                                 <td>
                                                     <div class="cart_product">
                                                         <div class="item_image">
-                                                            <img src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}"
-                                                                alt="image_not_found">
+                                                            @if ($item->product->dolibarr_id == null)
+                                                                <img src="{{ asset('images/products/' . $item->product_id . '/' . $item->product->image) }}"
+                                                                    alt="image_not_found">
+                                                            @else
+                                                                <img src="{{ asset('productsDolibarr/' . $item->product->dolibarr_id . '/' . $item->product->image) }}"
+                                                                    alt="image_not_found">
+                                                            @endif
                                                         </div>
                                                         <div class="item_content">
                                                             <h4 class="item_title mb-0">{{ $item->product->name }}</h4>

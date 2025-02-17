@@ -369,8 +369,13 @@
                                         @if ($index % 2 == 0)
                                             <div class="electronic_product_small">
                                                 <a class="item_image" href="{{ route('product', $product->id) }}">
-                                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                        alt="image_introuvable">
+                                                    @if ($product->dolibarr_id == null)
+                                                        <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                            alt="image_introuvable">
+                                                    @else
+                                                        <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                            alt="image_introuvable">
+                                                    @endif
                                                 </a>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
@@ -389,8 +394,13 @@
                                         @if ($index % 2 != 0)
                                             <div class="electronic_product_small">
                                                 <a class="item_image" href="{{ route('product', $product->id) }}">
-                                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                        alt="image_introuvable">
+                                                    @if ($product->dolibarr_id == null)
+                                                        <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                            alt="image_introuvable">
+                                                    @else
+                                                        <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                            alt="image_introuvable">
+                                                    @endif
                                                 </a>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
@@ -498,10 +508,11 @@
             if (selectedCategoryId) {
                 let currentPath = window.location.pathname;
                 let url;
-
+                // console.log(currentPath);
                 if (currentPath === '/' || currentPath === '/products' || currentPath === '/cart' || currentPath ===
                     '/checkout' ||
                     currentPath === '/order-completed' || currentPath === '/my-orders') {
+
                     if (!currentPath.includes('/products')) {
                         url = new URL(window.location.origin + '/products');
                     } else {
