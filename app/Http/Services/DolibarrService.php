@@ -23,7 +23,7 @@ class DolibarrService
     {
         $this->client = new Client();
         $this->apiKey = "ad3634d577f46311cf08ccf858098602ad95c574";
-        $this->baseUrl = "http://192.168.1.56";
+        $this->baseUrl = "http://mdoli.ddns.net";
     }
 
     public function getProducts()
@@ -35,7 +35,7 @@ class DolibarrService
         try {
             while (true) {
                 // Fetch products for the current page
-                $response = $this->client->get("http://192.168.1.56/api/index.php/products?page=0&limit=50", [
+                $response = $this->client->get("http://mdoli.ddns.net/api/index.php/products?page=0&limit=50", [
                     'headers' => [
                         'DOLAPIKEY' => $this->apiKey,
                     ],
@@ -84,7 +84,7 @@ class DolibarrService
     public function getProductDetails($id)
     {
         try {
-            $response = $this->client->get("http://192.168.1.56/api/index.php/products/{$id}", [
+            $response = $this->client->get("http://mdoli.ddns.net/api/index.php/products/{$id}", [
                 'headers' => [
                     'DOLAPIKEY' => $this->apiKey,
                 ]
@@ -101,7 +101,7 @@ class DolibarrService
             // dd("here");
             // dd($product['ref']);
             // Fetching the documents (images) for the product
-            $documentsResponse = $this->client->get("http://192.168.1.56/api/index.php/documents?modulepart=product&id={$id}&ref={$product['ref']}", [
+            $documentsResponse = $this->client->get("http://mdoli.ddns.net/api/index.php/documents?modulepart=product&id={$id}&ref={$product['ref']}", [
                 'headers' => [
                     'DOLAPIKEY' => $this->apiKey,
                 ]
@@ -117,7 +117,7 @@ class DolibarrService
             foreach ($product['documents'] as $document) {
                 if ($document['type'] === 'file') {
                     // Construct the image URL
-                    $imageUrl = "http://192.168.1.56/viewimage.php?modulepart=product&file={$product['ref']}/{$document['name']}";
+                    $imageUrl = "http://mdoli.ddns.net/viewimage.php?modulepart=product&file={$product['ref']}/{$document['name']}";
 
                     // Add the image URL to the images array
                     $images[] = [
@@ -313,7 +313,7 @@ class DolibarrService
             // dd($document);
             try {
                 // Construct the image URL
-                $imageUrl = "http://192.168.1.56/api/index.php/documents/download?modulepart=product&original_file={$productRef}/{$document['name']}";
+                $imageUrl = "http://mdoli.ddns.net/api/index.php/documents/download?modulepart=product&original_file={$productRef}/{$document['name']}";
 
                 // Fetch the image content
                 $response = $this->client->get($imageUrl, [
