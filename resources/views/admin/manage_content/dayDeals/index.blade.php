@@ -112,9 +112,17 @@
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
                                                             @if ($product->image != null)
-                                                                <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                                    style="border-radius: 4%" alt="{{ $product->name }}"
-                                                                    width="50" height="50">
+                                                                @if ($product->dolibarr_id == null)
+                                                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                                        style="border-radius: 4%"
+                                                                        alt="{{ $product->name }}" width="50"
+                                                                        height="50">
+                                                                @else
+                                                                    <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                                        style="border-radius: 4%"
+                                                                        alt="{{ $product->name }}" width="50"
+                                                                        height="50">
+                                                                @endif
                                                             @else
                                                                 <span style="color: rgb(234, 109, 109)">Aucune image</span>
                                                             @endif
@@ -141,22 +149,18 @@
                                                                     <a href="{{ route('admin.products.show', $product->id) }}"
                                                                         class="dropdown-item"><i class="la la-eye"></i>
                                                                         Voir Détails</a>
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#editProduct{{ $product->id }}"><i
-                                                                            class="la la-pencil"></i> Modifier</button>
-                                                                    <button data-toggle="modal"
-                                                                        data-target="#deleteProduct{{ $product->id }}"
-                                                                        class="dropdown-item"><i class="la la-trash"></i>
-                                                                        Supprimer</button>
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('admin.products.edit', $product->id) }}"><i
+                                                                            class="la la-pencil"></i> Modifier</a>
                                                                 </span>
                                                             </span>
                                                         </td>
 
                                                         {{-- Delete Product Modal --}}
-                                                        @include('admin.products.delete')
+                                                        {{-- @include('admin.products.delete') --}}
 
                                                         {{-- Edit Product Modal --}}
-                                                        @include('admin.products.edit')
+                                                        {{-- @include('admin.products.edit') --}}
 
                                                     </tr>
                                                 @endforeach
