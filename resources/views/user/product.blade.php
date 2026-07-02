@@ -1,6 +1,55 @@
 @extends('base')
 
+@section('seo_title', $product->name . ' | Mobidigitech Maroc')
+@section('seo_description', Str::limit(strip_tags($product->description ?? $product->name . ' disponible sur Mobidigitech - livraison rapide au Maroc.'), 160))
+@section('seo_keywords', $product->name . ', ' . ($product->category->name ?? 'produit') . ', Mobidigitech, ' . ($product->brand->name ?? '') . ', Maroc')
+@section('og_type', 'product')
+@php
+    $productImage = $product->dolibarr_id
+        ? asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image)
+        : asset('images/products/' . $product->id . '/' . $product->image);
+@endphp
+@section('og_image', $productImage)
+
+@section('seo_schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ $product->name }}",
+    "image": "{{ $productImage }}",
+    "description": "{{ Str::limit(strip_tags($product->description ?? $product->name), 200) }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "{{ $product->brand->name ?? 'Mobidigitech' }}"
+    },
+    "offers": {
+        "@type": "Offer",
+        "priceCurrency": "MAD",
+        "price": "{{ $product->price }}",
+        "availability": "{{ $product->stock_status === 'instock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+        "seller": {
+            "@type": "Organization",
+            "name": "Mobidigitech"
+        }
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{ route('home') }}"},
+        {"@type": "ListItem", "position": 2, "name": "Produits", "item": "{{ route('products') }}"},
+        {"@type": "ListItem", "position": 3, "name": "{{ $product->name }}", "item": "{{ url()->current() }}"}
+    ]
+}
+</script>
+@endsection
+
 @section('style')
+
     <style>
         @media (max-width: 768px) {
             .images-nav {

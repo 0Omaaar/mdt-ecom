@@ -1,5 +1,22 @@
 @extends('base')
 
+@section('seo_title', 'Tous les Produits | Mobidigitech - PC, Téléphones, Accessoires au Maroc')
+@section('seo_description', 'Parcourez notre catalogue complet: PC portables, PC bureau, téléphones, accessoires informatique et produits digitaux. Livraison rapide au Maroc.')
+@section('seo_keywords', 'produits informatique Maroc, PC portable, téléphones Maroc, accessoires informatique, boutique en ligne Maroc, Mobidigitech')
+
+@section('seo_schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{ route('home') }}"},
+        {"@type": "ListItem", "position": 2, "name": "Produits", "item": "{{ url()->current() }}"}
+    ]
+}
+</script>
+@endsection
+
 @section('content')
 
     @php

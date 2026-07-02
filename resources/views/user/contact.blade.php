@@ -1,4 +1,29 @@
 @extends('base')
+
+@section('seo_title', 'Contactez-nous | Mobidigitech - Support & Assistance')
+@section('seo_description', 'Contactez l\'équipe Mobidigitech pour toute question, support ou renseignement. Nous sommes disponibles pour vous aider. Adresse: Rabat, Maroc.')
+@section('seo_keywords', 'contact Mobidigitech, support Mobidigitech, service client Maroc, aide informatique Maroc')
+
+@section('seo_schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Mobidigitech",
+    "url": "https://mobidigitech.ma",
+    "telephone": "+212-080-857-6413",
+    "email": "sales@mobidigitech.com",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rue Alkitres 643/84 Magasin N 2 Guich Loudaya",
+        "addressLocality": "Rabat",
+        "addressCountry": "MA"
+    },
+    "hasMap": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13240.51951354877!2d-6.8878281!3d33.9377875"
+}
+</script>
+@endsection
+
 @section('content')
     <!-- main body - start
       ================================================== -->

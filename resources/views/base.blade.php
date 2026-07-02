@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -7,7 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Mobidigitech</title>
+    <!-- SEO Meta Tags -->
+    <title>@yield('seo_title', 'Mobidigitech | Marketplace eCommerce Maroc')</title>
+    <meta name="description" content="@yield('seo_description', 'Mobidigitech - Votre partenaire eCommerce au Maroc. Découvrez PC portables, accessoires, téléphones et produits digitaux aux meilleurs prix.')">
+    <meta name="keywords" content="@yield('seo_keywords', 'eCommerce Maroc, Mobidigitech, PC portable Maroc, accessoires informatique, boutique en ligne Maroc, téléphones')">
+    <meta name="author" content="Mobidigitech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('seo_title', 'Mobidigitech | Marketplace eCommerce Maroc')">
+    <meta property="og:description" content="@yield('seo_description', 'Mobidigitech - Votre partenaire eCommerce au Maroc.')">
+    <meta property="og:image" content="@yield('og_image', asset('assets/user/images/logo/logo.png'))">
+    <meta property="og:site_name" content="Mobidigitech">
+    <meta property="og:locale" content="fr_MA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('seo_title', 'Mobidigitech | Marketplace eCommerce Maroc')">
+    <meta name="twitter:description" content="@yield('seo_description', 'Mobidigitech - Votre partenaire eCommerce au Maroc.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('assets/user/images/logo/logo.png'))">
+
+    @yield('seo_schema')
+
     <link rel="shortcut icon" href="{{ asset('assets/user/images/logo/logo_16_2x.png') }}">
 
     <!-- fraimwork - css include -->
@@ -430,6 +455,9 @@
                 <p class="copyright_text mb-0">© 2024
                     Tous droits réservés. <a href="{{ route('home') }}" class="author_link">MOBIDIGITECH</a>
                     marketplace eCommerce. </p>
+                <p class="mt-2 text-white" style="font-size: 12px; opacity: 0.8;">
+                    <i class="fal fa-chart-line"></i> Total Visites: {{ \App\Models\Visit::count() }} | Visiteurs uniques: {{ \App\Models\Visit::distinct('visitor_id')->count('visitor_id') }}
+                </p>
             </div>
         </div>
     </footer>
@@ -591,6 +619,67 @@
         });
     </script>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" class="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #2c3e50; color: #fff; padding: 15px; text-align: center; z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.2);">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <p class="mb-0 mr-3" style="font-size: 14px;">Nous utilisons des cookies pour analyser notre trafic, améliorer l'expérience utilisateur et personnaliser le contenu. En cliquant sur "Accepter", vous consentez à l'utilisation de tous les cookies.</p>
+            <div class="mt-2 mt-md-0">
+                <button id="cookie-accept" class="btn btn-success btn-sm mr-2" style="border-radius: 20px; padding: 5px 20px;">Accepter</button>
+                <button id="cookie-decline" class="btn btn-outline-light btn-sm" style="border-radius: 20px; padding: 5px 20px;">Refuser</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Setup Cookie Consent
+            const cookieName = "{{ config('analytics.consent_cookie_name', 'cookie_consent_analytics') }}";
+            
+            function getCookie(name) {
+                let matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+            }
+
+            function setCookie(name, value, options = {}) {
+                options = {
+                    path: '/',
+                    // add other defaults here if necessary
+                    ...options
+                };
+
+                if (options.expires instanceof Date) {
+                    options.expires = options.expires.toUTCString();
+                }
+
+                let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+                for (let optionKey in options) {
+                    updatedCookie += "; " + optionKey;
+                    let optionValue = options[optionKey];
+                    if (optionValue !== true) {
+                        updatedCookie += "=" + optionValue;
+                    }
+                }
+                document.cookie = updatedCookie;
+            }
+
+            if (!getCookie(cookieName)) {
+                document.getElementById('cookie-consent-banner').style.display = 'block';
+            }
+
+            document.getElementById('cookie-accept').addEventListener('click', function() {
+                setCookie(cookieName, 'accepted', { 'max-age': 3600 * 24 * 365 }); // 1 year
+                document.getElementById('cookie-consent-banner').style.display = 'none';
+            });
+
+            document.getElementById('cookie-decline').addEventListener('click', function() {
+                setCookie(cookieName, 'declined', { 'max-age': 3600 * 24 * 30 }); // 30 days
+                document.getElementById('cookie-consent-banner').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 
 </html>

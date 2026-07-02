@@ -80,11 +80,13 @@ class ContactController extends Controller
                 'message' => 'string|max:1000',
             ]);
 
-            $contact = new Contact();
+            $contact = new \App\Models\ContactSubmission();
             $contact->name = $request->name;
             $contact->email = $request->email;
             $contact->subject = $request->subject;
             $contact->message = $request->message;
+            $contact->ip_address = $request->ip();
+            $contact->submitted_from_page = substr($request->headers->get('referer'), 0, 255);
             $contact->save();
 
             $notification = new Notification();
@@ -95,7 +97,7 @@ class ContactController extends Controller
 
             event(new NewOrder($contact->id));
 
-            Mail::to($request->email)->queue(new NotificationMail('notification-contact', $request->email, 'Nouveau Message'));
+            Mail::to(env('MAIL_FROM_ADDRESS', 'admin@mobidigitech.com'))->queue(new NotificationMail('notification-contact', $request->email, 'Nouveau Message de ' . $request->name));
 
             DB::commit();
 
@@ -111,16 +113,16 @@ class ContactController extends Controller
 
     public function admin_index()
     {
-        $contacts = Contact::latest()->get();
+        $contacts = \App\Models\ContactSubmission::latest()->get();
 
         return view('admin.contact.index', compact('contacts'));
     }
 
     public function answerContactWithMail(Request $request, $id)
     {
-        $contact = Contact::findOrFail($id);
+        $contact = \App\Models\ContactSubmission::findOrFail($id);
 
-        Mail::to($contact->email)->queue(new ContactMail($contact, $request->response));
+        Mail::to($contact->email)->queue(new ContactMail((object)$contact->toArray(), $request->response));
 
         $contact->status = 'Traité';
         $contact->save();
@@ -131,7 +133,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         try {
-            $contact = Contact::findOrfail($id);
+            $contact = \App\Models\ContactSubmission::findOrfail($id);
             $contact->delete();
 
             return redirect()->back()->with('success', 'Message supprimé avec succès');

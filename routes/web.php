@@ -1,6 +1,22 @@
 <?php
 include_once 'auth.php';
 
+// SEO Routes - Sitemap & Robots
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', function () {
+    $robots  = "User-agent: *\n";
+    $robots .= "Allow: /\n";
+    $robots .= "Disallow: /admin/\n";
+    $robots .= "Disallow: /cart\n";
+    $robots .= "Disallow: /checkout\n";
+    $robots .= "Disallow: /my-orders\n";
+    $robots .= "Disallow: /login\n";
+    $robots .= "Disallow: /registration\n";
+    $robots .= "\n";
+    $robots .= "Sitemap: " . route('sitemap') . "\n";
+    return response($robots, 200)->header('Content-Type', 'text/plain');
+})->name('robots');
+
 use App\Events\NewOrder;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
@@ -234,3 +250,8 @@ Route::get('/dolibarr/products/store', [DolibarrController::class, 'storeVisible
 
 Route::get('/dolibarr/products', [DolibarrController::class, 'getProducts'])->name('dolibarr.products');
 Route::get('/dolibarr/products/{id}',[DolibarrController::class, 'getProductDetails'])->name('dolibarr.products.details');
+
+// Analytics Dashboard
+Route::get('/admin/analytics', [\App\Http\Controllers\DashboardController::class, 'analytics'])->middleware('auth', 'isAdmin')->name('admin.analytics');
+Route::get('/admin/analytics/export', [\App\Http\Controllers\DashboardController::class, 'exportCsv'])->middleware('auth', 'isAdmin')->name('admin.analytics.export');
+

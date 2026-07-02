@@ -1,5 +1,47 @@
 @extends('base')
 
+@section('seo_title', 'Mobidigitech | N°1 Marketplace eCommerce au Maroc - PC, Téléphones, Accessoires')
+@section('seo_description', 'Mobidigitech - Votre marketplace N°1 au Maroc. Découvrez des milliers de produits: PC portables, téléphones, accessoires informatique. Livraison rapide et prix compétitifs.')
+@section('seo_keywords', 'Mobidigitech, eCommerce Maroc, marketplace Maroc, PC portable Maroc, téléphone Maroc, accessoires informatique Maroc, boutique en ligne')
+
+@section('seo_schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Mobidigitech",
+    "url": "https://mobidigitech.ma",
+    "logo": "{{ asset('assets/user/images/logo/logo.png') }}",
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+212-080-857-6413",
+        "contactType": "customer service",
+        "availableLanguage": ["French", "Arabic"]
+    },
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rue Alkitres 643/84 Magasin N 2 Guich Loudaya",
+        "addressLocality": "Rabat",
+        "addressCountry": "MA"
+    },
+    "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Mobidigitech",
+    "url": "https://mobidigitech.ma",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mobidigitech.ma/products?name={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+@endsection
+
 
 @section('style')
     <style>
