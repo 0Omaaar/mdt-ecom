@@ -76,7 +76,7 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        return view('admin.analytics.index', compact(
+        return view('admin.analytics', compact(
             'startDate', 'endDate',
             'totalVisits', 'uniqueVisitors', 'totalPageViews',
             'onlineVisitors', 'todayVisits', 'thisWeekVisits', 'thisMonthVisits',
