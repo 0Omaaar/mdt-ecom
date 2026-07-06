@@ -105,10 +105,7 @@
                     <button type="submit" class="btn btn-info mr-1">
                         <i class="ft-filter"></i> Filtrer
                     </button>
-                    <a href="{{ route('admin.analytics.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
-                       class="btn btn-success">
-                        <i class="ft-download"></i> CSV
-                    </a>
+
                 </form>
             </div>
         </div>
@@ -405,6 +402,9 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="mt-2 d-flex justify-content-center">
+                                    {{ $topPages->links('pagination::bootstrap-4') }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -459,6 +459,9 @@
                                             @endforelse
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-center">
+                                    {{ $recentVisitors->links('pagination::bootstrap-4') }}
                                 </div>
                             </div>
                         </div>

@@ -67,14 +67,14 @@ class DashboardController extends Controller
             })
             ->groupBy('url', 'page_title')
             ->orderByDesc('views')
-            ->take(10)
-            ->get();
+            ->paginate(11, ['*'], 'top_pages')
+            ->withQueryString();
 
         // Recent Visitors
         $recentVisitors = Visit::withCount('pageViews')
             ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get();
+            ->paginate(11, ['*'], 'visitors')
+            ->withQueryString();
 
         return view('admin.analytics', compact(
             'startDate', 'endDate',
