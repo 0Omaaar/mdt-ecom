@@ -680,6 +680,26 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var images = document.querySelectorAll('img');
+            images.forEach(function(img) {
+                img.addEventListener('error', function() {
+                    if (!this.classList.contains('fallback-applied')) {
+                        this.classList.add('fallback-applied');
+                        this.src = '{{ asset("assets/images/default.png") }}';
+                        this.alt = 'No Image Available';
+                    }
+                });
+                
+                // Also trigger error if image is already broken on load
+                if (img.complete && img.naturalHeight === 0) {
+                    var event = new Event('error');
+                    img.dispatchEvent(event);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
