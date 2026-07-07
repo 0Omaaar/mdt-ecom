@@ -103,7 +103,7 @@ class ProductController extends Controller
 
             $subCategory = SubCategory::findOrFail($product->subcategory_id);
             $product->category_id = $subCategory->category->id;
-            $product->image = 'n';
+            $product->image = null;
 
             $product->save();
 
