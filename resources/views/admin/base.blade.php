@@ -262,14 +262,14 @@
                     </ul>
                 </li>
 
-                {{-- <li class=" navigation-header"><span data-i18n="Analytics">Analytiques</span><i
+                <li class=" navigation-header"><span data-i18n="Analytics">Analytiques</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="Analytics"></i>
                 </li>
                 <li class=" nav-item"><a href="{{ route('admin.analytics') }}"><i
                             class="la la-bar-chart"></i><span class="menu-title"
                             data-i18n="Analytics">Tableau de bord</span></a>
-                </li> --}}
+                </li>
                 <li class=" navigation-header"><span data-i18n="User Interface">Settings</span><i
                         class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right"
                         data-original-title="User Interface"></i>
