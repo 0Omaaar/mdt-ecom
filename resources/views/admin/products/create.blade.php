@@ -139,9 +139,20 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="category_id">Catégorie</label>
+                                                        <div class="col-md-9">
+                                                            <select id="category_id" class="form-control" name="category_id" required>
+                                                                <option selected disabled>--Choisir Catégorie--</option>
+                                                                @foreach ($categories as $category)
+                                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="subcategory_id">Sous-catégorie</label>
                                                         <div class="col-md-9">
-                                                            <select id="subcategory_id" class="form-control" name="subcategory_id" required>
+                                                            <select id="subcategory_id" class="form-control" name="subcategory_id">
                                                                 <option selected disabled>--Choisir Sous Catégorie--</option>
                                                                 @foreach ($subCategories as $subCategory)
                                                                     <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>

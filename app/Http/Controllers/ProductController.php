@@ -51,10 +51,11 @@ class ProductController extends Controller
 
     public function create()
     {
+        $categories = Category::all();
         $subCategories = SubCategory::all();
         $brands = Brand::all();
 
-        return view('admin.products.create', compact('subCategories', 'brands'));
+        return view('admin.products.create', compact('categories', 'subCategories', 'brands'));
     }
 
     public function edit($id)
@@ -82,6 +83,8 @@ class ProductController extends Controller
                 'sku' => 'required|string|max:255',
                 'stock_status' => 'required|in:instock,outstock',
                 'quantity' => 'required|integer|min:0',
+                'category_id' => 'required',
+                'subcategory_id' => 'nullable',
             ]);
 
             $product = new Product();
@@ -94,6 +97,7 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
@@ -101,8 +105,11 @@ class ProductController extends Controller
             $product->dayDeals = $request->has('dayDeals');
             $product->best_price = $request->has('best_price');
 
-            $subCategory = SubCategory::findOrFail($product->subcategory_id);
-            $product->category_id = $subCategory->category->id;
+            if ($product->subcategory_id) {
+                $subCategory = SubCategory::findOrFail($product->subcategory_id);
+                $product->category_id = $subCategory->category_id;
+            }
+
             $product->image = null;
 
             $product->save();
@@ -168,6 +175,8 @@ class ProductController extends Controller
                 'sku' => 'required|string|max:255',
                 'stock_status' => 'required|in:instock,outstock',
                 'quantity' => 'required|integer|min:0',
+                'category_id' => 'required',
+                'subcategory_id' => 'nullable',
             ]);
 
             $product = Product::findOrFail($id);
@@ -180,6 +189,7 @@ class ProductController extends Controller
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
             $product->subcategory_id = $request->input('subcategory_id');
+            $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
             $product->selection = $request->has('selection');
             $product->nouveautes = $request->has('nouveautes');
@@ -187,8 +197,10 @@ class ProductController extends Controller
             $product->dayDeals = $request->has('dayDeals');
             $product->best_price = $request->has('best_price');
 
-            $subCategory = SubCategory::findOrFail($product->subcategory_id);
-            $product->category_id = $subCategory->category->id;
+            if ($product->subcategory_id) {
+                $subCategory = SubCategory::findOrFail($product->subcategory_id);
+                $product->category_id = $subCategory->category_id;
+            }
 
             if ($request->hasFile('image')) {
                 $oldImagePath = public_path('images/products/' . $product->id . '/' . $product->image);
