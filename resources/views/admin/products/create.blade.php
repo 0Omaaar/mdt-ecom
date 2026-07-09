@@ -242,7 +242,7 @@
                                                     <div class="form-group row" style="margin-right: 15%">
                                                         <label class="col-md-3 label-control" style="margin-top: 1.4%" for="image">Images</label>
                                                         <div class="col-md-9">
-                                                            <input type="file" id="images" name="images[]" multiple required>
+                                                            <input type="file" id="images" name="images[]" multiple>
                                                         </div>
                                                     </div>
                                                 </div>
