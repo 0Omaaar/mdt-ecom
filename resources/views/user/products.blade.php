@@ -118,7 +118,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="item_content">
-                                                    <span class="item_name">{{ $product->subcategory->name }}</span>
+                                                    <span class="item_name">{{ $product->subcategory?->name ?? $product->category->name }}</span>
                                                     <h3 class="item_title">
                                                         <a
                                                             href="{{ route('product', ['id' => $product->id]) }}">{{ Str::limit($product->name, 50, '...') }}</a>

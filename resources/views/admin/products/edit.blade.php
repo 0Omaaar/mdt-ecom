@@ -161,16 +161,39 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control"
+                                                                for="category_id">Catégorie</label>
+                                                            <div class="col-md-9">
+                                                                <select id="category_id" class="form-control"
+                                                                    name="category_id" required>
+                                                                    <option selected value="{{ $product->category->id }}">
+                                                                        {{ $product->category->name }}</option>
+                                                                    @foreach ($categories as $category)
+                                                                        @if($category->id != $product->category_id)
+                                                                            <option value="{{ $category->id }}">
+                                                                                {{ $category->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control"
                                                                 for="subcategory_id">Sous-catégorie</label>
                                                             <div class="col-md-9">
                                                                 <select id="subcategory_id" class="form-control"
-                                                                    name="subcategory_id" required>
-                                                                    <option selected
-                                                                        value="{{ $product->subcategory->id }}">
-                                                                        {{ $product->subcategory->name }}</option>
+                                                                    name="subcategory_id">
+                                                                    @if($product->subcategory)
+                                                                        <option selected value="{{ $product->subcategory->id }}">
+                                                                            {{ $product->subcategory->name }}</option>
+                                                                        <option value="">-- Aucun --</option>
+                                                                    @else
+                                                                        <option selected value="">-- Aucun --</option>
+                                                                    @endif
                                                                     @foreach ($subCategories as $subCategory)
-                                                                        <option value="{{ $subCategory->id }}">
-                                                                            {{ $subCategory->name }}</option>
+                                                                        @if(!$product->subcategory || $subCategory->id != $product->subcategory_id)
+                                                                            <option value="{{ $subCategory->id }}">
+                                                                                {{ $subCategory->name }}</option>
+                                                                        @endif
                                                                     @endforeach
                                                                 </select>
                                                             </div>

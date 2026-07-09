@@ -135,7 +135,7 @@
                         <div class="details_content">
                             <div class="d-flex align-items-center justify-content-between mb_15">
                                 <span class="item_brand text-uppercase">
-                                    {{ $product->subcategory->name }}
+                                    {{ $product->subcategory?->name ?? $product->category->name }}
                                 </span>
                                 <span class="instock_text">Disponibilité:
                                     @if ($product->stock_status == 'instock')
@@ -188,7 +188,9 @@
                                         <h4 class="list_title">Categories:</h4>
                                         <ul class="ul_li clearfix">
                                             <li>{{ $product->category->name }}</li>
-                                            <li>{{ $product->subcategory->name }}</li>
+                                            @if($product->subcategory)
+                                                <li>{{ $product->subcategory->name }}</li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -279,7 +281,7 @@
                                         </a>
                                     </div>
                                     <div class="item_content">
-                                        <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                        <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                         <h3 class="item_title">
                                             <a href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>
                                         </h3>
@@ -311,7 +313,7 @@
                                             @endif
                                         </div>
                                         <div class="item_content">
-                                            <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                            <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                             <h3 class="item_title">
                                                 <a
                                                     href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>
@@ -342,7 +344,7 @@
                                             @endif
                                         </div>
                                         <div class="item_content">
-                                            <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                            <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                             <h3 class="item_title">
                                                 <a
                                                     href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>
@@ -373,7 +375,7 @@
                                             @endif
                                         </div>
                                         <div class="item_content">
-                                            <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                            <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                             <h3 class="item_title">
                                                 <a
                                                     href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>
@@ -404,7 +406,7 @@
                                             @endif
                                         </div>
                                         <div class="item_content">
-                                            <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                            <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                             <h3 class="item_title">
                                                 <a
                                                     href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>
@@ -435,7 +437,7 @@
                                             @endif
                                         </div>
                                         <div class="item_content">
-                                            <span class="item_name">{{ $prod->subcategory->name }}</span>
+                                            <span class="item_name">{{ $prod->subcategory?->name ?? $prod->category->name }}</span>
                                             <h3 class="item_title">
                                                 <a
                                                     href="{{ route('product', ['id' => $prod->id]) }}">{{ $prod->name }}</a>

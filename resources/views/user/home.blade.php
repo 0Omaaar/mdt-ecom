@@ -380,7 +380,7 @@
                                                     </div>
                                                     <div class="item_content">
                                                         <span
-                                                            class="item_name">{{ $product->subcategory->name }}</span>
+                                                            class="item_name">{{ $product->subcategory?->name ?? $product->category->name }}</span>
                                                         <h3 class="item_title">
                                                             <a
                                                                 href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 30, '...') }}</a>
@@ -431,7 +431,7 @@
                                                     </div>
                                                     <div class="item_content">
                                                         <span
-                                                            class="item_name">{{ $product->subcategory->name }}</span>
+                                                            class="item_name">{{ $product->subcategory?->name ?? $product->category->name }}</span>
                                                         <h3 class="item_title">
                                                             <a
                                                                 href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 25, '...') }}</a>
@@ -481,7 +481,7 @@
                                                     </div>
                                                     <div class="item_content">
                                                         <span
-                                                            class="item_name">{{ $product->subcategory->name }}</span>
+                                                            class="item_name">{{ $product->subcategory?->name ?? $product->category->name }}</span>
                                                         <h3 class="item_title">
                                                             <a
                                                                 href="{{ route('product', $product->id) }}">{{ Str::limit($product->name, 25, '...') }}</a>

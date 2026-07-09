@@ -136,7 +136,7 @@
                                                                 class="badge badge-lg {{ $product->stock_status == 'instock' ? 'badge-success' : 'badge-danger' }}">{{ $product->stock_status }}</span>
                                                         </td>
                                                         <td>{{ $product->category->name }}</td>
-                                                        <td>{{ $product->subcategory->name }}</td>
+                                                        <td>{{ $product->subcategory?->name ?? 'Aucune' }}</td>
                                                         <td>
                                                             <span class="dropdown">
                                                                 <button id="btnSearchDrop2" type="button"
