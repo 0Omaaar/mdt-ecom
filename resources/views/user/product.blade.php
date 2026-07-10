@@ -79,10 +79,10 @@
                                 <div id="di_tab_0" class="tab-pane active">
                                     <div class="image_wrap">
                                         @if ($product->dolibarr_id == null)
-                                            <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                            <img  style=" padding: 6%; src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @else
-                                            <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                            <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @endif
 
@@ -92,10 +92,10 @@
                                     <div id="di_tab_{{ $loop->index + 1 }}" class="tab-pane">
                                         <div class="image_wrap">
                                             @if ($product->dolibarr_id == null)
-                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                                <img style=" padding: 6%;  src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
                                                     alt="image_not_found">
                                             @else
-                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
+                                                <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
                                                     alt="image_not_found">
                                             @endif
                                         </div>
@@ -109,7 +109,7 @@
                                             <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @else
-                                            <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                            <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @endif
                                     </a>
@@ -118,7 +118,7 @@
                                     <li>
                                         <a data-toggle="tab" href="#di_tab_{{ $loop->index + 1 }}">
                                             @if ($product->dolibarr_id == null)
-                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                                <img style=" padding: 6%; src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
                                                     alt="image_not_found">
                                             @else
                                                 <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"

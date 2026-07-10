@@ -687,7 +687,7 @@
                 img.addEventListener('error', function() {
                     if (!this.classList.contains('fallback-applied')) {
                         this.classList.add('fallback-applied');
-                        this.src = '{{ asset("assets/images/default.png") }}';
+                        this.src = 'https://placehold.co/600x600/png?text=Aucune+Image';
                         this.alt = 'No Image Available';
                     }
                 });

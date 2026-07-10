@@ -99,6 +99,7 @@ button:focus {
 img {
   height: auto;
   max-width: 100%;
+  padding: 6% !important;
 }
 
 hr {
@@ -17844,6 +17845,7 @@ blockquote .blockquote_title {
 /* lookbook creative details - end */
 /* electronic details - start */
 .electronic_details .details_image .image_wrap {
+  padding: 6% !important;
   height: 670px;
   display: flex;
   align-items: center;
@@ -17852,6 +17854,7 @@ blockquote .blockquote_title {
 }
 .electronic_details .details_image .image_wrap img {
   max-height: 500px;
+  padding: 6% !important;
 }
 .electronic_details .details_image .nav {
   z-index: 1;
