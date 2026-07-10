@@ -79,28 +79,34 @@
                                 <div id="di_tab_0" class="tab-pane active">
                                     <div class="image_wrap">
                                         @if ($product->dolibarr_id == null)
-                                            <img  style=" padding: 6%; src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                            <img   src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @else
-                                            <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                            <img  src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @endif
 
                                     </div>
                                 </div>
-                                @foreach ($product->images as $image)
-                                    <div id="di_tab_{{ $loop->index + 1 }}" class="tab-pane">
-                                        <div class="image_wrap">
-                                            @if ($product->dolibarr_id == null)
-                                                <img style=" padding: 6%;  src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                @if ($product->dolibarr_id == null)
+                                    @foreach ($product->images as $image)
+                                        <div id="di_tab_{{ $loop->index + 1 }}" class="tab-pane">
+                                            <div class="image_wrap">
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
                                                     alt="image_not_found">
-                                            @else
-                                                <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
-                                                    alt="image_not_found">
-                                            @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                    @foreach ($dolibarrImages as $index => $imgFile)
+                                        <div id="di_tab_{{ $index + 1 }}" class="tab-pane">
+                                            <div class="image_wrap">
+                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $imgFile) }}"
+                                                    alt="image_not_found">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <ul class="nav ul_li clearfix images-nav" role="tablist">
                                 <li>
@@ -109,24 +115,30 @@
                                             <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @else
-                                            <img style=" padding: 6%; src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                            <img  src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
                                                 alt="image_not_found">
                                         @endif
                                     </a>
                                 </li>
-                                @foreach ($product->images as $image)
-                                    <li>
-                                        <a data-toggle="tab" href="#di_tab_{{ $loop->index + 1 }}">
-                                            @if ($product->dolibarr_id == null)
-                                                <img style=" padding: 6%; src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
+                                @if ($product->dolibarr_id == null)
+                                    @foreach ($product->images as $image)
+                                        <li>
+                                            <a data-toggle="tab" href="#di_tab_{{ $loop->index + 1 }}">
+                                                <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
                                                     alt="image_not_found">
-                                            @else
-                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $image->path) }}"
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    @foreach ($dolibarrImages as $index => $imgFile)
+                                        <li>
+                                            <a data-toggle="tab" href="#di_tab_{{ $index + 1 }}">
+                                                <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $imgFile) }}"
                                                     alt="image_not_found">
-                                            @endif
-                                        </a>
-                                    </li>
-                                @endforeach
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>

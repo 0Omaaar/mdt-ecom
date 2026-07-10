@@ -171,11 +171,27 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $product = Product::findOrFail($id);
         $randomProducts = Product::inRandomOrder()->take(6)->get();
+        $dolibarrImages = [];
 
+        if ($product->dolibarr_id != null) {
+            $directoryPath = public_path('productsDolibarr/' . $product->dolibarr_id);
+            if (File::exists($directoryPath)) {
+                $files = File::files($directoryPath);
+                foreach ($files as $file) {
+                    // If product has no main image set, use the first file as main image
+                    if (!$product->image) {
+                        $product->image = $file->getFilename();
+                    }
+                    if ($file->getFilename() != $product->image) {
+                        $dolibarrImages[] = $file->getFilename();
+                    }
+                }
+            }
+        }
 
         $cart = $this->getUserCart();
 
-        return view('user.product', compact('categories', 'product', 'subcategories', 'cart', 'randomProducts'));
+        return view('user.product', compact('categories', 'product', 'subcategories', 'cart', 'randomProducts', 'dolibarrImages'));
     }
 
 

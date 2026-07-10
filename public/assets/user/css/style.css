@@ -17845,16 +17845,18 @@ blockquote .blockquote_title {
 /* lookbook creative details - end */
 /* electronic details - start */
 .electronic_details .details_image .image_wrap {
-  padding: 6% !important;
   height: 670px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #eaeaea;
+  overflow: hidden;
 }
 .electronic_details .details_image .image_wrap img {
   max-height: 500px;
-  padding: 6% !important;
+  max-width: 100%;
+  padding: 6%;
+  object-fit: contain;
 }
 .electronic_details .details_image .nav {
   z-index: 1;
