@@ -155,6 +155,7 @@ Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->mid
 Route::post('/admin/products/store', [ProductController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.products.store');
 Route::put('/admin/products/update/{id}', [ProductController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.products.update');
 Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.products.destroy');
+Route::delete('/admin/products/{productId}/image/{imageId}', [ProductController::class, 'destroyImage'])->middleware('auth', 'isAdmin')->name('admin.products.image.destroy');
 
 
 //reviews

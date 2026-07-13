@@ -164,14 +164,12 @@
                                                                 for="category_id">Catégorie</label>
                                                             <div class="col-md-9">
                                                                 <select id="category_id" class="form-control"
-                                                                    name="category_id" required>
-                                                                    <option selected value="{{ $product->category->id }}">
-                                                                        {{ $product->category->name }}</option>
+                                                                    name="category_id" required onchange="filterSubcategories()">
                                                                     @foreach ($categories as $category)
-                                                                        @if($category->id != $product->category_id)
-                                                                            <option value="{{ $category->id }}">
-                                                                                {{ $category->name }}</option>
-                                                                        @endif
+                                                                        <option value="{{ $category->id }}"
+                                                                            {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                                            {{ $category->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -182,18 +180,13 @@
                                                             <div class="col-md-9">
                                                                 <select id="subcategory_id" class="form-control"
                                                                     name="subcategory_id">
-                                                                    @if($product->subcategory)
-                                                                        <option selected value="{{ $product->subcategory->id }}">
-                                                                            {{ $product->subcategory->name }}</option>
-                                                                        <option value="">-- Aucun --</option>
-                                                                    @else
-                                                                        <option selected value="">-- Aucun --</option>
-                                                                    @endif
+                                                                    <option value="">-- Aucune --</option>
                                                                     @foreach ($subCategories as $subCategory)
-                                                                        @if(!$product->subcategory || $subCategory->id != $product->subcategory_id)
-                                                                            <option value="{{ $subCategory->id }}">
-                                                                                {{ $subCategory->name }}</option>
-                                                                        @endif
+                                                                        <option value="{{ $subCategory->id }}"
+                                                                            data-category="{{ $subCategory->category_id }}"
+                                                                            {{ $product->subcategory_id == $subCategory->id ? 'selected' : '' }}>
+                                                                            {{ $subCategory->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -317,21 +310,33 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group row" style="margin-right: 15%">
                                                             <label class="col-md-3 label-control" style="margin-top: 1.4%"
-                                                                for="images">Images</label>
+                                                                for="images">Images actuelles</label>
                                                             <div class="col-md-9">
                                                                 <div id="oldImagesPreview"
-                                                                    style="display: flex; gap: 10px; margin-bottom: 10px;">
-                                                                    @foreach ($images as $image)
-                                                                        <img src="{{ asset('images/products/' . $product->id . '/' . $image->path) }}"
-                                                                            alt="Old Product Image"
-                                                                            style="max-width: 100px; max-height: 100px;">
+                                                                    style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 15px;">
+                                                                    @foreach ($images as $img)
+                                                                        <div class="image-thumb-wrapper" id="img-wrapper-{{ $img->id }}"
+                                                                            style="position: relative; display: inline-block;">
+                                                                            <img src="{{ asset('images/products/' . $product->id . '/' . $img->path) }}"
+                                                                                alt="Product Image"
+                                                                                style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ddd; border-radius: 4px;">
+                                                                            <button type="button"
+                                                                                onclick="deleteProductImage({{ $product->id }}, {{ $img->id }})"
+                                                                                style="position: absolute; top: -6px; right: -6px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
                                                                     @endforeach
+                                                                    @if ($images->isEmpty())
+                                                                        <p class="text-muted" id="no-images-msg">Aucune image secondaire.</p>
+                                                                    @endif
                                                                 </div>
 
+                                                                <label style="margin-top: 8px; font-weight: 600;">Ajouter de nouvelles images :</label>
                                                                 <input type="file" id="images" name="images[]"
-                                                                    multiple onchange="previewNewImages(event)">
+                                                                    multiple onchange="previewNewImages(event)" style="margin-top: 4px;">
                                                                 <div id="newImagesPreview"
-                                                                    style="display: flex; gap: 10px; margin-top: 10px;">
+                                                                    style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -403,30 +408,88 @@
     </script>
 
     <script>
+        function filterSubcategories() {
+            const categoryId = document.getElementById('category_id').value;
+            const subcategorySelect = document.getElementById('subcategory_id');
+            const options = subcategorySelect.querySelectorAll('option');
+
+            options.forEach(option => {
+                if (option.value === '') {
+                    option.style.display = '';
+                    return;
+                }
+                const optCat = option.getAttribute('data-category');
+                option.style.display = (optCat == categoryId) ? '' : 'none';
+            });
+
+            // If currently selected subcategory doesn't belong to new category, reset to "Aucune"
+            const selected = subcategorySelect.value;
+            if (selected !== '') {
+                const selectedOption = subcategorySelect.querySelector('option[value="' + selected + '"]');
+                if (selectedOption && selectedOption.style.display === 'none') {
+                    subcategorySelect.value = '';
+                }
+            }
+        }
+
+        // Run on page load to set correct subcategory options
+        document.addEventListener('DOMContentLoaded', filterSubcategories);
+    </script>
+
+    <script>
         function previewNewImages(event) {
             const files = event.target.files;
             const newImagesPreview = document.getElementById('newImagesPreview');
-            const oldImagesPreview = document.getElementById('oldImagesPreview');
 
             newImagesPreview.innerHTML = '';
 
-            if (files.length > 0) {
-                oldImagesPreview.style.display = 'none';
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const wrapper = document.createElement('div');
+                    wrapper.style.cssText = 'position:relative;display:inline-block;';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.cssText = 'width:100px;height:100px;object-fit:cover;border:1px solid #ccc;border-radius:4px;';
+                    wrapper.appendChild(img);
+                    newImagesPreview.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '100px';
-                        img.style.maxHeight = '100px';
-                        newImagesPreview.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            } else {
-                oldImagesPreview.style.display = 'flex';
-            }
+        function deleteProductImage(productId, imageId) {
+            if (!confirm('Supprimer cette image ?')) return;
+
+            fetch(`/admin/products/${productId}/image/${imageId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const wrapper = document.getElementById('img-wrapper-' + imageId);
+                    if (wrapper) wrapper.remove();
+                    // Show "no images" if all deleted
+                    const remaining = document.querySelectorAll('#oldImagesPreview .image-thumb-wrapper');
+                    if (remaining.length === 0) {
+                        const msg = document.getElementById('no-images-msg');
+                        if (!msg) {
+                            const p = document.createElement('p');
+                            p.className = 'text-muted';
+                            p.id = 'no-images-msg';
+                            p.textContent = 'Aucune image secondaire.';
+                            document.getElementById('oldImagesPreview').appendChild(p);
+                        }
+                    }
+                } else {
+                    alert('Erreur : ' + data.message);
+                }
+            })
+            .catch(() => alert('Erreur de connexion.'));
         }
     </script>
 

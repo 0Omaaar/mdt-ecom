@@ -188,19 +188,14 @@ class ProductController extends Controller
             $product->sku = $request->input('sku');
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
-            $product->subcategory_id = $request->input('subcategory_id');
-            $product->category_id = $request->input('category_id');
-            $product->brand_id = $request->input('brand_id');
-            $product->selection = $request->has('selection');
-            $product->nouveautes = $request->has('nouveautes');
-            $product->top_ventes = $request->has('top_ventes');
-            $product->dayDeals = $request->has('dayDeals');
-            $product->best_price = $request->has('best_price');
-
-            if ($product->subcategory_id) {
-                $subCategory = SubCategory::findOrFail($product->subcategory_id);
-                $product->category_id = $subCategory->category_id;
-            }
+            $product->subcategory_id = $request->input('subcategory_id') ?: null;
+            $product->category_id    = $request->input('category_id');
+            $product->brand_id       = $request->input('brand_id');
+            $product->selection      = $request->has('selection');
+            $product->nouveautes     = $request->has('nouveautes');
+            $product->top_ventes     = $request->has('top_ventes');
+            $product->dayDeals       = $request->has('dayDeals');
+            $product->best_price     = $request->has('best_price');
 
             if ($request->hasFile('image')) {
                 $oldImagePath = public_path('images/products/' . $product->id . '/' . $product->image);
@@ -214,18 +209,9 @@ class ProductController extends Controller
             }
 
             if ($request->hasFile('images')) {
-                foreach ($product->images as $oldImage) {
-                    $oldImagePath = public_path('images/products/' . $product->id . '/' . $oldImage->path);
-                    if (File::exists($oldImagePath)) {
-                        File::delete($oldImagePath);
-                    }
-                    $oldImage->delete();
-                }
-
                 foreach ($request->file('images') as $image) {
                     $imageName = uniqid() . '.' . $image->extension();
                     $image->move(public_path('images/products/' . $product->id . '/'), $imageName);
-
                     $product->images()->create(['path' => $imageName]);
                 }
             }
@@ -267,6 +253,24 @@ class ProductController extends Controller
             }
         } catch (\Exception $e) {
             return redirect()->route('admin.products.index')->with('error', 'Une Erreur est survenue lors de suppression du Produit.');
+        }
+    }
+
+    public function destroyImage($productId, $imageId)
+    {
+        try {
+            $product = Product::findOrFail($productId);
+            $image = $product->images()->findOrFail($imageId);
+
+            $imagePath = public_path('images/products/' . $productId . '/' . $image->path);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $image->delete();
+
+            return response()->json(['success' => true, 'message' => 'Image supprimée avec succès.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Erreur lors de la suppression.'], 500);
         }
     }
 }
