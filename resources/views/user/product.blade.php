@@ -1,8 +1,8 @@
 @extends('base')
 
-@section('seo_title', $product->name . ' | Mobidigitech Maroc')
-@section('seo_description', Str::limit(strip_tags($product->description ?? $product->name . ' disponible sur Mobidigitech - livraison rapide au Maroc.'), 160))
-@section('seo_keywords', $product->name . ', ' . ($product->category->name ?? 'produit') . ', Mobidigitech, ' . ($product->brand->name ?? '') . ', Maroc')
+@section('seo_title', $product->name . ' au meilleur prix au Maroc | Mobidigitech')
+@section('seo_description', Str::limit(strip_tags($product->description ?? $product->name . ' en vente au Maroc. Achetez en ligne avec livraison rapide à domicile à Témara, Rabat, Casablanca et partout au Maroc.'), 160))
+@section('seo_keywords', $product->name . ', ' . ($product->category->name ?? 'produit') . ', Mobidigitech Témara, Mobidigitech Rabat, boutique informatique Témara, livraison Témara, Maroc')
 @section('og_type', 'product')
 @php
     $productImage = $product->dolibarr_id
@@ -226,6 +226,13 @@
                     <div class="tab-content">
                         <div id="description_tab" class="tab-pane active">
                             {!! html_entity_decode($product->description) !!}
+
+                            <div class="local-delivery-info mt-4 p-3" style="background-color: #f7f9fc; border-left: 4px solid #3b82f6; border-radius: 4px;">
+                                <h5 class="mb-2" style="color: #1e3a8a; font-weight: 600;"><i class="fas fa-truck mr-2"></i>Livraison Express à Témara, Rabat & partout au Maroc</h5>
+                                <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.6;">
+                                    Commandez votre <strong>{{ $product->name }}</strong> chez Mobidigitech et profitez d'une livraison rapide à domicile à <strong>Témara, Rabat, Harhoura, Salé</strong> et partout au Maroc. Service client à votre écoute et possibilité de paiement à la livraison.
+                                </p>
+                            </div>
                         </div>
 
                         <div id="reviews_tab" class="tab-pane fade">

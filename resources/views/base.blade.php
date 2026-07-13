@@ -8,9 +8,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- SEO Meta Tags -->
-    <title>@yield('seo_title', 'Mobidigitech | Marketplace eCommerce Maroc')</title>
-    <meta name="description" content="@yield('seo_description', 'Mobidigitech - Votre partenaire eCommerce au Maroc. Découvrez PC portables, accessoires, téléphones et produits digitaux aux meilleurs prix.')">
-    <meta name="keywords" content="@yield('seo_keywords', 'eCommerce Maroc, Mobidigitech, PC portable Maroc, accessoires informatique, boutique en ligne Maroc, téléphones')">
+    <title>@yield('seo_title', 'Mobidigitech | Boutique eCommerce Témara, Rabat & Maroc')</title>
+    <meta name="description" content="@yield('seo_description', 'Mobidigitech - Votre boutique eCommerce à Témara, Rabat et partout au Maroc. Découvrez PC portables, accessoires informatiques et téléphones au meilleur prix.')">
+    <meta name="keywords" content="@yield('seo_keywords', 'eCommerce Maroc, Mobidigitech, PC portable Maroc, accessoires informatique, boutique en ligne Témara, boutique informatique Rabat, téléphones')">
     <meta name="author" content="Mobidigitech">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">

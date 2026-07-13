@@ -11,6 +11,7 @@
     <meta name="keywords"
         content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MDT-ADMIN</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
     <link
