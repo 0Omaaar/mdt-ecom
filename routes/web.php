@@ -122,12 +122,14 @@ Route::get('/admin/categories/index', [CategoryController::class, 'index'])->mid
 Route::post('/admin/categories/store', [CategoryController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.categories.store');
 Route::put('/admin/categories/update/{id}', [CategoryController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.categories.update');
 Route::delete('/admin/categories/delete/{id}', [CategoryController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.categories.destroy');
+Route::post('/admin/categories/bulk-delete', [CategoryController::class, 'bulkDestroy'])->middleware('auth', 'isAdmin')->name('admin.categories.bulk_destroy');
 
 //sub categories
 Route::get('/admin/subCategories/index', [SubCategoryController::class, 'index'])->middleware('auth', 'isAdmin')->name('admin.subCategories.index');
 Route::post('/admin/subCategories/store', [SubCategoryController::class, 'store'])->middleware('auth', 'isAdmin')->name('admin.subCategories.store');
 Route::put('/admin/subCategories/update/{id}', [SubCategoryController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.subCategories.update');
 Route::delete('/admin/subCategories/delete/{id}', [SubCategoryController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.subCategories.destroy');
+Route::post('/admin/subCategories/bulk-delete', [SubCategoryController::class, 'bulkDestroy'])->middleware('auth', 'isAdmin')->name('admin.subCategories.bulk_destroy');
 
 //admin orders
 Route::get('/admin/orders/index', [OrderController::class, 'getOrders'])->middleware('auth', 'isAdmin')->name('admin.orders.index');
@@ -156,6 +158,7 @@ Route::post('/admin/products/store', [ProductController::class, 'store'])->middl
 Route::put('/admin/products/update/{id}', [ProductController::class, 'update'])->middleware('auth', 'isAdmin')->name('admin.products.update');
 Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy'])->middleware('auth', 'isAdmin')->name('admin.products.destroy');
 Route::delete('/admin/products/{productId}/image/{imageId}', [ProductController::class, 'destroyImage'])->middleware('auth', 'isAdmin')->name('admin.products.image.destroy');
+Route::post('/admin/products/bulk-delete', [ProductController::class, 'bulkDestroy'])->middleware('auth', 'isAdmin')->name('admin.products.bulk_destroy');
 
 
 //reviews

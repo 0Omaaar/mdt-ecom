@@ -92,4 +92,26 @@ class CategoryController extends Controller
             return redirect()->route('admin.categories.index')->with('error', 'Une Erreur est survenue lors de la suppression de la catégorie.');
         }
     }
+
+    public function bulkDestroy(Request $request)
+    {
+        try {
+            $ids = $request->input('ids');
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['success' => false, 'message' => 'Aucune catégorie sélectionnée.']);
+            }
+
+            $categories = Category::whereIn('id', $ids)->get();
+            foreach ($categories as $category) {
+                if ($category->image && File::exists(public_path('images/categories/' . $category->image))) {
+                    File::delete(public_path('images/categories/' . $category->image));
+                }
+                $category->delete();
+            }
+
+            return response()->json(['success' => true, 'message' => 'Catégories supprimées avec succès.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Une erreur est survenue lors de la suppression.'], 500);
+        }
+    }
 }

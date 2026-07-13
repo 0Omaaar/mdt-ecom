@@ -268,4 +268,40 @@ class ProductController extends Controller
             return response()->json(['success' => false, 'message' => 'Erreur lors de la suppression.'], 500);
         }
     }
+
+    public function bulkDestroy(Request $request)
+    {
+        try {
+            $ids = $request->input('ids');
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['success' => false, 'message' => 'Aucun produit sélectionné.']);
+            }
+
+            $products = Product::whereIn('id', $ids)->get();
+            foreach ($products as $product) {
+                if ($product->image != null && File::exists(public_path('images/products/' . $product->id . '/' . $product->image))) {
+                    File::delete(public_path('images/products/' . $product->id . '/' . $product->image));
+                }
+
+                if ($product->images->count() > 0) {
+                    foreach ($product->images as $image) {
+                        if (File::exists(public_path('images/products/' . $product->id . '/' . $image->path))) {
+                            File::delete(public_path('images/products/' . $product->id . '/' . $image->path));
+                        }
+                    }
+                }
+
+                $folderPath = public_path('images/products/' . $product->id);
+                if (File::isDirectory($folderPath)) {
+                    File::deleteDirectory($folderPath);
+                }
+
+                $product->delete();
+            }
+
+            return response()->json(['success' => true, 'message' => 'Produits supprimés avec succès.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Une erreur est survenue lors de la suppression.'], 500);
+        }
+    }
 }

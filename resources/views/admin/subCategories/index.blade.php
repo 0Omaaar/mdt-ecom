@@ -65,13 +65,15 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Sous Categories</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                                    <div class="heading-elements">
+                                    <div class="heading-elements" style="display: flex; align-items: center; gap: 10px;">
+                                        <button type="button" id="bulk-delete-btn" class="btn btn-danger btn-sm" style="display: none;" onclick="bulkDeleteSubCategories()">
+                                            <i class="la la-trash"></i> Supprimer la sélection (<span id="selected-count">0</span>)
+                                        </button>
                                         <button data-toggle="modal" data-target="#flipInY" class="btn btn-primary btn-sm"><i
                                                 class="ft-plus white"></i> Ajouter Une Sous
                                             Categorie</button>
 
                                         @include('admin.subCategories.add')
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -82,17 +84,22 @@
                    class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                 <thead>
                     <tr>
+                        <th style="text-align: center; width: 40px;">
+                            <input type="checkbox" id="select-all-subcategories" style="transform: scale(1.2); cursor: pointer;" onchange="toggleSelectAllSubCategories(this)">
+                        </th>
                         <th>N</th>
                         <th>Image</th>
                         <th>Nom</th>
                         <th>Categorie</th>
-                        {{-- <th>Nombre Produits</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($subCategories as $subCategory)
                         <tr>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="subcategory-checkbox" value="{{ $subCategory->id }}" style="transform: scale(1.2); cursor: pointer;" onchange="toggleBulkDeleteBtn()">
+                            </td>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>
                                 @if($subCategory->image != null)
@@ -231,5 +238,55 @@
             imagePreview.style.display = 'none';
         }
 
+        function toggleSelectAllSubCategories(master) {
+            const checkboxes = document.querySelectorAll('.subcategory-checkbox');
+            checkboxes.forEach(cb => cb.checked = master.checked);
+            toggleBulkDeleteBtn();
+        }
+
+        function toggleBulkDeleteBtn() {
+            const checkboxes = document.querySelectorAll('.subcategory-checkbox:checked');
+            const btn = document.getElementById('bulk-delete-btn');
+            const countSpan = document.getElementById('selected-count');
+            
+            if (checkboxes.length > 0) {
+                btn.style.display = 'inline-block';
+                countSpan.textContent = checkboxes.length;
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        function bulkDeleteSubCategories() {
+            const checked = document.querySelectorAll('.subcategory-checkbox:checked');
+            const ids = Array.from(checked).map(cb => cb.value);
+
+            if (ids.length === 0) return;
+
+            if (!confirm(`Voulez-vous vraiment supprimer les ${ids.length} sous-catégories sélectionnées ? Attention, cela affectera les produits associés.`)) {
+                return;
+            }
+
+            fetch("{{ route('admin.subCategories.bulk_destroy') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ ids: ids })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Erreur : ' + data.message);
+                }
+            })
+            .catch(err => {
+                alert('Une erreur est survenue lors de la suppression.');
+            });
+        }
     </script>
 @endsection

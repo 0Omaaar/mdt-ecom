@@ -61,14 +61,15 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Categories</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                                    <div class="heading-elements">
+                                    <div class="heading-elements" style="display: flex; align-items: center; gap: 10px;">
+                                        <button type="button" id="bulk-delete-btn" class="btn btn-danger btn-sm" style="display: none;" onclick="bulkDeleteCategories()">
+                                            <i class="la la-trash"></i> Supprimer la sélection (<span id="selected-count">0</span>)
+                                        </button>
                                         <button data-toggle="modal" data-target="#flipInY" class="btn btn-primary btn-sm"><i
                                                 class="ft-plus white"></i> Ajouter Une
                                             Categorie</button>
 
                                         @include('admin.categories.add')
-                                        
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -79,6 +80,9 @@
                 class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                 <thead>
                     <tr>
+                        <th style="text-align: center; width: 40px;">
+                            <input type="checkbox" id="select-all-categories" style="transform: scale(1.2); cursor: pointer;" onchange="toggleSelectAllCategories(this)">
+                        </th>
                         <th>N</th>
                         <th>Image</th>
                         <th>Nom</th>
@@ -91,6 +95,9 @@
                 <tbody>
                     @foreach ($categories as $category)
                         <tr>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="category-checkbox" value="{{ $category->id }}" style="transform: scale(1.2); cursor: pointer;" onchange="toggleBulkDeleteBtn()">
+                            </td>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>
                                 @if($category->image != null)
@@ -217,5 +224,55 @@
             // output.style.display = 'none';
         }
 
+        function toggleSelectAllCategories(master) {
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            checkboxes.forEach(cb => cb.checked = master.checked);
+            toggleBulkDeleteBtn();
+        }
+
+        function toggleBulkDeleteBtn() {
+            const checkboxes = document.querySelectorAll('.category-checkbox:checked');
+            const btn = document.getElementById('bulk-delete-btn');
+            const countSpan = document.getElementById('selected-count');
+            
+            if (checkboxes.length > 0) {
+                btn.style.display = 'inline-block';
+                countSpan.textContent = checkboxes.length;
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        function bulkDeleteCategories() {
+            const checked = document.querySelectorAll('.category-checkbox:checked');
+            const ids = Array.from(checked).map(cb => cb.value);
+
+            if (ids.length === 0) return;
+
+            if (!confirm(`Voulez-vous vraiment supprimer les ${ids.length} catégories sélectionnées ? Attention, cela supprimera ou affectera leurs sous-catégories et produits.`)) {
+                return;
+            }
+
+            fetch("{{ route('admin.categories.bulk_destroy') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ ids: ids })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Erreur : ' + data.message);
+                }
+            })
+            .catch(err => {
+                alert('Une erreur est survenue lors de la suppression.');
+            });
+        }
     </script>
 @endsection

@@ -91,4 +91,25 @@ class SubCategoryController extends Controller
         }
     }
 
+    public function bulkDestroy(Request $request)
+    {
+        try {
+            $ids = $request->input('ids');
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['success' => false, 'message' => 'Aucune sous-catégorie sélectionnée.']);
+            }
+
+            $subCategories = SubCategory::whereIn('id', $ids)->get();
+            foreach ($subCategories as $subCategory) {
+                if ($subCategory->image && File::exists(public_path('images/subCategories/' . $subCategory->image))) {
+                    File::delete(public_path('images/subCategories/' . $subCategory->image));
+                }
+                $subCategory->delete();
+            }
+
+            return response()->json(['success' => true, 'message' => 'Sous-catégories supprimées avec succès.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Une erreur est survenue lors de la suppression.'], 500);
+        }
+    }
 }
