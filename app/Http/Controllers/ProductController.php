@@ -96,7 +96,7 @@ class ProductController extends Controller
             $product->sku = $request->input('sku');
             $product->stock_status = $request->input('stock_status');
             $product->quantity = $request->input('quantity');
-            $product->subcategory_id = $request->input('subcategory_id');
+            $product->subcategory_id = $request->input('subcategory_id') ?: null;
             $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
             $product->selection = $request->has('selection');
@@ -104,11 +104,6 @@ class ProductController extends Controller
             $product->top_ventes = $request->has('top_ventes');
             $product->dayDeals = $request->has('dayDeals');
             $product->best_price = $request->has('best_price');
-
-            if ($product->subcategory_id) {
-                $subCategory = SubCategory::findOrFail($product->subcategory_id);
-                $product->category_id = $subCategory->category_id;
-            }
 
             $product->image = null;
 

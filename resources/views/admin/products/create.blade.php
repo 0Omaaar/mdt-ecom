@@ -141,7 +141,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="category_id">Catégorie</label>
                                                         <div class="col-md-9">
-                                                            <select id="category_id" class="form-control" name="category_id" required>
+                                                            <select id="category_id" class="form-control" name="category_id" required onchange="filterSubcategories()">
                                                                 <option selected disabled>--Choisir Catégorie--</option>
                                                                 @foreach ($categories as $category)
                                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -153,9 +153,9 @@
                                                         <label class="col-md-3 label-control" for="subcategory_id">Sous-catégorie</label>
                                                         <div class="col-md-9">
                                                             <select id="subcategory_id" class="form-control" name="subcategory_id">
-                                                                <option selected disabled>--Choisir Sous Catégorie--</option>
+                                                                <option value="" selected>-- Aucune --</option>
                                                                 @foreach ($subCategories as $subCategory)
-                                                                    <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                                                    <option value="{{ $subCategory->id }}" data-category="{{ $subCategory->category_id }}">{{ $subCategory->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -288,6 +288,29 @@
     </script>
 
 
+
+    <script>
+        function filterSubcategories() {
+            const categoryId = document.getElementById('category_id').value;
+            const subcategorySelect = document.getElementById('subcategory_id');
+            const options = subcategorySelect.querySelectorAll('option');
+
+            options.forEach(option => {
+                if (option.value === '') {
+                    option.style.display = '';
+                    return;
+                }
+                const optCat = option.getAttribute('data-category');
+                option.style.display = (optCat == categoryId) ? '' : 'none';
+            });
+
+            // Reset subcategory selection to "Aucune" since category changed
+            subcategorySelect.value = '';
+        }
+
+        // Run initially to filter correctly
+        document.addEventListener('DOMContentLoaded', filterSubcategories);
+    </script>
 
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
