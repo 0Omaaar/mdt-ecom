@@ -29,6 +29,96 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
+
+    <style>
+        /* Modern UI Card and Table */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid #f1f3f5;
+            padding-bottom: 1.5rem;
+        }
+        .table-bordered, .table-bordered th, .table-bordered td {
+            border: none;
+            border-bottom: 1px solid #f4f5f7;
+        }
+        .table thead th {
+            border-bottom: 2px solid #e9ecef !important;
+            color: #6c757d;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        .table tbody tr {
+            transition: all 0.2s ease-in-out;
+        }
+        .table tbody tr:hover {
+            background-color: #f8f9fa !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .table td {
+            vertical-align: middle;
+            padding: 1rem 0.75rem;
+        }
+        /* Soft Badges */
+        .badge-soft-success {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-radius: 20px;
+            padding: 0.5em 0.8em;
+            font-weight: 600;
+        }
+        .badge-soft-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-radius: 20px;
+            padding: 0.5em 0.8em;
+            font-weight: 600;
+        }
+        .badge-soft-danger {
+            background-color: #f8d7da;
+            color: #842029;
+            border-radius: 20px;
+            padding: 0.5em 0.8em;
+            font-weight: 600;
+        }
+        .badge-soft-dark {
+            background-color: #e9ecef;
+            color: #495057;
+            border-radius: 20px;
+            padding: 0.5em 0.8em;
+            font-weight: 600;
+        }
+        /* Thumbnails */
+        .table img {
+            border-radius: 8px !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        /* Action Dropdown */
+        .btn-action-ghost {
+            background: transparent;
+            color: #6c757d;
+            border: 1px solid transparent;
+            box-shadow: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .btn-action-ghost:hover {
+            background: #f1f3f5;
+            color: #495057;
+            border-color: #e9ecef;
+        }
+    </style>
 @endsection
 @section('content')
     <!-- BEGIN: Content-->
@@ -109,20 +199,20 @@
                                 @endif
                             </td>
                             <td>{{ $category->name }}</td>
-                            <td><span class="badge badge-dark badge-lg" style="background-color: #FAB003; color: white;">{{ $category->slug }}</span></td>
+                            <td><span class="badge badge-soft-dark">{{ $category->slug }}</span></td>
                             <td><span
-                                    class="badge badge-success badge-lg">{{ $category->subCategories()->count() }}</span>
+                                    class="badge badge-soft-success">{{ $category->subCategories()->count() }}</span>
                             </td>
                             <td><span
-                                    class="badge badge-success badge-lg">{{ $category->products()->count() }}</span>
+                                    class="badge badge-soft-success">{{ $category->products()->count() }}</span>
                             </td>
                             <td>
                                 <span class="dropdown">
                                     <button id="btnSearchDrop2" type="button"
                                         data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true"
-                                        class="btn btn-primary dropdown-toggle dropdown-menu-right">
-                                        <i class="ft-settings" style="color: #FFFFFF;"></i>
+                                        aria-expanded="false"
+                                        class="btn-action-ghost dropdown-toggle">
+                                        <i class="ft-settings"></i>
                                     </button>
                                     <span aria-labelledby="btnSearchDrop2"
                                         class="dropdown-menu mt-1 dropdown-menu-right">
