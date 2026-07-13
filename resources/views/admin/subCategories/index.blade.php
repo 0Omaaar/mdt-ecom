@@ -239,27 +239,33 @@
         }
 
         function toggleSelectAllSubCategories(master) {
-            const checkboxes = document.querySelectorAll('.subcategory-checkbox');
-            checkboxes.forEach(cb => cb.checked = master.checked);
+            const table = $('#invoices-list').DataTable();
+            const rows = table.rows({ 'search': 'applied' }).nodes();
+            $('input.subcategory-checkbox', rows).prop('checked', master.checked);
             toggleBulkDeleteBtn();
         }
 
         function toggleBulkDeleteBtn() {
-            const checkboxes = document.querySelectorAll('.subcategory-checkbox:checked');
+            const table = $('#invoices-list').DataTable();
+            const checked = table.$('.subcategory-checkbox:checked');
             const btn = document.getElementById('bulk-delete-btn');
             const countSpan = document.getElementById('selected-count');
             
-            if (checkboxes.length > 0) {
+            if (checked.length > 0) {
                 btn.style.display = 'inline-block';
-                countSpan.textContent = checkboxes.length;
+                countSpan.textContent = checked.length;
             } else {
                 btn.style.display = 'none';
             }
         }
 
         function bulkDeleteSubCategories() {
-            const checked = document.querySelectorAll('.subcategory-checkbox:checked');
-            const ids = Array.from(checked).map(cb => cb.value);
+            const table = $('#invoices-list').DataTable();
+            const checked = table.$('.subcategory-checkbox:checked');
+            const ids = [];
+            checked.each(function() {
+                ids.push(this.value);
+            });
 
             if (ids.length === 0) return;
 

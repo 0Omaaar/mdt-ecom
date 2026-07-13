@@ -334,11 +334,11 @@
             },
         });
 
-        mainImagePond.setOptions({
+        miniaturePond.setOptions({
             maxFiles: 1,
         });
 
-        additionalImagesPond.setOptions({
+        imagesPond.setOptions({
             allowMultiple: true,
             maxFiles: 5,
         });
