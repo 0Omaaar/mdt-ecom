@@ -3,7 +3,6 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css') }}">
-
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/icheck/icheck.css') }}">
@@ -23,103 +22,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/invoice.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/animate/animate.css') }}">
-
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
 
-    <style>
-        /* Modern UI Card and Table */
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-        }
-        .card-header {
-            background-color: transparent;
-            border-bottom: 1px solid #f1f3f5;
-            padding-bottom: 1.5rem;
-        }
-        .table-bordered, .table-bordered th, .table-bordered td {
-            border: none;
-            border-bottom: 1px solid #f4f5f7;
-        }
-        .table thead th {
-            border-bottom: 2px solid #e9ecef !important;
-            color: #6c757d;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-        .table tbody tr {
-            transition: all 0.2s ease-in-out;
-        }
-        .table tbody tr:hover {
-            background-color: #f8f9fa !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-        .table td {
-            vertical-align: middle;
-            padding: 1rem 0.75rem;
-        }
-        /* Soft Badges */
-        .badge-soft-success {
-            background-color: #d1e7dd;
-            color: #0f5132;
-            border-radius: 20px;
-            padding: 0.5em 0.8em;
-            font-weight: 600;
-        }
-        .badge-soft-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border-radius: 20px;
-            padding: 0.5em 0.8em;
-            font-weight: 600;
-        }
-        .badge-soft-danger {
-            background-color: #f8d7da;
-            color: #842029;
-            border-radius: 20px;
-            padding: 0.5em 0.8em;
-            font-weight: 600;
-        }
-        .badge-soft-dark {
-            background-color: #e9ecef;
-            color: #495057;
-            border-radius: 20px;
-            padding: 0.5em 0.8em;
-            font-weight: 600;
-        }
-        /* Thumbnails */
-        .table img {
-            border-radius: 8px !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-        /* Action Dropdown */
-        .btn-action-ghost {
-            background: transparent;
-            color: #6c757d;
-            border: 1px solid transparent;
-            box-shadow: none;
-            padding: 0.4rem 0.6rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .btn-action-ghost:hover {
-            background: #f1f3f5;
-            color: #495057;
-            border-color: #e9ecef;
-        }
-    </style>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    @include('admin.products._styles')
 @endsection
+
 @section('content')
     @php
         use Illuminate\Support\Str;
@@ -130,37 +43,41 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Liste Produits</h3>
+                    <h3 class="content-header-title mb-0 page-heading">
+                        <span class="icon-wrap"><i class="la la-cubes"></i></span> Liste Produits
+                    </h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Accueil</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="#">Produits</a>
-                                </li>
-                                <li class="breadcrumb-item active">Gestion
-                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Accueil</a></li>
+                                <li class="breadcrumb-item"><a href="#">Produits</a></li>
+                                <li class="breadcrumb-item active">Gestion</li>
                             </ol>
                         </div>
                     </div>
                 </div>
-
             </div>
+
             <div class="content-body">
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-head">
-                                <div class="card-header">
-                                    <h4 class="card-title">Produits</h4>
-                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                                    <div class="heading-elements" style="display: flex; align-items: center; gap: 10px;">
-                                        <button type="button" id="bulk-delete-btn" class="btn btn-danger btn-sm" style="display: none;" onclick="bulkDeleteProducts()">
-                                            <i class="la la-trash"></i> Supprimer la sélection (<span id="selected-count">0</span>)
+                            <div class="card-header">
+                                <h4 class="card-title"><i class="la la-cube"></i> Produits
+                                    <span class="badge badge-soft-primary ml-1">{{ $products->count() }}</span>
+                                </h4>
+                                <div class="heading-elements d-flex align-items-center" style="gap:10px;">
+                                    <div id="bulk-actions-bar" class="bulk-actions-bar">
+                                        <i class="la la-check-square"></i>
+                                        <span><span id="selected-count">0</span> sélectionné(s)</span>
+                                        <button type="button" id="bulk-delete-btn" class="btn btn-danger btn-sm ml-2"
+                                            onclick="bulkDeleteProducts()">
+                                            <i class="la la-trash"></i> Supprimer la sélection
                                         </button>
-                                        <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm"><i
-                                                class="ft-plus white"></i> Ajouter Un Produit</a>
                                     </div>
+                                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">
+                                        <i class="la la-plus"></i> Ajouter Un Produit
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-content">
@@ -171,7 +88,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center; width: 40px;">
-                                                        <input type="checkbox" id="select-all-products" style="transform: scale(1.2); cursor: pointer;" onchange="toggleSelectAllProducts(this)">
+                                                        <input type="checkbox" id="select-all-products" style="transform: scale(1.2); cursor: pointer;">
                                                     </th>
                                                     <th>N</th>
                                                     <th>Miniature</th>
@@ -181,36 +98,40 @@
                                                     <th>Statut</th>
                                                     <th>Categorie</th>
                                                     <th>Sous Categorie</th>
-                                                    <th>Actions</th>
+                                                    <th style="width:70px;">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($products as $product)
-                                                    <tr>
+                                            <tbody id="products-tbody">
+                                                @forelse ($products as $product)
+                                                    <tr id="product-row-{{ $product->id }}" data-product-id="{{ $product->id }}">
                                                         <td style="text-align: center;">
-                                                            <input type="checkbox" class="product-checkbox" value="{{ $product->id }}" style="transform: scale(1.2); cursor: pointer;" onchange="toggleBulkDeleteBtn()">
+                                                            <input type="checkbox" class="product-checkbox select-checkbox"
+                                                                value="{{ $product->id }}">
                                                         </td>
                                                         <td>{{ $loop->index + 1 }}</td>
                                                         <td>
                                                             @if ($product->image != null)
                                                                 @if ($product->dolibarr_id != null)
-                                                                    <img src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
-                                                                        style="border-radius: 4%"
-                                                                        alt="{{ $product->name }}" width="50"
-                                                                        height="50">
+                                                                    <img class="product-thumb"
+                                                                        src="{{ asset('productsDolibarr/' . $product->dolibarr_id . '/' . $product->image) }}"
+                                                                        alt="{{ $product->name }}">
                                                                 @else
-                                                                    <img src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
-                                                                        style="border-radius: 4%"
-                                                                        alt="{{ $product->name }}" width="50"
-                                                                        height="50">
+                                                                    <img class="product-thumb"
+                                                                        src="{{ asset('images/products/' . $product->id . '/' . $product->image) }}"
+                                                                        alt="{{ $product->name }}">
                                                                 @endif
                                                             @else
-                                                                <span style="color: rgb(234, 109, 109)">Aucune image</span>
+                                                                <span class="product-thumb-empty"><i class="la la-image"></i></span>
                                                             @endif
                                                         </td>
-                                                        <td>{{ Str::limit($product->name, 15, '...') }}</td>
+                                                        <td>
+                                                            <div class="product-name-cell">
+                                                                <span class="p-name">{{ Str::limit($product->name, 20, '...') }}</span>
+                                                                <span class="p-id">#{{ $product->id }}</span>
+                                                            </div>
+                                                        </td>
                                                         <td><span class="badge badge-soft-dark">{{ $product->sku }}</span></td>
-                                                        <td>{{ $product->price }}</td>
+                                                        <td><strong>{{ $product->price }}</strong> DHS</td>
                                                         <td>
                                                             @if ($product->stock_status == 'instock')
                                                                 <span class="badge badge-soft-success">En stock</span>
@@ -218,7 +139,7 @@
                                                                 <span class="badge badge-soft-danger">Rupture de stock</span>
                                                             @endif
                                                         </td>
-                                                        <td><span class="badge badge-soft-dark">{{ $product->category->name }}</span></td>
+                                                        <td><span class="badge badge-soft-dark">{{ $product->category->name ?? '—' }}</span></td>
                                                         <td>
                                                             @if($product->subcategory)
                                                                 <span class="badge badge-soft-dark">{{ Str::limit($product->subcategory->name, 12, '...') }}</span>
@@ -228,37 +149,42 @@
                                                         </td>
                                                         <td>
                                                             <span class="dropdown">
-                                                                <button id="btnSearchDrop2" type="button"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false"
+                                                                <button type="button" data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false"
                                                                     class="btn-action-ghost dropdown-toggle">
                                                                     <i class="ft-settings"></i>
                                                                 </button>
-                                                                <span aria-labelledby="btnSearchDrop2"
-                                                                    class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                <span class="dropdown-menu dropdown-menu-right">
                                                                     <a href="{{ route('admin.products.show', $product->id) }}"
-                                                                        class="dropdown-item"><i class="la la-eye"></i> Voir
-                                                                        Détails</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('admin.products.edit', $product->id) }}"><i
-                                                                            class="la la-pencil"></i> Modifier</a>
-                                                                    <button data-toggle="modal"
+                                                                        class="dropdown-item">
+                                                                        <i class="la la-eye"></i> Voir Détails
+                                                                    </a>
+                                                                    <a class="dropdown-item" href="{{ route('admin.products.edit', $product->id) }}">
+                                                                        <i class="la la-pencil"></i> Modifier
+                                                                    </a>
+                                                                    <button type="button" data-toggle="modal"
                                                                         data-target="#deleteProduct{{ $product->id }}"
-                                                                        class="dropdown-item"><i class="la la-trash"></i>
-                                                                        Supprimer</button>
+                                                                        class="dropdown-item text-danger">
+                                                                        <i class="la la-trash"></i> Supprimer
+                                                                    </button>
                                                                 </span>
                                                             </span>
                                                         </td>
-
-                                                        {{-- Delete Product Modal --}}
-                                                        @include('admin.products.delete')
-
-
                                                     </tr>
-                                                @endforeach
 
+                                                    {{-- Delete Product Modal --}}
+                                                    @include('admin.products.delete')
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="10">
+                                                            <div class="empty-state">
+                                                                <i class="la la-box-open d-block"></i>
+                                                                Aucun produit pour le moment.
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>
@@ -271,125 +197,214 @@
     </div>
     <!-- END: Content-->
 
+    {{-- ==========================================================
+         Single shared Edit modal shell.
+         Content (the actual form) is injected via AJAX every time
+         "Modifier" is clicked, using the product's own edit URL.
+         ========================================================== --}}
+
+
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 @endsection
 
 
 @section('script')
+    @include('admin.products._scripts_common')
+
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
-    <!-- BEGIN Vendor JS-->
-
     <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js') }}"></script>
-
-    <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendors/js/forms/icheck/icheck.min.js') }}"></script>
-    <!-- END: Page Vendor JS-->
+    <!-- END: Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('assets/admin/js/core/app.js') }}"></script>
     <!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
     <script src="{{ asset('assets/admin/js/scripts/pages/invoices-list.js') }}"></script>
-    <!-- END: Page JS-->
-
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js') }}"></script>
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
 
     <script>
-        function previewImageAdd(event) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('image-preview');
-                output.src = reader.result;
-                output.style.display = 'block';
+        /* =========================================================================
+           1) DATA TABLES & SELECTION HELPERS
+           ========================================================================= */
+        function getDataTableSafe() {
+            try {
+                if ($.fn.DataTable && $.fn.DataTable.isDataTable('#invoices-list')) {
+                    return $('#invoices-list').DataTable();
+                }
+            } catch (e) {}
+            return null;
+        }
+
+        function getCheckedIds() {
+            const table = getDataTableSafe();
+            const checked = table ? table.$('.product-checkbox:checked')
+                                   : document.querySelectorAll('.product-checkbox:checked');
+            return Array.from(checked).map(el => el.value);
+        }
+
+        let isSyncing = false;
+        function toggleBulkDeleteBtn() {
+            if (isSyncing) return;
+            const ids = getCheckedIds();
+            const bar = document.getElementById('bulk-actions-bar');
+            const countSpan = document.getElementById('selected-count');
+
+            if (ids.length > 0) {
+                bar.style.display = 'flex';
+                countSpan.textContent = ids.length;
+            } else {
+                bar.style.display = 'none';
             }
-            reader.readAsDataURL(event.target.files[0]);
-        }
 
-        function removePreviewAdd() {
-            var output = document.getElementById('image-preview');
-            output.src = '';
-            output.style.display = 'none';
-        }
-
-        function previewImage(event, categoryId) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('image-preview-' + categoryId);
-                output.src = '';
-                output.src = reader.result;
-                output.style.display = 'block';
+            // Sync the select-all checkbox visually
+            isSyncing = true;
+            const selectAll = document.getElementById('select-all-products');
+            const totalVisible = document.querySelectorAll('.product-checkbox').length;
+            if (selectAll) {
+                const isAllChecked = totalVisible > 0 && ids.length === totalVisible;
+                if (isAllChecked) {
+                    $(selectAll).iCheck('check');
+                } else {
+                    $(selectAll).iCheck('uncheck');
+                }
             }
-            reader.readAsDataURL(event.target.files[0]);
+            isSyncing = false;
         }
 
-        function removePreview(categoryId) {
-            var output = document.getElementById('image-preview-' + categoryId);
-            output.src = '';
-            // output.style.display = 'none';
-        }
-
-        function toggleSelectAllProducts(master) {
-            const table = $('#invoices-list').DataTable();
-            const rows = table.rows({ 'search': 'applied' }).nodes();
-            $('input.product-checkbox', rows).prop('checked', master.checked);
+        function removeProductRow(id) {
+            const row = document.getElementById('product-row-' + id);
+            if (row) {
+                row.classList.add('row-removing');
+                setTimeout(() => row.remove(), 260);
+            }
+            const modal = document.getElementById('deleteProduct' + id);
+            if (modal) modal.remove();
             toggleBulkDeleteBtn();
         }
 
-        function toggleBulkDeleteBtn() {
-            const table = $('#invoices-list').DataTable();
-            const checked = table.$('.product-checkbox:checked');
-            const btn = document.getElementById('bulk-delete-btn');
-            const countSpan = document.getElementById('selected-count');
-            
-            if (checked.length > 0) {
-                btn.style.display = 'inline-block';
-                countSpan.textContent = checked.length;
-            } else {
-                btn.style.display = 'none';
-            }
-        }
-
-        function bulkDeleteProducts() {
-            const table = $('#invoices-list').DataTable();
-            const checked = table.$('.product-checkbox:checked');
-            const ids = [];
-            checked.each(function() {
-                ids.push(this.value);
+        /* =========================================================================
+           2) iCHECK EVENT BINDINGS (survives DataTable pagination/redraws)
+           ========================================================================= */
+        $(document).ready(function() {
+            // Select-all checkbox
+            $(document).on('ifChecked', '#select-all-products', function() {
+                if (isSyncing) return;
+                isSyncing = true;
+                const table = getDataTableSafe();
+                if (table) {
+                    const rows = table.rows({ 'search': 'applied' }).nodes();
+                    $('input.product-checkbox', rows).iCheck('check');
+                } else {
+                    $('input.product-checkbox').iCheck('check');
+                }
+                isSyncing = false;
+                toggleBulkDeleteBtn();
             });
 
+            $(document).on('ifUnchecked', '#select-all-products', function() {
+                if (isSyncing) return;
+                isSyncing = true;
+                const table = getDataTableSafe();
+                if (table) {
+                    const rows = table.rows({ 'search': 'applied' }).nodes();
+                    $('input.product-checkbox', rows).iCheck('uncheck');
+                } else {
+                    $('input.product-checkbox').iCheck('uncheck');
+                }
+                isSyncing = false;
+                toggleBulkDeleteBtn();
+            });
+
+            // Individual checkboxes
+            $(document).on('ifChanged', '.product-checkbox', function() {
+                toggleBulkDeleteBtn();
+            });
+        });
+
+        /* =========================================================================
+           3) BULK DELETE WITH SWEETALERT2
+           ========================================================================= */
+        function bulkDeleteProducts() {
+            const ids = getCheckedIds();
             if (ids.length === 0) return;
 
-            if (!confirm(`Voulez-vous vraiment supprimer les ${ids.length} produits sélectionnés ?`)) {
-                return;
-            }
+            Swal.fire({
+                title: 'Êtes-vous sûr ?',
+                text: `Voulez-vous vraiment supprimer les ${ids.length} produit(s) sélectionné(s) ?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff4961',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const btn = document.getElementById('bulk-delete-btn');
+                    const originalHtml = btn.innerHTML;
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="la la-spinner la-spin"></i> Suppression...';
 
-            fetch("{{ route('admin.products.bulk_destroy') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ ids: ids })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    alert('Erreur : ' + data.message);
+                    apiRequest("{{ route('admin.products.bulk_destroy') }}", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ids: ids })
+                    })
+                    .then(data => {
+                        ids.forEach(id => removeProductRow(id));
+                        showToast((data && data.message) || `${ids.length} produit(s) supprimé(s).`, 'success');
+                    })
+                    .catch(err => {
+                        showToast(err.message || 'Une erreur est survenue lors de la suppression.', 'error');
+                    })
+                    .finally(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = originalHtml;
+                    });
                 }
-            })
-            .catch(err => {
-                alert('Une erreur est survenue lors de la suppression.');
             });
         }
+
+        /* =========================================================================
+           4) SINGLE-ROW DELETE (AJAX, event delegation)
+           ========================================================================= */
+        document.getElementById('products-tbody').addEventListener('submit', function (e) {
+            const form = e.target.closest('.js-delete-product-form');
+            if (!form) return;
+            e.preventDefault();
+
+            const productId = form.dataset.productId;
+            const btn = form.querySelector('.js-confirm-delete-btn');
+            const label = btn.querySelector('.js-btn-label');
+            const spinner = btn.querySelector('.js-btn-spinner');
+
+            btn.disabled = true;
+            label.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            apiRequest(form.action, {
+                method: 'POST',
+                body: new FormData(form) // includes _method=DELETE + _token
+            })
+            .then(data => {
+                $('#deleteProduct' + productId).modal('hide');
+                removeProductRow(productId);
+                showToast((data && data.message) || 'Produit supprimé avec succès.', 'success');
+            })
+            .catch(err => {
+                showToast(err.message || 'Erreur lors de la suppression.', 'error');
+            })
+            .finally(() => {
+                btn.disabled = false;
+                label.classList.remove('d-none');
+                spinner.classList.add('d-none');
+            });
+        });
     </script>
 @endsection

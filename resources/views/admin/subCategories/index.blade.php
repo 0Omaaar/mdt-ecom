@@ -175,7 +175,7 @@
                 <thead>
                     <tr>
                         <th style="text-align: center; width: 40px;">
-                            <input type="checkbox" id="select-all-subcategories" style="transform: scale(1.2); cursor: pointer;" onchange="toggleSelectAllSubCategories(this)">
+                            <input type="checkbox" id="select-all-subcategories" style="transform: scale(1.2); cursor: pointer;">
                         </th>
                         <th>N</th>
                         <th>Image</th>
@@ -188,7 +188,7 @@
                     @foreach ($subCategories as $subCategory)
                         <tr>
                             <td style="text-align: center;">
-                                <input type="checkbox" class="subcategory-checkbox" value="{{ $subCategory->id }}" style="transform: scale(1.2); cursor: pointer;" onchange="toggleBulkDeleteBtn()">
+                                <input type="checkbox" class="subcategory-checkbox" value="{{ $subCategory->id }}" style="transform: scale(1.2); cursor: pointer;">
                             </td>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>
@@ -328,14 +328,9 @@
             imagePreview.style.display = 'none';
         }
 
-        function toggleSelectAllSubCategories(master) {
-            const table = $('#invoices-list').DataTable();
-            const rows = table.rows({ 'search': 'applied' }).nodes();
-            $('input.subcategory-checkbox', rows).prop('checked', master.checked);
-            toggleBulkDeleteBtn();
-        }
-
+        let isSyncing = false;
         function toggleBulkDeleteBtn() {
+            if (isSyncing) return;
             const table = $('#invoices-list').DataTable();
             const checked = table.$('.subcategory-checkbox:checked');
             const btn = document.getElementById('bulk-delete-btn');
@@ -347,7 +342,49 @@
             } else {
                 btn.style.display = 'none';
             }
+
+            // Sync the select-all checkbox visually
+            isSyncing = true;
+            const selectAll = document.getElementById('select-all-subcategories');
+            const totalVisible = document.querySelectorAll('.subcategory-checkbox').length;
+            if (selectAll) {
+                const isAllChecked = totalVisible > 0 && checked.length === totalVisible;
+                if (isAllChecked) {
+                    $(selectAll).iCheck('check');
+                } else {
+                    $(selectAll).iCheck('uncheck');
+                }
+            }
+            isSyncing = false;
         }
+
+        $(document).ready(function() {
+            // Select-all checkbox
+            $(document).on('ifChecked', '#select-all-subcategories', function() {
+                if (isSyncing) return;
+                isSyncing = true;
+                const table = $('#invoices-list').DataTable();
+                const rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input.subcategory-checkbox', rows).iCheck('check');
+                isSyncing = false;
+                toggleBulkDeleteBtn();
+            });
+
+            $(document).on('ifUnchecked', '#select-all-subcategories', function() {
+                if (isSyncing) return;
+                isSyncing = true;
+                const table = $('#invoices-list').DataTable();
+                const rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input.subcategory-checkbox', rows).iCheck('uncheck');
+                isSyncing = false;
+                toggleBulkDeleteBtn();
+            });
+
+            // Individual checkboxes
+            $(document).on('ifChanged', '.subcategory-checkbox', function() {
+                toggleBulkDeleteBtn();
+            });
+        });
 
         function bulkDeleteSubCategories() {
             const table = $('#invoices-list').DataTable();
@@ -359,29 +396,38 @@
 
             if (ids.length === 0) return;
 
-            if (!confirm(`Voulez-vous vraiment supprimer les ${ids.length} sous-catégories sélectionnées ? Attention, cela affectera les produits associés.`)) {
-                return;
-            }
-
-            fetch("{{ route('admin.subCategories.bulk_destroy') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ ids: ids })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    alert('Erreur : ' + data.message);
+            Swal.fire({
+                title: 'Êtes-vous sûr ?',
+                text: `Voulez-vous vraiment supprimer les ${ids.length} sous-catégories sélectionnées ? Attention, cela affectera les produits associés de manière irréversible.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff4961',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch("{{ route('admin.subCategories.bulk_destroy') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ ids: ids })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.reload();
+                        } else {
+                            alert('Erreur : ' + data.message);
+                        }
+                    })
+                    .catch(err => {
+                        alert('Une erreur est survenue lors de la suppression.');
+                    });
                 }
-            })
-            .catch(err => {
-                alert('Une erreur est survenue lors de la suppression.');
             });
         }
     </script>
