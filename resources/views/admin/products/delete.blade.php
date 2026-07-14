@@ -1,37 +1,49 @@
-<div class="modal text-left" style="margin-top: 0%" id="deleteProduct{{ $product->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+{{--
+    ============================================================================
+    delete.blade.php — per-row delete confirmation modal.
+
+    Included once per product row from index.blade.php via:
+        @include('admin.products.delete')
+
+    Submits via AJAX (fetch) to route('admin.products.destroy', $product->id).
+    On success: the corresponding table row fades out and is removed WITHOUT a
+    full page reload, and the row count / "select all" state is refreshed.
+
+    Backend contract: DELETE route('admin.products.destroy', $product->id)
+    must return JSON when requested via AJAX:
+        { success: true, message: '...' }
+        { success: false, message: '...' }  (e.g. 422/500 on failure)
+    ============================================================================
+--}}
+<div class="modal text-left" id="deleteProduct{{ $product->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel62">Supprimer Produit</h4>
+                <h4 class="modal-title"><i class="la la-trash text-danger"></i> Supprimer Produit</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form" method="POST" action="{{ route('admin.products.destroy', $product->id) }}"
-                enctype="multipart/form-data">
+            <form class="form js-delete-product-form" method="POST"
+                action="{{ route('admin.products.destroy', $product->id) }}" data-product-id="{{ $product->id }}">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <div class="card">
-                        <div class="card-content collpase show">
-                            <div class="card-body">
-                                <div class="form-body">
-
-                                    <p>Êtes-vous sûr de vouloir supprimer le produit
-                                        <strong>{{ $product->name }}</strong> ?
-                                         <span style=" color: rgb(226, 79, 79); font-weight: bold;">Cette action est irréversible.</span></p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="mb-0">
+                        Êtes-vous sûr de vouloir supprimer le produit
+                        <strong>{{ $product->name }}</strong> ?
+                    </p>
+                    <p class="mt-2 mb-0" style="color:#c92a2a; font-weight:600; font-size:.85rem;">
+                        <i class="la la-exclamation-triangle"></i> Cette action est irréversible.
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
                         <i class="la la-times"></i> Fermer
                     </button>
-                    <button type="submit" class="btn btn-danger">
-                        <i class="la la-trash"></i> Supprimer
+                    <button type="submit" class="btn btn-danger js-confirm-delete-btn">
+                        <span class="js-btn-label"><i class="la la-trash"></i> Supprimer</span>
+                        <span class="js-btn-spinner d-none"><i class="la la-spinner la-spin"></i> Suppression...</span>
                     </button>
                 </div>
             </form>

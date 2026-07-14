@@ -19,3 +19,6 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+
+# Uploaded product images (user-generated, not part of source code)
+/public/images/products/
