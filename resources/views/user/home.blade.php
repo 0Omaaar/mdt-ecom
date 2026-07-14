@@ -145,9 +145,9 @@
                         <div class="alldepartments_dropdown show_lg collapse" id="alldepartments_dropdown">
                             <div class="card">
                                 <ul class="alldepartments_menulist ul_li_block clearfix">
-                                    <li><a href="javascript:void(0)">Deals du jour</a></li>
-                                    <li><a href="javascript:void(0)">Notre sélection</a></li>
-                                    <li><a h href="javascript:void(0)">Nouvelle arrivage</a></li>
+                                    <li><a href="#deals_section">Deals du jour</a></li>
+                                    <li><a href="#selection_section">Notre sélection</a></li>
+                                    <li><a href="#selection_section" onclick="$('.electronic_tabs_nav a.nouv').tab('show')">Nouvelle arrivage</a></li>
                                     @foreach ($categories as $category)
                                         <li class="{{ $category->subCategories->count() > 0 ? 'has_child' : '' }}">
                                             <a href="javascript:void(0)" class="category-link"
@@ -254,22 +254,131 @@
                 </div>
 
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <style>
+                        .promo-banner {
+                            position: relative;
+                            width: 100%;
+                            height: 250px;
+                            overflow: hidden;
+                            border-radius: 4px;
+                            display: flex;
+                            align-items: center;
+                            text-decoration: none !important;
+                            color: #111;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                            transition: transform 0.3s;
+                        }
+                        .promo-banner:hover {
+                            transform: translateY(-5px);
+                        }
+                        /* Top Banner: Laptops */
+                        .banner-laptops {
+                            background: linear-gradient(110deg, #ffffff 45%, #E9E69A 45%);
+                        }
+                        .banner-laptops .banner-img {
+                            position: absolute;
+                            left: -20px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            width: 60%;
+                            max-width: 200px;
+                        }
+                        .banner-laptops .banner-content {
+                            position: absolute;
+                            right: 15px;
+                            text-align: right;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        .banner-laptops .badge-red {
+                            background: #b13745;
+                            color: white;
+                            padding: 4px 10px;
+                            font-weight: 800;
+                            font-size: 14px;
+                            letter-spacing: 1px;
+                            display: inline-block;
+                            margin-bottom: 5px;
+                        }
+                        .banner-laptops .sub-text {
+                            font-size: 12px;
+                            font-weight: 700;
+                            margin-bottom: -10px;
+                            letter-spacing: 1px;
+                        }
+                        .banner-laptops .discount {
+                            font-size: 55px;
+                            font-weight: 900;
+                            line-height: 1;
+                            letter-spacing: -2px;
+                            margin-bottom: 5px;
+                            color: #1a1a1a;
+                        }
+                        .banner-laptops .date-text {
+                            font-size: 11px;
+                            font-weight: 800;
+                            letter-spacing: 0.5px;
+                        }
+
+                        /* Bottom Banner: Gaming/Home */
+                        .banner-gaming {
+                            background: linear-gradient(110deg, #99EBE5 55%, #E9E69A 55%);
+                        }
+                        .banner-gaming .banner-content {
+                            position: absolute;
+                            left: 20px;
+                            text-align: left;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        .banner-gaming .title-main {
+                            font-size: 26px;
+                            font-weight: 900;
+                            line-height: 0.9;
+                            color: #1a1a1a;
+                            margin-bottom: 8px;
+                            letter-spacing: -0.5px;
+                        }
+                        .banner-gaming .sub-text {
+                            font-size: 9px;
+                            font-weight: 600;
+                            letter-spacing: 1px;
+                            text-transform: uppercase;
+                            color: #333;
+                        }
+                        .banner-gaming .banner-img {
+                            position: absolute;
+                            right: -10px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            width: 55%;
+                            max-width: 180px;
+                        }
+                    </style>
+
                     <div class="advertisement_image mb_30">
-                        <a
-                            @if ($offer1) href="{{ route('product', $offer1->content) }}"
-                            @else
-                            href="javascript:void(0)" @endif>
-                            <img src="{{ asset('assets/user/images/offer/electronic/img_02.jpg') }}"
-                                alt="image_not_found">
+                        <a class="promo-banner banner-laptops" 
+                            @if ($offer1) href="{{ route('product', $offer1->content) }}" @else href="javascript:void(0)" @endif>
+                            {{-- Change img_02.jpg to your transparent laptop image --}}
+                            <img src="{{ asset('assets/user/images/offer/electronic/img_02.jpg') }}" class="banner-img" alt="Laptops">
+                            <div class="banner-content">
+                                <span class="badge-red">LAPTOPS</span>
+                                <div class="sub-text">UP TO</div>
+                                <div class="discount">80%</div>
+                                <div class="date-text">1ST JUNE TO 20TH AUG</div>
+                            </div>
                         </a>
                     </div>
+                    
                     <div class="advertisement_image mt-2">
-                        <a
-                            @if ($offer2) href="{{ route('product', $offer2->content) }}"
-                            @else
-                            href="javascript:void(0)" @endif>
-                            <img src="{{ asset('assets/user/images/offer/electronic/img_03.jpg') }}"
-                                alt="image_not_found">
+                        <a class="promo-banner banner-gaming"
+                            @if ($offer2) href="{{ route('product', $offer2->content) }}" @else href="javascript:void(0)" @endif>
+                            <div class="banner-content">
+                                <div class="title-main">HOME<br>RENOVATION</div>
+                                <div class="sub-text">OVER 20 YEARS EXPERIENCE</div>
+                            </div>
+                            {{-- Change img_03.jpg to your transparent controller image --}}
+                            <img src="{{ asset('assets/user/images/offer/electronic/img_03.jpg') }}" class="banner-img" alt="Gaming">
                         </a>
                     </div>
                 </div>
@@ -289,7 +398,7 @@
                 <div class="row justify-content-lg-between">
 
                     <div class="col-lg-4">
-                        <div class="electronic_deals_slider">
+                        <div class="electronic_deals_slider" id="deals_section" style="scroll-margin-top: 100px;">
                             <div class="item_header">
                                 <h2 class="title_text text-white mb-0"><strong>Deals</strong> du jour</h2>
                             </div>
@@ -325,7 +434,7 @@
                                                         <p>L'offre se termine :</p>
                                                     </div>
                                                     <ul class="countdown_timer timein_box ul_li clearfix"
-                                                        data-countdown="2024/11/24"></ul>
+                                                        data-countdown="{{ \Carbon\Carbon::tomorrow()->format('Y/m/d') }}"></ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +452,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" id="selection_section" style="scroll-margin-top: 100px;">
                         <div class="electronic_product_group clearfix">
                             <ul class="electronic_tabs_nav nav ul_li_right clearfix">
                                 <li><a class="active" data-toggle="tab" href="#featured_tab">Notre sélection</a></li>
