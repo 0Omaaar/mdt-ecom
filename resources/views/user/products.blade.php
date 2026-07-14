@@ -44,13 +44,6 @@
                 <div class="col-lg-9 order-last">
                     <ul class="electronic_filter_bar ul_li mb_30">
                         <li>
-                            <ul class="layout_btns nav ul_li clearfix" role="tablist">
-                                <li>
-                                    <a class="active" href="{{ route('products') }}"><i class="fas fa-th"></i></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
                             <div class="product_show option_select">
                                 <select id="perPageSelect" name="per_page">
                                     <option data-display="Show on page:" disabled>Select A Option</option>
@@ -153,23 +146,37 @@
                                 <div id="sb_category_accordion" class="sb_category_accordion">
                                     @foreach ($categories as $category)
                                         <div class="card">
-                                            <div class="card-header">
-                                                <a data-toggle="collapse" href="#collapse_one{{ $category->id }}">
-                                                    {{ $category->name }} ({{ $category->subCategories->count() }})
+                                            <div class="card-header d-flex align-items-center justify-content-between">
+                                                {{-- Category name: navigates to category page --}}
+                                                <a class="cat-nav-link" href="{{ route('products') }}?category={{ $category->id }}">
+                                                    {{ $category->name }}
+                                                    @if($category->subCategories->count() > 0)
+                                                        <span class="cat-count">({{ $category->subCategories->count() }})</span>
+                                                    @endif
                                                 </a>
+                                                {{-- Arrow: only toggles the dropdown --}}
+                                                @if($category->subCategories->count() > 0)
+                                                    <span class="cat-toggle-arrow" data-toggle="collapse" data-target="#collapse_one{{ $category->id }}" style="cursor:pointer; padding: 0 8px; font-size: 12px;">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </span>
+                                                @endif
                                             </div>
+                                            @if($category->subCategories->count() > 0)
                                             <div id="collapse_one{{ $category->id }}" class="collapse show"
                                                 data-parent="#sb_category_accordion">
                                                 <div class="card-body p-0">
                                                     <ul class="ul_li_block clearfix">
                                                         @foreach ($category->subCategories as $subCategory)
-                                                            <li><a href="javascript:void(0)"
-                                                                    onclick="applyFilter('subcategory', '{{ $subCategory->name }}')">{{ $subCategory->name }}</a>
+                                                            <li>
+                                                                <a href="{{ route('products') }}?subcategory={{ urlencode($subCategory->name) }}">
+                                                                    {{ $subCategory->name }}
+                                                                </a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                     @endforeach
 
