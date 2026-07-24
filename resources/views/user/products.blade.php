@@ -43,44 +43,14 @@
 
                 <div class="col-lg-9 order-last">
                     <ul class="electronic_filter_bar ul_li mb_30">
-                        <li>
-                            <div class="product_show option_select">
-                                <select id="perPageSelect" name="per_page">
-                                    <option data-display="Show on page:" disabled>Select A Option</option>
-                                    <option value="18" {{ request('per_page') == 12 ? 'selected' : '' }}>Show on
-                                        page: 12</option>
-                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>Show on
-                                        page: 20</option>
-                                    <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>Show on
-                                        page: 30</option>
-                                    <option value="40" {{ request('per_page') == 40 ? 'selected' : '' }}>Show on
-                                        page: 40</option>
-                                </select>
-                            </div>
-                        </li>
-
-                        <li>
-                            <p class="result_text mb-0 d-flex align-items-center">
-                                @if ($products->currentPage() > 1)
-                                    <a class="next_btn"
-                                        href="{{ $products->appends(request()->except('page'))->previousPageUrl() }}&per_page={{ request('per_page', 12) }}"
-                                        style="margin-right: 10px;">
-                                        <i class="fal fa-long-arrow-left"></i>
-                                    </a>
+                        <li style="width: 100%;">
+                            <form action="{{ route('products') }}" method="GET" class="d-flex w-100">
+                                @if(request('category'))
+                                    <input type="hidden" name="category" value="{{ request('category') }}">
                                 @endif
-
-                                <span class="active_page">{{ $products->currentPage() }}</span> of
-                                {{ $products->lastPage() }}
-
-                                @if ($products->currentPage() < $products->lastPage())
-                                    <a class="next_btn"
-                                        href="{{ $products->appends(request()->except('page'))->nextPageUrl() }}&per_page={{ request('per_page', 12) }}">
-                                        <i class="fal fa-long-arrow-right"></i>
-                                    </a>
-                                @endif
-                            </p>
-
-
+                                <input type="text" name="name" class="form-control" placeholder="Rechercher dans cette catégorie..." value="{{ request('name') }}" style="border-radius: 4px 0 0 4px;">
+                                <button type="submit" class="btn btn-primary" style="border-radius: 0 4px 4px 0; background-color: #0056b3; border-color: #0056b3;"><i class="fas fa-search"></i></button>
+                            </form>
                         </li>
                     </ul>
 
@@ -132,6 +102,30 @@
                                 @endif
 
                             </ul>
+                            
+                            @if ($products->lastPage() > 1)
+                            <div class="pagination_wrap mt-5 mb-3 d-flex justify-content-center">
+                                <p class="result_text mb-0 d-flex align-items-center" style="font-size: 16px;">
+                                    @if ($products->currentPage() > 1)
+                                        <a class="next_btn"
+                                            href="{{ $products->appends(request()->except('page'))->previousPageUrl() }}"
+                                            style="margin-right: 15px; font-weight: bold; color: #0056b3;">
+                                            <i class="fal fa-long-arrow-left"></i> Précédent
+                                        </a>
+                                    @endif
+    
+                                    <span class="active_page mx-3" style="font-weight:bold; padding: 5px 15px; background: #f4f5f7; border-radius: 4px;">{{ $products->currentPage() }} sur {{ $products->lastPage() }}</span>
+    
+                                    @if ($products->currentPage() < $products->lastPage())
+                                        <a class="next_btn"
+                                            href="{{ $products->appends(request()->except('page'))->nextPageUrl() }}"
+                                            style="margin-left: 15px; font-weight: bold; color: #0056b3;">
+                                            Suivant <i class="fal fa-long-arrow-right"></i>
+                                        </a>
+                                    @endif
+                                </p>
+                            </div>
+                            @endif
 
                         </div>
                     </div>
@@ -140,7 +134,7 @@
 
                 <div class="col-lg-3">
                     <form id="filterForm" action="#" method="GET">
-                        <aside class="electronic_sidebar sidebar_section">
+                        <aside class="electronic_sidebar sidebar_section" style="position: sticky; top: 20px; z-index: 100; max-height: 95vh; overflow-y: auto;">
                             <div class="sb_widget sb_collapse_category">
                                 <h3 class="sb_widget_title">Tous Les Categories</h3>
                                 <div id="sb_category_accordion" class="sb_category_accordion">
@@ -148,7 +142,7 @@
                                         <div class="card">
                                             <div class="card-header d-flex align-items-center justify-content-between">
                                                 {{-- Category name: navigates to category page --}}
-                                                <a class="cat-nav-link" href="{{ route('products') }}?category={{ $category->id }}">
+                                                <a class="cat-nav-link" href="{{ route('products') }}?category={{ $category->id }}" style="{{ request('category') == $category->id ? 'font-weight: bold; color: #0056b3;' : '' }}">
                                                     {{ $category->name }}
                                                     @if($category->subCategories->count() > 0)
                                                         <span class="cat-count">({{ $category->subCategories->count() }})</span>
@@ -162,7 +156,7 @@
                                                 @endif
                                             </div>
                                             @if($category->subCategories->count() > 0)
-                                            <div id="collapse_one{{ $category->id }}" class="collapse show"
+                                            <div id="collapse_one{{ $category->id }}" class="collapse {{ request('category') == $category->id ? 'show' : '' }}"
                                                 data-parent="#sb_category_accordion">
                                                 <div class="card-body p-0">
                                                     <ul class="ul_li_block clearfix">

@@ -158,7 +158,7 @@ class HomeController extends Controller
             }
         }
 
-        $perPage = $request->input('per_page', 12);
+        $perPage = $request->input('per_page', 20);
         $products = $products->paginate($perPage);
 
         return view('user.products', compact('categories', 'products', 'subcategories', 'brands', 'cart', 'randomProducts', 'randomSubCategories'));
