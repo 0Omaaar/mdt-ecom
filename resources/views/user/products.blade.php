@@ -37,7 +37,14 @@
 
     <!-- product_section - start
    ================================================== -->
-    <section class="product_section clearfix" style="margin-top: 2%; margin-bottom: 5%;">
+    <style>
+        /* Force overflow visible on all ancestors to ensure position: sticky works */
+        html, body, main, .product_section, .container, .row {
+            overflow: visible !important;
+            overflow-x: clip !important; /* Prevents horizontal scroll without breaking sticky */
+        }
+    </style>
+    <section class="product_section" style="margin-top: 2%; margin-bottom: 5%;">
         <div class="container maxw_1600">
             <div class="row justify-content-lg-between">
 
