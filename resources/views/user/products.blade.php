@@ -132,9 +132,9 @@
 
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-3" style="position: -webkit-sticky; position: sticky; top: 80px; align-self: flex-start; max-height: 100vh; overflow-y: auto; z-index: 100;">
                     <form id="filterForm" action="#" method="GET">
-                        <aside class="electronic_sidebar sidebar_section" style="position: sticky; top: 20px; z-index: 100; max-height: 95vh; overflow-y: auto;">
+                        <aside class="electronic_sidebar sidebar_section" style="padding-bottom: 50px;">
                             <div class="sb_widget sb_collapse_category">
                                 <h3 class="sb_widget_title">Tous Les Categories</h3>
                                 <div id="sb_category_accordion" class="sb_category_accordion">
