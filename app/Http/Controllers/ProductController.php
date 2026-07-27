@@ -146,6 +146,12 @@ class ProductController extends Controller
 
             $product->save();
 
+            \App\Models\Notification::create([
+                'subject' => 'new-product',
+                'subject_id' => $product->id,
+                'content' => "Nouveau produit ajouté : " . $product->name,
+            ]);
+
             return redirect()->route('admin.products.index')->with('success', 'Produit ajouté avec succès');
         } catch (\Exception $e) {
             $folderPath = public_path('images/tmp/');
@@ -213,6 +219,12 @@ class ProductController extends Controller
 
 
             $product->save();
+
+            \App\Models\Notification::create([
+                'subject' => 'update-product',
+                'subject_id' => $product->id,
+                'content' => "Le produit a été mis à jour : " . $product->name,
+            ]);
 
             return redirect()->route('admin.products.index')->with('success', 'Produit modifié avec succès');
         } catch (\Exception $e) {

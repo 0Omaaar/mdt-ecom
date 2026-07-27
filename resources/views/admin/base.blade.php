@@ -116,15 +116,16 @@
 
                         @php
                             $notifications = App\Models\Notification::latest()->take(5)->get();
+                            $notifCount = $notifications->count();
                         @endphp
 
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
                                 href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span
-                                    class="badge badge-pill badge-danger badge-up badge-glow">0</span></a>
+                                    class="badge badge-pill badge-danger badge-up badge-glow">{{ $notifCount }}</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
                                     <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span>
-                                    </h6><span class="notification-tag badge badge-danger float-right m-0">0 New</span>
+                                    </h6><span class="notification-tag badge badge-danger float-right m-0">{{ $notifCount }} New</span>
                                 </li>
 
 
@@ -132,13 +133,20 @@
                                         @foreach ($notifications as $notification)
                                             <div class="media">
                                                 <div class="media-left align-self-center">
-                                                    <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
+                                                    @if($notification->subject == 'new-product')
+                                                        <i class="ft-box icon-bg-circle bg-success mr-0"></i>
+                                                    @elseif($notification->subject == 'update-product')
+                                                        <i class="ft-edit icon-bg-circle bg-warning mr-0"></i>
+                                                    @else
+                                                        <i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i>
+                                                    @endif
                                                 </div>
                                                 <div class="media-body">
-                                                    <h6 class="media-heading"
+                                                    <h6 class="media-heading" style="cursor: pointer;"
                                                         @if ($notification->subject == 'new-order') onclick="window.location.href='{{ route('admin.orders.show', $notification->subject_id) }}'"
-                                                @elseif ($notification->subject == 'new-contact')
-                                                    onclick="window.location.href='{{ route('admin.contact.index') }}'" @endif>
+                                                        @elseif ($notification->subject == 'new-contact') onclick="window.location.href='{{ route('admin.contact.index') }}'"
+                                                        @elseif (in_array($notification->subject, ['new-product', 'update-product'])) onclick="window.location.href='{{ route('admin.products.show', $notification->subject_id) }}'"
+                                                        @endif>
                                                         {{ $notification->content }}</h6>
                                                     <small>
                                                         <time

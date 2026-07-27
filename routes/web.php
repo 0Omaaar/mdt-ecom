@@ -101,6 +101,10 @@ Route::get('/admin/index', function() {
         ];
     }
 
+    $totalSalesCount = DB::table('order_items')->sum('quantity') ?? 0;
+    $totalInventoryCost = Product::sum(DB::raw('price * quantity')) ?? 0;
+    $totalRevenue = Order::where('status', '!=', 'annulée')->sum('total_price') ?? 0;
+
     return view('admin.index', compact(
         'totalProducts',
         'totalProductsInStock',
@@ -112,7 +116,10 @@ Route::get('/admin/index', function() {
         'totalOrders',
         'totalOrdersEnAttente',
         'totalOrdersValidee',
-        'totalOrdersAnnulee'
+        'totalOrdersAnnulee',
+        'totalSalesCount',
+        'totalInventoryCost',
+        'totalRevenue'
     ));
 })->middleware('isAdmin')->name('admin.index');
 
