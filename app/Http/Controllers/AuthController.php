@@ -20,22 +20,45 @@ class AuthController extends Controller
     public function customLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        try {
+            $user = User::where('email', $request->email)->first();
 
-        if (auth()->attempt($credentials)) {
-            if(\Auth::user()->type == 'admin'){
-                return redirect()->route('admin.index');
+            if ($user) {
+                // If password in DB is plain text / legacy format (not starting with standard bcrypt prefixes)
+                if (!str_starts_with($user->password, '$2y$') && !str_starts_with($user->password, '$2a$') && !str_starts_with($user->password, '$2b$')) {
+                    if ($user->password === $request->password) {
+                        $user->password = Hash::make($request->password);
+                        $user->save();
+                        Auth::login($user);
+
+                        if (Auth::user()->type == 'admin') {
+                            return redirect()->route('admin.index');
+                        }
+                        return redirect()->route('home');
+                    } else {
+                        return redirect()->back()->with('error', 'Adresse e-mail ou mot de passe incorrect.')->withInput();
+                    }
+                }
             }
-            else{
-                return redirect()->route('home');
+
+            $credentials = $request->only('email', 'password');
+
+            if (auth()->attempt($credentials)) {
+                if (Auth::user()->type == 'admin') {
+                    return redirect()->route('admin.index');
+                } else {
+                    return redirect()->route('home');
+                }
             }
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', 'Adresse e-mail ou mot de passe incorrect.')->withInput();
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect()->back()->with('error', 'Adresse e-mail ou mot de passe incorrect.')->withInput();
     }
 
     public function registration()

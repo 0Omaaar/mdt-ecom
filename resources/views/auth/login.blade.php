@@ -105,11 +105,25 @@
 
     <h1>Bienvenue chez Mobidigitech</h1>
     <p>Saisissez votre adresse e-mail et mot de passe pour vous connecter à Mobidigitech.</p>
+
+    @if (session('error'))
+        <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 6px; margin-bottom: 20px; font-size: 14px; text-align: center;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 6px; margin-bottom: 20px; font-size: 14px; text-align: center;">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
     
     <form action="{{ route('login.custom') }}" method="POST">
         @csrf
         <div class="form-item">
-            <input type="email" name="email" placeholder="Adresse email*" required>
+            <input type="email" name="email" placeholder="Adresse email*" value="{{ old('email') }}" required>
         </div>
         <div class="form-item">
             <input type="password" name="password" placeholder="Mot de passe*" required>
