@@ -56,6 +56,65 @@
             opacity: 0.5;
             text-decoration: none;
         }
+
+        /* Client Type Card Styles (Particulier / Société) */
+        .client_type_title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a365d;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .client_type_card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #1a365d;
+            border-radius: 8px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #1a365d;
+            transition: all 0.3s ease;
+            height: 100%;
+            min-height: 140px;
+        }
+
+        .client_type_card.active {
+            background-color: #ffffff;
+            border-color: #1a365d;
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.2);
+        }
+
+        .client_type_card:hover {
+            border-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .client_type_card .card_icon {
+            margin-bottom: 12px;
+            color: #1a365d;
+        }
+
+        .client_type_card .card_title {
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        #company_fields {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
     </style>
 @endsection
 
@@ -103,9 +162,65 @@
                 @endif
                 <form action="{{ route('order.create') }}" method="POST">
                     @csrf
+                    
+                    <!-- VOUS ÊTES Selection Section -->
+                    <div class="billing_form mb_40" style="padding: 25px 30px;">
+                        <h3 class="client_type_title">VOUS ÊTES</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-6 col-md-5">
+                                <label class="client_type_card active" id="card_particulier" onclick="selectClientType('particulier')">
+                                    <input type="radio" name="client_type" id="type_particulier" value="particulier" checked style="display: none;">
+                                    <div class="card_icon">
+                                        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <span class="card_title">PARTICULIER</span>
+                                </label>
+                            </div>
+                            <div class="col-6 col-md-5">
+                                <label class="client_type_card" id="card_societe" onclick="selectClientType('societe')">
+                                    <input type="radio" name="client_type" id="type_societe" value="societe" style="display: none;">
+                                    <div class="card_icon">
+                                        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                            <path d="M9 22v-4h6v4"></path>
+                                            <line x1="8" y1="6" x2="10" y2="6"></line>
+                                            <line x1="14" y1="6" x2="16" y2="6"></line>
+                                            <line x1="8" y1="10" x2="10" y2="10"></line>
+                                            <line x1="14" y1="10" x2="16" y2="10"></line>
+                                            <line x1="8" y1="14" x2="10" y2="14"></line>
+                                            <line x1="14" y1="14" x2="16" y2="14"></line>
+                                        </svg>
+                                    </div>
+                                    <span class="card_title">SOCIÉTÉ</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="billing_form mb_50">
                         <h3 class="form_title mb_30">Détails de facturation</h3>
                         <div class="form_wrap">
+
+                            <!-- Company Specific Fields (Displayed when Société is selected) -->
+                            <div id="company_fields" style="display: none;">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form_item">
+                                            <span class="input_title">Nom de la société / Raison sociale<sup>*</sup></span>
+                                            <input type="text" name="company_name" id="company_name_input" placeholder="Nom de la société">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_item">
+                                            <span class="input_title">ICE (Identifiant Commun de l'Entreprise)<sup>*</sup></span>
+                                            <input type="text" name="ice" id="ice_input" placeholder="N° ICE">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-lg-6">
@@ -138,11 +253,6 @@
                             <div class="form_item">
                                 <span class="input_title">Ville<sup>*</sup></span>
                                 <input type="text" name="ville" required>
-                            </div>
-
-                            <div class="form_item">
-                                <span class="input_title">CIN<sup>*</sup></span>
-                                <input type="text" name="cin" placeholder="رقم بطاقة التعريف الوطنية" required>
                             </div>
 
                             <div class="form_item">
@@ -300,13 +410,43 @@
 @endsection
 
 @section('script')
-@if ($cart)
-    <script>
+<script>
+    function selectClientType(type) {
+        const cardParticulier = document.getElementById('card_particulier');
+        const cardSociete = document.getElementById('card_societe');
+        const companyFields = document.getElementById('company_fields');
+        const companyNameInput = document.getElementById('company_name_input');
+        const iceInput = document.getElementById('ice_input');
+
+        if (type === 'societe') {
+            cardSociete.classList.add('active');
+            cardParticulier.classList.remove('active');
+            document.getElementById('type_societe').checked = true;
+            if (companyFields) companyFields.style.display = 'block';
+            if (companyNameInput) companyNameInput.setAttribute('required', 'required');
+            if (iceInput) iceInput.setAttribute('required', 'required');
+        } else {
+            cardParticulier.classList.add('active');
+            cardSociete.classList.remove('active');
+            document.getElementById('type_particulier').checked = true;
+            if (companyFields) companyFields.style.display = 'none';
+            if (companyNameInput) {
+                companyNameInput.removeAttribute('required');
+                companyNameInput.value = '';
+            }
+            if (iceInput) {
+                iceInput.removeAttribute('required');
+                iceInput.value = '';
+            }
+        }
+    }
+
+    @if ($cart)
         function updateTotalPrice(additionalCost) {
             const originalPrice = parseFloat({{ $cart->total_price }});
             const newTotal = originalPrice + additionalCost;
             document.querySelector('#total_price').textContent = newTotal.toFixed(2) + ' DH';
         }
-    </script>
-@endif
+    @endif
+</script>
 @endsection

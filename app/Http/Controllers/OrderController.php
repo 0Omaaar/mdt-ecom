@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewOrder;
 use App\Mail\NotificationMail;
+use App\Mail\NewOrderAdminMail;
 use App\Models\Cart;
 use App\Models\Notification;
 use App\Models\Order;
@@ -13,6 +14,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
@@ -45,11 +47,14 @@ class OrderController extends Controller
                 }
                 $order->shipping_method = $request->shipping_method;
                 $order->payment_method = $request->payment_method;
+                $order->client_type = $request->input('client_type', 'particulier');
+                $order->company_name = $request->input('company_name');
+                $order->ice = $request->input('ice');
                 $order->prenom = $request->prenom;
                 $order->nom = $request->nom;
                 $order->adresse = $request->adresse;
                 $order->ville = $request->ville;
-                $order->cin = $request->cin;
+                $order->cin = $request->input('cin');
                 $order->phone = $request->phone;
                 $order->email = $request->email;
                 if($request->shipping_method == 'transport'){
@@ -94,10 +99,19 @@ class OrderController extends Controller
 
             DB::commit();
 
-            //send mail notification
-            $adminEmail = Setting::where('subject', 'email_notifications')->first();
-            Mail::to($adminEmail->content)->queue(new NotificationMail('notification-order', $adminEmail, 'Nouvelle Commande'));
-
+            //send mail notification to admin
+            try {
+                $adminSetting = Setting::where('subject', 'email_notifications')->first();
+                $adminEmail = ($adminSetting && !empty($adminSetting->content)) 
+                    ? $adminSetting->content 
+                    : config('mail.from.address', 'admin@mobidigitech.ma');
+                
+                if (!empty($adminEmail)) {
+                    Mail::to($adminEmail)->send(new NewOrderAdminMail($order));
+                }
+            } catch (\Exception $mailEx) {
+                Log::error('Erreur d\'envoi de l\'email de notification de commande : ' . $mailEx->getMessage());
+            }
 
             return redirect()->route('order.completed');
         }catch(\Exception $e){

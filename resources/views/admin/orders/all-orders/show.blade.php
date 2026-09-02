@@ -165,11 +165,18 @@
                                     </div>
                                     <div class="featured-image bg-success bg-lighten-2">
                                         <ul>
+                                            <li>Type Client : <span><strong class="badge bg-primary text-uppercase">{{ $order->client_type ?? 'Particulier' }}</strong></span></li>
+                                            @if(($order->client_type ?? '') === 'societe')
+                                                <li>Société : <span><strong>{{ $order->company_name }}</strong></span></li>
+                                                <li>ICE : <span><strong>{{ $order->ice }}</strong></span></li>
+                                            @endif
                                             <li>Prenom : <span><strong>{{ $order->prenom }}</strong></span></li>
                                             <li>Nom : <span><strong>{{ $order->nom }}</strong></span></li>
                                             <li>Adresse : <span><strong>{{ $order->adresse }}</strong></span></li>
                                             <li>Ville : <span><strong>{{ $order->ville }}</strong></span></li>
-                                            <li>CIN : <span><strong>{{ $order->cin }}</strong></span></li>
+                                            @if(!empty($order->cin))
+                                                <li>CIN : <span><strong>{{ $order->cin }}</strong></span></li>
+                                            @endif
                                             <li>Telephone : <span><strong>{{ $order->phone }}</strong></span></li>
                                             <li>Email : <span><strong>{{ $order->email }}</strong></span></li>
                                         </ul>
