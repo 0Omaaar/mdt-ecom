@@ -452,7 +452,7 @@
 
         <div class="footer_bottom text-center bg_black clearfix">
             <div class="container maxw_1600">
-                <p class="copyright_text mb-0">© 2024
+                <p class="copyright_text mb-0">© 2026
                     Tous droits réservés. <a href="{{ route('home') }}" class="author_link">MOBIDIGITECH</a>
                     marketplace eCommerce. </p>
                 <p class="mt-2 text-white" style="font-size: 12px; opacity: 0.8;">

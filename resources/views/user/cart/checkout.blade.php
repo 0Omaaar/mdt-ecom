@@ -210,13 +210,13 @@
                                     <div class="col-lg-6">
                                         <div class="form_item">
                                             <span class="input_title">Nom de la société / Raison sociale<sup>*</sup></span>
-                                            <input type="text" name="company_name" id="company_name_input" placeholder="Nom de la société">
+                                            <input type="text" name="company_name" id="company_name_input" placeholder="Ex: MOBIDIGITECH SARL">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form_item">
                                             <span class="input_title">ICE (Identifiant Commun de l'Entreprise)<sup>*</sup></span>
-                                            <input type="text" name="ice" id="ice_input" placeholder="N° ICE">
+                                            <input type="text" name="ice" id="ice_input" placeholder="Ex: 001234567000089">
                                         </div>
                                     </div>
                                 </div>
@@ -226,43 +226,36 @@
                                 <div class="col-lg-6">
                                     <div class="form_item">
                                         <span class="input_title">Prénom<sup>*</sup></span>
-                                        <input type="text" name="prenom" required>
+                                        <input type="text" name="prenom" placeholder="Votre prénom" required>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form_item">
                                         <span class="input_title">Nom<sup>*</sup></span>
-                                        <input type="text" name="nom" required>
+                                        <input type="text" name="nom" placeholder="Votre nom" required>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="option_select">
-                                <span class="input_title">Pays<sup>*</sup></span>
-                                <select>
-                                    <option value="maroc" selected>Maroc</option>
-                                </select>
-                            </div>
-
                             <div class="form_item">
                                 <span class="input_title">Adresse<sup>*</sup></span>
-                                <input type="text" name="adresse" placeholder="العنوان" required>
+                                <input type="text" name="adresse" placeholder="Adresse de livraison" required>
                             </div>
 
                             <div class="form_item">
                                 <span class="input_title">Ville<sup>*</sup></span>
-                                <input type="text" name="ville" required>
+                                <input type="text" name="ville" placeholder="Votre ville" required>
                             </div>
 
                             <div class="form_item">
                                 <span class="input_title">Téléphone<sup>*</sup></span>
-                                <input type="tel" name="phone" required>
+                                <input type="tel" name="phone" placeholder="Ex: 0612345678" required>
                             </div>
 
                             <div class="form_item">
                                 <span class="input_title">Adresse E-mail<sup>*</sup></span>
-                                <input type="email" name="email" placeholder="عنوان البريد الإلكتروني" required>
+                                <input type="email" name="email" placeholder="Adresse e-mail" required>
                             </div>
 
                             <hr>
